@@ -44,7 +44,12 @@ OUTPUT_FILE_SM  = ''.join([DATA_DIR_OUT, 'europarl.sm'])
 OUTPUT_FILE_ROW = ''.join([DATA_DIR_OUT, 'europarl.row'])
 
 # Limit number of sentences to proces (for testing purposes)
-SENTENCES_LIMIT = 500
+# For no limit, say None
+SENTENCES_LIMIT = 10000
+
+# Minimal number of occurrences wanted
+# For no threshold, say anything below 2
+PAIR_OCC_THRESHOLD = 50
 
 class AlignedSentences:
     
@@ -72,8 +77,9 @@ class AlignedSentences:
         """
         f = open(OUTPUT_FILE_SM, 'w', ENC)
         for pair, count in self.pairs_combined.items():
-            f.write(''.join([pair[0], ' ', pair[1], 
-                    ' ', str(count), '\n']).decode(ENC))
+            if count >= PAIR_OCC_THRESHOLD: 
+                f.write(''.join([pair[0], ' ', pair[1], 
+                        ' ', str(count), '\n']).decode(ENC))
         f.close()
         
         print('SM file written out: ' + OUTPUT_FILE_SM)
@@ -83,9 +89,10 @@ class AlignedSentences:
            cf. http://clic.cimec.unitn.it/composes/toolkit/ex01input.html
         """
         row = set()
-        for pair in self.pairs_combined.keys():
-            row.add(pair[0])
-            row.add(pair[1])
+        for pair, count in self.pairs_combined.items():
+            if count >= PAIR_OCC_THRESHOLD:
+                row.add(pair[0])
+                row.add(pair[1])
         
         f = open(OUTPUT_FILE_ROW, 'w', ENC)
         for token in row:
@@ -205,9 +212,11 @@ def main():
     aligned_sentences = AlignedSentences(sentences_de, sentences_en)
     aligned_sentences.combine_words()
     
+    '''
     # Show pairs
     for pair, count in aligned_sentences.pairs_combined.items():
         print(count, pair)
+    '''
         
     # Write pairs in sparse matrix format
     aligned_sentences.write_sparse_matrix()
