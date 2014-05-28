@@ -107,4 +107,7 @@ while True:
             #similarity
             #an string anfügen mit similarity
         #print whatever
+        
+        
+        ###
     
