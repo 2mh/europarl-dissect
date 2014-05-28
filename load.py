@@ -30,12 +30,12 @@ def valid_dimension(lemma, tag, source):
 
 # must be in relevant part of speech group
 def valid_pos(source, tag):
-    if source = "de":
+    if source == "de":
         if tag in set(["NN", "ADJA", "ADJD", "VVFIN"]):
             return True
         else:
             return False
-    elif source = "en":
+    elif source == "en":
         if tag in set(["NN", "JJ", "VB"]):
             return True
         else:
