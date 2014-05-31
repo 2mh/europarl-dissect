@@ -49,6 +49,32 @@ def valid_pos(source, tag):
     else:
         return False
 
+# gives ordered list. the nearest elements come first. penalty on same language
+def get_best_translations(wformat, query_space, europarl_space, number_of_neighbours):
+    try:
+        nearest = europarl_space.get_neighbours(wformat, 10, CosSimilarity())
+    except:
+        nearest = query_space.get_neighbours(wformat, 10, CosSimilarity(), space2 = europarl_space)
+    r = []
+    for n, s in nearest:
+        similarity = europarl_space.get_sim(n, wformat, CosSimilarity(), space2 = query_space)
+        if n[-3:] == "_" + source_lang:
+            similarity = 0
+        elif n == wformat:
+            similarity = 0
+        r.append((n, similarity))
+    best = sorted(r, key=lambda m: m[1], reverse=True)
+    return best
+
+def format_best_translations(wformat, best_translations, number_of_translations):
+    r = wformat + "\t\t"
+    for i in range(number_of_translations):
+        r += best_translations[i][0]
+        r += " "
+        r += str(best_translations[i][1])
+        r += "\t"
+    return r.rstrip()
+
 # arguments: 1. inputfile - 2. source language
 if len(sys.argv) > 2:
     sentences = open(sys.argv[1], "r")
@@ -113,6 +139,6 @@ while True:
     # for every word print neighbours (yet no fancy format and language selection)
     for w in words:
         wformat = lemmaformat(w)
-        print wformat + "\t" + str(query_space.get_neighbours(wformat, 5, CosSimilarity(), space2 = europarl_space))
-
+        best_translations = get_best_translations(wformat, query_space, europarl_space, 10)
+        print format_best_translations(wformat, best_translations, 3)
     print line.rstrip()
