@@ -16,7 +16,7 @@ import re, sys
 # python load.py inputfile inputlanguage outputlanguage
 # inputfile: word per line
 
-space_cols_file = "./data/out/europarl.row"
+space_cols_file = "./data/out/europarl.row" #"./data/out/europarl.row"
 loaded_space_file = "./data/out/europarl.pkl"
 source_lang = "de" # default
 target_lang = "en" # default
@@ -28,17 +28,17 @@ ENC = "utf-8"
 # space lemma format
 def lemmaformat(l):
     if input_is_tokenized:
-        return l[0].lower() + "_" + l[1]
+        return str(l[0].lower() + "_" + l[1])
     else:
-        return l[0].lower() + "_" + l[1]
+        return str(l[0].lower() + "_" + l[1])
         #return l[2] + "_" + l[1] + "_" + l[3]
 
 # space dimension format
 def dimensionformat(l):
     if input_is_tokenized:
-        return l[0].lower() + "_" + l[1]
+        return str(l[0].lower() + "_" + l[1])
     else:
-        return l[0].lower() + "_" + l[1]
+        return str(l[0].lower() + "_" + l[1])
         #return l[2] + "_" + l[1] + "_" + l[3]
 
 # surrounding words can only be part of the vector, if they exist in the matrix
@@ -89,7 +89,7 @@ def format_best_translations(w, best_translations, number_of_translations):
         for i in range(number_of_translations):
             r += best_translations[i][0][:-3].decode(ENC)
             r += " "
-            r += str(best_translations[i][2])
+            r += str(best_translations[i][1])
             r += "\t"
         return r.rstrip()
     else:
@@ -108,11 +108,15 @@ stopwords[target_lang] = set(stw.words(langtag[target_lang]))
 
 # vector dimension/columns for input matrix and matrix per sentence
 space_cols_fileobject = open(space_cols_file, "r")
-space_cols = space_cols_fileobject.readlines()
+space_cols = space_cols_fileobject.read().split("\n")[:-1] #space_cols = space_cols_fileobject.readlines()
 space_cols_fileobject.close()
 
 # load the space
 europarl_space = io_utils.load(loaded_space_file)
+#europarl_space = Space.build(data = "./dude/europarl.sm",
+                       #rows = "./dude/europarl.row",
+                       #cols = "./dude/europarl.row",
+                       #format = "sm")
 
 # work on input file
 while True:
@@ -146,7 +150,7 @@ while True:
     # fill matrix for sentence
     for i in words:
         for j in words:
-            if valid_dimension(dimensionformat(j)):
+            #if valid_dimension(dimensionformat(j)):
                 freq[lemmaformat(i)][dimensionformat(j)] += 1
 
     # bild unique list of the words in this sentence for the rows
