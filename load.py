@@ -87,7 +87,7 @@ def format_best_translations(w, best_translations, number_of_translations):
     if w[0].lower() not in stopwords[source_lang] and not re.match(r'(\W|\d)', w[0]):
         r = w[0] + "\t\t"
         for i in range(number_of_translations):
-            r += best_translations[i][0][:-3]
+            r += best_translations[i][0][:-3].decode(ENC)
             r += " "
             r += str(best_translations[i][2])
             r += "\t"
