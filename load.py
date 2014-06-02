@@ -16,7 +16,7 @@ import re, sys
 # python load.py inputfile inputlanguage outputlanguage
 # inputfile: word per line
 
-space_cols_file = "./europarl.row"
+space_cols_file = "./data/out/europarl.row"
 loaded_space_file = "./data/out/europarl.pkl"
 source_lang = "de" # default
 target_lang = "en" # default
