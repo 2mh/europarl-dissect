@@ -46,15 +46,15 @@ OUTPUT_FILE_ROW = ''.join([DATA_DIR_OUT, 'europarl.row'])
 
 # Limit number of sentences to process (for testing purposes).
 # For no limit, set None
-SENTENCES_LIMIT = 200000
+SENTENCES_LIMIT = 1000
 
 # Filter out sentences which are longer than this number, in one or
 # the other language -- wherever first.
-MAX_SENTENCE_LEN = 10
+MAX_SENTENCE_LEN = 1000000
 
 # Minimal number of occurrences wanted.
 # For no threshold, set anything below 2
-PAIR_OCC_THRESHOLD = 100
+PAIR_OCC_THRESHOLD = 0
 
 class AlignedSentences:
     
@@ -263,3 +263,4 @@ TODO:
 - Write out sm file in sorted form (by frequency)
 - Remove _de _en pair entries in sm file
 - Save temporary files to save time in further runs
+'''
