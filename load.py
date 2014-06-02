@@ -9,26 +9,32 @@ from collections import defaultdict
 import numpy as np
 import sys
 
-space_cols_file = "./europarl_space.cols"
-loaded_space_file = "./europarl_space.pkl"
-source_lang = "de"
+# use this program like
+# python load.py inputfile inputlanguage
+# inputfile: word per line
+
+space_cols_file = "./europarl.row"
+loaded_space_file = "./data/out/europarl.pkl"
+source_lang = "de" # default
 
 # space lemma format
 def lemmaformat(l):
-    return l[0] + "_" + l[1] + "_" + l[2]
+    #return l[2] + "_" + l[1] + "_" + l[3]
+    return l[0].lower() + "_" + l[1]
 
 # space dimension format
 def dimensionformat(l):
-    return l[0] + "_" + l[1] + "_" + l[2]
+    #return l[2] + "_" + l[1] + "_" + l[3]
+    return l[0].lower() + "_" + l[1]
 
 # surrounding words can only be part of the vector, if they exist in the matrix
-def valid_dimension(lemma, tag, source):
-    if dimensionformat(lemma, tag, source) in set(space_cols):
+def valid_dimension(n):
+    if n in set(space_cols):
         return True
     else:
         return False
 
-# must be in relevant part of speech group
+# must be in relevant part of speech group (not yet completed)
 def valid_pos(source, tag):
     if source == "de":
         if tag in set(["NN", "ADJA", "ADJD", "VVFIN"]):
@@ -42,6 +48,32 @@ def valid_pos(source, tag):
             return False
     else:
         return False
+
+# gives ordered list. the nearest elements come first. penalty on same language
+def get_best_translations(wformat, query_space, europarl_space, number_of_neighbours):
+    try:
+        nearest = europarl_space.get_neighbours(wformat, 10, CosSimilarity())
+    except:
+        nearest = query_space.get_neighbours(wformat, 10, CosSimilarity(), space2 = europarl_space)
+    r = []
+    for n, s in nearest:
+        similarity = europarl_space.get_sim(n, wformat, CosSimilarity(), space2 = query_space)
+        if n[-3:] == "_" + source_lang:
+            similarity = 0
+        elif n == wformat:
+            similarity = 0
+        r.append((n, similarity))
+    best = sorted(r, key=lambda m: m[1], reverse=True)
+    return best
+
+def format_best_translations(wformat, best_translations, number_of_translations):
+    r = wformat + "\t\t"
+    for i in range(number_of_translations):
+        r += best_translations[i][0]
+        r += " "
+        r += str(best_translations[i][1])
+        r += "\t"
+    return r.rstrip()
 
 # arguments: 1. inputfile - 2. source language
 if len(sys.argv) > 2:
@@ -69,46 +101,44 @@ while True:
     if not line:
         break
 
-    # collect words in sentence until sentence end
+    # collect words in sentence until sentence end (now in mockup mode about pos)
     while not line.startswith("."):
-        ipos = line.split("\t")[1]
+        cleaned = line.rstrip()
+        #ipos = line.split("\t")[1]
+        ipos = "NN"
         if valid_pos(source_lang, ipos):
-            words.append([line.split("\t")[2], line.split("\t")[1], source_lang])
+            words.append(tuple(cleaned.split("\t") + [source_lang]))
             pos.append(ipos)
         line = sentences.readline()
+        if not line:
+            break
 
     # fill matrix for sentence
-    for i in range(words):
-        for j in range(words):
-            if valid_dimension(dimensionformat(words[j])):
+    for i in words:
+        for j in words:
+            if valid_dimension(dimensionformat(j)):
                 freq[lemmaformat(i)][dimensionformat(j)] += 1
 
-    uniqwords = list(set(words)) # rows for sentence matrix
+    # bild unique list of the words in this sentence for the rows
+    uniqwords = set()
+    for w in words:
+        uniqwords.add(lemmaformat(w))
+    query_rows = list(uniqwords) # rows for sentence matrix
 
     # dissect compatible matrix
-    m = np.mat(np.zeros(shape=(len(uniqwords), len(space_cols), dtype=element_type))
+    m = np.mat(np.zeros(shape=(len(query_rows), len(space_cols))))
 
     # convert sentence matrix to compatible matrix
-    for i in range(uniqwords):
-        for j in space_cols:
-            m[lemmaformat(uniqwords[i]), j] = freq[lemmaformat(uniqwords[i])][space_cols[j]]
+    for i in range(len(query_rows)):
+        for j in range(len(space_cols)):
+            m[i, j] = freq[query_rows[i]][space_cols[j]]
 
     # build dissect matrix
-    query_space = Space(DenseMatrix(m), row, column)
+    query_space = Space(DenseMatrix(m), query_rows, space_cols)
 
-    print query_space
-    
-    
-    #for w in words:
-        #wformat = lemmaformat(...)
-        #query_space.get_neighbours(wformat, 3, CosSimilarity(), space2 = europarl_space)
-        #list = ...
-        #for c in list:
-            #similarity
-            #an string anfügen mit similarity
-        #print whatever
-        
-        
-        ###
-    
-    ## 
+    # for every word print neighbours (yet no fancy format and language selection)
+    for w in words:
+        wformat = lemmaformat(w)
+        best_translations = get_best_translations(wformat, query_space, europarl_space, 10)
+        print format_best_translations(wformat, best_translations, 3)
+    print line.rstrip()
