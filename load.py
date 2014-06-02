@@ -1,31 +1,45 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 
+#from codecs import open
 from composes.utils import io_utils
 from composes.similarity.cos import CosSimilarity
 from composes.semantic_space.space import Space
 from composes.matrix.dense_matrix import DenseMatrix
 from collections import defaultdict
 import numpy as np
-import sys
+from nltk.tokenize import TreebankWordTokenizer
+from nltk.corpus import stopwords as stw
+import re, sys
 
 # use this program like
-# python load.py inputfile inputlanguage
+# python load.py inputfile inputlanguage outputlanguage
 # inputfile: word per line
 
 space_cols_file = "./europarl.row"
 loaded_space_file = "./data/out/europarl.pkl"
 source_lang = "de" # default
+target_lang = "en" # default
+langtag = {"nl":"dutch","fi":"finnish","de":"german","it":"italian","pt":"portuguese","es":"spanish","tr":"turkish","da":"danish","en":"english","fr":"french","hu":"hungarian","no":"norwegian","ru":"russian","sv":"swedish"}
+stopwords = {}
+input_is_tokenized = False
+ENC = "utf-8"
 
 # space lemma format
 def lemmaformat(l):
-    #return l[2] + "_" + l[1] + "_" + l[3]
-    return l[0].lower() + "_" + l[1]
+    if input_is_tokenized:
+        return l[0].lower() + "_" + l[1]
+    else:
+        return l[0].lower() + "_" + l[1]
+        #return l[2] + "_" + l[1] + "_" + l[3]
 
 # space dimension format
 def dimensionformat(l):
-    #return l[2] + "_" + l[1] + "_" + l[3]
-    return l[0].lower() + "_" + l[1]
+    if input_is_tokenized:
+        return l[0].lower() + "_" + l[1]
+    else:
+        return l[0].lower() + "_" + l[1]
+        #return l[2] + "_" + l[1] + "_" + l[3]
 
 # surrounding words can only be part of the vector, if they exist in the matrix
 def valid_dimension(n):
@@ -50,7 +64,8 @@ def valid_pos(source, tag):
         return False
 
 # gives ordered list. the nearest elements come first. penalty on same language
-def get_best_translations(wformat, query_space, europarl_space, number_of_neighbours):
+def get_best_translations(w, query_space, europarl_space, number_of_neighbours):
+    wformat = lemmaformat(w)
     try:
         nearest = europarl_space.get_neighbours(wformat, 10, CosSimilarity())
     except:
@@ -58,29 +73,36 @@ def get_best_translations(wformat, query_space, europarl_space, number_of_neighb
     r = []
     for n, s in nearest:
         similarity = europarl_space.get_sim(n, wformat, CosSimilarity(), space2 = query_space)
-        if n[-3:] == "_" + source_lang:
-            similarity = 0
+        if n[-3:] != "_" + target_lang:
+            similarity = 0.0
         elif n == wformat:
-            similarity = 0
+            similarity = 0.0
         r.append((n, similarity))
     best = sorted(r, key=lambda m: m[1], reverse=True)
     return best
 
-def format_best_translations(wformat, best_translations, number_of_translations):
-    r = wformat + "\t\t"
-    for i in range(number_of_translations):
-        r += best_translations[i][0]
-        r += " "
-        r += str(best_translations[i][1])
-        r += "\t"
-    return r.rstrip()
+def format_best_translations(w, best_translations, number_of_translations):
+    if w[0].lower() not in stopwords[source_lang] and not re.match(r'(\W|\d)', w[0]):
+        r = w[0] + "\t\t"
+        for i in range(number_of_translations):
+            r += best_translations[i][0][:-3]
+            r += " "
+            r += str(best_translations[i][1])
+            r += "\t"
+        return r.rstrip()
+    else:
+        return w[0]
 
 # arguments: 1. inputfile - 2. source language
-if len(sys.argv) > 2:
-    sentences = open(sys.argv[1], "r")
-    source_lang = sys.argv[2]
+if len(sys.argv) > 3:
+    sentences = open(sys.argv[1], "r")#, ENC)
+    source_lang = sys.argv[2].lower()
+    target_lang = sys.argv[3].lower()
 else:
     sentences = sys.stdin
+
+stopwords[source_lang] = set(stw.words(langtag[source_lang]))
+stopwords[target_lang] = set(stw.words(langtag[target_lang]))
 
 # vector dimension/columns for input matrix and matrix per sentence
 space_cols_fileobject = open(space_cols_file, "r")
@@ -102,16 +124,22 @@ while True:
         break
 
     # collect words in sentence until sentence end (now in mockup mode about pos)
-    while not line.startswith("."):
-        cleaned = line.rstrip()
-        #ipos = line.split("\t")[1]
-        ipos = "NN"
-        if valid_pos(source_lang, ipos):
-            words.append(tuple(cleaned.split("\t") + [source_lang]))
-            pos.append(ipos)
-        line = sentences.readline()
-        if not line:
-            break
+    if input_is_tokenized:
+        while not re.match(r'[.:?!]', line):
+            cleaned = line.rstrip()
+            #ipos = line.split("\t")[1]
+            ipos = "NN"
+            if valid_pos(source_lang, ipos):
+                words.append(tuple(cleaned.split("\t") + [source_lang]))
+                pos.append(ipos)
+            line = sentences.readline()
+            if not line:
+                break
+    else:
+        tokenized = TreebankWordTokenizer().tokenize(line)
+        for t in tokenized:
+            pos.append("NN")
+            words.append([t, source_lang])
 
     # fill matrix for sentence
     for i in words:
@@ -136,9 +164,10 @@ while True:
     # build dissect matrix
     query_space = Space(DenseMatrix(m), query_rows, space_cols)
 
-    # for every word print neighbours (yet no fancy format and language selection)
+    # for every word print neighbours with similarity
     for w in words:
-        wformat = lemmaformat(w)
-        best_translations = get_best_translations(wformat, query_space, europarl_space, 10)
-        print format_best_translations(wformat, best_translations, 3)
-    print line.rstrip()
+        best_translations = get_best_translations(w, query_space, europarl_space, 20)
+        print format_best_translations(w, best_translations, 3)
+
+    if input_is_tokenized:
+        print line.rstrip()
