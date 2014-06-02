@@ -33,6 +33,7 @@ DATA_DIR_IN  = ''.join([DATA_DIR, 'in', sep])
 DATA_DIR_OUT = ''.join([DATA_DIR, 'out', sep])
 
 # Parallalized sentences of europarl
+# Input data gotten from here: http://www.statmt.org/europarl/
 europarl_files = \
 {
     DE_LANG : ''.join([DATA_DIR_IN, 'europarl-v7.de-en.de']),
@@ -43,17 +44,22 @@ europarl_files = \
 OUTPUT_FILE_SM  = ''.join([DATA_DIR_OUT, 'europarl.sm'])
 OUTPUT_FILE_ROW = ''.join([DATA_DIR_OUT, 'europarl.row'])
 
-# Limit number of sentences to proces (for testing purposes)
-# For no limit, say None
+# Limit number of sentences to process (for testing purposes).
+# For no limit, set None
 SENTENCES_LIMIT = 10000
 
-# Minimal number of occurrences wanted
-# For no threshold, say anything below 2
-PAIR_OCC_THRESHOLD = 50
+# Filter out sentences which are longer than this number, in one or
+# the other language -- wherever first.
+MAX_SENTENCE_LEN = 10
+
+# Minimal number of occurrences wanted.
+# For no threshold, set anything below 2
+PAIR_OCC_THRESHOLD = 10
 
 class AlignedSentences:
     
-    def __init__(self, sentences_1, sentences_2):
+    def __init__(self, sentences_1, sentences_2, 
+                 filter_sentences=False):
         ''' 
         XXX: Some sanity should be done here to ensure
              the number of sentences match.
@@ -62,11 +68,33 @@ class AlignedSentences:
         self.sentences_2 = sentences_2
         self.number_sentences = sentences_1.sentences.keys()[-1]
         self.pairs_combined = defaultdict(int)
+        self.no_sentences_filtered = 0
+        
+        # In parallel throw out sentences which are considered too long.
+        if filter_sentences == True:
+            self._filter_sentences()
+        
+    def _filter_sentences(self):
+        '''Filter sentences upon criteria of word length. The idea is
+           to not compare too long sentences with each other.
+        '''
+        for sentence_no, sentence in self.sentences_1.sentences.items():
+            if len(sentence) > MAX_SENTENCE_LEN or \
+            len(self.sentences_2.sentences[sentence_no]) > \
+            MAX_SENTENCE_LEN:
+                self.no_sentences_filtered += 1
+                self.sentences_1.sentences[sentence_no] = ['DELETED']
+                self.sentences_2.sentences[sentence_no] = ['DELETED']
+                
+        print(str(self.no_sentences_filtered) + " sentences emptied, " \
+              + "because of word length higher than " \
+              + str(MAX_SENTENCE_LEN) + ".")
         
     def combine_words(self):
         # Iterate through sentence numbers
         for i in range(1, self.number_sentences + 1):
             bilingual_sentence = self._get_bilingual_sentence(i)
+            # complexity: quadratic
             pairs = combinations(bilingual_sentence, 2)
             for pair in pairs:
                 self.pairs_combined[pair] += 1
@@ -208,8 +236,11 @@ def main():
         print sentence_id
     '''
     
-    # Combine words on basis of their sentences
-    aligned_sentences = AlignedSentences(sentences_de, sentences_en)
+    # Combine words on basis of their sentences after filtering out
+    # long sentences.
+    aligned_sentences = AlignedSentences(sentences_de, 
+                                         sentences_en,
+                                         filter_sentences=True)
     aligned_sentences.combine_words()
     
     '''
