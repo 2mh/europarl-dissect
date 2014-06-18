@@ -64,13 +64,10 @@ def get_best_translations(w, query_space, europarl_space, number_of_neighbours, 
     r = []
     for n, s in nearest:
         similarity = europarl_space.get_sim(n, wformat, CosSimilarity(), space2 = query_space)
-        if n[-3:] != "_" + target_lang: # Answers in the same language will be punished
-            similarity = 0.0
-        elif n == wformat:
-            similarity = 0.0
+        if n[-3:] != "_" + target_lang:
+            similarity = 0.0 # Answers in the same language will be punished
         elif n[-5:-4] != pos:
-            similarity = similarity/3
-        #r.append((n, similarity, s))
+            similarity = similarity/3.0 # Different PoS will be punished TODO: select best parameter
         r.append((n, similarity, s))
 
     best = sorted(r, key=lambda m: m[1], reverse=True)
