@@ -1,7 +1,6 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 
-from codecs import open
 from composes.utils import io_utils
 from composes.similarity.cos import CosSimilarity
 from composes.semantic_space.space import Space
@@ -81,7 +80,7 @@ def format_best_translations(w, best_translations, number_of_translations, tag):
     if valid_pos(tag) and not re.match(r'(\W|\d)', w[0]):
         r = w + "\t\t"
         for i in range(number_of_translations):
-            r += best_translations[i][0][:].decode(ENC)
+            r += best_translations[i][0][:]
             r += " "
             r += str(best_translations[i][1])
             r += "\t"
@@ -91,7 +90,7 @@ def format_best_translations(w, best_translations, number_of_translations, tag):
 
 # arguments: 1. inputfile - 2. source language
 if len(sys.argv) > 3:
-    sentences = open(sys.argv[1], "r", ENC)
+    sentences = open(sys.argv[1], "r")
     source_lang = sys.argv[2].lower()
     target_lang = sys.argv[3].lower()
 else:
