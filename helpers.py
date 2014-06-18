@@ -4,14 +4,14 @@ import re
 
 def getTag(tag, lang):
     if lang == "en":
-        if tag in set(["NN", "NNS"]):
+        if re.match(r"NN.*", tag):
             return "N"
-        elif tag in set(["NP", "NPS"]):
+        elif re.match(r"NP.*", tag):
             return "P"
         elif re.match(r"V.*", tag):
             return "V"
         elif re.match(r"JJ.*", tag):
-            return "J"
+            return "A"
         else:
             return "0"
             
@@ -23,7 +23,7 @@ def getTag(tag, lang):
         elif re.match(r"V.*", tag):
             return "V"
         elif re.match(r"ADJ.", tag):
-            return "J"
+            return "A"
         else:
             return "0"
         

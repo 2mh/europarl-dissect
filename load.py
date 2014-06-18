@@ -8,11 +8,8 @@ from composes.semantic_space.space import Space
 from composes.matrix.dense_matrix import DenseMatrix
 from collections import defaultdict
 import numpy as np
-from nltk.tokenize import TreebankWordTokenizer
-from nltk.corpus import stopwords as stw
 import re, sys
 import subprocess
-#from treetagger import TreeTagger
 import helpers
 
 # use this program like
@@ -23,9 +20,8 @@ space_cols_file = "./data/out/europarl.row" #"./data/out/europarl.row"
 loaded_space_file = "./data/out/europarl.pkl"
 source_lang = "de" # default
 target_lang = "en" # default
-treetagger = "tree-tagger"
-langtag = {"nl":"dutch","fi":"finnish","de":"german","it":"italian","pt":"portuguese","es":"spanish","tr":"turkish","da":"danish","en":"english","fr":"french","hu":"hungarian","no":"norwegian","ru":"russian","sv":"swedish"}
-stopwords = {}
+treetaggerpath = "/home/reto/bin/cmd/"
+langtag =  {"nl":"dutch","fi":"finnish","de":"german","it":"italian","pt":"portuguese","es":"spanish","tr":"turkish","da":"danish","en":"english","fr":"french","hu":"hungarian","no":"norwegian","ru":"russian","sv":"swedish"}
 input_is_tokenized = False
 ENC = "utf-8"
 
@@ -53,14 +49,14 @@ def valid_dimension(n):
         return False
 
 # must be in relevant part of speech group (not yet completed)
-def valid_pos(source, tag):
-    if tag in set(["N", "P", "V", "J"]):
+def valid_pos(tag):
+    if tag in ["N", "P", "V", "A"]:
         return True
     else:
         return False
 
 # gives ordered list. the nearest elements come first. penalty on same language
-def get_best_translations(w, query_space, europarl_space, number_of_neighbours):
+def get_best_translations(w, query_space, europarl_space, number_of_neighbours, pos):
     wformat = lemmaformat(w)
     try:
         nearest = europarl_space.get_neighbours(wformat, 10, CosSimilarity())
@@ -69,18 +65,20 @@ def get_best_translations(w, query_space, europarl_space, number_of_neighbours):
     r = []
     for n, s in nearest:
         similarity = europarl_space.get_sim(n, wformat, CosSimilarity(), space2 = query_space)
-        if n[-3:] != "_" + target_lang:
+        if n[-3:] != "_" + target_lang: # Answers in the same language will be punished
             similarity = 0.0
         elif n == wformat:
             similarity = 0.0
+        elif n[-5:-4] != pos:
+            similarity = similarity/3
         #r.append((n, similarity, s))
         r.append((n, similarity, s))
 
     best = sorted(r, key=lambda m: m[1], reverse=True)
     return best
 
-def format_best_translations(w, best_translations, number_of_translations):
-    if w[0].lower() not in stopwords[source_lang] and not re.match(r'(\W|\d)', w[0]):
+def format_best_translations(w, best_translations, number_of_translations, tag):
+    if valid_pos(tag) and not re.match(r'(\W|\d)', w[0]):
         r = w + "\t\t"
         for i in range(number_of_translations):
             r += best_translations[i][0][:].decode(ENC)
@@ -99,9 +97,6 @@ if len(sys.argv) > 3:
 else:
     sentences = sys.stdin
 
-stopwords[source_lang] = set(stw.words(langtag[source_lang]))
-stopwords[target_lang] = set(stw.words(langtag[target_lang]))
-
 # vector dimension/columns for input matrix and matrix per sentence
 space_cols_fileobject = open(space_cols_file, "r")
 space_cols = space_cols_fileobject.read().split("\n")[:-1] #space_cols = space_cols_fileobject.readlines()
@@ -109,10 +104,6 @@ space_cols_fileobject.close()
 
 # load the space
 europarl_space = io_utils.load(loaded_space_file)
-#europarl_space = Space.build(data = "./dude/europarl.sm",
-                       #rows = "./dude/europarl.row",
-                       #cols = "./dude/europarl.row",
-                       #format = "sm")
 
 # work on input file
 while True:
@@ -141,14 +132,8 @@ while True:
             if not line:
                 break
     else:
-        #tokenized = TreebankWordTokenizer().tokenize(line)
-        #for t in tokenized:
-            #pos.append("NN")
-            #words.append([t, source_lang])
-            
-        
         treetagger = subprocess.Popen(
-            ["/home/reto/bin/cmd/tree-tagger-english-utf8"],
+            [treetaggerpath + "tree-tagger-" + langtag[source_lang] + "-utf8"],
             stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         treetaggerout, stderr = treetagger.communicate(line)
         treeword = treetaggerout.split("\n")
@@ -156,7 +141,7 @@ while True:
             pos.append(helpers.getTag(t.split("\t")[1], source_lang))
             lemmas.append((t.split("\t")[2], source_lang, helpers.getTag(t.split("\t")[1], source_lang)))
             words.append(t.split("\t")[0])
-
+    
     # fill matrix for sentence
     for i in lemmas:
         for j in lemmas:
@@ -168,8 +153,6 @@ while True:
     for l in lemmas:
         uniqwords.add(lemmaformat(l))
     query_rows = list(uniqwords) # rows for sentence matrix
-    
-    print(l)
 
     # dissect compatible matrix
     m = np.mat(np.zeros(shape=(len(query_rows), len(space_cols))))
@@ -184,8 +167,8 @@ while True:
 
     # for every word print neighbours with similarity
     for i in range(len(words)):
-        best_translations = get_best_translations(lemmas[i], query_space, europarl_space, 10)
-        print(format_best_translations(words[i], best_translations, 3))
+        best_translations = get_best_translations(lemmas[i], query_space, europarl_space, 10, pos[i])
+        print(format_best_translations(words[i], best_translations, 3, pos[i]))
 
     if input_is_tokenized:
         print(line.rstrip())
