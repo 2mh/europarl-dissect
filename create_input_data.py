@@ -1,6 +1,7 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 
+#from __future__ import unicode_literals
 from codecs import open
 from collections import defaultdict
 from itertools import combinations
@@ -46,15 +47,15 @@ OUTPUT_FILE_ROW = ''.join([DATA_DIR_OUT, 'europarl.row'])
 
 # Limit number of sentences to process (for testing purposes).
 # For no limit, set None
-SENTENCES_LIMIT = 1000
+SENTENCES_LIMIT = 2000
 
 # Filter out sentences which are longer than this number, in one or
 # the other language -- wherever first.
-MAX_SENTENCE_LEN = 1000000
+MAX_SENTENCE_LEN = 100000
 
 # Minimal number of occurrences wanted.
 # For no threshold, set anything below 2
-PAIR_OCC_THRESHOLD = 0
+PAIR_OCC_THRESHOLD = 1
 
 class AlignedSentences:
     
@@ -99,6 +100,8 @@ class AlignedSentences:
             for pair in pairs:
                 self.pairs_combined[pair] += 1
                 
+        print(len(self.pairs_combined))
+
     def write_sparse_matrix(self):
         """Write out pairs in a sparse matrix format for DISSECT
            cf. http://clic.cimec.unitn.it/composes/toolkit/ex01input.html
@@ -190,7 +193,7 @@ class Sentences:
         for token in tokens:
             # Do not hold interpunctional signs and stopwords
             if token not in IGNORE_LIST and \
-               token not in stopwords.words(LANG_LONG[self.lang]):
+               token.lower() not in stopwords.words(LANG_LONG[self.lang]):
                 # Add hold tokens in lowered form
                 tokens_filtered.append(token.lower())
         
