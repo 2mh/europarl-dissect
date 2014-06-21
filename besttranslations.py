@@ -11,6 +11,8 @@ import re, sys, subprocess, argparse
 import helpers
 
 # For use: $ python besttranslations.py --help
+# Example (with lemmatized matrix dimensions): $ python besttranslations.py -l -s "en" -t "de" -i "./data/europarl_2014_en.txt"
+# Example (with surface form dimensions):      $ python besttranslations.py -s "en" -t "de" -i "./data/europarl_2014_en.txt"
 
 # Parameters to be set once starting the program:
 input_is_tokenized = False # default
@@ -36,7 +38,8 @@ long_langtag =  {"nl":"dutch","fi":"finnish","de":"german","it":"italian","pt":"
 # space dimension format
 def dimensionformat(word, tag, lemma, lang):
     if use_lemmatization:
-        return lemma + "_" + tag + "_" + lang
+        #return lemma + "_" + tag + "_" + lang
+        return lemma.lower() + "_" + lang + "_" + tag
     else:
         return word.lower() + "_" + lang
 
@@ -58,9 +61,11 @@ def get_best_translations(word, tag, lemma, query_space, loaded_space):
     r = []
     for n, s in nearest: # n: space dimension. s: score
         similarity = loaded_space.get_sim(n, wformat, CosSimilarity(), space2 = query_space)
-        if n[-3:] != "_" + target_lang:
+        #if n[-3:] != "_" + target_lang:
+        if n[-4:-2] != target_lang:
             similarity = 0.0 # Answers in the same language will be punished
-        elif n[-5:-4] != tag and use_lemmatization:
+        #elif n[-5:-4] != tag and use_lemmatization:
+        elif n[-1:] != tag and use_lemmatization:
             similarity = similarity * DIFFERENT_POS_PUNISHMENT
         r.append((n, similarity, s))
 
