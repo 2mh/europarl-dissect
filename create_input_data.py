@@ -62,7 +62,7 @@ OUTPUT_FILE_ROW = ''.join([DATA_DIR_OUT, 'europarl.row'])
 
 # Limit number of sentences to process (for testing purposes).
 # For no limit, set None
-SENTENCES_LIMIT = 1000
+SENTENCES_LIMIT = 10
 
 # Filter out sentences which are longer than this number, in one or
 # the other language -- wherever first.
@@ -222,8 +222,8 @@ class Sentences:
             token_pos_tagged = token.split('\t')
             pos_tag = getTag(token_pos_tagged[0], DE_LANG)
             if pos_tag != "0":
-                token = token_pos_tagged[1].lower() + '_' + self.lang \
-                        + '_' + pos_tag
+                token = token_pos_tagged[1].lower() +  '_' + pos_tag \
+                + '_' + self.lang
                 tokens_pos_tagged.append(token)
                 
         self.sentences[counter] = tokens_pos_tagged
