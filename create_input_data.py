@@ -1,15 +1,21 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 
-#from __future__ import unicode_literals
+from argparse import ArgumentParser
 from codecs import open
 from collections import defaultdict
 from itertools import combinations
 from os import sep, makedirs
 from os.path import exists
+import subprocess
 
 from nltk.corpus import stopwords
 from nltk import word_tokenize
+
+from helpers import getTag
+
+# Global options
+USE_TREETAGGER = True # Uses TreeTagger for lemmatization + Pos tagging
 
 # Languages used
 DE_LANG = 'de'
@@ -33,6 +39,9 @@ DATA_DIR = ''.join(['data', sep])
 DATA_DIR_IN  = ''.join([DATA_DIR, 'in', sep])
 DATA_DIR_OUT = ''.join([DATA_DIR, 'out', sep])
 
+# Treetagger location
+TREETAGGER_DIR = ''.join(['treetagger', sep, 'cmd', sep])
+
 # Parallalized sentences of europarl
 # Input data gotten from here: http://www.statmt.org/europarl/
 europarl_files = \
@@ -41,13 +50,19 @@ europarl_files = \
     EN_LANG : ''.join([DATA_DIR_IN, 'europarl-v7.de-en.en'])
 }
 
+treetagger_paths = \
+{
+    DE_LANG : ''.join([TREETAGGER_DIR, 'tree-tagger-german-utf8-new']),
+    EN_LANG : ''.join([TREETAGGER_DIR, 'tree-tagger-english-utf8-new'])
+}
+
 # Sparse matrix output file for feeding DISSECT
 OUTPUT_FILE_SM  = ''.join([DATA_DIR_OUT, 'europarl.sm'])
 OUTPUT_FILE_ROW = ''.join([DATA_DIR_OUT, 'europarl.row'])
 
 # Limit number of sentences to process (for testing purposes).
 # For no limit, set None
-SENTENCES_LIMIT = 2000
+SENTENCES_LIMIT = 1000
 
 # Filter out sentences which are longer than this number, in one or
 # the other language -- wherever first.
@@ -146,8 +161,12 @@ class AlignedSentences:
         """Mark tokens with a language tag -- as suffix."""
         marked_tokens = []
         
-        for token in tokens:
-            marked_tokens.append(token + '_' + lang)
+        # Only do this when TreeTagger wasn't used.
+        if not USE_TREETAGGER:
+            for token in tokens:
+                marked_tokens.append(token + '_' + lang)
+        else:
+            marked_tokens = tokens
             
         return marked_tokens
             
@@ -168,11 +187,14 @@ class Sentences:
                 i += 1
                 
                 # Show some progress
-                if self._is_sentence_to_print(i, 1000):
+                if self._is_sentence_to_print(i, 10):
                     print(i)
                     
                 # Process sentence furtherly (tokenization & filtering)
-                self._process_sentence(sentence.rstrip(), i)
+                if USE_TREETAGGER:
+                    self._process_sentence_tt(sentence.rstrip(), i)
+                else:
+                    self._process_sentence(sentence.rstrip(), i)
                 
                 # Eventually stop
                 if limit is not None:
@@ -186,6 +208,25 @@ class Sentences:
         tokens = word_tokenize(sentence.encode(ENC))
         tokens_filtered = self._filter_tokens(tokens)
         self.sentences[counter] = tokens_filtered
+        
+    def _process_sentence_tt(self, sentence, counter):
+        """Process sentence with Treetagger"""
+        tokens_pos_tagged = []
+        
+        treetagger = subprocess.Popen([treetagger_paths[self.lang]],
+        stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE)
+        treetagger_out = treetagger.communicate(sentence.encode(ENC))[0]
+        treetagger_token = treetagger_out.split('\n')
+        for token in treetagger_token:
+            token_pos_tagged = token.split('\t')
+            pos_tag = getTag(token_pos_tagged[0], DE_LANG)
+            if pos_tag != "0":
+                token = token_pos_tagged[1].lower() + '_' + self.lang \
+                        + '_' + pos_tag
+                tokens_pos_tagged.append(token)
+                
+        self.sentences[counter] = tokens_pos_tagged
         
     def _filter_tokens(self, tokens):
         tokens_filtered = []
@@ -259,7 +300,15 @@ def main():
     aligned_sentences.write_row()
     
 if __name__ == '__main__':
-	main()
+    '''
+    argparser = ArgumentParser(
+                description='Create DISSECT input material.')
+    argparser.add_argument('-t', '--treetagger', help="Use TreeTagger \
+                                 for tokenization, \
+                                 lemmatization and PoS tagging.")
+    argparser.parse_args('-t')
+    '''
+    main()
     
 '''
 TODO:
