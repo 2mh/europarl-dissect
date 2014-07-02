@@ -17,8 +17,9 @@ import helpers
 # Parameters to be set once starting the program:
 input_is_tokenized = False # default
 use_lemmatization = False # default
-space_cols_file = "./data/out/europarl.row" # default
-loaded_space_file = "./data/out/europarl.pkl" # default
+space_cols_file = "./en-de--10k-sent-lemmatized+pos/europarl.row" # default
+loaded_space_file_s = "./de-en--10k-sent-lemmatized+pos/europarl.pkl" # default
+loaded_space_file_t = "./en-de--10k-sent-lemmatized+pos/europarl.pkl" # default
 source_lang = "de" # default
 target_lang = "en" # default
 input_file = sys.stdin # default
@@ -27,8 +28,10 @@ tag_cutoff = 0 # default: return in format of space_cols_file
 
 # Static paramaters:
 DIFFERENT_POS_PUNISHMENT = 0.3
-NUMBER_OF_NEIGHBOURS = 10
+NUMBER_OF_NEIGHBOURS = 20
 NUMBER_OF_TRANSLATIONS = 3
+OVERALL_SIMILARITY_WEIGHT = 1
+SENTENCE_SIMILARITY_WEIGHT = 3
 TREETAGGER_PATH = "/home/reto/bin/cmd/"
 
 # Conversion between names for languages 
@@ -38,8 +41,7 @@ long_langtag =  {"nl":"dutch","fi":"finnish","de":"german","it":"italian","pt":"
 # space dimension format
 def dimensionformat(word, tag, lemma, lang):
     if use_lemmatization:
-        #return lemma + "_" + tag + "_" + lang
-        return lemma.lower() + "_" + lang + "_" + tag
+        return lemma.lower() + "_" + tag + "_" + lang
     else:
         return word.lower() + "_" + lang
 
@@ -50,24 +52,25 @@ def valid_pos(tag):
     else:
         return False
 
-# gives ordered list. the nearest elements come first. penalty on same language
-# return format: list of best translations as [space dimension, sentence dependent similarity, space similarity]
+# gives ordered list. the nearest elements come first.
+# return format: list of best translations as [space dimension, score, sentence dependent similarity, translation dependent similarity]
 def get_best_translations(word, tag, lemma, query_space, loaded_space):
     wformat = dimensionformat(word, tag, lemma, source_lang)
     try:
-        nearest = loaded_space.get_neighbours(wformat, NUMBER_OF_NEIGHBOURS, CosSimilarity())
+        nearest = loaded_space[source_lang].get_neighbours(wformat, NUMBER_OF_NEIGHBOURS, CosSimilarity(), space2 = loaded_space[target_lang])
     except:
-        nearest = query_space.get_neighbours(wformat, NUMBER_OF_NEIGHBOURS, CosSimilarity(), space2 = loaded_space)
+        nearest = query_space.get_neighbours(wformat, NUMBER_OF_NEIGHBOURS, CosSimilarity(), space2 = loaded_space[target_lang])
     r = []
-    for n, s in nearest: # n: space dimension. s: score
-        similarity = loaded_space.get_sim(n, wformat, CosSimilarity(), space2 = query_space)
-        #if n[-3:] != "_" + target_lang:
-        if n[-4:-2] != target_lang:
-            similarity = 0.0 # Answers in the same language will be punished
-        #elif n[-5:-4] != tag and use_lemmatization:
-        elif n[-1:] != tag and use_lemmatization:
-            similarity = similarity * DIFFERENT_POS_PUNISHMENT
-        r.append((n, similarity, s))
+    for n, s in nearest: # n: space dimension. s: translation similarty (how possible is the translation)
+        # sentence similarity (how well does the word fit to the sentece):
+        z = loaded_space[target_lang].get_sim(n, wformat, CosSimilarity(), space2 = query_space)
+        # score to order the best translations. includes translation probability and how a word fits into a sentence
+        score = (SENTENCE_SIMILARITY_WEIGHT * z + OVERALL_SIMILARITY_WEIGHT * s) / (SENTENCE_SIMILARITY_WEIGHT + OVERALL_SIMILARITY_WEIGHT)
+        if n[-3:] != "_" + target_lang:
+            score = 0.0 # Answers in the same language will be punished. TODO: delete when the new matrices are present
+        if n[-5:-4] != tag and use_lemmatization:
+            score = score * DIFFERENT_POS_PUNISHMENT
+        r.append((n, score, z, s))
 
     best = sorted(r, key=lambda m: m[1], reverse=True)
     return best
@@ -86,14 +89,15 @@ def format_best_translations(word, tag, lemma, best_translations):
         return word + "\n"
 
 def main():
-    global input_is_tokenized, use_lemmatization, space_cols_file, loaded_space_file, source_lang, target_lang, input_file, output_file, tag_cutoff
+    global input_is_tokenized, use_lemmatization, space_cols_file, loaded_space_file_s, loaded_space_file_t, source_lang, target_lang, input_file, output_file, tag_cutoff
     
     parser = argparse.ArgumentParser(description="Word translations that fit best to the sentence")
     parser.add_argument("-k", "--tokenized", help="use pretokenized input", action="store_true")
     parser.add_argument("-l", "--lemmatized", help="use lemmatization", action="store_true")
     parser.add_argument("-p", "--returntag", help="return language tag", action="store_true")
     parser.add_argument("-d", "--dimensions", type=str, help="column file for the input matrix")
-    parser.add_argument("-m", "--matrix", type=str , help="pickled input matrix")
+    parser.add_argument("-m", "--sourcematrix", type=str , help="pickled input matrix for source language")
+    parser.add_argument("-y", "--targetmatrix", type=str , help="pickled input matrix for target language")
     parser.add_argument("-s", "--sourcelang", type=str, help="input language")
     parser.add_argument("-t", "--targetlang", type=str, help="output language")
     parser.add_argument("-i", "--infile", type=str, help="input file")
@@ -106,8 +110,10 @@ def main():
         use_lemmatization = True
     if args.dimensions:
         space_cols_file = args.dimensions
-    if args.matrix:
-        loaded_space_file = args.matrix
+    if args.sourcematrix:
+        loaded_space_file_s = args.sourcematrix
+    if args.targetmatrix:
+        loaded_space_file_t = args.targetmatrix
     if args.sourcelang:
         source_lang = args.sourcelang
     if args.targetlang:
@@ -130,7 +136,10 @@ def main():
     space_cols_fileobject.close()
 
     # load the space
-    loaded_space = io_utils.load(loaded_space_file)
+    loaded_space = {}
+    loaded_space[source_lang] = io_utils.load(loaded_space_file_s)
+    if not loaded_space.get(target_lang): # only load it once for similary queries in the same language
+        loaded_space[target_lang] = io_utils.load(loaded_space_file_t)
 
     # work on input file
     while True:
@@ -166,8 +175,8 @@ def main():
                 [TREETAGGER_PATH + "tree-tagger-" + long_langtag[source_lang] + "-utf8"],
                 stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
             treetaggerout, stderr = treetagger.communicate(line)
-            treeword = treetaggerout.split("\n")
-            for t in treeword[:-1]: #TODO still bad style
+            treeword = treetaggerout.rstrip().split("\n")
+            for t in treeword:
                 w = t.split("\t")[0]
                 p = helpers.getTag(t.split("\t")[1], source_lang)
                 l = t.split("\t")[2]
