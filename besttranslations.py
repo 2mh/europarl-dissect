@@ -14,18 +14,6 @@ import helpers
 # Example (with lemmatized matrix dimensions): $ python besttranslations.py -l -s "en" -t "de" -i "./data/europarl_2014_en.txt"
 # Example (with surface form dimensions):      $ python besttranslations.py -s "en" -t "de" -i "./data/europarl_2014_en.txt"
 
-# Parameters to be set once starting the program:
-input_is_tokenized = False # default
-use_lemmatization = False # default
-space_cols_file = "./en-de--10k-sent-lemmatized+pos/europarl.row" # default
-loaded_space_file_s = "./de-en--10k-sent-lemmatized+pos/europarl.pkl" # default
-loaded_space_file_t = "./en-de--10k-sent-lemmatized+pos/europarl.pkl" # default
-source_lang = "de" # default
-target_lang = "en" # default
-input_file = sys.stdin # default
-output_file = sys.stdout # default
-tag_cutoff = 0 # default: return in format of space_cols_file
-
 # Static paramaters:
 DIFFERENT_POS_PUNISHMENT = 0.3
 NUMBER_OF_NEIGHBOURS = 20
@@ -34,28 +22,26 @@ OVERALL_SIMILARITY_WEIGHT = 1
 SENTENCE_SIMILARITY_WEIGHT = 3
 TREETAGGER_PATH = "/home/reto/bin/cmd/"
 
+# Parameters to be set once starting the program:
+source_lang = "de" # default
+target_lang = "en" # default
+input_is_tokenized = False # default
+use_lemmatization = False # default
+space_cols_file = "./en-de--10k-sent-lemmatized+pos/europarl.row" # default
+loaded_space_file_s = "./de-en--10k-sent-lemmatized+pos/europarl.pkl" # default
+loaded_space_file_t = "./en-de--10k-sent-lemmatized+pos/europarl.pkl" # default
+input_file = sys.stdin # default
+output_file = sys.stdout # default
+tag_cutoff = 0 # default: return in format of space_cols_file
+
 # Conversion between names for languages 
 long_langtag =  {"nl":"dutch","fi":"finnish","de":"german","it":"italian","pt":"portuguese","es":"spanish","tr":"turkish","da":"danish","en":"english","fr":"french","hu":"hungarian","no":"norwegian","ru":"russian","sv":"swedish"}
 
 
-# space dimension format
-def dimensionformat(word, tag, lemma, lang):
-    if use_lemmatization:
-        return lemma.lower() + "_" + tag + "_" + lang
-    else:
-        return word.lower() + "_" + lang
-
-# must be in relevant part of speech group (not yet completed)
-def valid_pos(tag):
-    if tag in ["N", "P", "V", "A"]:
-        return True
-    else:
-        return False
-
 # gives ordered list. the nearest elements come first.
 # return format: list of best translations as [space dimension, score, sentence dependent similarity, translation dependent similarity]
 def get_best_translations(word, tag, lemma, query_space, loaded_space):
-    wformat = dimensionformat(word, tag, lemma, source_lang)
+    wformat = helpers.dimensionformat(word, tag, lemma, source_lang, use_lemmatization)
     try:
         nearest = loaded_space[source_lang].get_neighbours(wformat, NUMBER_OF_NEIGHBOURS, CosSimilarity(), space2 = loaded_space[target_lang])
     except:
@@ -77,7 +63,7 @@ def get_best_translations(word, tag, lemma, query_space, loaded_space):
 
 # Set the output for each input word
 def format_best_translations(word, tag, lemma, best_translations):
-    if valid_pos(tag) and not re.match(r'(\W|\d)', word):
+    if helpers.valid_pos(tag) and not re.match(r'(\W|\d)', word):
         r = word + "\t\t"
         for i in range(NUMBER_OF_TRANSLATIONS):
             r += best_translations[i][0][:len(best_translations[i][0])-tag_cutoff]
@@ -164,7 +150,7 @@ def main():
                 words.append(w)
                 lemmas.append(l)
                 pos.append(p)
-                formatted.append(dimensionformat(w, p, l, source_lang))
+                formatted.append(helpers.dimensionformat(w, p, l, source_lang, use_lemmatization))
                 line = input_file.readline()
                 if not line:
                     break
@@ -183,7 +169,7 @@ def main():
                 words.append(w)
                 lemmas.append(l)
                 pos.append(p)
-                formatted.append(dimensionformat(w, p, l, source_lang))
+                formatted.append(helpers.dimensionformat(w, p, l, source_lang, use_lemmatization))
 
         # fill matrix for sentence
         for i in formatted:

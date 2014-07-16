@@ -29,3 +29,17 @@ def getTag(tag, lang):
         
     else:
         return "0"
+    
+# space dimension format
+def dimensionformat(word, tag, lemma, lang, use_lemmatization):
+    if use_lemmatization:
+        return lemma.lower() + "_" + tag + "_" + lang
+    else:
+        return word.lower() + "_" + lang
+
+# must be in relevant part of speech group (not yet completed)
+def valid_pos(tag):
+    if tag in ["N", "P", "V", "A"]:
+        return True
+    else:
+        return False
