@@ -52,7 +52,7 @@ def get_best_translations(word, tag, lemma, query_space, loaded_space):
 
 # Set the output for each input word
 def format_best_translations(word, tag, lemma, best_translations):
-    if helpers.valid_pos(tag) and not re.match(r'(\W|\d)', word):
+    if helpers.valid_pos(tag):
         r = word + "\t\t"
         for i in range(parameters.NUMBER_OF_TRANSLATIONS):
             r += best_translations[i][0][:len(best_translations[i][0])-tag_cutoff]
@@ -61,7 +61,7 @@ def format_best_translations(word, tag, lemma, best_translations):
             r += "\t"
         return r.rstrip() + "\n"
     else:
-        return word + tag +"\n"
+        return word + "\n"
 
 def main():
     global input_is_tokenized, use_lemmatization, space_cols_file, loaded_space_file_s, loaded_space_file_t, source_lang, target_lang, input_file, output_file, tag_cutoff
