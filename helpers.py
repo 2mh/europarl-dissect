@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 import re
 
+# Conversion between names for languages 
+LONG_LANGTAG =  {"nl":"dutch","fi":"finnish","de":"german","it":"italian","pt":"portuguese","es":"spanish","tr":"turkish","da":"danish","en":"english","fr":"french","hu":"hungarian","no":"norwegian","ru":"russian","sv":"swedish"}
+
 def getTag(tag, lang):
     if lang == "en":
         if re.match(r"NN.*", tag):
