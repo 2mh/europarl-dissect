@@ -14,14 +14,16 @@ import helpers, parameters
 # Example (with lemmatized matrix dimensions): $ python besttranslations.py -l -s "en" -t "de" -i "./data/europarl_2014_en.txt"
 # Example (with surface form dimensions):      $ python besttranslations.py -s "en" -t "de" -i "./data/europarl_2014_en.txt"
 
-# Parameters to be set once starting the program:
+# Parameters to be set once starting the program - either per default or per argparse:
 source_lang = "de" # default
 target_lang = "en" # default
 input_is_tokenized = False # default
 use_lemmatization = False # default
 space_cols_file = parameters.DATA_DIR_OUT + '_'.join(sorted([source_lang,target_lang])) + '-words.col' #"./en-de--10k-sent-lemmatized+pos/europarl.row" # default
-loaded_space_file_s = parameters.DATA_DIR_OUT + source_lang + '-words.sm' #"./de-en--10k-sent-lemmatized+pos/europarl.pkl" # default
-loaded_space_file_t = parameters.DATA_DIR_OUT + target_lang + '-words.sm' #"./en-de--10k-sent-lemmatized+pos/europarl.pkl" # default
+loaded_space_file_s = parameters.DATA_DIR_OUT + source_lang + '_' + source_lang + '-' + target_lang + '-words.pkl'
+#"./de-en--10k-sent-lemmatized+pos/europarl.pkl" # default
+loaded_space_file_t = parameters.DATA_DIR_OUT + target_lang + '_' + target_lang + '-' + source_lang + '-words.pkl'
+#"./en-de--10k-sent-lemmatized+pos/europarl.pkl" # default
 input_file = sys.stdin # default
 output_file = sys.stdout # default
 tag_cutoff = 0 # default: return in format of space_cols_file
@@ -41,8 +43,8 @@ def get_best_translations(word, tag, lemma, query_space, loaded_space):
         z = loaded_space[target_lang].get_sim(n, wformat, CosSimilarity(), space2 = query_space)
         # score to order the best translations. includes translation probability and how a word fits into a sentence
         score = (parameters.SENTENCE_SIMILARITY_WEIGHT * z + parameters.OVERALL_SIMILARITY_WEIGHT * s) / (parameters.SENTENCE_SIMILARITY_WEIGHT + parameters.OVERALL_SIMILARITY_WEIGHT)
-        if n[-3:] != "_" + target_lang:
-            score = 0.0 # Answers in the same language will be punished. TODO: delete when the new matrices are present
+        #if n[-3:] != "_" + target_lang:
+        #    score = 0.0 # Answers in the same language will be punished. TODO: delete when the new matrices are present
         if n[-5:-4] != tag and use_lemmatization:
             score = score * parameters.DIFFERENT_POS_PUNISHMENT
         r.append((n, score, z, s))
