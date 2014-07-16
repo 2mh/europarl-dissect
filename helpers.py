@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 import re
 
+# Conversion between names for languages 
+LONG_LANGTAG =  {"nl":"dutch","fi":"finnish","de":"german","it":"italian","pt":"portuguese","es":"spanish","tr":"turkish","da":"danish","en":"english","fr":"french","hu":"hungarian","no":"norwegian","ru":"russian","sv":"swedish"}
+
 def getTag(tag, lang):
     if lang == "en":
         if re.match(r"NN.*", tag):
@@ -29,3 +32,17 @@ def getTag(tag, lang):
         
     else:
         return "0"
+    
+# space dimension format
+def dimensionformat(word, tag, lemma, lang, use_lemmatization):
+    if use_lemmatization:
+        return lemma.lower() + "_" + tag + "_" + lang
+    else:
+        return word.lower() + "_" + lang
+
+# must be in relevant part of speech group (not yet completed)
+def valid_pos(tag):
+    if tag in ["N", "P", "V", "A"]:
+        return True
+    else:
+        return False
