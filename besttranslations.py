@@ -15,15 +15,13 @@ import helpers, parameters
 # Example (with surface form dimensions):      $ python besttranslations.py -s "en" -t "de" -i "./data/europarl_2014_en.txt"
 
 # Parameters to be set once starting the program - either per default or per argparse:
-source_lang = "de" # default
-target_lang = "en" # default
+source_lang = "en" # default
+target_lang = "de" # default
 input_is_tokenized = False # default
 use_lemmatization = False # default
-space_cols_file = parameters.DATA_DIR_OUT + '_'.join(sorted([source_lang,target_lang])) + '-words.col' #"./en-de--10k-sent-lemmatized+pos/europarl.row" # default
-loaded_space_file_s = parameters.DATA_DIR_OUT + source_lang + '_' + source_lang + '-' + target_lang + '-words.pkl'
-#"./de-en--10k-sent-lemmatized+pos/europarl.pkl" # default
-loaded_space_file_t = parameters.DATA_DIR_OUT + target_lang + '_' + target_lang + '-' + source_lang + '-words.pkl'
-#"./en-de--10k-sent-lemmatized+pos/europarl.pkl" # default
+space_cols_file = ""
+loaded_space_file_s = ""
+loaded_space_file_t = ""
 input_file = sys.stdin # default
 output_file = sys.stdout # default
 tag_cutoff = 0 # default: return in format of space_cols_file
@@ -63,7 +61,7 @@ def format_best_translations(word, tag, lemma, best_translations):
             r += "\t"
         return r.rstrip() + "\n"
     else:
-        return word + "\n"
+        return word + tag +"\n"
 
 def main():
     global input_is_tokenized, use_lemmatization, space_cols_file, loaded_space_file_s, loaded_space_file_t, source_lang, target_lang, input_file, output_file, tag_cutoff
@@ -81,20 +79,27 @@ def main():
     parser.add_argument("-o", "--outfile", type=str, help="output file")
     args = parser.parse_args()
     
+    
+    if args.sourcelang:
+        source_lang = args.sourcelang
+    if args.targetlang:
+        target_lang = args.targetlang
     if args.tokenized:
         input_is_tokenized = True
     if args.lemmatized:
         use_lemmatization = True
     if args.dimensions:
         space_cols_file = args.dimensions
+    else:
+        space_cols_file = parameters.DATA_DIR_OUT + '_'.join(sorted([source_lang,target_lang])) + '-words.col'
     if args.sourcematrix:
         loaded_space_file_s = args.sourcematrix
+    else:
+        loaded_space_file_s = parameters.DATA_DIR_OUT + source_lang + '_' + source_lang + '-' + target_lang + '.pkl'
     if args.targetmatrix:
         loaded_space_file_t = args.targetmatrix
-    if args.sourcelang:
-        source_lang = args.sourcelang
-    if args.targetlang:
-        target_lang = args.targetlang
+    else:
+        loaded_space_file_t = parameters.DATA_DIR_OUT + target_lang + '_' + target_lang + '-' + source_lang + '.pkl'
     if args.infile:
         input_file = open(args.infile, "r")
     if args.outfile:
