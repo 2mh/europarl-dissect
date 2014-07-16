@@ -9,13 +9,15 @@ from os import sep, makedirs
 from os.path import exists
 import subprocess
 
+from composes.semantic_space.space import Space
+from composes.utils import io_utils
 from nltk.corpus import stopwords
 from nltk import word_tokenize
 
 from helpers import getTag
 
 # Global options
-USE_TREETAGGER = True # Uses TreeTagger for lemmatization + Pos tagging
+USE_TREETAGGER = False # Uses TreeTagger for lemmatization + Pos tagging
 
 # Languages used
 DE_LANG = 'de'
@@ -56,13 +58,18 @@ treetagger_paths = \
     EN_LANG : ''.join([TREETAGGER_DIR, 'tree-tagger-english-utf8-new'])
 }
 
-# Sparse matrix output file for feeding DISSECT
-OUTPUT_FILE_SM  = ''.join([DATA_DIR_OUT, 'europarl.sm'])
-OUTPUT_FILE_ROW = ''.join([DATA_DIR_OUT, 'europarl.row'])
+# Input files (col file, row files and sparse matrix files) for DISSECT
+OUTPUT_FILE_DE_DE_EN_SM = ''.join([DATA_DIR_OUT, 'de_de-en.sm'])
+OUTPUT_FILE_EN_EN_DE_SM = ''.join([DATA_DIR_OUT, 'en_en-de.sm'])
+OUTPUT_FILE_DE_EN_WORDS_COL = ''.join([DATA_DIR_OUT, 'de_en-words.col'])
+OUTPUT_FILE_DE_WORDS_ROW = ''.join([DATA_DIR_OUT, 'de-words.row'])
+OUTPUT_FILE_EN_WORDS_ROW = ''.join([DATA_DIR_OUT, 'en-words.row'])
+OUTPUT_FILE_DE_DE_EN_PKL = ''.join([DATA_DIR_OUT, 'de_de-en.pkl'])
+OUTPUT_FILE_EN_EN_DE_PKL = ''.join([DATA_DIR_OUT, 'en_en-en.pkl'])
 
 # Limit number of sentences to process (for testing purposes).
 # For no limit, set None
-SENTENCES_LIMIT = 10
+SENTENCES_LIMIT = 10000
 
 # Filter out sentences which are longer than this number, in one or
 # the other language -- wherever first.
@@ -121,33 +128,109 @@ class AlignedSentences:
         """Write out pairs in a sparse matrix format for DISSECT
            cf. http://clic.cimec.unitn.it/composes/toolkit/ex01input.html
         """
+        '''
         f = open(OUTPUT_FILE_SM, 'w', ENC)
         for pair, count in self.pairs_combined.items():
-            if count >= PAIR_OCC_THRESHOLD: 
+            if count >= PAIR_OCC_THRESHOLD:
                 f.write(''.join([pair[0], ' ', pair[1], 
                         ' ', str(count), '\n']).decode(ENC))
         f.close()
-        
-        print('SM file written out: ' + OUTPUT_FILE_SM)
-        
-    def write_row(self):
-        """Write out row of words as given in the DISSECT tutorial
-           cf. http://clic.cimec.unitn.it/composes/toolkit/ex01input.html
-        """
-        row = set()
+        '''
+        f = open(OUTPUT_FILE_DE_DE_EN_SM, 'w', ENC)
         for pair, count in self.pairs_combined.items():
             if count >= PAIR_OCC_THRESHOLD:
-                row.add(pair[0])
-                row.add(pair[1])
+                # We only want '_de' -> '_de' and '_de' -> '_en'
+                # combinations.
+                if ''.join(['_', DE_LANG]) in pair[0]:
+                    f.write(''.join([pair[0], ' ', pair[1], 
+                        ' ', str(count), '\n']).decode(ENC))
+        print('SM file written out: ' + OUTPUT_FILE_DE_DE_EN_SM)
+        f.close()
         
-        f = open(OUTPUT_FILE_ROW, 'w', ENC)
-        for token in row:
+        f = open(OUTPUT_FILE_EN_EN_DE_SM, 'w', ENC)
+        for pair, count in self.pairs_combined.items():
+            if count >= PAIR_OCC_THRESHOLD:
+                # We only want '_en' -> '_en' and '_en' -> '_de'
+                # combinations.
+                if ''.join(['_', EN_LANG]) in pair[1]:
+                    f.write(''.join([pair[1], ' ', pair[0], 
+                        ' ', str(count), '\n']).decode(ENC))
+        print('SM file written out: ' + OUTPUT_FILE_EN_EN_DE_SM)
+        f.close()
+        
+    def write_col(self):
+        """Write out col of words (all words in both languages)
+        """
+        col = set()
+        for pair, count in self.pairs_combined.items():
+            if count >= PAIR_OCC_THRESHOLD:
+                col.add(pair[0])
+                col.add(pair[1])
+        
+        f = open(OUTPUT_FILE_DE_EN_WORDS_COL, 'w', ENC)
+        for token in col:
             f.write(''.join([token, '\n']).decode(ENC))
         f.close()
         
-        print('Row file written out: ' + OUTPUT_FILE_ROW)
-            
-            
+        print('Col file written out: ' + OUTPUT_FILE_DE_EN_WORDS_COL)
+        
+    def write_row(self):
+        """Write out row of words (language dependent each)
+        """
+        row_1 = set()
+        row_2 = set()
+        
+        for pair, count in self.pairs_combined.items():
+            if count >= PAIR_OCC_THRESHOLD:
+                # Collect lang 1 words
+                if ''.join(['_', DE_LANG]) in pair[0]:
+                    row_1.add(pair[0])
+                else:
+                    row_2.add(pair[0])
+                # Collect lang 2 words
+                if ''.join(['_', DE_LANG]) in pair[1]:
+                    row_1.add(pair[1])
+                else:
+                    row_2.add(pair[1])
+        
+        f = open(OUTPUT_FILE_DE_WORDS_ROW, 'w', ENC)
+        for token in row_1:
+            f.write(''.join([token, '\n']).decode(ENC))
+        f.close()
+        
+        print('Row file written out: ' + OUTPUT_FILE_DE_WORDS_ROW)
+        
+        f = open(OUTPUT_FILE_EN_WORDS_ROW, 'w', ENC)
+        for token in row_2:
+            f.write(''.join([token, '\n']).decode(ENC))
+        f.close()
+        
+        print('Row file written out: ' + OUTPUT_FILE_EN_WORDS_ROW)
+        
+    def write_pkl(self):
+        """
+        Create spaces from co-occurrence counts in sparse format (.sm)
+        """
+        
+        # For direction DE-EN
+        my_space_1 = Space.build(data = OUTPUT_FILE_DE_DE_EN_SM ,
+                       rows = OUTPUT_FILE_DE_WORDS_ROW,
+                       cols = OUTPUT_FILE_DE_EN_WORDS_COL,
+                       format = "sm")
+        
+        # For direction EN-DE   
+        my_space_2 = Space.build(data = OUTPUT_FILE_EN_EN_DE_SM,
+                       rows = OUTPUT_FILE_EN_WORDS_ROW,
+                       cols = OUTPUT_FILE_DE_EN_WORDS_COL,
+                       format = "sm")
+        
+        # Save the space objects in pickle format
+        io_utils.save(my_space_1, OUTPUT_FILE_DE_DE_EN_PKL)
+        io_utils.save(my_space_2, OUTPUT_FILE_EN_EN_DE_PKL)
+        
+        print('Pickle file written out: ' + OUTPUT_FILE_DE_DE_EN_PKL)
+        print('Pickle file written out: ' + OUTPUT_FILE_EN_EN_DE_PKL)
+        
     def _get_bilingual_sentence(self, counter):
         """Get a sentence with united tokens."""
         marked_sentence_1 = self._mark_tokens_by_lang(self.sentences_1.\
@@ -289,15 +372,21 @@ def main():
     
     '''
     # Show pairs
-    for pair, count in aligned_sentences.pairs_combined.items():
-        print(count, pair)
+    for pair, count in aligned_sentences.pairs_combined.items():The President welcomed the adoption of the euro by Latvia on 1 January 2014.
+        print(count, pair)The President welcomed the adoption of the euro by Latvia on 1 January 2014.
     '''
         
     # Write pairs in sparse matrix format
     aligned_sentences.write_sparse_matrix()
     
+    # Write tokens to a col format
+    aligned_sentences.write_col()
+    
     # Write tokens to a row format
     aligned_sentences.write_row()
+    
+    # Write pickle files (for faster processing in besttranslations.py)
+    aligned_sentences.write_pkl()
     
 if __name__ == '__main__':
     '''
