@@ -1,9 +1,28 @@
-#!/usr/bin/python2
 # -*- coding: utf-8 -*-
+
+from os import sep
 import re
 
 # Conversion between names for languages 
-LONG_LANGTAG =  {"nl":"dutch","fi":"finnish","de":"german","it":"italian","pt":"portuguese","es":"spanish","tr":"turkish","da":"danish","en":"english","fr":"french","hu":"hungarian","no":"norwegian","ru":"russian","sv":"swedish"}
+LONG_LANGTAG =  {"nl":"dutch",
+                 "fi":"finnish",
+                 "de":"german",
+                 "it":"italian",
+                 "pt":"portuguese",
+                 "es":"spanish",
+                 "tr":"turkish",
+                 "da":"danish",
+                 "en":"english",
+                 "fr":"french",
+                 "hu":"hungarian",
+                 "no":"norwegian",
+                 "ru":"russian",
+                 "sv":"swedish"}
+
+# Location of data (to read from, to write to)
+DATA_DIR = ''.join(['data', sep])
+DATA_DIR_IN  = ''.join([DATA_DIR, 'in', sep])
+DATA_DIR_OUT = ''.join([DATA_DIR, 'out', sep])
 
 def getTag(tag, lang):
     if lang == "en":
@@ -46,3 +65,39 @@ def valid_pos(tag):
         return True
     else:
         return False
+        
+class Suffixes:
+    """ This class provides suffixes for being more flexible with
+        language pairs supported.
+    """
+    
+    def __init__(self, lang_1, lang_2):
+        """
+        Initalized class with both languages used. If both languages
+        provided are the same, just the first argument provided is
+        used.
+        @param lang1
+        @param lang2
+        """
+        single_language = False
+        if lang_1 == lang_2:
+            single_language = True
+
+        self.lang_1 = lang_1.lower()
+        self.lang_2 = lang_2.lower()
+        self.europarl_prefix = 'europarl-v7.'
+
+    def lang_to_lang_infix(self):
+        """Return infixes like 'de-en' and 'en-de' as tuple. """
+        return self.lang_1 + '-' + self.lang_2, \
+               self.lang_2 + '-' + self.lang_1
+        
+    def europarl_filepaths(self):
+        """Get europarl file suffix, e. g. 'europarl-v7.de-en.de' 
+           and europarl-v7.de-en.en"""
+        return DATA_DIR_IN + sep + self.europarl_prefix + \
+               self.lang_to_lang_infix()[0] + \
+               '.' + self.lang_1, \
+               DATA_DIR_IN + sep + self.europarl_prefix + \
+               self.lang_to_lang_infix()[0] + \
+               '.' + self.lang_2

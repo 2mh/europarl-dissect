@@ -14,32 +14,24 @@ from composes.utils import io_utils
 from nltk.corpus import stopwords
 from nltk import word_tokenize
 
+from helpers import DATA_DIR, DATA_DIR_IN, DATA_DIR_OUT, LONG_LANGTAG
 from helpers import getTag
+from helpers import Suffixes
 
 # Global options
 USE_TREETAGGER = False # Uses TreeTagger for lemmatization + Pos tagging
 
-# Languages used
-DE_LANG = 'de'
-EN_LANG = 'en'
+# Both languages involved / default languages used
+LANG_1 = 'de'
+LANG_2 = 'en'
 
-# Languages used (verbose)
-LANG_LONG = \
-{ 
-    DE_LANG : 'german',
-    EN_LANG : 'english' 
-}
+suffixes = Suffixes(LANG_1, LANG_2)
 
 # Encoding used
 ENC = 'utf-8'
 
 # Symbols to ignore (besides stopwords)
 IGNORE_LIST = ['.', ',', ';', '(', ')', '-', ':', '!', '?', '\'']
-
-# Location of data (to read from, to write to)
-DATA_DIR = ''.join(['data', sep])
-DATA_DIR_IN  = ''.join([DATA_DIR, 'in', sep])
-DATA_DIR_OUT = ''.join([DATA_DIR, 'out', sep])
 
 # Treetagger location
 TREETAGGER_DIR = ''.join(['treetagger', sep, 'cmd', sep])
@@ -48,14 +40,14 @@ TREETAGGER_DIR = ''.join(['treetagger', sep, 'cmd', sep])
 # Input data gotten from here: http://www.statmt.org/europarl/
 europarl_files = \
 {
-    DE_LANG : ''.join([DATA_DIR_IN, 'europarl-v7.de-en.de']),
-    EN_LANG : ''.join([DATA_DIR_IN, 'europarl-v7.de-en.en'])
+    LANG_1 : suffixes.europarl_filepaths()[0],
+    LANG_2 : suffixes.europarl_filepaths()[1]
 }
 
 treetagger_paths = \
 {
-    DE_LANG : ''.join([TREETAGGER_DIR, 'tree-tagger-german-utf8-new']),
-    EN_LANG : ''.join([TREETAGGER_DIR, 'tree-tagger-english-utf8-new'])
+    LANG_1 : ''.join([TREETAGGER_DIR, 'tree-tagger-german-utf8-new']),
+    LANG_2 : ''.join([TREETAGGER_DIR, 'tree-tagger-english-utf8-new'])
 }
 
 # Input files (col file, row files and sparse matrix files) for DISSECT
@@ -65,11 +57,20 @@ OUTPUT_FILE_DE_EN_WORDS_COL = ''.join([DATA_DIR_OUT, 'de_en-words.col'])
 OUTPUT_FILE_DE_WORDS_ROW = ''.join([DATA_DIR_OUT, 'de-words.row'])
 OUTPUT_FILE_EN_WORDS_ROW = ''.join([DATA_DIR_OUT, 'en-words.row'])
 OUTPUT_FILE_DE_DE_EN_PKL = ''.join([DATA_DIR_OUT, 'de_de-en.pkl'])
-OUTPUT_FILE_EN_EN_DE_PKL = ''.join([DATA_DIR_OUT, 'en_en-en.pkl'])
+OUTPUT_FILE_EN_EN_DE_PKL = ''.join([DATA_DIR_OUT, 'en_en-de.pkl'])
+
+# Single language output files (despite *_ROW files)
+# (Despite that: a *_ROW file *is* a *_COL file)
+OUTPUT_FILE_DE_SM = ''.join([DATA_DIR_OUT, 'de.sm'])
+OUTPUT_FILE_EN_SM = ''.join([DATA_DIR_OUT, 'en.sm'])
+OUTPUT_FILE_DE_PKL = ''.join([DATA_DIR_OUT, 'de.pkl'])
+OUTPUT_FILE_EN_PKL = ''.join([DATA_DIR_OUT, 'en.pkl'])
+OUTPUT_FILE_DE_WORDS_COL = ''.join([DATA_DIR_OUT, 'de-words.col'])
+OUTPUT_FILE_EN_WORDS_COL = ''.join([DATA_DIR_OUT, 'en-words.col'])
 
 # Limit number of sentences to process (for testing purposes).
 # For no limit, set None
-SENTENCES_LIMIT = 10000
+SENTENCES_LIMIT = 200
 
 # Filter out sentences which are longer than this number, in one or
 # the other language -- wherever first.
@@ -124,39 +125,31 @@ class AlignedSentences:
                 
         print(len(self.pairs_combined))
 
-    def write_sparse_matrix(self):
+    def _write_sparse_matrix(self, output_file, primary_language):
         """Write out pairs in a sparse matrix format for DISSECT
            cf. http://clic.cimec.unitn.it/composes/toolkit/ex01input.html
         """
-        '''
-        f = open(OUTPUT_FILE_SM, 'w', ENC)
+        f = open(output_file, 'w', ENC)
+        
         for pair, count in self.pairs_combined.items():
             if count >= PAIR_OCC_THRESHOLD:
-                f.write(''.join([pair[0], ' ', pair[1], 
-                        ' ', str(count), '\n']).decode(ENC))
-        f.close()
-        '''
-        f = open(OUTPUT_FILE_DE_DE_EN_SM, 'w', ENC)
-        for pair, count in self.pairs_combined.items():
-            if count >= PAIR_OCC_THRESHOLD:
-                # We only want '_de' -> '_de' and '_de' -> '_en'
-                # combinations.
-                if ''.join(['_', DE_LANG]) in pair[0]:
+                # We only want e. g.  '_de' -> '_de' and '_de' -> '_en'
+                # combinations, given primary_language is 'de'.
+                if ''.join(['_', primary_language]) in pair[0]:
                     f.write(''.join([pair[0], ' ', pair[1], 
                         ' ', str(count), '\n']).decode(ENC))
-        print('SM file written out: ' + OUTPUT_FILE_DE_DE_EN_SM)
+        print('SM file written out: ' + output_file)
+        
         f.close()
         
-        f = open(OUTPUT_FILE_EN_EN_DE_SM, 'w', ENC)
-        for pair, count in self.pairs_combined.items():
-            if count >= PAIR_OCC_THRESHOLD:
-                # We only want '_en' -> '_en' and '_en' -> '_de'
-                # combinations.
-                if ''.join(['_', EN_LANG]) in pair[1]:
-                    f.write(''.join([pair[1], ' ', pair[0], 
-                        ' ', str(count), '\n']).decode(ENC))
-        print('SM file written out: ' + OUTPUT_FILE_EN_EN_DE_SM)
-        f.close()
+    def write_sparse_matrices(self):
+        """ Write sm matrices."""
+        
+        # E. g. de-en
+        self._write_sparse_matrix(OUTPUT_FILE_DE_DE_EN_SM, LANG_1)
+        
+        # E. g. en-de
+        self._write_sparse_matrix(OUTPUT_FILE_EN_EN_DE_SM, LANG_2)
         
     def write_col(self):
         """Write out col of words (all words in both languages)
@@ -183,12 +176,12 @@ class AlignedSentences:
         for pair, count in self.pairs_combined.items():
             if count >= PAIR_OCC_THRESHOLD:
                 # Collect lang 1 words
-                if ''.join(['_', DE_LANG]) in pair[0]:
+                if ''.join(['_', LANG_1]) in pair[0]:
                     row_1.add(pair[0])
                 else:
                     row_2.add(pair[0])
                 # Collect lang 2 words
-                if ''.join(['_', DE_LANG]) in pair[1]:
+                if ''.join(['_', LANG_1]) in pair[1]:
                     row_1.add(pair[1])
                 else:
                     row_2.add(pair[1])
@@ -303,7 +296,7 @@ class Sentences:
         treetagger_token = treetagger_out.split('\n')
         for token in treetagger_token:
             token_pos_tagged = token.split('\t')
-            pos_tag = getTag(token_pos_tagged[0], DE_LANG)
+            pos_tag = getTag(token_pos_tagged[0], LANG_1)
             if pos_tag != "0":
                 token = token_pos_tagged[1].lower() +  '_' + pos_tag \
                 + '_' + self.lang
@@ -317,7 +310,8 @@ class Sentences:
         for token in tokens:
             # Do not hold interpunctional signs and stopwords
             if token not in IGNORE_LIST and \
-               token.lower() not in stopwords.words(LANG_LONG[self.lang]):
+               token.lower() not in stopwords.\
+               words(LONG_LANGTAG[self.lang]):
                 # Add hold tokens in lowered form
                 tokens_filtered.append(token.lower())
         
@@ -334,7 +328,23 @@ class Sentences:
         return False
 
 def main():
+    global language_used
+    language_used = False
 
+    argparser = ArgumentParser(description=\
+                               'Create DISSECT input material.')
+    argparser.add_argument('-l', '--language', 
+                           help="Specifies that input material " + \
+                                "only for specified language is " + \
+                                "created.",
+                           type=str)
+    pargs = argparser.parse_args()
+    
+    # User only wants a specific language, e. g. 'de' for German
+    if(pargs.language):
+        language_used = pargs.language.lower()
+        print(language_used)
+    
     # Check if any input data is missing
     for lang in europarl_files.keys():
         if not exists(europarl_files[lang]):
@@ -348,60 +358,37 @@ def main():
         makedirs(DATA_DIR_OUT)
         print('Now created.')
    
-    
-    # Read German sentences
-    sentences_de = Sentences(DE_LANG)
-    sentences_de.read_sentences(limit=SENTENCES_LIMIT)
-    
-    # Read English sentences
-    sentences_en = Sentences(EN_LANG)
-    sentences_en.read_sentences(limit=SENTENCES_LIMIT)
-
-    '''
-    # Example print out of german sentences read in
-    for sentence_id in sentences_de.sentences.values():
-        print sentence_id
-    '''
-    
-    # Combine words on basis of their sentences after filtering out
-    # long sentences.
-    aligned_sentences = AlignedSentences(sentences_de, 
-                                         sentences_en,
-                                         filter_sentences=True)
-    aligned_sentences.combine_words()
-    
-    '''
-    # Show pairs
-    for pair, count in aligned_sentences.pairs_combined.items():The President welcomed the adoption of the euro by Latvia on 1 January 2014.
-        print(count, pair)The President welcomed the adoption of the euro by Latvia on 1 January 2014.
-    '''
+    if not language_used:
+        # Read German sentences
+        sentences_de = Sentences(LANG_1)
+        sentences_de.read_sentences(limit=SENTENCES_LIMIT)
         
-    # Write pairs in sparse matrix format
-    aligned_sentences.write_sparse_matrix()
-    
-    # Write tokens to a col format
-    aligned_sentences.write_col()
-    
-    # Write tokens to a row format
-    aligned_sentences.write_row()
-    
-    # Write pickle files (for faster processing in besttranslations.py)
-    aligned_sentences.write_pkl()
+        # Read English sentences
+        sentences_en = Sentences(LANG_2)
+        sentences_en.read_sentences(limit=SENTENCES_LIMIT)
+        
+        # Combine words on basis of their sentences after filtering out
+        # long sentences.
+        aligned_sentences = AlignedSentences(sentences_de, 
+                                             sentences_en,
+                                             filter_sentences=True)
+        aligned_sentences.combine_words()
+            
+        # Write pairs in sparse matrix format
+        aligned_sentences.write_sparse_matrices()
+        
+        # Write tokens to a col format
+        aligned_sentences.write_col()
+        
+        # Write tokens to a row format
+        aligned_sentences.write_row()
+        
+        # Write pickle files (for faster processing in besttranslations.py)
+        aligned_sentences.write_pkl()
+    else:
+        sentences = Sentences(language_used)
+        sentences.read_sentences(limit=SENTENCES_LIMIT)
     
 if __name__ == '__main__':
-    '''
-    argparser = ArgumentParser(
-                description='Create DISSECT input material.')
-    argparser.add_argument('-t', '--treetagger', help="Use TreeTagger \
-                                 for tokenization, \
-                                 lemmatization and PoS tagging.")
-    argparser.parse_args('-t')
-    '''
+
     main()
-    
-'''
-TODO:
-- Write out sm file in sorted form (by frequency)
-- Remove _de _en pair entries in sm file
-- Save temporary files to save time in further runs
-'''
