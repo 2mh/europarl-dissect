@@ -17,10 +17,9 @@ from nltk import word_tokenize
 from helpers import DATA_DIR, DATA_DIR_IN, DATA_DIR_OUT, LONG_LANGTAG
 from helpers import getTag
 from helpers import Suffixes
-
-# Both languages involved / default languages used
-LANG_1 = 'de'
-LANG_2 = 'en'
+from parameters import LANG_1, LANG_2, SENTENCES_LIMIT, \
+                       MAX_SENTENCE_LEN, PAIR_OCC_THRESHOLD, \
+                       TREETAGGER_PATH
 
 # Input files (col file, row files and sparse matrix files) for DISSECT
 OUTPUT_FILE_DE_DE_EN_SM = ''.join([DATA_DIR_OUT, 'de_de-en.sm'])
@@ -40,18 +39,6 @@ OUTPUT_FILE_EN_PKL = ''.join([DATA_DIR_OUT, 'en.pkl'])
 OUTPUT_FILE_DE_WORDS_COL = ''.join([DATA_DIR_OUT, 'de-words.col'])
 OUTPUT_FILE_EN_WORDS_COL = ''.join([DATA_DIR_OUT, 'en-words.col'])
 
-# Limit number of sentences to process (for testing purposes).
-# For no limit, set None
-SENTENCES_LIMIT = 1000000
-
-# Filter out sentences which are longer than this number, in one or
-# the other language -- wherever first.
-MAX_SENTENCE_LEN = 100000
-
-# Minimal number of occurrences wanted.
-# For no threshold, set anything below 2
-PAIR_OCC_THRESHOLD = 1
-
 # Symbols to ignore (besides stopwords)
 IGNORE_LIST = ['.', ',', ';', '(', ')', '-', ':', '!', '?', '\'']
 
@@ -62,12 +49,15 @@ suffixes = Suffixes(LANG_1, LANG_2)
 
 # Global variables for command-line control.
 global single_language, use_treetagger, sentences_limit, lang_1, \
-       lang_2
+       lang_2, treetagger_path
 language_used  = False
 use_treetagger = False
 sentences_limit = SENTENCES_LIMIT # Assign default number
 lang_1 = LANG_1 # Default lang 1
 lang_2 = LANG_2 # Default lang 2
+# Default path; should be changed in parameters.py file, or at least
+# set by --treetagger-path parameter option.
+treetagger_path = TREETAGGER_PATH
 
 # Parallalized sentences of europarl
 # Input data gotten from here: http://www.statmt.org/europarl/
@@ -77,11 +67,13 @@ europarl_files = \
     lang_2 : suffixes.europarl_filepaths()[1]
 }
 
+'''
 treetagger_paths = \
 {
-    lang_1 : ''.join([TREETAGGER_DIR, 'tree-tagger-german-utf8-new']),
-    lang_2 : ''.join([TREETAGGER_DIR, 'tree-tagger-english-utf8-new'])
+    lang_1 : ''.join([treetagger_path, 'tree-tagger-german-utf8-new']),
+    lang_2 : ''.join([treetagger_path, 'tree-tagger-english-utf8-new'])
 }
+'''
 
 class AlignedSentences:
     
@@ -128,20 +120,31 @@ class AlignedSentences:
                 
         print(len(self.pairs_combined))
 
-    def _write_sparse_matrix(self, output_file, primary_language):
+    def _write_sparse_matrix(self, output_file, lang):
         """Write out pairs in a sparse matrix format for DISSECT
            cf. 
            http://clic.cimec.unitn.it/composes/toolkit/ex01input.html
         """
         f = open(output_file, 'w')
         
-        for pair, count in self.pairs_combined.items():
-            if count >= PAIR_OCC_THRESHOLD:
-                # We only want e. g.  '_de' -> '_de' and '_de' -> '_en'
-                # combinations, given primary_language is 'de'.
-                if ''.join(['_', primary_language]) in pair[0]:
-                    f.write(''.join([pair[0], ' ', pair[1], 
-                        ' ', str(count), '\n']))
+        if lang == lang_1:
+            for pair, count in self.pairs_combined.items():
+                if count >= PAIR_OCC_THRESHOLD:
+                    # We only want lang_1-lang_1 and lang_1-lang_2
+                    # combinations.
+                    if ''.join(['_', lang_1]) in pair[0]:
+                        f.write(''.join([pair[0], ' ', pair[1], 
+                            ' ', str(count), '\n']))
+        # Assume lang_2 is meant.
+        else:
+            for pair, count in self.pairs_combined.items():
+                if count >= PAIR_OCC_THRESHOLD:
+                    # We only want lang_2-lang_2 and lang_2-lang_1
+                    # combinations.
+                    if ''.join(['_', lang_2]) in pair[1]:
+                        f.write(''.join([pair[1], ' ', pair[0], 
+                            ' ', str(count), '\n']))
+        
         print('SM file written out: ' + output_file)
         
         f.close()
@@ -185,7 +188,7 @@ class AlignedSentences:
                 else:
                     row_2.add(pair[0])
                 # Collect lang 2 words
-                if ''.join(['_', lang_2]) in pair[1]:
+                if ''.join(['_', lang_1]) in pair[1]:
                     row_1.add(pair[1])
                 else:
                     row_2.add(pair[1])
@@ -290,9 +293,16 @@ class Sentences:
         """Process sentence with Treetagger"""
         tokens_pos_tagged = []
         
-        treetagger = subprocess.Popen([treetagger_paths[self.lang]],
-        stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE)
+        # Set corresponding TreeTagger command.
+        treetagger_script = treetagger_path + \
+                            "tree-tagger-" + LONG_LANGTAG[self.lang] + \
+                            "-utf8-new"
+                        
+        # Call TreeTagger.
+        treetagger = subprocess.Popen([treetagger_script],
+                        stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE)
+                        
         treetagger_out = treetagger.communicate(sentence)[0]
         treetagger_token = treetagger_out.split('\n')
         for token in treetagger_token:
@@ -345,7 +355,7 @@ def handle_arguments():
     
     # Variables here are to be seen and set globally.
     global single_language, use_treetagger, sentences_limit, lang_1, \
-           lang_2
+           lang_2, treetagger_path
            
     argparser = ArgumentParser(description=\
                                'Create DISSECT input material.')
@@ -362,6 +372,10 @@ def handle_arguments():
                            help="Make sure there's a (low) maximum " + \
                                 "number of sentences to read in.",
                            type=int)
+    argparser.add_argument('-tp', '--treetagger-path',
+                           help="Specifiy path where TreeTagger " + \
+                                "cmd directory resides.",
+                           type=str)
     argparser.add_argument('lang_1', nargs="?")
     argparser.add_argument('lang_2', nargs="?")
     pargs = argparser.parse_args()
@@ -396,6 +410,13 @@ def handle_arguments():
         else:
             argparser.print_help()
             exit(2)
+            
+    # Check if TreeTagger cmd path was specified.
+    if(pargs.treetagger_path):
+        treetagger_path = pargs.treetagger_path
+        # Make sure there's a directory seperator at the end.
+        if treetagger_path[-1] != sep:
+            treetagger_path += sep
 
 def create_bilingual_input():
     """Creates input material for two languages (bilingual input
