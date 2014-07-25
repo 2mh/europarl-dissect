@@ -332,8 +332,7 @@ def create_folder(dir_location, problem_str):
     """
     Create folders if not already done.
     @param dir_location: Concrete path to check and eventually create.
-    @param  problem_str: String to show to indicate there's a folder
-                         missing.
+    @param  problem_str: String to indicate there's a folder missing.
     """
     if not exists(dir_location):
         print(problem_str + dir_location)
