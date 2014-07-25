@@ -11,10 +11,15 @@ import re, sys, subprocess, argparse
 import helpers, parameters
 
 # For use: $ python besttranslations.py --help
-# Example (with lemmatized matrix dimensions): $ python besttranslations.py -l -s "en" -t "de" -i "./data/europarl_2014_en.txt"
-# Example (with surface form dimensions):      $ python besttranslations.py -s "en" -t "de" -i "./data/europarl_2014_en.txt"
+# Example (with lemmatized matrix dimensions): 
+# $ python besttranslations.py -l -s "en" -t "de" \
+#   -i "./data/europarl_2014_en.txt"
+# Example (with surface form dimensions):      
+# $ python besttranslations.py -s "en" -t "de" \
+#   -i "./data/europarl_2014_en.txt"
 
-# Parameters to be set once starting the program - either per default or per argparse:
+# Parameters to be set once starting the program - either per 
+# default or per argparse:
 source_lang = "en" # default
 target_lang = "de" # default
 input_is_tokenized = False # default
@@ -28,21 +33,41 @@ tag_cutoff = 0 # default: return in format of space_cols_file
 
 
 # gives ordered list. the nearest elements come first.
-# return format: list of best translations as [space dimension, score, sentence dependent similarity, translation dependent similarity]
+# return format: list of best translations as [space dimension, score, 
+# sentence dependent similarity, translation dependent similarity]
 def get_best_translations(word, tag, lemma, query_space, loaded_space):
-    wformat = helpers.dimensionformat(word, tag, lemma, source_lang, use_lemmatization)
+    wformat = helpers.dimensionformat(word, tag, lemma, source_lang, 
+                                      use_lemmatization)
     try:
-        nearest = loaded_space[source_lang].get_neighbours(wformat, parameters.NUMBER_OF_NEIGHBOURS, CosSimilarity(), space2 = loaded_space[target_lang])
+        nearest = loaded_space[source_lang].get_neighbours(wformat, 
+                                    parameters.NUMBER_OF_NEIGHBOURS, 
+                                    CosSimilarity(), 
+                                    space2 = loaded_space[target_lang])
     except:
-        nearest = query_space.get_neighbours(wformat, parameters.NUMBER_OF_NEIGHBOURS, CosSimilarity(), space2 = loaded_space[target_lang])
+        nearest = query_space.get_neighbours(wformat, 
+                              parameters.NUMBER_OF_NEIGHBOURS, 
+                              CosSimilarity(), 
+                              space2 = loaded_space[target_lang])
     r = []
-    for n, s in nearest: # n: space dimension. s: translation similarty (how possible is the translation)
-        # sentence similarity (how well does the word fit to the sentece):
-        z = loaded_space[target_lang].get_sim(n, wformat, CosSimilarity(), space2 = query_space)
-        # score to order the best translations. includes translation probability and how a word fits into a sentence
-        score = (parameters.SENTENCE_SIMILARITY_WEIGHT * z + parameters.OVERALL_SIMILARITY_WEIGHT * s) / (parameters.SENTENCE_SIMILARITY_WEIGHT + parameters.OVERALL_SIMILARITY_WEIGHT)
+    
+    # n: space dimension. 
+    # s: translation similarty (how possible is the translation)
+    for n, s in nearest: 
+        # sentence similarity 
+        # (how well does the word fit to the sentece):
+        z = loaded_space[target_lang].get_sim(n, wformat, 
+                                              CosSimilarity(), 
+                                              space2 = query_space)
+        # score to order the best translations. 
+        # includes translation probability and how a word fits 
+        # into a sentence
+        score = (parameters.SENTENCE_SIMILARITY_WEIGHT * z \
+                 + parameters.OVERALL_SIMILARITY_WEIGHT * s) \
+                 / (parameters.SENTENCE_SIMILARITY_WEIGHT \
+                 + parameters.OVERALL_SIMILARITY_WEIGHT)
         #if n[-3:] != "_" + target_lang:
-        #    score = 0.0 # Answers in the same language will be punished. TODO: delete when the new matrices are present
+        #    score = 0.0 # Answers in the same language 
+        # will be punished. TODO: delete when new matrices are present
         if n[-5:-4] != tag and use_lemmatization:
             score = score * parameters.DIFFERENT_POS_PUNISHMENT
         r.append((n, score, z, s))
@@ -55,7 +80,8 @@ def format_best_translations(word, tag, lemma, best_translations):
     if helpers.valid_pos(tag):
         r = word + "\t\t"
         for i in range(parameters.NUMBER_OF_TRANSLATIONS):
-            r += best_translations[i][0][:len(best_translations[i][0])-tag_cutoff]
+            r += best_translations[i][0][:len(best_translations[i][0])
+                                         -tag_cutoff]
             r += " "
             r += str(best_translations[i][1])
             r += "\t"
@@ -64,21 +90,33 @@ def format_best_translations(word, tag, lemma, best_translations):
         return word + "\n"
 
 def main():
-    global input_is_tokenized, use_lemmatization, space_cols_file, loaded_space_file_s, loaded_space_file_t, source_lang, target_lang, input_file, output_file, tag_cutoff
+    global input_is_tokenized, use_lemmatization, space_cols_file, \
+           loaded_space_file_s, loaded_space_file_t, source_lang, \
+           target_lang, input_file, output_file, tag_cutoff
     
-    parser = argparse.ArgumentParser(description="Word translations that fit best to the sentence")
-    parser.add_argument("-k", "--tokenized", help="use pretokenized input", action="store_true")
-    parser.add_argument("-l", "--lemmatized", help="use lemmatization", action="store_true")
-    parser.add_argument("-p", "--returntag", help="return language tag", action="store_true")
-    parser.add_argument("-d", "--dimensions", type=str, help="column file for the input matrix")
-    parser.add_argument("-m", "--sourcematrix", type=str , help="pickled input matrix for source language")
-    parser.add_argument("-y", "--targetmatrix", type=str , help="pickled input matrix for target language")
-    parser.add_argument("-s", "--sourcelang", type=str, help="input language")
-    parser.add_argument("-t", "--targetlang", type=str, help="output language")
-    parser.add_argument("-i", "--infile", type=str, help="input file")
-    parser.add_argument("-o", "--outfile", type=str, help="output file")
+    parser = argparse.ArgumentParser(description="Word translations" + \
+                                     " that fit best to the sentence")
+    parser.add_argument("-k", "--tokenized", 
+           help="use pretokenized input", action="store_true")
+    parser.add_argument("-l", "--lemmatized", 
+           help="use lemmatization", action="store_true")
+    parser.add_argument("-p", "--returntag", 
+           help="return language tag", action="store_true")
+    parser.add_argument("-d", "--dimensions", type=str,
+           help="column file for the input matrix")
+    parser.add_argument("-m", "--sourcematrix", type=str,
+           help="pickled input matrix for source language")
+    parser.add_argument("-y", "--targetmatrix", type=str,
+           help="pickled input matrix for target language")
+    parser.add_argument("-s", "--sourcelang", type=str, 
+           help="input language")
+    parser.add_argument("-t", "--targetlang", type=str,
+           help="output language")
+    parser.add_argument("-i", "--infile", type=str, 
+           help="input file")
+    parser.add_argument("-o", "--outfile", type=str, 
+           help="output file")
     args = parser.parse_args()
-    
     
     if args.sourcelang:
         source_lang = args.sourcelang
@@ -91,15 +129,21 @@ def main():
     if args.dimensions:
         space_cols_file = args.dimensions
     else:
-        space_cols_file = parameters.DATA_DIR_OUT + '_'.join(sorted([source_lang,target_lang])) + '-words.col'
+        space_cols_file = parameters.DATA_DIR_OUT \
+                        + '_'.join(sorted([source_lang,target_lang])) \
+                        + '-words.col'
     if args.sourcematrix:
         loaded_space_file_s = args.sourcematrix
     else:
-        loaded_space_file_s = parameters.DATA_DIR_OUT + source_lang + '_' + source_lang + '-' + target_lang + '.pkl'
+        loaded_space_file_s = parameters.DATA_DIR_OUT + source_lang \
+                            + '_' + source_lang + '-' + target_lang \
+                            + '.pkl'
     if args.targetmatrix:
         loaded_space_file_t = args.targetmatrix
     else:
-        loaded_space_file_t = parameters.DATA_DIR_OUT + target_lang + '_' + target_lang + '-' + source_lang + '.pkl'
+        loaded_space_file_t = parameters.DATA_DIR_OUT + target_lang \
+                            + '_' + target_lang + '-' + source_lang \
+                            + '.pkl'
     if args.infile:
         input_file = open(args.infile, "r")
     if args.outfile:
@@ -114,13 +158,15 @@ def main():
 
     # vector dimension/columns for input matrix and matrix per sentence
     space_cols_fileobject = open(space_cols_file, "r")
-    space_cols = space_cols_fileobject.read().split("\n")[:-1] #space_cols = space_cols_fileobject.readlines()
+    # space_cols = space_cols_fileobject.readlines()
+    space_cols = space_cols_fileobject.read().split("\n")[:-1] 
     space_cols_fileobject.close()
 
     # load the space
     loaded_space = {}
     loaded_space[source_lang] = io_utils.load(loaded_space_file_s)
-    if not loaded_space.get(target_lang): # only load it once for similary queries in the same language
+    # only load it once for similary queries in the same language
+    if not loaded_space.get(target_lang):
         loaded_space[target_lang] = io_utils.load(loaded_space_file_t)
 
     # work on input file
@@ -129,8 +175,9 @@ def main():
         words = [] # words in sentence
         lemmas = [] # lemmas in sentence
         pos = [] # part-of-speech tags per word in sentence
-        formatted = [] # 
-        freq = defaultdict(lambda: defaultdict(int)) # matrix for sentence
+        formatted = []
+        # matrix for sentence
+        freq = defaultdict(lambda: defaultdict(int))
 
         # Stop when file is entirely read
         if not line:
@@ -146,7 +193,8 @@ def main():
                 words.append(w)
                 lemmas.append(l)
                 pos.append(p)
-                formatted.append(helpers.dimensionformat(w, p, l, source_lang, use_lemmatization))
+                formatted.append(helpers.dimensionformat(w, p, l, 
+                                 source_lang, use_lemmatization))
                 line = input_file.readline()
                 if not line:
                     break
@@ -154,8 +202,10 @@ def main():
         # Use tree-tagger as lemmatizer and/or tokenizer
         else:
             treetagger = subprocess.Popen(
-                [parameters.TREETAGGER_PATH + "tree-tagger-" + helpers.LONG_LANGTAG[source_lang] + "-utf8"],
-                stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+                [parameters.TREETAGGER_PATH + "tree-tagger-"
+                 + helpers.LONG_LANGTAG[source_lang] + "-utf8"],
+                stdin = subprocess.PIPE, stdout = subprocess.PIPE, 
+                stderr = subprocess.PIPE)
             treetaggerout, stderr = treetagger.communicate(line)
             treeword = treetaggerout.rstrip().split("\n")
             for t in treeword:
@@ -165,7 +215,8 @@ def main():
                 words.append(w)
                 lemmas.append(l)
                 pos.append(p)
-                formatted.append(helpers.dimensionformat(w, p, l, source_lang, use_lemmatization))
+                formatted.append(helpers.dimensionformat(w, p, l, 
+                                 source_lang, use_lemmatization))
 
         # fill matrix for sentence
         for i in formatted:
@@ -191,8 +242,10 @@ def main():
 
         # for every word print neighbours with similarity
         for i in range(len(words)):
-            best_translations = get_best_translations(words[i], pos[i], lemmas[i], query_space, loaded_space)
-            output_file.write(format_best_translations(words[i], pos[i], lemmas[i], best_translations))
+            best_translations = get_best_translations(words[i], pos[i], 
+                                lemmas[i], query_space, loaded_space)
+            output_file.write(format_best_translations(words[i], pos[i], 
+                              lemmas[i], best_translations))
 
         if input_is_tokenized:
             output_file.write(line.split("\t")[0] + "\n")
