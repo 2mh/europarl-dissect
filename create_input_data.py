@@ -61,7 +61,7 @@ TREETAGGER_DIR = ''.join(['treetagger', sep, 'cmd', sep])
 suffixes = Suffixes(LANG_1, LANG_2)
 
 # Global variables for command-line control.
-global language_used, use_treetagger, sentences_limit, lang_1, \
+global single_language, use_treetagger, sentences_limit, lang_1, \
        lang_2
 language_used  = False
 use_treetagger = False
@@ -327,11 +327,27 @@ class Sentences:
             return True
         
         return False
-
-def main():
-    global language_used, use_treetagger, sentences_limit, lang_1, \
+        
+def create_folder(dir_location, problem_str):
+    """
+    Create folders if not already done.
+    @param dir_location: Concrete path to check and eventually create.
+    @param  problem_str: String to show to indicate there's a folder
+                         missing.
+    """
+    if not exists(dir_location):
+        print(problem_str + dir_location)
+        makedirs(dir_location)
+        print("Now created.")
+    
+def handle_arguments():
+    """This function handles command-line options and arguments
+       provided."""
+    
+    # Variables here are to be seen and set globally.
+    global single_language, use_treetagger, sentences_limit, lang_1, \
            lang_2
-
+           
     argparser = ArgumentParser(description=\
                                'Create DISSECT input material.')
     argparser.add_argument('-s', '--single-language', 
@@ -353,8 +369,10 @@ def main():
     
     # User only wants a specific language, e. g. 'de' for German
     if(pargs.single_language):
-        language_used = pargs.single_language.lower()
-        print(language_used)
+        single_language = pargs.single_language.lower()
+        print(single_language)
+    else:
+        single_language = None
         
     # User can decide to use TreeTagger (for lemmatization and PoS
     # tagging).
@@ -379,44 +397,61 @@ def main():
         else:
             argparser.print_help()
             exit(2)
+
+def create_bilingual_input():
+    """Creates input material for two languages (bilingual input
+       material), which is interesting to create translation
+       candidates between two languages' words."""
+    
+    # Read first language's sentences
+    sentences_1 = Sentences(lang_1)
+    sentences_1.read_sentences()
+    
+    # Read second language's sentences
+    sentences_2 = Sentences(lang_2)
+    sentences_2.read_sentences()
+    
+    # Combine words on basis of their sentences after filtering out
+    # long sentences.
+    aligned_sentences = AlignedSentences(sentences_1, 
+                                         sentences_2,
+                                         filter_sentences=True)
+    aligned_sentences.combine_words()
+        
+    # Write pairs in sparse matrix format
+    aligned_sentences.write_sparse_matrices()
+    
+    # Write tokens to a col format
+    aligned_sentences.write_col()
+    
+    # Write tokens to a row format
+    aligned_sentences.write_row()
+    
+    # Write pickle files (for faster processing in 
+    # besttranslations.py)
+    aligned_sentences.write_pkl()
+        
+def create_singlelang_input():
+    """Creates input material for a single language, which can be
+       used to look for similarities between words."""
+    sentences = Sentences(single_language)
+    sentences.read_sentences()
+    # XXX: Still not functional.
+    
+def main():
+    # Handle command-line arguments and options.
+    handle_arguments()
    
-    # Create output folder if not done
-    if not exists(DATA_DIR_OUT):
-        print('Output dir not given: ' + DATA_DIR_OUT)
-        makedirs(DATA_DIR_OUT)
-        print('Now created.')
+    # Create input and output folders if not the case already.
+    create_folder(DATA_DIR_OUT, "Output dir not given: ")
+    create_folder(DATA_DIR_IN, "Input dir not given: ")
    
-    if not language_used:
-        # Read German sentences
-        sentences_de = Sentences(lang_1)
-        sentences_de.read_sentences()
-        
-        # Read English sentences
-        sentences_en = Sentences(lang_2)
-        sentences_en.read_sentences()
-        
-        # Combine words on basis of their sentences after filtering out
-        # long sentences.
-        aligned_sentences = AlignedSentences(sentences_de, 
-                                             sentences_en,
-                                             filter_sentences=True)
-        aligned_sentences.combine_words()
-            
-        # Write pairs in sparse matrix format
-        aligned_sentences.write_sparse_matrices()
-        
-        # Write tokens to a col format
-        aligned_sentences.write_col()
-        
-        # Write tokens to a row format
-        aligned_sentences.write_row()
-        
-        # Write pickle files (for faster processing in 
-        # besttranslations.py)
-        aligned_sentences.write_pkl()
+    # single_language is None if not used.
+    # Normal use is to work with two languages.
+    if not single_language:
+        create_bilingual_input()
     else:
-        sentences = Sentences(language_used)
-        sentences.read_sentences()
+        create_singlelang_input()
     
 if __name__ == '__main__':
 
