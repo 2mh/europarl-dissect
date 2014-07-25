@@ -63,7 +63,7 @@ OUTPUT_FILE_EN_WORDS_COL = ''.join([DATA_DIR_OUT, 'en-words.col'])
 
 # Limit number of sentences to process (for testing purposes).
 # For no limit, set None
-SENTENCES_LIMIT = 10
+SENTENCES_LIMIT = 1000000
 
 # Filter out sentences which are longer than this number, in one or
 # the other language -- wherever first.
@@ -246,10 +246,8 @@ class Sentences:
         self.lang = lang
         self.sentences = {}
         
-    def read_sentences(self, limit=None):
+    def read_sentences(self):
         """Read in sentences from a file in a given language.
-        limit: If provided with a number stop after given number of
-               sentences.
         """
         with open(europarl_files[self.lang], 'r') as f:
             i = 0
@@ -267,9 +265,8 @@ class Sentences:
                     self._process_sentence(sentence.rstrip(), i)
                 
                 # Eventually stop
-                if limit is not None:
-                    if limit == i:
-                        break
+                if sentences_limit == i:
+                    break
                 
             print('Number of sentences \'' + self.lang + '\' read in: ' 
                    + str(i))
@@ -322,32 +319,41 @@ class Sentences:
         return False
 
 def main():
-    global language_used, use_treetagger
+    global language_used, use_treetagger, sentences_limit
     language_used  = False
     use_treetagger = False
+    sentences_limit = SENTENCES_LIMIT # Assign default number
 
     argparser = ArgumentParser(description=\
                                'Create DISSECT input material.')
-    argparser.add_argument('-l', '--language', 
+    argparser.add_argument('-s', '--single-language', 
                            help="Specifies that input material " + \
                                 "only for specified language is " + \
                                 "created.",
                            type=str)
-    argparser.add_argument('-t', '--treetagger',
+    argparser.add_argument('-t', '--use-treetagger',
                            help="Make sure TreeTagger is used for " + \
                                 "lemmatization and PoS tagging.",
                            action="store_true")
+    argparser.add_argument('-l', '--sentences-limit',
+                           help="Make sure there's a (low) maximum " + \
+                                "number of sentences to read in.",
+                           type=int)
     pargs = argparser.parse_args()
     
     # User only wants a specific language, e. g. 'de' for German
-    if(pargs.language):
-        language_used = pargs.language.lower()
+    if(pargs.single_language):
+        language_used = pargs.single_language.lower()
         print(language_used)
         
     # User can decide to use TreeTagger (for lemmatization and PoS
     # tagging).
-    if(pargs.treetagger):
+    if(pargs.use_treetagger):
         use_treetagger = True
+    
+    # Number of sentences we allow.
+    if(pargs.sentences_limit):
+        sentences_limit = pargs.sentences_limit
     
     # Check if any input data is missing
     for lang in europarl_files.keys():
@@ -365,11 +371,11 @@ def main():
     if not language_used:
         # Read German sentences
         sentences_de = Sentences(LANG_1)
-        sentences_de.read_sentences(limit=SENTENCES_LIMIT)
+        sentences_de.read_sentences()
         
         # Read English sentences
         sentences_en = Sentences(LANG_2)
-        sentences_en.read_sentences(limit=SENTENCES_LIMIT)
+        sentences_en.read_sentences()
         
         # Combine words on basis of their sentences after filtering out
         # long sentences.
@@ -392,7 +398,7 @@ def main():
         aligned_sentences.write_pkl()
     else:
         sentences = Sentences(language_used)
-        sentences.read_sentences(limit=SENTENCES_LIMIT)
+        sentences.read_sentences()
     
 if __name__ == '__main__':
 
