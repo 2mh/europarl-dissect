@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from argparse import ArgumentParser
-from codecs import open
 from collections import defaultdict
 from itertools import combinations
 from os import sep, makedirs
@@ -26,9 +25,6 @@ LANG_1 = 'de'
 LANG_2 = 'en'
 
 suffixes = Suffixes(LANG_1, LANG_2)
-
-# Encoding used
-ENC = 'utf-8'
 
 # Symbols to ignore (besides stopwords)
 IGNORE_LIST = ['.', ',', ';', '(', ')', '-', ':', '!', '?', '\'']
@@ -129,7 +125,7 @@ class AlignedSentences:
         """Write out pairs in a sparse matrix format for DISSECT
            cf. http://clic.cimec.unitn.it/composes/toolkit/ex01input.html
         """
-        f = open(output_file, 'w', ENC)
+        f = open(output_file, 'w')
         
         for pair, count in self.pairs_combined.items():
             if count >= PAIR_OCC_THRESHOLD:
@@ -137,7 +133,7 @@ class AlignedSentences:
                 # combinations, given primary_language is 'de'.
                 if ''.join(['_', primary_language]) in pair[0]:
                     f.write(''.join([pair[0], ' ', pair[1], 
-                        ' ', str(count), '\n']).decode(ENC))
+                        ' ', str(count), '\n']))
         print('SM file written out: ' + output_file)
         
         f.close()
@@ -160,9 +156,9 @@ class AlignedSentences:
                 col.add(pair[0])
                 col.add(pair[1])
         
-        f = open(OUTPUT_FILE_DE_EN_WORDS_COL, 'w', ENC)
+        f = open(OUTPUT_FILE_DE_EN_WORDS_COL, 'w')
         for token in col:
-            f.write(''.join([token, '\n']).decode(ENC))
+            f.write(''.join([token, '\n']))
         f.close()
         
         print('Col file written out: ' + OUTPUT_FILE_DE_EN_WORDS_COL)
@@ -186,16 +182,16 @@ class AlignedSentences:
                 else:
                     row_2.add(pair[1])
         
-        f = open(OUTPUT_FILE_DE_WORDS_ROW, 'w', ENC)
+        f = open(OUTPUT_FILE_DE_WORDS_ROW, 'w')
         for token in row_1:
-            f.write(''.join([token, '\n']).decode(ENC))
+            f.write(''.join([token, '\n']))
         f.close()
         
         print('Row file written out: ' + OUTPUT_FILE_DE_WORDS_ROW)
         
-        f = open(OUTPUT_FILE_EN_WORDS_ROW, 'w', ENC)
+        f = open(OUTPUT_FILE_EN_WORDS_ROW, 'w')
         for token in row_2:
-            f.write(''.join([token, '\n']).decode(ENC))
+            f.write(''.join([token, '\n']))
         f.close()
         
         print('Row file written out: ' + OUTPUT_FILE_EN_WORDS_ROW)
@@ -257,7 +253,7 @@ class Sentences:
         limit: If provided with a number stop after given number of
                sentences.
         """
-        with open(europarl_files[self.lang], 'r', ENC) as f:
+        with open(europarl_files[self.lang], 'r') as f:
             i = 0
             for sentence in f:
                 i += 1
@@ -281,7 +277,7 @@ class Sentences:
                    + str(i))
                    
     def _process_sentence(self, sentence, counter):
-        tokens = word_tokenize(sentence.encode(ENC))
+        tokens = word_tokenize(sentence)
         tokens_filtered = self._filter_tokens(tokens)
         self.sentences[counter] = tokens_filtered
         
