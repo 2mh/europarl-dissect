@@ -23,7 +23,7 @@ SENTENCES_LIMIT = 1000000
 
 # Filter out sentences which are longer than this number, in one or
 # the other language -- wherever first.
-MAX_SENTENCE_LEN = 100000
+MAX_SENTENCE_LEN = 10000 
 
 # Minimal number of occurrences wanted.
 # For no threshold, set anything below 2
