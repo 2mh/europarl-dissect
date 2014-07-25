@@ -17,9 +17,6 @@ from helpers import DATA_DIR, DATA_DIR_IN, DATA_DIR_OUT, LONG_LANGTAG
 from helpers import getTag
 from helpers import Suffixes
 
-# Global options
-USE_TREETAGGER = False # Uses TreeTagger for lemmatization + Pos tagging
-
 # Both languages involved / default languages used
 LANG_1 = 'de'
 LANG_2 = 'en'
@@ -66,7 +63,7 @@ OUTPUT_FILE_EN_WORDS_COL = ''.join([DATA_DIR_OUT, 'en-words.col'])
 
 # Limit number of sentences to process (for testing purposes).
 # For no limit, set None
-SENTENCES_LIMIT = 200
+SENTENCES_LIMIT = 10
 
 # Filter out sentences which are longer than this number, in one or
 # the other language -- wherever first.
@@ -123,7 +120,8 @@ class AlignedSentences:
 
     def _write_sparse_matrix(self, output_file, primary_language):
         """Write out pairs in a sparse matrix format for DISSECT
-           cf. http://clic.cimec.unitn.it/composes/toolkit/ex01input.html
+           cf. 
+           http://clic.cimec.unitn.it/composes/toolkit/ex01input.html
         """
         f = open(output_file, 'w')
         
@@ -234,7 +232,7 @@ class AlignedSentences:
         marked_tokens = []
         
         # Only do this when TreeTagger wasn't used.
-        if not USE_TREETAGGER:
+        if not use_treetagger:
             for token in tokens:
                 marked_tokens.append(token + '_' + lang)
         else:
@@ -263,7 +261,7 @@ class Sentences:
                     print(i)
                     
                 # Process sentence furtherly (tokenization & filtering)
-                if USE_TREETAGGER:
+                if use_treetagger:
                     self._process_sentence_tt(sentence.rstrip(), i)
                 else:
                     self._process_sentence(sentence.rstrip(), i)
@@ -288,7 +286,7 @@ class Sentences:
         treetagger = subprocess.Popen([treetagger_paths[self.lang]],
         stdin=subprocess.PIPE, stdout=subprocess.PIPE,
         stderr=subprocess.PIPE)
-        treetagger_out = treetagger.communicate(sentence.encode(ENC))[0]
+        treetagger_out = treetagger.communicate(sentence)[0]
         treetagger_token = treetagger_out.split('\n')
         for token in treetagger_token:
             token_pos_tagged = token.split('\t')
@@ -324,8 +322,9 @@ class Sentences:
         return False
 
 def main():
-    global language_used
-    language_used = False
+    global language_used, use_treetagger
+    language_used  = False
+    use_treetagger = False
 
     argparser = ArgumentParser(description=\
                                'Create DISSECT input material.')
@@ -334,12 +333,21 @@ def main():
                                 "only for specified language is " + \
                                 "created.",
                            type=str)
+    argparser.add_argument('-t', '--treetagger',
+                           help="Make sure TreeTagger is used for " + \
+                                "lemmatization and PoS tagging.",
+                           action="store_true")
     pargs = argparser.parse_args()
     
     # User only wants a specific language, e. g. 'de' for German
     if(pargs.language):
         language_used = pargs.language.lower()
         print(language_used)
+        
+    # User can decide to use TreeTagger (for lemmatization and PoS
+    # tagging).
+    if(pargs.treetagger):
+        use_treetagger = True
     
     # Check if any input data is missing
     for lang in europarl_files.keys():
@@ -379,7 +387,8 @@ def main():
         # Write tokens to a row format
         aligned_sentences.write_row()
         
-        # Write pickle files (for faster processing in besttranslations.py)
+        # Write pickle files (for faster processing in 
+        # besttranslations.py)
         aligned_sentences.write_pkl()
     else:
         sentences = Sentences(language_used)
