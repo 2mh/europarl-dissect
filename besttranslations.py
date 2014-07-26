@@ -97,13 +97,16 @@ def format_best_translations(word, tag, lemma, best_translations):
             elif i == last_idx:
                 r += " \\\\"
         return r.rstrip() + "\n"
+    elif no_stopword_print:
+        return ""
     else:
         return word + " & & & \\\\" + "\n"
 
 def main():
     global input_is_tokenized, use_lemmatization, space_cols_file, \
            loaded_space_file_s, loaded_space_file_t, source_lang, \
-           target_lang, input_file, output_file, tag_cutoff
+           target_lang, input_file, output_file, tag_cutoff, \
+           no_stopword_print
     
     parser = argparse.ArgumentParser(description="Word translations" + \
                                      " that fit best to the sentence")
@@ -127,6 +130,8 @@ def main():
            help="input file")
     parser.add_argument("-o", "--outfile", type=str, 
            help="output file")
+    parser.add_argument("-nsp", "--no-stopword-print", 
+           action="store_true")
     args = parser.parse_args()
     
     if args.sourcelang:
@@ -166,6 +171,9 @@ def main():
             tag_cutoff = 5
         else:
             tag_cutoff = 3
+    no_stopword_print = False
+    if args.no_stopword_print:
+        no_stopword_print = args.no_stopword_print
 
     # vector dimension/columns for input matrix and matrix per sentence
     space_cols_fileobject = open(space_cols_file, "r")
