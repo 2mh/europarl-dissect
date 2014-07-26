@@ -1,6 +1,12 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 
+'''
+TODO:   
+- Add --treetagger-path option.
+- Transfer code to helpers.py or parameters.py.
+'''
+
 from composes.utils import io_utils
 from composes.similarity.cos import CosSimilarity
 from composes.semantic_space.space import Space
@@ -78,16 +84,21 @@ def get_best_translations(word, tag, lemma, query_space, loaded_space):
 # Set the output for each input word
 def format_best_translations(word, tag, lemma, best_translations):
     if helpers.valid_pos(tag):
-        r = word + "\t\t"
+        last_idx = parameters.NUMBER_OF_TRANSLATIONS - 1
+        r = word.ljust(23) + " & "
+        r_orig = r
+        # Return a number of candiates
         for i in range(parameters.NUMBER_OF_TRANSLATIONS):
             r += best_translations[i][0][:len(best_translations[i][0])
                                          -tag_cutoff]
-            r += " "
-            r += str(best_translations[i][1])
-            r += "\t"
+            r += " (" + "{0:1.2f}".format(best_translations[i][1]) + ")"
+            if i < last_idx:
+                r += " & "
+            elif i == last_idx:
+                r += " \\\\"
         return r.rstrip() + "\n"
     else:
-        return word + "\n"
+        return word + " & & & \\\\" + "\n"
 
 def main():
     global input_is_tokenized, use_lemmatization, space_cols_file, \
