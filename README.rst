@@ -1,3 +1,11 @@
+**Table of Contents**
+
+
+.. contents::
+    :local:
+    :depth: 1
+    :backlinks: none
+
 europarl-dissect
 ================
 
