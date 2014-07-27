@@ -5,9 +5,6 @@
 TODO:
 - Make system more flexible / variable (to use with other languages).
 - Allow proper use of single language (-s option) data creation.
-- Increase speed of TreeTagger usage (-l option).
-- Make again use of standard TreeTagger programs
-  (no use of -new versions).
 - Transfer code to helpers.py or parameters.py.
 '''
 
