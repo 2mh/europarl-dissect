@@ -3,10 +3,12 @@ europarl-dissect (data input folder)
 
 Here europarl files are expected, like:
 
-europarl-v7.de-en.de
-europarl-v7.de-en.en
-europarl-v7.fr-en.en
-europarl-v7.fr-en.fr
+::
+
+	europarl-v7.de-en.de
+	europarl-v7.de-en.en
+	europarl-v7.fr-en.en
+	europarl-v7.fr-en.fr
 
 Retrieve the files
 ------------------
