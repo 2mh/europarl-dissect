@@ -1,0 +1,137 @@
+The
+YES sitting        sitzung 0.343458664908    arbeitszimmern 0.242800325535    elisabeth 0.240209617875
+NO opened        begleitausschüsse 0.172607063483    tatkräftig 0.171246733697    materialströme 0.156582994038
+at
+17.05
+.
+The
+YES minutes        protokoll 0.337514507274    minuten 0.327387490146    abgeordnetentätigkeit 0.16036144365
+of
+the
+NO previous        vorredner 0.209441807511    früheren 0.208110670091    wurde 0.135115915306
+YES sitting        sitzung 0.405252872738    protokolls 0.338731077725    protokoll 0.336788251788
+NO were        sitzung 0.429399370492    protokolls 0.363803437554    protokoll 0.350715311916
+NO approved        wurde 0.141523957546    entwurf 0.134395524086    daran 0.126867116647
+.
+The
+YES President        präsidentin 0.313802548749    präsident 0.313486237261    herr 0.293184723499
+NO welcomed        präsidentin 0.260936353429    präsident 0.243134568507    kommissionspräsident 0.237404447338
+the
+NO adoption        strafrechtsschutz 0.198630637889    vervielfachung 0.195019209804    abdeckt 0.189437459328
+of
+the
+NO euro        günstige 0.211656325349    duisenberg 0.187893626069    strafrechtsschutz 0.182802370819
+by
+NO Latvia        januar 0.352578069037    1. 0.331444315895    präsidentin 0.267664398903
+on
+1
+YES January        januar 0.390090806011    1. 0.379824469797    Übergangsbestimmungen 0.264526963952
+2014
+.
+He
+NO expressed        ausdruck 0.224702561224    wurde 0.204118489073    meinung 0.202644230952
+NO Parliament        rechtzeitigen 0.270787245688    zuvor 0.257444456238    meinung 0.213011207172
+'s
+YES solidarity        solidarität 0.366151381924    woge 0.31082272892    not 0.270590359127
+with
+the
+YES victims        opfer 0.274960521793    wurde 0.17917888512    darauf 0.149527414723
+of
+the
+YES storms        stürme 0.28582483069    sturm 0.178052404677    häufigkeit 0.133309316895
+.
+The
+YES President        präsident 0.292868461858    herr 0.288906756922    präsidentin 0.28643553826
+NO spoke        präsidentin 0.255282551553    präsident 0.249220459122    kollegen 0.235243277934
+of
+the
+YES UN        hervorstechendste 0.163231891088    flüchtlingsbeihilfen 0.16316426057    un-flüchtlinge 0.161604650727
+YES conference        regierungskonferenz 0.291783660216    eröffnung 0.209897803644    einberufung 0.203161474253
+on
+the
+NO future        darauf 0.212292702098    ja 0.206832923931    dafür 0.205364306398
+of
+YES Syria        syrien 0.296389113929    israel 0.228966571996    volksabstimmungen 0.214927841589
+would
+NO open        möchte 0.253159292791    darauf 0.189897573377    ganz 0.187420298559
+in
+YES Geneva        genfer 0.206774650281    genf 0.170834002869    hervorstechendste 0.157470855939
+on
+22
+YES January        januar 0.300396783478    1. 0.206037520413    wurde 0.164806916243
+2014
+.
+The
+YES President        präsident 0.268912194619    präsidentin 0.26866855108    herr 0.264516980418
+NO commented        zurückgehalten 0.377273074643    lobenswerter 0.374035503011    anschaue 0.373034796499
+on
+YES press        presse 0.21780168056    unbekannten 0.157712696047    darüber 0.144279406609
+YES reports        berichte 0.266549827509    präsident 0.253207311174    präsidentin 0.251436214708
+of
+YES accusations        anhaltspunkte 0.204580660207    anschuldigungen 0.166120115198    liest 0.156462106547
+NO made        wurde 0.21127266803    möchte 0.20917403841    ganz 0.199943555432
+by
+the
+NO Romanian        index 0.119278731442    billigflagge 0.105383606605    vorkommnissen 0.103900849681
+YES Prime        premierminister 0.294772040416    ministerpräsident 0.256401197628    gesprächen 0.219580235358
+YES Minister        premierminister 0.291574804154    ministerpräsident 0.266595795777    gesprächen 0.208005642546
+,
+NO Victor        zurückgehalten 0.32232918561    lobenswerter 0.301511344578    premierminister 0.258008372186
+NO Ponta        zurückgehalten 0.32232918561    lobenswerter 0.301511344578    premierminister 0.258008372186
+,
+against
+YES Elmar        einvernehmlich 0.255158597126    elmar 0.221280161897    tsatsos 0.197737279471
+YES Brok        brok 0.274476086686    präsident 0.26040532906    kollegen 0.231324483642
+.
+The
+YES deadline        grundsatzabkommen 0.194026241613    endstatus 0.177514063538    termin 0.171162706731
+for
+NO tabling        kontrovers 0.140492668637    florenz 0.137323760572    opportun 0.129094204909
+YES amendments        Änderungsanträge 0.302050767345    eingebrachten 0.194632279636    bernd 0.174438388951
+NO was        Änderungsanträge 0.27244463663    12 0.257191228738    Änderungsanträgen 0.230885466694
+NO set        deshalb 0.152193291205    wurde 0.148765423333    unsere 0.145763974881
+for
+YES Tuesday        Änderungsanträge 0.248848567738    dienstag 0.245644475237    vortrag 0.193924303963
+14
+YES January        januar 0.279066345143    1. 0.19889702055    Übergangsbestimmungen 0.159919052304
+2014
+at
+12
+YES noon        12.00 0.236746845445    findet 0.214941144404    abstimmung 0.197597432747
+.
+The
+YES vote        abstimmung 0.346380248167    bitte 0.239639139423    strategieplans 0.218932785665
+would
+NO be        abstimmung 0.316662052453    wäre 0.259387463219    statt 0.256852705654
+NO held        dafür 0.156493082059    darauf 0.153155340246    kollegen 0.15302013949
+on
+YES Wednesday        mittwoch 0.320838937611    tagesordnungspunkt 0.217711727539    möchte 0.211340018671
+15
+YES January        januar 0.312478079945    1. 0.203001032252    Übergangsbestimmungen 0.164296823118
+2014
+at
+12
+YES noon        abstimmung 0.401020120077    12.00 0.345651821385    findet 0.306530500917
+.
+The
+NO appointments        durchgefallen 0.231382049687    eingebracht. 0.228463951102    verwaltungskompetenz 0.215677178744
+would
+YES be        wäre 0.270641737532    minuten 0.256120416286    zweifelhaftem 0.253546276419
+NO deemed        moderater 0.216130538951    lohnabschlüsse 0.214201326906    nervösen 0.206361482859
+YES ratified        ratifiziert 0.239452628205    auslieferung 0.162028794856    Übereinkommen 0.153460858659
+if
+there
+YES were        wäre 0.270641737532    minuten 0.256120416286    zweifelhaftem 0.253546276419
+no
+NO objections        möchte 0.202050827125    eingehen. 0.18988088898    gewissensbissen 0.18708015464
+before
+the
+YES approval        vorabkontrollen 0.215008296692    genehmigung 0.21118150177    zustimmung 0.151275381795
+of
+these
+YES minutes        minuten 0.282306977847    protokoll 0.223605692388    vertreters 0.136061611342
+.
+The
+YES item        unterpunkt 0.327962638008    folgt 0.304266912323    pinochet 0.254367565821
+YES closed        geschlossen 0.447056236738    20.25 0.314706061747    20.14 0.314706061747
+.
