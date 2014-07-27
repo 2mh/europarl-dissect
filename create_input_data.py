@@ -283,7 +283,8 @@ class Sentences:
                 
                 # Show some progress
                 if self._is_sentence_to_print(i, 10):
-                    print >> stderr, "Number of sentences processed:", i
+                    print >> stderr, "Number of \'" + self.lang + \
+                             "\' sentences processed:", str(i).rjust(9)
                     
                 # Process sentence furtherly (tokenization & filtering)
                 if use_treetagger:
@@ -295,7 +296,7 @@ class Sentences:
                 if sentences_limit == i:
                     break
                 
-            print >> stderr, 'Number of sentences \'' \
+            print >> stderr, '=> Number of sentences \'' \
                      + self.lang + '\' read in:', i
                    
     def _process_sentence(self, sentence, counter):
