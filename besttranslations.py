@@ -255,8 +255,9 @@ def main():
                     p = helpers.getTag(t.split("\t")[1], source_lang)
                     l = t.split("\t")[2]
                 except:
-                    print "Caution: TreeTagger token cannot " + \
-                          "be processed:", t
+                    print >> sys.stderr, \
+                             "Caution: TreeTagger token cannot " + \
+                             "be processed:", t
                     continue # Skip it
                 words.append(w)
                 lemmas.append(l)

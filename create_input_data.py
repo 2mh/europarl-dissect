@@ -14,7 +14,7 @@ from itertools import combinations
 from os import sep, makedirs
 from os.path import exists
 import subprocess
-from sys import exit
+from sys import exit, stderr
 
 from nltk.corpus import stopwords
 from nltk import word_tokenize
@@ -105,9 +105,10 @@ class AlignedSentences:
                 self.sentences_1.sentences[sentence_no] = ['DELETED']
                 self.sentences_2.sentences[sentence_no] = ['DELETED']
                 
-        print(str(self.no_sentences_filtered) + " sentences emptied, " \
-              + "because of word length higher than " \
-              + str(max_sentence_len) + ".")
+        print >> stderr, self.no_sentences_filtered), \
+                 + "sentences emptied, " \
+                 + "because of word length higher than " \
+                 + str(max_sentence_len) + "."
         
     def combine_words(self):
         # Iterate through sentence numbers
@@ -118,7 +119,8 @@ class AlignedSentences:
             for pair in pairs:
                 self.pairs_combined[pair] += 1
                 
-        print(len(self.pairs_combined))
+        print >> stderr, "Number of words combined:", \
+                 len(self.pairs_combined)
 
     def _write_sparse_matrix(self, output_file, lang):
         """Write out pairs in a sparse matrix format for DISSECT
@@ -145,7 +147,7 @@ class AlignedSentences:
                         f.write(''.join([pair[1], ' ', pair[0], 
                             ' ', str(count), '\n']))
         
-        print('SM file written out: ' + output_file)
+        print >> stderr, 'SM file written out:', output_file
         
         f.close()
         
@@ -172,7 +174,9 @@ class AlignedSentences:
             f.write(''.join([token, '\n']))
         f.close()
         
-        print('Col file written out: ' + OUTPUT_FILE_DE_EN_WORDS_COL)
+        print >> stderr, \
+                 'Col file written out:' \
+                 OUTPUT_FILE_DE_EN_WORDS_COL
         
     def write_row(self):
         """Write out row of words (language dependent each)
@@ -198,14 +202,16 @@ class AlignedSentences:
             f.write(''.join([token, '\n']))
         f.close()
         
-        print('Row file written out: ' + OUTPUT_FILE_DE_WORDS_ROW)
+        print >> stderr, 'Row file written out:', \
+                 OUTPUT_FILE_DE_WORDS_ROW)
         
         f = open(OUTPUT_FILE_EN_WORDS_ROW, 'w')
         for token in row_2:
             f.write(''.join([token, '\n']))
         f.close()
         
-        print('Row file written out: ' + OUTPUT_FILE_EN_WORDS_ROW)
+        print >> stderr, 'Row file written out:', \
+                 OUTPUT_FILE_EN_WORDS_ROW)
         
     def write_pkl(self):
         """
@@ -228,8 +234,10 @@ class AlignedSentences:
         io_utils.save(my_space_1, OUTPUT_FILE_DE_DE_EN_PKL)
         io_utils.save(my_space_2, OUTPUT_FILE_EN_EN_DE_PKL)
         
-        print('Pickle file written out: ' + OUTPUT_FILE_DE_DE_EN_PKL)
-        print('Pickle file written out: ' + OUTPUT_FILE_EN_EN_DE_PKL)
+        print >> 'Pickle file 1 written out:', \
+                  + OUTPUT_FILE_DE_DE_EN_PKL)
+        print >> 'Pickle file 2 written out:', \
+                  + OUTPUT_FILE_EN_EN_DE_PKL)
         
     def _get_bilingual_sentence(self, counter):
         """Get a sentence with united tokens."""
@@ -275,7 +283,7 @@ class Sentences:
                 
                 # Show some progress
                 if self._is_sentence_to_print(i, 10):
-                    print(i)
+                    print >> stderr, "Number of sentences processed:", i
                     
                 # Process sentence furtherly (tokenization & filtering)
                 if use_treetagger:
@@ -287,8 +295,8 @@ class Sentences:
                 if sentences_limit == i:
                     break
                 
-            print('Number of sentences \'' + self.lang + '\' read in: ' 
-                   + str(i))
+            print >> stderr, 'Number of sentences \'' \
+                     + self.lang + '\' read in:', i
                    
     def _process_sentence(self, sentence, counter):
         tokens = word_tokenize(sentence)
@@ -304,8 +312,9 @@ class Sentences:
         for token in treetagger_tokens:
             token_pos_tagged = token.split('\t')
             if len(token_pos_tagged) != 3:
-                print "Caution -- broken TreeTagger case: ", \
-                      token_pos_tagged, "(list)"
+                print >> stderr, \
+                         "Caution -- broken TreeTagger case: ", \
+                         token_pos_tagged, "(list)"
                 continue # Skip it
             pos_tag = getTag(token_pos_tagged[1], lang_1)
             token = token_pos_tagged[2].lower()
@@ -348,9 +357,9 @@ def create_folder(dir_location, problem_str):
     @param  problem_str: String to indicate there's a folder missing.
     """
     if not exists(dir_location):
-        print(problem_str + dir_location)
+        print >> stderr, problem_str + dir_location
         makedirs(dir_location)
-        print("Now created.")
+        print >> stderr, "Now created."
     
 def handle_arguments():
     """This function handles command-line options and arguments
@@ -407,7 +416,6 @@ def handle_arguments():
     # User only wants a specific language, e. g. 'de' for German
     if(pargs.single_language):
         single_language = pargs.single_language.lower()
-        print(single_language)
     else:
         single_language = None
         
@@ -455,9 +463,9 @@ def handle_arguments():
     # Check if any input data is missing
     for lang in europarl_files.keys():
         if not exists(europarl_files[lang]):
-            print('Input data \'' + lang + '\' is missing.' +
-                  ' (Check location: ' + europarl_files[lang] + ')'
-                 )
+            print >> stderr, 'Input data \'' + lang + \
+                     + '\' is missing.' + \
+                     ' (Check location: ' + europarl_files[lang] + ')'
 
 def create_bilingual_input():
     """Creates input material for two languages (bilingual input
