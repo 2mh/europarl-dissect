@@ -36,12 +36,12 @@ relies on:
 It comes shipped with following two frameworks in its ``lib/`` directory
 already, to ensure better compatibility for the time being:
 
-- `DISSECT 0.1.0 <http://clic.cimec.unitn.it/composes/toolkit/installation.html>`
-- `TreeTaggerWrapper <http://perso.limsi.fr/pointal/?id=dev:treetaggerwrapper>`
+- `DISSECT 0.1.0 <http://clic.cimec.unitn.it/composes/toolkit/installation.html>`__
+- `TreeTaggerWrapper <http://perso.limsi.fr/pointal/?id=dev:treetaggerwrapper>`__
 
 Installation
 ------------
-TBD
+
 
 Usage
 -----
