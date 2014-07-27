@@ -376,8 +376,8 @@ def handle_arguments():
                                 "number of sentences to read in.",
                            type=int)
     argparser.add_argument('-tp', '--treetagger-path',
-                           help="Specifiy path where TreeTagger " + \
-                                "cmd directory resides.",
+                           help="Specifiy TreeTagger base directory" + \
+                                "path (relatively or absolutely).",
                            type=str)
     argparser.add_argument('-ms', '--max-sentence-len',
                            help="Make sure no sentence considered " + \
