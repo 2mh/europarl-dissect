@@ -394,7 +394,7 @@ def handle_arguments():
                            type=int)
     argparser.add_argument('-r', '--use-randomized-input',
                            help="This option looks for input data " + \
-                                "with suffix '_rand' in the input " + \
+                                "with suffix '_rand' in the name " + \
                                 "in order to use randomized input " + \
                                 "lines.",
                            action="store_true")
