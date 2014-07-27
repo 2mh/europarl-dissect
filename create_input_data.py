@@ -361,7 +361,7 @@ def handle_arguments():
     
     # Variables here are to be seen and set globally.
     global single_language, use_treetagger, sentences_limit, lang_1, \
-           lang_2, treetagger_base_path
+           lang_2, treetagger_path
            
     argparser = ArgumentParser(description=\
                                'Create DISSECT input material.')
