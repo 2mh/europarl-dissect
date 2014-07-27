@@ -3,6 +3,8 @@
 from os import sep
 import re
 
+from parameters import DATA_DIR_IN
+
 # Conversion between names for languages 
 LONG_LANGTAG =  {"nl":"dutch",
                  "fi":"finnish",

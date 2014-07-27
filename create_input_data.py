@@ -105,10 +105,10 @@ class AlignedSentences:
                 self.sentences_1.sentences[sentence_no] = ['DELETED']
                 self.sentences_2.sentences[sentence_no] = ['DELETED']
                 
-        print >> stderr, self.no_sentences_filtered), \
-                 + "sentences emptied, " \
-                 + "because of word length higher than " \
-                 + str(max_sentence_len) + "."
+        print >> stderr, self.no_sentences_filtered, \
+                 "sentences emptied, " + \
+                 "because of word length higher than " + \
+                 str(max_sentence_len) + "."
         
     def combine_words(self):
         # Iterate through sentence numbers
@@ -175,7 +175,7 @@ class AlignedSentences:
         f.close()
         
         print >> stderr, \
-                 'Col file written out:' \
+                 'Col file written out:', \
                  OUTPUT_FILE_DE_EN_WORDS_COL
         
     def write_row(self):
@@ -203,7 +203,7 @@ class AlignedSentences:
         f.close()
         
         print >> stderr, 'Row file written out:', \
-                 OUTPUT_FILE_DE_WORDS_ROW)
+                 OUTPUT_FILE_DE_WORDS_ROW
         
         f = open(OUTPUT_FILE_EN_WORDS_ROW, 'w')
         for token in row_2:
@@ -211,7 +211,7 @@ class AlignedSentences:
         f.close()
         
         print >> stderr, 'Row file written out:', \
-                 OUTPUT_FILE_EN_WORDS_ROW)
+                 OUTPUT_FILE_EN_WORDS_ROW
         
     def write_pkl(self):
         """
@@ -234,10 +234,10 @@ class AlignedSentences:
         io_utils.save(my_space_1, OUTPUT_FILE_DE_DE_EN_PKL)
         io_utils.save(my_space_2, OUTPUT_FILE_EN_EN_DE_PKL)
         
-        print >> 'Pickle file 1 written out:', \
-                  + OUTPUT_FILE_DE_DE_EN_PKL)
-        print >> 'Pickle file 2 written out:', \
-                  + OUTPUT_FILE_EN_EN_DE_PKL)
+        print >> stderr, 'Pickle file 1 written out:', \
+                          OUTPUT_FILE_DE_DE_EN_PKL
+        print >> stderr, 'Pickle file 2 written out:', \
+                          OUTPUT_FILE_EN_EN_DE_PKL
         
     def _get_bilingual_sentence(self, counter):
         """Get a sentence with united tokens."""
