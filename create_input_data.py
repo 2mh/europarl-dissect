@@ -30,8 +30,8 @@ from helpers import DATA_DIR, DATA_DIR_IN, DATA_DIR_OUT, LONG_LANGTAG
 from helpers import getTag
 from helpers import Suffixes
 from parameters import LANG_1, LANG_2, SENTENCES_LIMIT, \
-                       MAX_SENTENCE_LEN, PAIR_OCC_THRESHOLD, \
-                       TREETAGGER_BASE_PATH
+                       MAX_SENTENCE_LEN, MIN_PAIR_OCC, \
+                       TREETAGGER_BASE_PATH, MAX_WORD_LEN
 
 # Input files (col file, row files and sparse matrix files) for DISSECT
 OUTPUT_FILE_DE_DE_EN_SM = ''.join([DATA_DIR_OUT, 'de_de-en.sm'])
@@ -54,17 +54,18 @@ OUTPUT_FILE_EN_WORDS_COL = ''.join([DATA_DIR_OUT, 'en-words.col'])
 # Symbols to ignore (besides stopwords)
 IGNORE_LIST = ['.', ',', ';', '(', ')', '-', ':', '!', '?', '\'']
 
-# Treetagger location
-TREETAGGER_DIR = ''.join(['treetagger', sep, 'cmd', sep])
-
 suffixes = Suffixes(LANG_1, LANG_2)
 
 # Global variables for command-line control.
 global single_language, use_treetagger, sentences_limit, lang_1, \
-       lang_2, treetagger_path
+       lang_2, treetagger_path, max_sentence_len, min_pair_occ, \
+       max_word_len
 language_used  = False
 use_treetagger = False
 sentences_limit = SENTENCES_LIMIT # Assign default number
+max_sentence_len = MAX_SENTENCE_LEN
+min_pair_occ = MIN_PAIR_OCC
+max_word_len = MAX_WORD_LEN
 lang_1 = LANG_1 # Default lang 1
 lang_2 = LANG_2 # Default lang 2
 # Default path; should be changed in parameters.py file, or at least
@@ -102,16 +103,16 @@ class AlignedSentences:
            to not compare too long sentences with each other.
         '''
         for sentence_no, sentence in self.sentences_1.sentences.items():
-            if len(sentence) > MAX_SENTENCE_LEN or \
+            if len(sentence) > max_sentence_len or \
             len(self.sentences_2.sentences[sentence_no]) > \
-            MAX_SENTENCE_LEN:
+            max_sentence_len:
                 self.no_sentences_filtered += 1
                 self.sentences_1.sentences[sentence_no] = ['DELETED']
                 self.sentences_2.sentences[sentence_no] = ['DELETED']
                 
         print(str(self.no_sentences_filtered) + " sentences emptied, " \
               + "because of word length higher than " \
-              + str(MAX_SENTENCE_LEN) + ".")
+              + str(max_sentence_len) + ".")
         
     def combine_words(self):
         # Iterate through sentence numbers
@@ -133,7 +134,7 @@ class AlignedSentences:
         
         if lang == lang_1:
             for pair, count in self.pairs_combined.items():
-                if count >= PAIR_OCC_THRESHOLD:
+                if count >= min_pair_occ:
                     # We only want lang_1-lang_1 and lang_1-lang_2
                     # combinations.
                     if ''.join(['_', lang_1]) in pair[0]:
@@ -142,7 +143,7 @@ class AlignedSentences:
         # Assume lang_2 is meant.
         else:
             for pair, count in self.pairs_combined.items():
-                if count >= PAIR_OCC_THRESHOLD:
+                if count >= min_pair_occ:
                     # We only want lang_2-lang_2 and lang_2-lang_1
                     # combinations.
                     if ''.join(['_', lang_2]) in pair[1]:
@@ -167,7 +168,7 @@ class AlignedSentences:
         """
         col = set()
         for pair, count in self.pairs_combined.items():
-            if count >= PAIR_OCC_THRESHOLD:
+            if count >= min_pair_occ:
                 col.add(pair[0])
                 col.add(pair[1])
         
@@ -185,7 +186,7 @@ class AlignedSentences:
         row_2 = set()
         
         for pair, count in self.pairs_combined.items():
-            if count >= PAIR_OCC_THRESHOLD:
+            if count >= min_pair_occ:
                 # Collect lang 1 words
                 if ''.join(['_', lang_1]) in pair[0]:
                     row_1.add(pair[0])
@@ -265,7 +266,7 @@ class Sentences:
         
         if use_treetagger:
             self.treetagger = TreeTagger(TAGLANG=lang,
-                                         TAGDIR=treetagger_base_path,
+                                         TAGDIR=treetagger_path,
                                          TAGINENC="utf8",
                                          TAGOUTENC="utf8")
         
@@ -315,7 +316,7 @@ class Sentences:
             token = token_pos_tagged[2].lower()
             # Those cases we don't want.
             if not token in ["<unknown>", "@ord@", "@card@"] and \
-               not pos_tag == "0":
+               not pos_tag == "0" and len(token) <= max_word_len:
                 token +=  '_' + pos_tag + '_' + self.lang
                 tokens_pos_tagged.append(token)
 
@@ -328,7 +329,8 @@ class Sentences:
             # Do not hold interpunctional signs and stopwords
             if token not in IGNORE_LIST and \
                token.lower() not in stopwords.\
-               words(LONG_LANGTAG[self.lang]):
+               words(LONG_LANGTAG[self.lang]) \
+               and len(token) <= max_word_len:
                 # Add hold tokens in lowered form
                 tokens_filtered.append(token.lower())
         
@@ -361,7 +363,8 @@ def handle_arguments():
     
     # Variables here are to be seen and set globally.
     global single_language, use_treetagger, sentences_limit, lang_1, \
-           lang_2, treetagger_path
+           lang_2, treetagger_path, max_sentence_len, min_pair_occ, \
+           max_word_len
            
     argparser = ArgumentParser(description=\
                                'Create DISSECT input material.')
@@ -374,7 +377,7 @@ def handle_arguments():
                            help="Make sure TreeTagger is used for " + \
                                 "lemmatization and PoS tagging.",
                            action="store_true")
-    argparser.add_argument('-l', '--sentences-limit',
+    argparser.add_argument('-ls', '--sentences-limit',
                            help="Make sure there's a (low) maximum " + \
                                 "number of sentences to read in.",
                            type=int)
@@ -382,6 +385,19 @@ def handle_arguments():
                            help="Specifiy path where TreeTagger " + \
                                 "cmd directory resides.",
                            type=str)
+    argparser.add_argument('-ms', '--max-sentence-len',
+                           help="Make sure no sentence considered " + \
+                                "is longer than this number of " + \
+                                "words.",
+                            type=int)
+    argparser.add_argument('-mpo', '--min-pair-occ',
+                           help="Define how often a pair should at " + \
+                                "least occur to be considered.",
+                            type=int)
+    argparser.add_argument('-mw', '--max-word-len',
+                           help="Allow to specify how long a word " + \
+                                "might be for it to be considered.",
+                           type=int)
     argparser.add_argument('lang_1', nargs="?")
     argparser.add_argument('lang_2', nargs="?")
     pargs = argparser.parse_args()
@@ -417,12 +433,20 @@ def handle_arguments():
             argparser.print_help()
             exit(2)
             
-    # Check if TreeTagger cmd path was specified.
+    # Check if TreeTagger path was specified.
     if(pargs.treetagger_path):
         treetagger_path = pargs.treetagger_path
         # Make sure there's a directory seperator at the end.
         if treetagger_path[-1] != sep:
             treetagger_path += sep
+            
+    # Check for limits (min & maxes)
+    if (pargs.min_pair_occ):
+        min_pair_occ = pargs.min_pair_occ
+    if (pargs.max_sentence_len):
+        max_sentence_len = pargs.max_sentence_len
+    if (pargs.max_word_len):
+        max_word_len = pargs.max_word_len
 
 def create_bilingual_input():
     """Creates input material for two languages (bilingual input

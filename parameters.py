@@ -20,7 +20,7 @@ LANG_2 = 'en'
 
 # Limit number of sentences to process (for testing purposes).
 # For no limit, set None
-SENTENCES_LIMIT = 1000000
+SENTENCES_LIMIT = 10000
 
 # Filter out sentences which are longer than this number, in one or
 # the other language -- wherever first.
@@ -28,8 +28,10 @@ MAX_SENTENCE_LEN = 10000
 
 # Minimal number of occurrences wanted.
 # For no threshold, set anything below 2
-PAIR_OCC_THRESHOLD = 1
+MIN_PAIR_OCC = 1
 
+# Maximum length of a word.
+MAX_WORD_LEN = 10000
 
 ### Default parameters used for besttranslations.py
 
