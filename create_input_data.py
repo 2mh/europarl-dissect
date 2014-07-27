@@ -19,10 +19,11 @@ from os.path import exists
 import subprocess
 from sys import exit
 
-from composes.semantic_space.space import Space
-from composes.utils import io_utils
 from nltk.corpus import stopwords
 from nltk import word_tokenize
+
+from lib.dissect.composes.semantic_space.space import Space
+from lib.dissect.composes.utils import io_utils
 
 from helpers import DATA_DIR, DATA_DIR_IN, DATA_DIR_OUT, LONG_LANGTAG
 from helpers import getTag

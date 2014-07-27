@@ -7,10 +7,10 @@ TODO:
 - Transfer code to helpers.py or parameters.py.
 '''
 
-from composes.utils import io_utils
-from composes.similarity.cos import CosSimilarity
-from composes.semantic_space.space import Space
-from composes.matrix.dense_matrix import DenseMatrix
+from lib.dissect.composes.utils import io_utils
+from lib.dissect.composes.similarity.cos import CosSimilarity
+from lib.dissect.composes.semantic_space.space import Space
+from lib.dissect.composes.matrix.dense_matrix import DenseMatrix
 from collections import defaultdict
 import numpy as np
 import re, sys, subprocess, argparse
