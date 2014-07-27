@@ -31,7 +31,7 @@ from helpers import getTag
 from helpers import Suffixes
 from parameters import LANG_1, LANG_2, SENTENCES_LIMIT, \
                        MAX_SENTENCE_LEN, PAIR_OCC_THRESHOLD, \
-                       TREETAGGER_PATH, TREETAGGER_BASE_PATH
+                       TREETAGGER_BASE_PATH
 
 # Input files (col file, row files and sparse matrix files) for DISSECT
 OUTPUT_FILE_DE_DE_EN_SM = ''.join([DATA_DIR_OUT, 'de_de-en.sm'])
@@ -69,8 +69,7 @@ lang_1 = LANG_1 # Default lang 1
 lang_2 = LANG_2 # Default lang 2
 # Default path; should be changed in parameters.py file, or at least
 # set by --treetagger-path parameter option.
-treetagger_base_path = TREETAGGER_BASE_PATH
-treetagger_path = TREETAGGER_PATH
+treetagger_path = TREETAGGER_BASE_PATH
 
 # Parallalized sentences of europarl
 # Input data gotten from here: http://www.statmt.org/europarl/
@@ -303,20 +302,7 @@ class Sentences:
     def _process_sentence_tt(self, sentence, counter):
         """Process sentence with Treetagger"""
         tokens_pos_tagged = []
-        
-        # Set corresponding TreeTagger command.
-        treetagger_script = treetagger_path + \
-                            "tree-tagger-" + LONG_LANGTAG[self.lang] + \
-                            "-utf8-new"
                         
-        # Call TreeTagger.
-        '''
-        treetagger = subprocess.Popen([treetagger_script],
-                        stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE)
-        '''
-                        
-        #treetagger_out = treetagger.communicate(sentence)[0]
         treetagger_tokens = self.treetagger.TagText(sentence)
         token_pos_tagged = None
         for token in treetagger_tokens:
@@ -375,7 +361,7 @@ def handle_arguments():
     
     # Variables here are to be seen and set globally.
     global single_language, use_treetagger, sentences_limit, lang_1, \
-           lang_2, treetagger_path
+           lang_2, treetagger_base_path
            
     argparser = ArgumentParser(description=\
                                'Create DISSECT input material.')
