@@ -393,8 +393,8 @@ def handle_arguments():
                                 "might be for it to be considered.",
                            type=int)
     argparser.add_argument('-r', '--use-randomized-input',
-                           help="This option looks for versions " + \
-                                "suffix _rand in the input " + \
+                           help="This option looks for input data " + \
+                                "with suffix '_rand' in the input " + \
                                 "in order to use randomized input " + \
                                 "lines.",
                            action="store_true")
