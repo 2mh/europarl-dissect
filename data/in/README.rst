@@ -13,4 +13,4 @@ Here europarl files are expected, like:
 Retrieve the files
 ------------------
 
-This files can be retrieved from here: http://www.statmt.org/europarl/
+These files can be retrieved from here: http://www.statmt.org/europarl/
