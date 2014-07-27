@@ -59,9 +59,10 @@ suffixes = Suffixes(LANG_1, LANG_2)
 # Global variables for command-line control.
 global single_language, use_treetagger, sentences_limit, lang_1, \
        lang_2, treetagger_path, max_sentence_len, min_pair_occ, \
-       max_word_len
+       max_word_len, use_randomized_input, europarl_files
 language_used  = False
 use_treetagger = False
+use_randomized_input = False
 sentences_limit = SENTENCES_LIMIT # Assign default number
 max_sentence_len = MAX_SENTENCE_LEN
 min_pair_occ = MIN_PAIR_OCC
@@ -74,11 +75,7 @@ treetagger_path = TREETAGGER_BASE_PATH
 
 # Parallalized sentences of europarl
 # Input data gotten from here: http://www.statmt.org/europarl/
-europarl_files = \
-{
-    lang_1 : suffixes.europarl_filepaths()[0],
-    lang_2 : suffixes.europarl_filepaths()[1]
-}
+europarl_files = {}
 
 class AlignedSentences:
     
@@ -364,7 +361,7 @@ def handle_arguments():
     # Variables here are to be seen and set globally.
     global single_language, use_treetagger, sentences_limit, lang_1, \
            lang_2, treetagger_path, max_sentence_len, min_pair_occ, \
-           max_word_len
+           max_word_len, use_randomized_input, europarl_files
            
     argparser = ArgumentParser(description=\
                                'Create DISSECT input material.')
@@ -398,6 +395,12 @@ def handle_arguments():
                            help="Allow to specify how long a word " + \
                                 "might be for it to be considered.",
                            type=int)
+    argparser.add_argument('-r', '--use-randomized-input',
+                           help="This option looks for versions " + \
+                                "suffix _rand in the input " + \
+                                "in order to use randomized input " + \
+                                "lines.",
+                           action="store_true")
     argparser.add_argument('lang_1', nargs="?")
     argparser.add_argument('lang_2', nargs="?")
     pargs = argparser.parse_args()
@@ -417,13 +420,6 @@ def handle_arguments():
     # Number of sentences we allow.
     if(pargs.sentences_limit):
         sentences_limit = pargs.sentences_limit
-    
-    # Check if any input data is missing
-    for lang in europarl_files.keys():
-        if not exists(europarl_files[lang]):
-            print('Input data \'' + lang + '\' is missing.' +
-                  ' (Check location: ' + europarl_files[lang] + ')'
-                 )
    
     # Languages can be specified as arguments.
     if(pargs.lang_1):
@@ -440,13 +436,29 @@ def handle_arguments():
         if treetagger_path[-1] != sep:
             treetagger_path += sep
             
-    # Check for limits (min & maxes)
+    # Check for limits (mins & maxes)
     if (pargs.min_pair_occ):
         min_pair_occ = pargs.min_pair_occ
     if (pargs.max_sentence_len):
         max_sentence_len = pargs.max_sentence_len
     if (pargs.max_word_len):
         max_word_len = pargs.max_word_len
+    if (pargs.use_randomized_input):
+        use_randomized_input = True
+        
+    europarl_files = {
+                lang_1 : suffixes.\
+                  europarl_filepaths(randfile=use_randomized_input)[0],
+                lang_2 : suffixes.\
+                  europarl_filepaths(randfile=use_randomized_input)[1]
+    }
+    
+    # Check if any input data is missing
+    for lang in europarl_files.keys():
+        if not exists(europarl_files[lang]):
+            print('Input data \'' + lang + '\' is missing.' +
+                  ' (Check location: ' + europarl_files[lang] + ')'
+                 )
 
 def create_bilingual_input():
     """Creates input material for two languages (bilingual input

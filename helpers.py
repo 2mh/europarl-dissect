@@ -92,12 +92,16 @@ class Suffixes:
         return self.lang_1 + '-' + self.lang_2, \
                self.lang_2 + '-' + self.lang_1
         
-    def europarl_filepaths(self):
+    def europarl_filepaths(self, randfile=False):
         """Get europarl file suffix, e. g. 'europarl-v7.de-en.de' 
            and europarl-v7.de-en.en"""
+        randfile_suffix = ""
+        if randfile:
+               randfile_suffix = "_rand"
+               
         return DATA_DIR_IN + sep + self.europarl_prefix + \
                self.lang_to_lang_infix()[0] + \
-               '.' + self.lang_1, \
+               '.' + self.lang_1 + randfile_suffix, \
                DATA_DIR_IN + sep + self.europarl_prefix + \
                self.lang_to_lang_infix()[0] + \
-               '.' + self.lang_2
+               '.' + self.lang_2 + randfile_suffix
