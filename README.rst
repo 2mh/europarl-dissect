@@ -1,9 +1,8 @@
 **Table of Contents**
 
-
 .. contents::
     :local:
-    :depth: 1
+    :depth: 2
     :backlinks: none
 
 europarl-dissect
