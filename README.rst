@@ -8,6 +8,9 @@
 europarl-dissect
 ================
 
+Introduction
+------------
+
 ``europarl-dissect`` is an experimental toolset to play around with
 distributional semantics. 
 
@@ -49,23 +52,28 @@ to ensure better compatibility for the time being:
 Installation
 ------------
 
-### TreeTagger installation
+TreeTagger installation
+***********************
 
 TBD
 
-### TreeTagger configuration
+TreeTagger configuration
+************************
 
 TBD
 
-### Installation of europarl training data
+Installation of europarl training data
+**************************************
 
 TBD
 
-### Preparing a (small) set of testing data 
+Preparing a (small) set of testing data 
+***************************************
 
 TBD
 
-### Clone the source code
+Clone the source code
+*********************
 
 TBD
 
