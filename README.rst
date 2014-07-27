@@ -5,7 +5,7 @@ europarl-dissect
 distributional semantics. 
 
 Its basic intuition is to provide the best translation candidates for
-the words of a sentence (for any language direction we have training
+the words of a sentence (for *any* language direction we have training
 material for), but not just considering global relatedness of words
 in a training corpus, but also taking into account the concrete words
 of the input sentence provided.
