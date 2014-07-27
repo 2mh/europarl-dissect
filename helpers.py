@@ -19,11 +19,6 @@ LONG_LANGTAG =  {"nl":"dutch",
                  "ru":"russian",
                  "sv":"swedish"}
 
-# Location of data (to read from, to write to)
-DATA_DIR = ''.join(['data', sep])
-DATA_DIR_IN  = ''.join([DATA_DIR, 'in', sep])
-DATA_DIR_OUT = ''.join([DATA_DIR, 'out', sep])
-
 def getTag(tag, lang):
     if lang == "en":
         if re.match(r"NN.*", tag):

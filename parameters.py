@@ -1,5 +1,5 @@
-#!/usr/bin/python2
 # -*- coding: utf-8 -*-
+from os import sep
 
 ### Parameters to change before running.
 
@@ -8,8 +8,6 @@
 # here.
 TREETAGGER_PATH = "treetagger/cmd/"
 TREETAGGER_BASE_PATH = "treetagger/"
-
-DATA_DIR_OUT = './data/out/'
 
 
 ### default parameters used in create_input_data.py 
@@ -33,6 +31,7 @@ MIN_PAIR_OCC = 1
 # Maximum length of a word.
 MAX_WORD_LEN = 10000
 
+
 ### Default parameters used for besttranslations.py
 
 DIFFERENT_POS_PUNISHMENT = 0.3
@@ -40,3 +39,14 @@ NUMBER_OF_NEIGHBOURS = 100
 NUMBER_OF_TRANSLATIONS = 3
 OVERALL_SIMILARITY_WEIGHT = 1
 SENTENCE_SIMILARITY_WEIGHT = 3
+
+
+### defautl parameters used in both program parts
+
+# Location of data (to read from, to write to)
+DATA_DIR = ''.join(['data', sep])
+DATA_DIR_IN  = ''.join([DATA_DIR, 'in', sep])
+DATA_DIR_OUT = ''.join([DATA_DIR, 'out', sep])
+
+# Default encoding (for places where specification is necessary)
+ENC = "utf8"

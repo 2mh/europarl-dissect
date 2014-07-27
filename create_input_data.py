@@ -23,12 +23,13 @@ from lib.dissect.composes.semantic_space.space import Space
 from lib.dissect.composes.utils import io_utils
 from lib.ttpw.treetaggerwrapper import TreeTagger
 
-from helpers import DATA_DIR, DATA_DIR_IN, DATA_DIR_OUT, LONG_LANGTAG
+from helpers import LONG_LANGTAG
 from helpers import getTag
 from helpers import Suffixes
 from parameters import LANG_1, LANG_2, SENTENCES_LIMIT, \
                        MAX_SENTENCE_LEN, MIN_PAIR_OCC, \
-                       TREETAGGER_BASE_PATH, MAX_WORD_LEN
+                       TREETAGGER_BASE_PATH, MAX_WORD_LEN, \
+                       DATA_DIR, DATA_DIR_IN, DATA_DIR_OUT, ENC
 
 # Input files (col file, row files and sparse matrix files) for DISSECT
 OUTPUT_FILE_DE_DE_EN_SM = ''.join([DATA_DIR_OUT, 'de_de-en.sm'])
@@ -261,8 +262,8 @@ class Sentences:
         if use_treetagger:
             self.treetagger = TreeTagger(TAGLANG=lang,
                                          TAGDIR=treetagger_path,
-                                         TAGINENC="utf8",
-                                         TAGOUTENC="utf8")
+                                         TAGINENC=ENC,
+                                         TAGOUTENC=ENC)
         
     def read_sentences(self):
         """Read in sentences from a file in a given language.

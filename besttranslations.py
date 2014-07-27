@@ -14,13 +14,14 @@ from lib.dissect.composes.utils import io_utils
 from lib.dissect.composes.similarity.cos import CosSimilarity
 from lib.dissect.composes.semantic_space.space import Space
 from lib.dissect.composes.matrix.dense_matrix import DenseMatrix
+from lib.ttpw.treetaggerwrapper import TreeTagger
 
 import helpers
 from parameters import DIFFERENT_POS_PUNISHMENT, \
                        NUMBER_OF_NEIGHBOURS, NUMBER_OF_TRANSLATIONS, \
                        OVERALL_SIMILARITY_WEIGHT, \
                        SENTENCE_SIMILARITY_WEIGHT, TREETAGGER_PATH, \
-                       DATA_DIR_OUT
+                       DATA_DIR_OUT, TREETAGGER_BASE_PATH, ENC
 
 # For use: $ python besttranslations.py --help
 # Example (with lemmatized matrix dimensions): 
@@ -46,6 +47,7 @@ no_stopword_print = False # default
 number_of_neighbours = NUMBER_OF_NEIGHBOURS
 number_of_translations = NUMBER_OF_TRANSLATIONS
 different_pos_punishment = DIFFERENT_POS_PUNISHMENT
+treetagger_path = TREETAGGER_BASE_PATH
 
 # gives ordered list. the nearest elements come first.
 # return format: list of best translations as [space dimension, score, 
@@ -116,7 +118,8 @@ def main():
            loaded_space_file_s, loaded_space_file_t, source_lang, \
            target_lang, input_file, output_file, tag_cutoff, \
            no_stopword_print, number_of_translations, \
-           number_of_neighbours, different_pos_punishment
+           number_of_neighbours, different_pos_punishment, \
+           treetagger_path
     
     parser = argparse.ArgumentParser(description="Word translations" + \
                                      " that fit best to the sentence")
@@ -209,6 +212,10 @@ def main():
     if not loaded_space.get(target_lang):
         loaded_space[target_lang] = io_utils.load(loaded_space_file_t)
 
+    # Initialize TreeTagger only once
+    treetagger = TreeTagger(TAGLANG=source_lang, TAGDIR=treetagger_path,
+                            TAGINENC=ENC, TAGOUTENC=ENC)
+    
     # work on input file
     while True:
         line = input_file.readline()
@@ -241,17 +248,24 @@ def main():
 
         # Use tree-tagger as lemmatizer and/or tokenizer
         else:
+            '''
             treetagger = subprocess.Popen(
                 [TREETAGGER_PATH + "tree-tagger-"
                  + helpers.LONG_LANGTAG[source_lang] + "-utf8"],
                 stdin = subprocess.PIPE, stdout = subprocess.PIPE, 
                 stderr = subprocess.PIPE)
             treetaggerout, stderr = treetagger.communicate(line)
-            treeword = treetaggerout.rstrip().split("\n")
-            for t in treeword:
-                w = t.split("\t")[0]
-                p = helpers.getTag(t.split("\t")[1], source_lang)
-                l = t.split("\t")[2]
+            '''
+            treetagger_sentence = treetagger.TagText(line)
+            for t in treetagger_sentence:
+                try:
+                    w = t.split("\t")[0]
+                    p = helpers.getTag(t.split("\t")[1], source_lang)
+                    l = t.split("\t")[2]
+                except:
+                    print "Caution: TreeTagger token cannot " + \
+                          "be processed:", t
+                    continue # Skip it
                 words.append(w)
                 lemmas.append(l)
                 pos.append(p)
