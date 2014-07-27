@@ -1,0 +1,5 @@
+    136811 data/out/de_en-words.col
+     95715 data/out/de-words.row
+     41096 data/out/en-words.row
+  21848279 data/out/de_de-en.sm
+  19940174 data/out/en_en-de.sm
