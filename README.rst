@@ -35,7 +35,7 @@ training and show off the best candidates available:
 
 Dependencies
 ------------
-``europarl-dissect`` runs under Python versions >= 2.7.6.
+``europarl-dissect`` runs under Python versions >= 2.6.6.
 
 It was tested with following additional Python libraries it externally
 relies on:
