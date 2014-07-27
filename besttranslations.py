@@ -212,7 +212,7 @@ def main():
     if not loaded_space.get(target_lang):
         loaded_space[target_lang] = io_utils.load(loaded_space_file_t)
 
-    # Initialize TreeTagger only once
+    # Initialize TreeTagger only once (for later use)
     treetagger = TreeTagger(TAGLANG=source_lang, TAGDIR=treetagger_path,
                             TAGINENC=ENC, TAGOUTENC=ENC)
     
@@ -248,14 +248,6 @@ def main():
 
         # Use tree-tagger as lemmatizer and/or tokenizer
         else:
-            '''
-            treetagger = subprocess.Popen(
-                [TREETAGGER_PATH + "tree-tagger-"
-                 + helpers.LONG_LANGTAG[source_lang] + "-utf8"],
-                stdin = subprocess.PIPE, stdout = subprocess.PIPE, 
-                stderr = subprocess.PIPE)
-            treetaggerout, stderr = treetagger.communicate(line)
-            '''
             treetagger_sentence = treetagger.TagText(line)
             for t in treetagger_sentence:
                 try:
