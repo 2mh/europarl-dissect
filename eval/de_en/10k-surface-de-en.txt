@@ -1,153 +1,75 @@
-Die
-NO Sitzung        7.50 0.493400197124    1.05 0.493400197124    8.40 0.475638404848
-NO wird        7.50 0.522232967867    1.05 0.522232967867    8.40 0.471404520791
-um
-17.05
-YES Uhr        p.m 0.473996496958    8.40 0.404558196606    11.15 0.404558196606
-NO eröffnet        awaits 0.172436232874    backing 0.145132958855    tsatsos 0.143177408068
-.
-Das
-YES Protokoll        minutes 0.380361296402    sitting 0.315584759303    protocol 0.205174407673
-der
-YES vorangegangenen        duration 0.184361515871    previous 0.182241484738    900 0.144882085082
-YES Sitzung        sitting 0.325036336321    8.40 0.275178123179    11.15 0.275178123179
-NO wird        minutes 0.407844364086    sitting 0.322443988603    8.40 0.204124145232
-YES genehmigt        authorised 0.155713808687    categories 0.153783129243    code 0.131716853098
-.
-Der
-NO Präsident        prodi 0.229497977773    ladies 0.216779486259    commissioner 0.215918506779
-YES begrüßt        welcomes 0.238403535158    muslim 0.17056426416    debate 0.141991402174
-die
-YES Einführung        internal 0.147132742334    tax 0.14544386358    establishing 0.144592748725
-des
-YES Euro        eur 0.285916030724    billion 0.234883781631    million 0.21086037639
-als
-YES Währung        monetary 0.202225256268    2496/96/ecsc 0.201563812189    c5-0104/1999 0.19751250217
-in
-NO Lettland        euro 0.298602419763    pivotal 0.278639106288    1 0.240787285563
-am
-1
-.
-YES Januar        january 0.301247023062    standardisation 0.152121042033    completion 0.13749129437
-2014
-.
-Er
-NO spricht        policy 0.163205786871    also 0.159644441154    community 0.157871894523
-den
-YES Opfern        union 0.168080238044    victims 0.152381686282    paradox 0.145084770596
-der
-YES Unwetter        mourning 0.212026515595    condolences 0.202066307224    weather 0.17519759692
-die
-YES Solidarität        solidarity 0.360481086577    within 0.189789904288    union 0.184231373726
-des
-NO Europäischen        union 0.294317381134    parliament 0.265791289876    institutions 0.247301503353
-NO Parlaments        cod 0.244493116425    c5-0327/1999 0.214499686487    1998/0169 0.213274281013
-aus
-.
-Der
-NO Präsident        prodi 0.217862619588    ladies 0.212239781607    commissioner 0.201659495493
-NO erinnert        cofinancing 0.151827770293    cohesion 0.141927274505    pointed 0.138576043347
-an
-die
-YES Konferenz        presidents 0.250824512214    conference 0.172968534614    corroborate 0.161733047037
-der
-YES Vereinten        nations 0.370002564731    secrets 0.214204562163    united 0.202815065112
-YES Nationen        nations 0.325355475943    secrets 0.194945818591    united 0.184108691346
-zur
-YES Zukunft        future 0.232474301915    going 0.134648447541    make 0.13005691413
-NO Syriens        damascus 0.201883914571    assad 0.187477846055    renounces 0.17336410604
-,
-deren
-NO Eröffnung        conference 0.18671229476    intergovernmental 0.14221469749    scheduling 0.12794829442
-für
-den
-22
-.
-YES Januar        january 0.274667144403    standardisation 0.167681166067    completion 0.138626415792
-2014
-in
-YES Genf        1957 0.183219100879    carriage 0.181428801458    geneva 0.181082392546
-NO anberaumt        nations 0.276477593696    january 0.19867985356    future 0.177630653967
-NO ist        nations 0.276477593696    january 0.19867985356    future 0.177630653967
-.
-Der
-NO Präsident        prodi 0.23295177234    ladies 0.224253996279    commissioner 0.217144504965
-NO weist        gypsy 0.136716727113    refugees. 0.132862745146    arriving 0.127169150503
-auf
-die
-NO Pressemeldungen        president 0.17400322953    brok 0.170560573084    mr 0.160294242657
-über
-die
-NO Vorwürfe        president 0.17400322953    brok 0.170560573084    mr 0.160294242657
-hin
-,
-die
-der
-NO rumänische        president 0.17400322953    brok 0.170560573084    mr 0.160294242657
-YES Premierminister        prime 0.215058972971    strip 0.177855625595    minister 0.168095244009
-NO Victor        president 0.17400322953    brok 0.170560573084    mr 0.160294242657
-NO Ponta        president 0.17400322953    brok 0.170560573084    mr 0.160294242657
-gegen
-YES Elmar        tsatsos 0.265223811145    brok 0.263384635285    elmar 0.249635831194
-YES Brok        brok 0.313840289597    tsatsos 0.238595580588    0598 0.138638681562
-NO erhoben        insistent 0.125819004571    speak 0.119775759942    hint 0.104324563497
-NO hat        president 0.17400322953    brok 0.170560573084    mr 0.160294242657
-.
-Die
-YES Frist        deadline 0.135421020059    limit 0.111746690819    take 0.105015707035
-für
-die
-YES Einreichung        supplement 0.160615211902    submission 0.0988273062819    submitting 0.0950591630678
-von
-NO Änderungsanträgen        nos 0.194066100303    quantified 0.136774825956    re-instatement 0.123102969122
-NO wird        p.m 0.25794711115    noon 0.24343224778    12.00 0.210818510678
-auf
-YES Dienstag        tuesday 0.233505412755    submission 0.203340331663    one-way 0.154744069686
-,
-14
-.
-YES Januar        january 0.269042087903    constructed 0.112090218617    shootings 0.108762089167
-2014
-,
-12.00
-YES Uhr        p.m 0.342845051394    noon 0.302538114029    12.00 0.285417931089
-YES festgesetzt        recording 0.162244088421    pinpointing 0.159838659071    legislated 0.1473524991
-.
-Die
-NO Abstimmung        noon 0.647646499013    12.00 0.562417620546    p.m 0.547412500949
-NO findet        noon 0.653019204553    12.00 0.571487855011    p.m 0.570393877532
-am
-YES Mittwoch        wednesday 0.297258087027    cyprus 0.190554028919    swoboda 0.173554869397
-,
-15
-.
-YES Januar        january 0.283823139836    constructed 0.11458333632    shootings 0.111222183985
-2014
-,
-um
-12.00
-YES Uhr        noon 0.604086846469    p.m 0.553363694165    12.00 0.546566793862
-statt
-.
-Diese
-NO Benennungen        contradiction 0.212621627781    confirmed 0.143499200667    confirms 0.121566134771
-YES gelten        apply 0.14735554154    host 0.140696018755    posted 0.11833828684
-als
-NO bestätigt        confirmed 0.198109035993    confirms 0.166484339481    transitive 0.131668712054
-,
-wenn
-bis
-zur
-YES Genehmigung        approval 0.144801353689    directors-general 0.126416889163    exemption 0.114595780402
-des
-NO vorliegenden        internal 0.115170753011    concerning 0.114526655427    us 0.114069562812
-NO Protokolls        1999/0228 0.173795614741    c5-0305/1999 0.173139745032    0550 0.172481502465
-kein
-YES Widerspruch        contradiction 0.234477132308    protects 0.133698513201    law 0.111595463543
-NO eingeht        neo-fascists 0.187125684268    somewhere 0.0931629307949    sovereignty 0.0731396172841
-.
-Der
-YES Punkt        point 0.297927115594    matter 0.148485183898    order 0.145054416288
-NO ist        leopards 0.5    closed 0.453565035724    8.40 0.288675134595
-YES geschlossen        closed 0.420543523989    8.40 0.303360317488    11.15 0.303360317488
-.
+Sitzung                 & 7.50 (0.49) & 1.05 (0.49) & 8.40 (0.48) \\
+wird                    & 7.50 (0.52) & 1.05 (0.52) & 8.40 (0.47) \\
+Uhr                     & p.m (0.47) & 7.50 (0.43) & 1.05 (0.43) \\
+eröffnet               & awaits (0.17) & backing (0.15) & tsatsos (0.14) \\
+Protokoll               & minutes (0.38) & sitting (0.32) & protocol (0.21) \\
+vorangegangenen         & sitting (0.29) & duration (0.18) & previous (0.18) \\
+Sitzung                 & minutes (0.34) & sitting (0.33) & 8.40 (0.28) \\
+wird                    & minutes (0.41) & sitting (0.32) & 8.40 (0.20) \\
+genehmigt               & authorised (0.16) & categories (0.15) & code (0.13) \\
+Präsident              & president (0.25) & prodi (0.23) & ladies (0.22) \\
+begrüßt               & welcomes (0.24) & muslim (0.17) & physically (0.15) \\
+Einführung             & introduction (0.26) & currency (0.22) & force (0.15) \\
+Euro                    & euro (0.29) & eur (0.28) & billion (0.23) \\
+Währung                & currency (0.22) & monetary (0.21) & 2496/96/ecsc (0.20) \\
+Lettland                & january (0.31) & euro (0.30) & pivotal (0.28) \\
+1.                      & january (0.37) & standardisation (0.20) & constructed (0.19) \\
+Januar                  & january (0.36) & standardisation (0.18) & valid (0.17) \\
+2014.                   & january (0.31) & euro (0.30) & pivotal (0.28) \\
+spricht                 & within (0.20) & union (0.18) & people (0.18) \\
+Opfern                  & european (0.27) & lending (0.18) & within (0.17) \\
+Unwetter                & mourning (0.21) & condolences (0.20) & weather (0.18) \\
+Solidarität            & solidarity (0.36) & european (0.29) & within (0.19) \\
+Europäischen           & european (0.34) & union (0.29) & parliament (0.27) \\
+Parlaments              & adjourned (0.28) & cod (0.24) & parliament (0.24) \\
+Präsident              & president (0.22) & prodi (0.22) & ladies (0.21) \\
+erinnert                & cofinancing (0.15) & cohesion (0.14) & pointed (0.14) \\
+Konferenz               & presidents (0.25) & conference (0.17) & corroborate (0.16) \\
+Vereinten               & nations (0.37) & secrets (0.21) & united (0.20) \\
+Nationen                & nations (0.33) & secrets (0.19) & future (0.19) \\
+Zukunft                 & future (0.23) & going (0.13) & make (0.13) \\
+Syriens                 & damascus (0.20) & assad (0.19) & renounces (0.17) \\
+Eröffnung              & conference (0.19) & intergovernmental (0.14) & scheduling (0.13) \\
+22.                     & mentioned. (0.22) & 22 (0.09) & nos (0.09) \\
+Januar                  & january (0.27) & standardisation (0.17) & completion (0.14) \\
+Genf                    & 1957 (0.18) & carriage (0.18) & geneva (0.18) \\
+anberaumt               & nations (0.28) & january (0.20) & future (0.18) \\
+ist                     & nations (0.28) & january (0.20) & future (0.18) \\
+Präsident              & president (0.26) & brok (0.25) & prodi (0.23) \\
+weist                   & gypsy (0.14) & compile (0.14) & refugees. (0.13) \\
+Pressemeldungen         & president (0.17) & brok (0.17) & mr (0.16) \\
+Vorwürfe               & president (0.17) & brok (0.17) & mr (0.16) \\
+rumänische             & president (0.17) & brok (0.17) & mr (0.16) \\
+Premierminister         & prime (0.22) & strip (0.18) & minister (0.17) \\
+Victor                  & president (0.17) & brok (0.17) & mr (0.16) \\
+Ponta                   & president (0.17) & brok (0.17) & mr (0.16) \\
+Elmar                   & tsatsos (0.27) & brok (0.26) & elmar (0.25) \\
+Brok                    & brok (0.31) & tsatsos (0.24) & elmar (0.18) \\
+erhoben                 & insistent (0.13) & speak (0.12) & hint (0.10) \\
+hat                     & president (0.17) & brok (0.17) & mr (0.16) \\
+Frist                   & deadline (0.14) & docups (0.11) & limit (0.11) \\
+Einreichung             & supplement (0.16) & submission (0.10) & submitting (0.10) \\
+Änderungsanträgen     & nos (0.18) & quantified (0.14) & sabotage (0.14) \\
+wird                    & p.m (0.26) & noon (0.24) & 12.00 (0.21) \\
+Dienstag                & tuesday (0.23) & submission (0.20) & one-way (0.15) \\
+14.                     & february (0.19) & 14 (0.17) & wednesday: (0.15) \\
+Januar                  & january (0.27) & place (0.13) & february (0.11) \\
+Uhr                     & p.m (0.34) & noon (0.30) & 12.00 (0.29) \\
+festgesetzt             & recording (0.16) & pinpointing (0.16) & legislated (0.15) \\
+Abstimmung              & noon (0.65) & 12.00 (0.56) & p.m (0.54) \\
+findet                  & noon (0.65) & 12.00 (0.57) & p.m (0.56) \\
+Mittwoch                & wednesday (0.30) & cyprus (0.19) & sitting (0.18) \\
+15.                     & recommended (0.17) & resigned (0.14) & march (0.11) \\
+Januar                  & january (0.28) & place (0.27) & take (0.17) \\
+Uhr                     & noon (0.60) & p.m (0.55) & 12.00 (0.55) \\
+Benennungen             & contradiction (0.21) & confirmed (0.14) & confirms (0.12) \\
+gelten                  & apply (0.15) & host (0.14) & posted (0.12) \\
+bestätigt              & confirmed (0.20) & confirms (0.17) & transitive (0.13) \\
+Genehmigung             & approval (0.14) & minutes (0.13) & directors-general (0.13) \\
+vorliegenden            & internal (0.12) & concerning (0.11) & us (0.11) \\
+Protokolls              & 1999/0228 (0.17) & c5-0305/1999 (0.17) & 0550 (0.17) \\
+Widerspruch             & contradiction (0.23) & protects (0.13) & law (0.11) \\
+eingeht                 & neo-fascists (0.19) & somewhere (0.09) & sovereignty (0.07) \\
+Punkt                   & point (0.30) & matter (0.15) & order (0.15) \\
+ist                     & leopards (0.50) & closed (0.45) & 8.40 (0.29) \\
+geschlossen             & closed (0.42) & 8.40 (0.30) & 11.15 (0.30) \\
