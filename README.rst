@@ -15,7 +15,7 @@ words in only *one* language, thus not giving translations, but more
 of synsets or semantic nets -- still considering the local context of
 the sentence provided.
 
-It consists of two programs, one for preparing and preprocessing the
+The system consists of two programs, one for preparing and preprocessing the
 input data, the other one to calculate the similarity of input material to 
 the semantic space established and show off the candidates.
 
