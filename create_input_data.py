@@ -24,13 +24,14 @@ from nltk import word_tokenize
 
 from lib.dissect.composes.semantic_space.space import Space
 from lib.dissect.composes.utils import io_utils
+from lib.ttpw.treetaggerwrapper import TreeTagger
 
 from helpers import DATA_DIR, DATA_DIR_IN, DATA_DIR_OUT, LONG_LANGTAG
 from helpers import getTag
 from helpers import Suffixes
 from parameters import LANG_1, LANG_2, SENTENCES_LIMIT, \
                        MAX_SENTENCE_LEN, PAIR_OCC_THRESHOLD, \
-                       TREETAGGER_PATH
+                       TREETAGGER_PATH, TREETAGGER_BASE_PATH
 
 # Input files (col file, row files and sparse matrix files) for DISSECT
 OUTPUT_FILE_DE_DE_EN_SM = ''.join([DATA_DIR_OUT, 'de_de-en.sm'])
@@ -68,6 +69,7 @@ lang_1 = LANG_1 # Default lang 1
 lang_2 = LANG_2 # Default lang 2
 # Default path; should be changed in parameters.py file, or at least
 # set by --treetagger-path parameter option.
+treetagger_base_path = TREETAGGER_BASE_PATH
 treetagger_path = TREETAGGER_PATH
 
 # Parallalized sentences of europarl
@@ -77,14 +79,6 @@ europarl_files = \
     lang_1 : suffixes.europarl_filepaths()[0],
     lang_2 : suffixes.europarl_filepaths()[1]
 }
-
-'''
-treetagger_paths = \
-{
-    lang_1 : ''.join([treetagger_path, 'tree-tagger-german-utf8-new']),
-    lang_2 : ''.join([treetagger_path, 'tree-tagger-english-utf8-new'])
-}
-'''
 
 class AlignedSentences:
     
@@ -270,6 +264,12 @@ class Sentences:
         self.lang = lang
         self.sentences = {}
         
+        if use_treetagger:
+            self.treetagger = TreeTagger(TAGLANG=lang,
+                                         TAGDIR=treetagger_base_path,
+                                         TAGINENC="utf8",
+                                         TAGOUTENC="utf8")
+        
     def read_sentences(self):
         """Read in sentences from a file in a given language.
         """
@@ -310,20 +310,29 @@ class Sentences:
                             "-utf8-new"
                         
         # Call TreeTagger.
+        '''
         treetagger = subprocess.Popen([treetagger_script],
                         stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                         stderr=subprocess.PIPE)
+        '''
                         
-        treetagger_out = treetagger.communicate(sentence)[0]
-        treetagger_token = treetagger_out.split('\n')
-        for token in treetagger_token:
+        #treetagger_out = treetagger.communicate(sentence)[0]
+        treetagger_tokens = self.treetagger.TagText(sentence)
+        token_pos_tagged = None
+        for token in treetagger_tokens:
             token_pos_tagged = token.split('\t')
-            pos_tag = getTag(token_pos_tagged[0], lang_1)
-            if pos_tag != "0":
-                token = token_pos_tagged[1].lower() +  '_' + pos_tag \
-                + '_' + self.lang
+            if len(token_pos_tagged) != 3:
+                print "Caution -- broken TreeTagger case: ", \
+                      token_pos_tagged, "(list)"
+                continue # Skip it
+            pos_tag = getTag(token_pos_tagged[1], lang_1)
+            token = token_pos_tagged[2].lower()
+            # Those cases we don't want.
+            if not token in ["<unknown>", "@ord@", "@card@"] and \
+               not pos_tag == "0":
+                token +=  '_' + pos_tag + '_' + self.lang
                 tokens_pos_tagged.append(token)
-                
+
         self.sentences[counter] = tokens_pos_tagged
         
     def _filter_tokens(self, tokens):

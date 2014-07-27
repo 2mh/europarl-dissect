@@ -336,7 +336,7 @@ TREETAGGER_INENCERR = "replace"
 TREETAGGER_OUTENCERR = "replace"
 
 # Default input and output for files and strings with no ecoding specified.
-USER_ENCODING = "latin1"
+USER_ENCODING = "utf8"
 # Default error processing for encoding - use Python stanndard: strict.
 # May be modified with options.
 DEFAULT_ENCERRORS = "strict"

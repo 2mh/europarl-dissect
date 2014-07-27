@@ -6,15 +6,21 @@ TODO:
 - Add --treetagger-path option.
 - Transfer code to helpers.py or parameters.py.
 '''
+import re, sys, subprocess, argparse
+import numpy as np
+from collections import defaultdict
 
 from lib.dissect.composes.utils import io_utils
 from lib.dissect.composes.similarity.cos import CosSimilarity
 from lib.dissect.composes.semantic_space.space import Space
 from lib.dissect.composes.matrix.dense_matrix import DenseMatrix
-from collections import defaultdict
-import numpy as np
-import re, sys, subprocess, argparse
-import helpers, parameters
+
+import helpers
+from parameters import DIFFERENT_POS_PUNISHMENT, \
+                       NUMBER_OF_NEIGHBOURS, NUMBER_OF_TRANSLATIONS, \
+                       OVERALL_SIMILARITY_WEIGHT, \
+                       SENTENCE_SIMILARITY_WEIGHT, TREETAGGER_PATH, \
+                       DATA_DIR_OUT
 
 # For use: $ python besttranslations.py --help
 # Example (with lemmatized matrix dimensions): 
@@ -36,7 +42,10 @@ loaded_space_file_t = ""
 input_file = sys.stdin # default
 output_file = sys.stdout # default
 tag_cutoff = 0 # default: return in format of space_cols_file
-
+no_stopword_print = False # default
+number_of_neighbours = NUMBER_OF_NEIGHBOURS
+number_of_translations = NUMBER_OF_TRANSLATIONS
+different_pos_punishment = DIFFERENT_POS_PUNISHMENT
 
 # gives ordered list. the nearest elements come first.
 # return format: list of best translations as [space dimension, score, 
@@ -46,12 +55,12 @@ def get_best_translations(word, tag, lemma, query_space, loaded_space):
                                       use_lemmatization)
     try:
         nearest = loaded_space[source_lang].get_neighbours(wformat, 
-                                    parameters.NUMBER_OF_NEIGHBOURS, 
+                                    number_of_neighbours, 
                                     CosSimilarity(), 
                                     space2 = loaded_space[target_lang])
     except:
         nearest = query_space.get_neighbours(wformat, 
-                              parameters.NUMBER_OF_NEIGHBOURS, 
+                              number_of_neighbours, 
                               CosSimilarity(), 
                               space2 = loaded_space[target_lang])
     r = []
@@ -67,15 +76,15 @@ def get_best_translations(word, tag, lemma, query_space, loaded_space):
         # score to order the best translations. 
         # includes translation probability and how a word fits 
         # into a sentence
-        score = (parameters.SENTENCE_SIMILARITY_WEIGHT * z \
-                 + parameters.OVERALL_SIMILARITY_WEIGHT * s) \
-                 / (parameters.SENTENCE_SIMILARITY_WEIGHT \
-                 + parameters.OVERALL_SIMILARITY_WEIGHT)
+        score = (SENTENCE_SIMILARITY_WEIGHT * z \
+                 + OVERALL_SIMILARITY_WEIGHT * s) \
+                 / (SENTENCE_SIMILARITY_WEIGHT \
+                 + OVERALL_SIMILARITY_WEIGHT)
         #if n[-3:] != "_" + target_lang:
         #    score = 0.0 # Answers in the same language 
         # will be punished. TODO: delete when new matrices are present
         if n[-5:-4] != tag and use_lemmatization:
-            score = score * parameters.DIFFERENT_POS_PUNISHMENT
+            score = score * different_pos_punishment
         r.append((n, score, z, s))
 
     best = sorted(r, key=lambda m: m[1], reverse=True)
@@ -84,11 +93,11 @@ def get_best_translations(word, tag, lemma, query_space, loaded_space):
 # Set the output for each input word
 def format_best_translations(word, tag, lemma, best_translations):
     if helpers.valid_pos(tag):
-        last_idx = parameters.NUMBER_OF_TRANSLATIONS - 1
+        last_idx = number_of_translations - 1
         r = word.ljust(23) + " & "
         r_orig = r
         # Return a number of candiates
-        for i in range(parameters.NUMBER_OF_TRANSLATIONS):
+        for i in range(number_of_translations):
             r += best_translations[i][0][:len(best_translations[i][0])
                                          -tag_cutoff]
             r += " (" + "{0:1.2f}".format(best_translations[i][1]) + ")"
@@ -106,7 +115,8 @@ def main():
     global input_is_tokenized, use_lemmatization, space_cols_file, \
            loaded_space_file_s, loaded_space_file_t, source_lang, \
            target_lang, input_file, output_file, tag_cutoff, \
-           no_stopword_print
+           no_stopword_print, number_of_translations, \
+           number_of_neighbours, different_pos_punishment
     
     parser = argparse.ArgumentParser(description="Word translations" + \
                                      " that fit best to the sentence")
@@ -131,7 +141,19 @@ def main():
     parser.add_argument("-o", "--outfile", type=str, 
            help="output file")
     parser.add_argument("-nsp", "--no-stopword-print", 
-           action="store_true")
+           action="store_true", 
+           help="Omit to print words without candidates -- usually " + \
+                 "stop words.")
+    parser.add_argument("-nt", "--number-of-translations", type=float,
+           help="The number of candidates to show for each input word.")
+    parser.add_argument("-nn", "--number-of-neighbours", type=int,
+           help="The number of neighbours for each input word to " + \
+                "consider in the similarity space constructed.")
+    parser.add_argument("-dpp", "--different-pos-punishment", 
+           type=float, help="The score's fraction to punish a " + \
+                             "candidate word which is there, but " + \
+                             "has not the same POS as its input peer.")
+    parser.add_argument
     args = parser.parse_args()
     
     if args.sourcelang:
@@ -145,19 +167,19 @@ def main():
     if args.dimensions:
         space_cols_file = args.dimensions
     else:
-        space_cols_file = parameters.DATA_DIR_OUT \
+        space_cols_file = DATA_DIR_OUT \
                         + '_'.join(sorted([source_lang,target_lang])) \
                         + '-words.col'
     if args.sourcematrix:
         loaded_space_file_s = args.sourcematrix
     else:
-        loaded_space_file_s = parameters.DATA_DIR_OUT + source_lang \
+        loaded_space_file_s = DATA_DIR_OUT + source_lang \
                             + '_' + source_lang + '-' + target_lang \
                             + '.pkl'
     if args.targetmatrix:
         loaded_space_file_t = args.targetmatrix
     else:
-        loaded_space_file_t = parameters.DATA_DIR_OUT + target_lang \
+        loaded_space_file_t = DATA_DIR_OUT + target_lang \
                             + '_' + target_lang + '-' + source_lang \
                             + '.pkl'
     if args.infile:
@@ -171,7 +193,6 @@ def main():
             tag_cutoff = 5
         else:
             tag_cutoff = 3
-    no_stopword_print = False
     if args.no_stopword_print:
         no_stopword_print = args.no_stopword_print
 
@@ -221,7 +242,7 @@ def main():
         # Use tree-tagger as lemmatizer and/or tokenizer
         else:
             treetagger = subprocess.Popen(
-                [parameters.TREETAGGER_PATH + "tree-tagger-"
+                [TREETAGGER_PATH + "tree-tagger-"
                  + helpers.LONG_LANGTAG[source_lang] + "-utf8"],
                 stdin = subprocess.PIPE, stdout = subprocess.PIPE, 
                 stderr = subprocess.PIPE)

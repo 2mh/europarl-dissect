@@ -7,6 +7,7 @@
 # TreeTagger shell scripts reside. Also an absolute path can be set
 # here.
 TREETAGGER_PATH = "treetagger/cmd/"
+TREETAGGER_BASE_PATH = "treetagger/"
 
 DATA_DIR_OUT = './data/out/'
 
