@@ -16,9 +16,9 @@ of synsets or semantic nets -- still considering the local context of
 the sentence provided.
 
 The system consists of two programs, one for preparing and preprocessing the
-input data, the other one to calculate the similarity of the input word
-to other words in the local and global semantic spaces established and 
-show off the best candidates achieved.
+input data, the other one to calculate the similarity of each input word
+to other words in the local and global semantic spaces established by
+training and show off the best candidates available.
 
 - ``create_input_data.py`` processes (parallelized) training data available
 - ``besttranslations.py`` shows candidates based on training data and input
