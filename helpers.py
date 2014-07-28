@@ -63,20 +63,23 @@ def valid_pos(tag):
     else:
         return False
         
-class Filenames():
+class Filenames:
+    """Class which provides common functionality to the handling of
+       file names, used in other classes."""
     def __init__(self):
         self.lang_1 = ""
         self.lang_2 = "" # Might not be used in single language runs.
         
 class InputFilenames(Filenames):
-    """Class to handle input files from europarl (currently: v7)."""
+    """Class to handle input file name from europarl 
+       (currently: v7)."""
     
     def __init__(self):
         pass
 
 class OutputFilenames(Filenames):
-    """Class to handle output files which are used as input material
-       for the DISSECT library."""
+    """Class to handle output files names which are used as input 
+       material for the DISSECT library."""
     
     def __init__(self):
         pass
