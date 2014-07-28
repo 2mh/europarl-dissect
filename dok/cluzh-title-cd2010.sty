@@ -1,0 +1,201 @@
+%% -*- coding: iso-8859-1 -*-
+%% cluzh-title
+%% @(#) Time-stamp: <2011-06-15T11:29:34 mxp>
+%% Created by Michael Piotrowski <mxp@cl.uzh.ch>
+
+%% NOTE:  This package is only usable with the mparticle and mpreport
+%% classes because it uses variables defined there (prefixed with mp@).
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cluzh-title-cd2010}[2011/03/21 Title page for CLUZH theses]
+
+\RequirePackage{graphicx}
+\RequirePackage{ifthen}
+\RequirePackage{keyval}
+
+%% To add flexibility, we will not use the ordinary processing of
+%% package options, but put them through the |keyval| package.
+%% This section is from the |hyperref| package.
+\def\ProcessOptionsWithKV#1{%
+  \let\@tempa\@empty
+  \@for\CurrentOption:=\@classoptionslist\do{%
+    \@ifundefined{KV@#1@\CurrentOption}%
+    {}%
+    {\edef\@tempa{\@tempa,\CurrentOption,}}}%
+  \edef\@tempa{%
+    \noexpand\setkeys{#1}{\@tempa\@ptionlist{\@currname.\@currext}}}%
+  \@tempa
+  \AtEndOfPackage{\let\@unprocessedoptions\relax}}
+
+%% Declare the options.
+\newcommand{\@cluzhtitletype}{liz}    % Type of thesis
+\define@key{cluzhtitle}{type}{\renewcommand{\@cluzhtitletype}{#1}}
+
+\newcommand{\@cluzhtitlestatus}{submitted} % Status (submitted, accepted)
+\define@key{cluzhtitle}{status}{\renewcommand{\@cluzhtitlestatus}{#1}}
+
+\newcommand{\@cluzhtitlesemester}{}   % Semester
+\define@key{cluzhtitle}{semester}{\renewcommand{\@cluzhtitlesemester}{#1}}
+
+\newcommand{\@cluzhtitleseminar}{}    % Title of seminar, if type=seminar
+\define@key{cluzhtitle}{seminar}{\renewcommand{\@cluzhtitleseminar}{#1}}
+
+\newcommand{\@cluzhtitlelogo}{yes}    % Use logo=no to suppress logo
+\define@key{cluzhtitle}{logo}{\renewcommand{\@cluzhtitlelogo}{#1}}
+
+%% Process them.
+\ProcessOptionsWithKV{cluzhtitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\@thesisname}{}
+
+\ifthenelse{\equal{\@cluzhtitletype}{diss}}%
+{\renewcommand{\@thesisname}{Abhandlung zur Erlangung der Doktorw\"{u}rde\\
+    der Philosophischen Fakultt der Universitt Z\"{u}rich}}%
+{%
+  \ifthenelse{\equal{\@cluzhtitletype}{liz}}%
+  {\renewcommand{\@thesisname}{Lizentiatsarbeit der Philosophischen
+      Fakultt der Universitt Z\"{u}rich}%
+  }
+  {
+    \ifthenelse{\equal{\@cluzhtitletype}{master}}%
+    {\renewcommand{\@thesisname}{Masterarbeit der Philosophischen
+        Fakultt der Universitt Z\"{u}rich}%
+    }
+    {
+      \ifthenelse{\equal{\@cluzhtitletype}{seminar}}%
+      {\renewcommand{\@thesisname}{Projektarbeit}%
+      }
+      {
+        \ifthenelse{\equal{\@cluzhtitletype}{report}}%
+        {\renewcommand{\@thesisname}{~}%
+        }
+        {\renewcommand{\@thesisname}{*** TYPE OF THESIS NOT SPECIFIED ***}}
+      }
+    }
+  }
+}
+
+\newcommand{\@supervisortext}{%
+  \ifthenelse{\value{c@supervisors} > 1}%
+  {Referenten}{Referent}%
+}
+\newcommand{\@readertext}{Betreuer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{c@supervisors}
+\setcounter{c@supervisors}{1}
+
+\newcommand{\institute}[1]{\def\@cluzhtitleinstitute{#1}}
+\institute{Institut f\"{u}r Computerlinguistik} % Could be used in the document
+
+\newcommand{\supervisor}[1]{\def\and{\\\stepcounter{c@supervisors}}\def\@supervisor{#1}}
+\newcommand{\reader}[1]{\def\and{\\}\def\@reader{#1}}
+
+\newcommand{\authororigin}[1]{\def\@authororigin{#1}}
+
+\newcommand{\studentid}[1]{\def\@studentid{#1}}
+
+\renewcommand{\maketitle}{%
+  \begin{titlepage}%
+   \setlength{\oddsidemargin}{62mm}
+   \setlength\textwidth{133mm}
+   \setlength{\mp@margwd}{37mm}
+   %% Use Helvetica
+   \renewcommand{\sfdefault}{phv}%
+   %% Place the logo
+   \par\hspace{-\mp@margwd}%
+   \unitlength1mm
+   \begin{picture}(0,12)
+     % \put(0,11){\rule{\mp@fullwd}{1mm}}
+     \ifthenelse{\equal{\@cluzhtitlelogo}{yes}}%
+     {
+       \ifthenelse{\equal{\@cluzhtitletype}{diss}}%
+       {\put(0,-20){\includegraphics[height=32mm]{uzhlogodpos}}%
+         \institute{} % No institute for dissertations
+       }
+       {\put(0,-20){\includegraphics[height=32mm]{uzhlogodpos}}}
+     }
+     {}
+     \@ifundefined{@cluzhtitleinstitute}{}{%
+       \put(37,-40){\sffamily\bfseries\Large\@cluzhtitleinstitute}
+     }
+     \put(37,-45){\rule{\textwidth}{.25mm}}
+   \end{picture}
+    %
+    %% typeset the title
+    \vspace{7cm}
+    \begin{flushleft}
+      \fontencoding{T1}
+      \sffamily\huge
+      \textbf{\@title}\\[1ex]
+      \normalsize
+      \@thesisname%
+      \ifthenelse{\equal{\@cluzhtitletype}{seminar}}%
+      {
+        in der Veranstaltung \\
+        \guillemotleft\@cluzhtitleseminar\guillemotright\\
+        \@cluzhtitlesemester
+      }
+      {}
+      \\[1em]
+      \ifthenelse{\equal{\@cluzhtitletype}{report}}%
+      {}
+      %{Vorgelegt von\\}
+      \textbf{\@author}%\\[1ex]
+      %\@ifundefined{@studentid}{}
+      %{
+      %  ~(\@studentid)
+      %}
+      \@ifundefined{@authororigin}{}
+      {
+        \\\@authororigin
+      }
+      \par
+      \ifthenelse{\equal{\@cluzhtitlestatus}{accepted}}%
+      {\relax}%
+%      {\@date}
+      {13. Januar 2014}
+      \vspace{1cm}
+      \@ifundefined{@supervisor}{}
+      {
+        \par
+        % The use of \settowidth is a hack to force evaluation of the
+        % \and macros in \@supervisor, which increase the
+        % c@supervisors counter, which is used in \@supervisortext to
+        % select the singular or plural form.  Real TeX hackers may be
+        % able to find a more elegant solution using \expandafter.
+        \newlength{\@cluzhtmp}
+        \settowidth{\@cluzhtmp}{\def\and{\stepcounter{c@supervisors}}\@supervisor}
+        \ifthenelse{\equal{\@cluzhtitlestatus}{accepted}}%
+        {\textbf{Angenommen im}\\
+          \@cluzhtitlesemester\\[1em]
+          \textbf{auf Antrag von}\\
+          \@supervisor}%
+        {
+          \textbf{\@supervisortext}\\
+          \@supervisor
+        }
+      }
+      %\@ifundefined{@reader}{}
+      %{
+      %  \par
+      %  \textbf{\@readertext}\\
+      %  \@reader
+      %%}
+      %%
+      \vfill
+      % Adresse
+    \end{flushleft}
+
+    \rule{\textwidth}{.25mm}
+%    \hspace{-\mp@margwd}%
+%    \rule{\mp@margwd}{2.25mm}%
+%    \hspace{-\mp@margwd}%
+%    \rule{\mp@fullwd}{.25mm}%
+  \end{titlepage}%
+}
+%%
+%% End of file `cluzh-title.sty'.

@@ -1,0 +1,89 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -*- coding: utf-8 -*-
+\documentclass[11pt,twoside,openright]{mpreport}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french, russian, icelandic, english, ngerman]{babel}
+\usepackage{pxfonts}
+\usepackage[numbers]{natbib}
+\usepackage{booktabs}
+\usepackage{gb4e} %\noautomath % For linguistic examples %%%einfach muell
+%\usepackage{listings}         % For listings %%%einfach muell
+%\usepackage{color} %%%einfach muell
+\usepackage{hyperref}         % Hyperref should normally be the last
+                              % package
+\usepackage{qtree}
+\usepackage{rotating}
+\usepackage{url}
+\usepackage{spverbatim}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{newunicodechar}
+\brokenpenalty10000\relax
+
+\let\cleardoublepage\clearpage
+
+% Information for the title page
+\usepackage[type=seminar,
+            seminar={Fragestellungen der statistikbasierten Semantik},
+            semester={Frühlingssemester 2014}]{cluzh-title-cd2010}
+
+% Avoid widows and orphans
+\widowpenalty50000
+\clubpenalty50000
+
+% URL with access date
+\newcommand{\urld}[2][???]{\url{#2} (\iflanguage{ngerman}{Letzter
+    Abruf:}{accessed} #1)}
+
+% Examples for the definition of convenience commands
+\newcommand{\first}[1]{\emph{#1}}
+\newcommand{\q}[1]{\iflanguage{ngerman}{\flqq#1\frqq}{``#1''}}
+\newcommand{\gloss}[1]{`#1'}
+\newcommand{\example}[1]{\emph{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Title page information
+\title{Distributionelle Semantik über Europarl-Korpora
+}
+\author{Reto Baumgartner \and Hernani Marques}
+
+\begin{document}
+\maketitle
+\small
+\tableofcontents
+\normalsize
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Einleitung}
+\label{cha:einleitung}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Theoretische Basis}
+\label{cha:theorie}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Praxis}
+\label{cha:praxis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Evaluation}
+\label{cha:evaluation}
+%%%
+\section{Übersetzungskandidaten DE--EN mit 10'000 Trainingssätzen über Wortoberflächen}
+\label{sec:evalDeEn10kSurf}
+\section{Übersetzungskandidaten EN--DE mit 10'000 Trainingssätzen über Wortoberflächen}
+\label{sec:evalDeEn10kSurf}
+\section{Übersetzungskandidaten EN--DE mit 10'000 Trainingssätzen über Wortoberflächen}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Schluss}
+\label{cha:schluss}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{plain-de}     % For German
+\bibliography{seminar}
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\listoffigures
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\end{document}
