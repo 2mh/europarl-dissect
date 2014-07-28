@@ -70,7 +70,7 @@ Beim einsprachingen Verwenden des Programms unterbleibt die Unterschiedung der M
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Theoretische Basis}
 \label{cha:theorie}
-Der Kern des Projektes ist die Annahme, dass ein Wort durch sein Umfeld definiert wird und dass sich in parallelen Texten die Wörter und ihre Übersetzungen einander annähern. Widdows \cite{geometry} hat dieses Verfahren verwendet um Übersetzungen zu Fachwörtern zu finden:
+Der Kern des Projektes ist die Annahme, dass ein Wort durch sein Umfeld definiert wird und dass sich in parallelen Texten die Wörter und ihre Übersetzungen einander annähern. Widdows \citep[S. 190ff.]{geometry} hat dieses Verfahren verwendet um Übersetzungen zu Fachwörtern zu finden:
 \begin{quote}
 The main idea in building a bilingual WORDSPACE is to consider each document along with its translation as if they were a single 'compound' document. [...] Two words that occur in documents which are translations of one another can then be regarded as cooccurring, just as if they had occurred in the same monolingual document [...]. The corpus we used in our experiments was a collection of abstracts from German medical documents which are available with English translations.\\
 This model allows a user to enter terms in \emph{either} language and finde related words or relevant documents in \emph{both} languages.
@@ -141,8 +141,8 @@ krieg_de model_en 4
 
 Aus diesen Dateien werden die gepickelten Dateien erstellt:
 \begin{itemize}
-\item \verb+de_de-en.pkl+ mit den Zeilen \verb+en-words.row+ und Spalten \verb+de_en-words.col+
-\item \verb+en_en-de.pkl+ mit den Zeilen \verb+de-words.row+ und Spalten \verb+de_en-words.col+
+\item \verb+de_de-en.pkl+ mit den Zeilen \verb+en-words.row+ und \\Spalten \verb+de_en-words.col+
+\item \verb+en_en-de.pkl+ mit den Zeilen \verb+de-words.row+ und \\Spalten \verb+de_en-words.col+
 \end{itemize}
 
 Diese gepickelten Matrixdateien werden zusammen mit der Dimensionendatei \verb+de_en-words.col+ ans Programm \verb+besttranslations.py+ weitergegeben und dort eingelesen, bzw. beim Erstellen der Satzmatrix gebraucht.
@@ -182,36 +182,15 @@ In \verb+parameters.py+ lassen sich die Defaultwerte langfristig festlegen, wie 
                 column sep=1ex
         }
     ]
-        \addplot            coordinates {(150k, 1.0) (100k,1.0) (50k,1.0) (20k,4) (10k,4) (5k,3)};
-        \addplot            coordinates {(150k, 1.0) (100k,1.0) (50k,1.0) (20k,4) (10k,4) (5k,3)};
-        \addplot            coordinates {(150k, 1.0) (100k,1.0) (50k,1.0) (20k,4) (10k,4) (5k,3)};
-        \addplot            coordinates {(150k, 1.0) (100k,1.0) (50k,1.0) (20k,4) (10k,4) (5k,3)};
+        \addplot            coordinates {(150k, 1.0) (100k,13.3) (50k,1.0) (20k,1) (10k,1) (5k,1)};
+        \addplot            coordinates {(150k, 1.0) (100k,{33/75}) (50k,1.0) (20k,1) (10k,1) (5k,1)};
+        \addplot            coordinates {(150k, 1.0) (100k,12.5) (50k,1.0) (20k,1) (10k,1) (5k,1)};
+        \addplot            coordinates {(150k, 1.0) (100k,1.0) (50k,1.0) (20k,1) (10k,1) (5k,1)};
 
         \legend{de-en Lemmata,de-en Oberfläche,en-de Lemmata,en-de Oberfläche}
     \end{axis}
 \end{tikzpicture}
 
-\begin{tikzpicture}
-\begin{axis}[
-        height=9cm, width=12cm, grid=major,
-    ycomb, %ybar interval,
-    tick label style={font=\small},
-    scaled ticks=false,
-    tick label style={/pgf/number format/fixed},
-    tickpos=left,
-    xtick={1,2,3,4,5},
-    xticklabels={150k, 100k, 50k, 10k, 5k},
-    ymin=0,
-    legend entries={Oberfläche,Lemmata},
-    %ytick={1000,2000,3000,4000,5000,6000,7000,8000,9000,10000},
-    %yticklabels={1\,000,2\,000,3\,000,4\,000,5\,000,6\,000,7\,000,8\,000,9\,000,10\,000}
-    ]
-% swe
-\addplot coordinates {(1,1) (2,2) (3,0) (4,4) (5,7)};
-% ice:
-\addplot coordinates {(1,1) (2,2) (3,0) (4,4) (5,7)};
-\end{axis}
-\end{tikzpicture}
 
 %%%
 \section{Übersetzungskandidaten DE--EN mit 10\,000 Trainingssätzen über Wortoberflächen}
@@ -226,7 +205,7 @@ In \verb+parameters.py+ lassen sich die Defaultwerte langfristig festlegen, wie 
 Die folgenden Beispiele zeigen, was passiert, wenn man innerhalb einer Sprache probiert zu übersetzen. Für die Semantik wurden die gleiche Art von Matrizen verwendet wie bei den zweisprachigen Versuchen, jedoch wurde für die Ausgangs- und Zielsprache -- die ja gleich sind -- dieselbe Matrix verwendet. Von einer Arbeitsweise rein in einer Sprache unterscheidet sich dieses Verfahren nur darin, dass in den Vektordimensionen noch die Wörter der anderen Sprache auftauchen. Der Einfluss sollte sich gering halten und es könnte höchstens erwartet werden, dass satzabhängige ähnliche Wörter gefunden werden.
 
 \subsection{Englisch mit Oberflächenform (10\,000 Trainingssätze)}
-\hspace{-4cm}\begin{footnotesize}\begin{tabular}{|llll|}
+\hspace{-0cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 The & & & \\
 sitting                 & 8.40 (0.32) & 11.15 (0.32) & 8.14 (0.32) \\
@@ -267,7 +246,7 @@ Grosse Beachtung verdienen auch die verschiedenen Vorschläge für 'sitting': Ei
 Auch wenn sie hier nicht passen sind die Vorschläge 'serbia' und 'bosnia' interessant in ihrem gemeinsamen Vorkommen. Als gewünscht kann man die Alternative 'dollar' zu 'euro' bezeichnen, wo beide klar semantisch dem gleichen Feld angehören.
 
 \subsection{Englisch mit Lemmatisierung (10\,000 Trainingssätze)}
-\hspace{-4cm}\begin{footnotesize}\begin{tabular}{|llll|}
+\hspace{-0cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 The & & & \\
 sitting                 & sitting (0.08) & anniversary (0.05) & declaration (0.05) \\
@@ -306,7 +285,7 @@ In diesem Beispiel wurden beim erstens Satz gute Vorschläge gebracht, der Rest 
 Man kann sicherlich sagen, dass durch die Lemmatisierung die Relation von Wörtern zu ihrem Umfeld verloren gehen kann -- mehr als bei den Oberflächenformem -- und die Verarbeitung mehr einem Bag-of-words ähnelt. Dies reicht aber nicht zur Erklärung, wieso besonders der letzte Satz ein derart schlechtes Resultat brachte.
 
 \subsection{Deutsch mit Oberflächenform (10\,000 Trainingssätze)}
-\hspace{-4cm}\begin{footnotesize}\begin{tabular}{|llll|}
+\hspace{-4.5cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 Die & & & \\
 Sitzung                 & sitzung (0.38) & 13.05 (0.35) & 19.50 (0.35) \\
@@ -345,7 +324,7 @@ Januar                  & januar (0.25) & Übergangsbestimmungen (0.24) & 1. (0.
 Hier sind im Grossen und Ganzen gute Vorschläge zu finden. Das Trippel aus 'euro', 'milliarden' und 'millionen' zeigt, dass auch semantisch ähnliche Wörter gefunden werden können. Schön ist auch dass wie mit 'protokoll' und 'protokolls' Formen des gleichen Wortes gefunden werden konnten. Das könnte bedeuten, dass sich auch die verschiedenen Formen eines Wortes annähern.
 
 \subsection{Deutsch mit Lemmatisierung (10\,000 Trainingssätze)}
-\hspace{-4cm}\begin{footnotesize}\begin{tabular}{|llll|}
+\hspace{-2.7cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 Die & & & \\
 Sitzung                 & sitzung (0.13) & durchführen (0.10) & Änderungsantrag (0.10) \\
@@ -389,11 +368,20 @@ Interessant ist auch der Zusammenhang zwischen 'werden' und 'müssen'. Beide kom
 \chapter{Schluss}
 \label{cha:schluss}
 
+sehr häppy. es klappt. 
+
+speziell: lemmatisierung. für englisch offenbar nicht gut. (wortarten bleiben erhalten, was macht es also bei englisch für einen unterschied?
+
+
+
 Versuchsreihen mit ähnlicheren Sprachen?
 
 hapax legomena aus den vektordimensionen entfernen?
 
 smoothing
+
+anderes korpus? das hier ist hochgradig domänenspezifisch. opensubs?
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{plain-de}     % For German
 \bibliography{seminar}
