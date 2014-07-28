@@ -1,75 +1,75 @@
 Sitzung                 & 7.50 (0.49) & 1.05 (0.49) & 8.40 (0.48) \\
 wird                    & 7.50 (0.52) & 1.05 (0.52) & 8.40 (0.47) \\
 Uhr                     & p.m (0.47) & 7.50 (0.43) & 1.05 (0.43) \\
-eröffnet               & awaits (0.17) & backing (0.15) & tsatsos (0.14) \\
-Protokoll               & minutes (0.38) & sitting (0.32) & protocol (0.21) \\
-vorangegangenen         & sitting (0.29) & duration (0.18) & previous (0.18) \\
-Sitzung                 & minutes (0.34) & sitting (0.33) & 8.40 (0.28) \\
+eröffnet               & awaits (0.17) & backing (0.15) & tsatsos (0.14) \\ %Y
+Protokoll               & minutes (0.38) & sitting (0.32) & protocol (0.21) \\ %Y
+vorangegangenen         & sitting (0.29) & duration (0.18) & previous (0.18) \\ %Y
+Sitzung                 & minutes (0.34) & sitting (0.33) & 8.40 (0.28) \\ %Y
 wird                    & minutes (0.41) & sitting (0.32) & 8.40 (0.20) \\
-genehmigt               & authorised (0.16) & categories (0.15) & code (0.13) \\
-Präsident              & president (0.25) & prodi (0.23) & ladies (0.22) \\
-begrüßt               & welcomes (0.24) & muslim (0.17) & physically (0.15) \\
-Einführung             & introduction (0.26) & currency (0.22) & force (0.15) \\
-Euro                    & euro (0.29) & eur (0.28) & billion (0.23) \\
-Währung                & currency (0.22) & monetary (0.21) & 2496/96/ecsc (0.20) \\
-Lettland                & january (0.31) & euro (0.30) & pivotal (0.28) \\
-1.                      & january (0.37) & standardisation (0.20) & constructed (0.19) \\
-Januar                  & january (0.36) & standardisation (0.18) & valid (0.17) \\
+genehmigt               & authorised (0.16) & categories (0.15) & code (0.13) \\ %Y
+Präsident              & president (0.25) & prodi (0.23) & ladies (0.22) \\ %Y
+begrüßt               & welcomes (0.24) & muslim (0.17) & physically (0.15) \\ %Y
+Einführung             & introduction (0.26) & currency (0.22) & force (0.15) \\ %Y
+Euro                    & euro (0.29) & eur (0.28) & billion (0.23) \\ %Y
+Währung                & currency (0.22) & monetary (0.21) & 2496/96/ecsc (0.20) \\ %Y
+Lettland                & january (0.31) & euro (0.30) & pivotal (0.28) \\ 
+1.                      & january (0.37) & standardisation (0.20) & constructed (0.19) \\ 
+Januar                  & january (0.36) & standardisation (0.18) & valid (0.17) \\ %Y
 2014.                   & january (0.31) & euro (0.30) & pivotal (0.28) \\
 spricht                 & within (0.20) & union (0.18) & people (0.18) \\
 Opfern                  & european (0.27) & lending (0.18) & within (0.17) \\
-Unwetter                & mourning (0.21) & condolences (0.20) & weather (0.18) \\
-Solidarität            & solidarity (0.36) & european (0.29) & within (0.19) \\
-Europäischen           & european (0.34) & union (0.29) & parliament (0.27) \\
-Parlaments              & adjourned (0.28) & cod (0.24) & parliament (0.24) \\
-Präsident              & president (0.22) & prodi (0.22) & ladies (0.21) \\
+Unwetter                & mourning (0.21) & condolences (0.20) & weather (0.18) \\ %Y
+Solidarität            & solidarity (0.36) & european (0.29) & within (0.19) \\ %Y
+Europäischen           & european (0.34) & union (0.29) & parliament (0.27) \\ %Y
+Parlaments              & adjourned (0.28) & cod (0.24) & parliament (0.24) \\ %Y
+Präsident              & president (0.22) & prodi (0.22) & ladies (0.21) \\ %Y
 erinnert                & cofinancing (0.15) & cohesion (0.14) & pointed (0.14) \\
-Konferenz               & presidents (0.25) & conference (0.17) & corroborate (0.16) \\
-Vereinten               & nations (0.37) & secrets (0.21) & united (0.20) \\
-Nationen                & nations (0.33) & secrets (0.19) & future (0.19) \\
-Zukunft                 & future (0.23) & going (0.13) & make (0.13) \\
+Konferenz               & presidents (0.25) & conference (0.17) & corroborate (0.16) \\ %Y
+Vereinten               & nations (0.37) & secrets (0.21) & united (0.20) \\ %Y
+Nationen                & nations (0.33) & secrets (0.19) & future (0.19) \\ %Y
+Zukunft                 & future (0.23) & going (0.13) & make (0.13) \\ %Y
 Syriens                 & damascus (0.20) & assad (0.19) & renounces (0.17) \\
-Eröffnung              & conference (0.19) & intergovernmental (0.14) & scheduling (0.13) \\
-22.                     & mentioned. (0.22) & 22 (0.09) & nos (0.09) \\
-Januar                  & january (0.27) & standardisation (0.17) & completion (0.14) \\
-Genf                    & 1957 (0.18) & carriage (0.18) & geneva (0.18) \\
+Eröffnung              & conference (0.19) & intergovernmental (0.14) & scheduling (0.13) \\ 
+22.                     & mentioned. (0.22) & 22 (0.09) & nos (0.09) \\ %Y
+Januar                  & january (0.27) & standardisation (0.17) & completion (0.14) \\ %Y
+Genf                    & 1957 (0.18) & carriage (0.18) & geneva (0.18) \\ %Y
 anberaumt               & nations (0.28) & january (0.20) & future (0.18) \\
 ist                     & nations (0.28) & january (0.20) & future (0.18) \\
-Präsident              & president (0.26) & brok (0.25) & prodi (0.23) \\
+Präsident              & president (0.26) & brok (0.25) & prodi (0.23) \\ %Y
 weist                   & gypsy (0.14) & compile (0.14) & refugees. (0.13) \\
 Pressemeldungen         & president (0.17) & brok (0.17) & mr (0.16) \\
 Vorwürfe               & president (0.17) & brok (0.17) & mr (0.16) \\
 rumänische             & president (0.17) & brok (0.17) & mr (0.16) \\
-Premierminister         & prime (0.22) & strip (0.18) & minister (0.17) \\
+Premierminister         & prime (0.22) & strip (0.18) & minister (0.17) \\ %Y
 Victor                  & president (0.17) & brok (0.17) & mr (0.16) \\
 Ponta                   & president (0.17) & brok (0.17) & mr (0.16) \\
-Elmar                   & tsatsos (0.27) & brok (0.26) & elmar (0.25) \\
-Brok                    & brok (0.31) & tsatsos (0.24) & elmar (0.18) \\
+Elmar                   & tsatsos (0.27) & brok (0.26) & elmar (0.25) \\ %Y
+Brok                    & brok (0.31) & tsatsos (0.24) & elmar (0.18) \\ %Y
 erhoben                 & insistent (0.13) & speak (0.12) & hint (0.10) \\
 hat                     & president (0.17) & brok (0.17) & mr (0.16) \\
-Frist                   & deadline (0.14) & docups (0.11) & limit (0.11) \\
-Einreichung             & supplement (0.16) & submission (0.10) & submitting (0.10) \\
+Frist                   & deadline (0.14) & docups (0.11) & limit (0.11) \\ %Y
+Einreichung             & supplement (0.16) & submission (0.10) & submitting (0.10) \\ %Y
 Änderungsanträgen     & nos (0.18) & quantified (0.14) & sabotage (0.14) \\
 wird                    & p.m (0.26) & noon (0.24) & 12.00 (0.21) \\
-Dienstag                & tuesday (0.23) & submission (0.20) & one-way (0.15) \\
-14.                     & february (0.19) & 14 (0.17) & wednesday: (0.15) \\
-Januar                  & january (0.27) & place (0.13) & february (0.11) \\
-Uhr                     & p.m (0.34) & noon (0.30) & 12.00 (0.29) \\
-festgesetzt             & recording (0.16) & pinpointing (0.16) & legislated (0.15) \\
+Dienstag                & tuesday (0.23) & submission (0.20) & one-way (0.15) \\ %Y
+14.                     & february (0.19) & 14 (0.17) & wednesday: (0.15) \\ %Y
+Januar                  & january (0.27) & place (0.13) & february (0.11) \\ %Y
+Uhr                     & p.m (0.34) & noon (0.30) & 12.00 (0.29) \\ %Y
+festgesetzt             & recording (0.16) & pinpointing (0.16) & legislated (0.15) \\ 
 Abstimmung              & noon (0.65) & 12.00 (0.56) & p.m (0.54) \\
 findet                  & noon (0.65) & 12.00 (0.57) & p.m (0.56) \\
-Mittwoch                & wednesday (0.30) & cyprus (0.19) & sitting (0.18) \\
+Mittwoch                & wednesday (0.30) & cyprus (0.19) & sitting (0.18) \\ %Y
 15.                     & recommended (0.17) & resigned (0.14) & march (0.11) \\
-Januar                  & january (0.28) & place (0.27) & take (0.17) \\
-Uhr                     & noon (0.60) & p.m (0.55) & 12.00 (0.55) \\
+Januar                  & january (0.28) & place (0.27) & take (0.17) \\ %Y
+Uhr                     & noon (0.60) & p.m (0.55) & 12.00 (0.55) \\ %Y
 Benennungen             & contradiction (0.21) & confirmed (0.14) & confirms (0.12) \\
 gelten                  & apply (0.15) & host (0.14) & posted (0.12) \\
-bestätigt              & confirmed (0.20) & confirms (0.17) & transitive (0.13) \\
-Genehmigung             & approval (0.14) & minutes (0.13) & directors-general (0.13) \\
+bestätigt              & confirmed (0.20) & confirms (0.17) & transitive (0.13) \\ %Y
+Genehmigung             & approval (0.14) & minutes (0.13) & directors-general (0.13) \\ %Y
 vorliegenden            & internal (0.12) & concerning (0.11) & us (0.11) \\
 Protokolls              & 1999/0228 (0.17) & c5-0305/1999 (0.17) & 0550 (0.17) \\
-Widerspruch             & contradiction (0.23) & protects (0.13) & law (0.11) \\
+Widerspruch             & contradiction (0.23) & protects (0.13) & law (0.11) \\ %Y
 eingeht                 & neo-fascists (0.19) & somewhere (0.09) & sovereignty (0.07) \\
-Punkt                   & point (0.30) & matter (0.15) & order (0.15) \\
+Punkt                   & point (0.30) & matter (0.15) & order (0.15) \\ %Y
 ist                     & leopards (0.50) & closed (0.45) & 8.40 (0.29) \\
-geschlossen             & closed (0.42) & 8.40 (0.30) & 11.15 (0.30) \\
+geschlossen             & closed (0.42) & 8.40 (0.30) & 11.15 (0.30) \\ %Y

@@ -100,8 +100,8 @@ class InputFilenames(Filenames):
         pass
         
     def sm(self):
-        
-
+        pass
+    
 class OutputFilenames(Filenames):
     """Class to handle output files names which are used as input 
        material for the DISSECT library."""
