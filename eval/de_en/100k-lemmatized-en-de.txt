@@ -1,0 +1,64 @@
+sitting                 & feierlich (0.10) & vorangegangen (0.09) & genehmigung (0.08) \\
+opened                  & fern (0.07) & kommissar (0.07) & helsinki (0.07) \\
+minutes                 & minute (0.15) & erheben (0.15) & erst (0.14) \\ %Y
+previous                & genehmigen (0.18) & billigen (0.15) & hochspannen (0.15) \\
+sitting                 & protokoll (0.16) & vorangegangen (0.15) & genehmigung (0.15) \\
+were                    & klar (0.16) & bewusst (0.16) & erst (0.16) \\
+approved                & sicher (0.16) & klar (0.16) & weit (0.16) \\
+President               & kommen (0.12) & begrüßen (0.11) & politikdebatte (0.11) \\
+welcomed                & burg (0.07) & fr (0.06) & präsident (0.05) \\
+adoption                & annahme (0.08) & fr (0.06) & empfehlung (0.06) \\ %Y
+euro                    & kommen (0.12) & begrüßen (0.11) & politikdebatte (0.11) \\
+Latvia                  & kommen (0.12) & begrüßen (0.11) & politikdebatte (0.11) \\
+January                 & kommen (0.12) & begrüßen (0.11) & politikdebatte (0.11) \\
+expressed               & ausdruck (0.08) & genugtuung (0.07) & aufrichtig (0.07) \\ % Wrong PoS
+Parliament              & woge (0.12) & silvio (0.11) & solidarität (0.10) \\
+solidarity              & symbolisch (0.06) & fr (0.06) & wunsch (0.06) \\
+victims                 & opfer (0.07) & befürchtung (0.06) & fr (0.06) \\ %Y
+storms                  & anmerken (0.06) & anliegen (0.06) & vertreten (0.06) \\
+President               & hinschleppen (0.11) & parteichef (0.09) & koordinatorin (0.09) \\
+spoke                   & präsident (0.07) & wort (0.07) & wortmeldung (0.07) \\ % Wrong PoS
+UN                      & hinschleppen (0.11) & parteichef (0.09) & koordinatorin (0.09) \\
+conference              & konferenz (0.10) & präsidium (0.07) & außenminister (0.06) \\ %Y
+future                  & außenminister (0.07) & blick (0.07) & nah (0.07) \\
+Syria                   & hinschleppen (0.11) & parteichef (0.09) & koordinatorin (0.09) \\
+open                    & außenminister (0.07) & präsident (0.07) & november (0.07) \\
+Geneva                  & hinschleppen (0.11) & parteichef (0.09) & koordinatorin (0.09) \\
+January                 & hinschleppen (0.11) & parteichef (0.09) & koordinatorin (0.09) \\
+President               & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+commented               & bemerkung (0.10) & anmerkung (0.09) & van (0.08) \\ % Wrong PoS
+press                   & fr (0.08) & präsident (0.08) & kollege (0.08) \\
+reports                 & ausgezeichnet (0.09) & bnfl (0.09) & periodisch (0.09) \\
+accusations             & bemerkung (0.09) & eingehen (0.08) & fr (0.07) \\
+made                    & verweisen (0.09) & kollege (0.09) & präsident (0.09) \\
+Romanian                & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Prime                   & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Minister                & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Victor                  & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Ponta                   & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Elmar                   & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Brok                    & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+deadline                & termin (0.16) & Änderungsantrag (0.15) & klar (0.14) \\ %Y
+tabling                 & eingereicht (0.15) & Änderungsantrag (0.15) & einbringen (0.15) \\
+amendments              & eingereicht (0.15) & Änderungsantrag (0.15) & eingebracht (0.15) \\ %Y
+was                     & Änderungsantrag (0.15) & klar (0.14) & bewusst (0.14) \\
+set                     & Änderungsantrag (0.16) & klar (0.15) & sicher (0.15) \\
+Tuesday                 & termingemäß (0.14) & termin (0.14) & prioritätensetzung (0.13) \\
+January                 & termingemäß (0.14) & termin (0.14) & prioritätensetzung (0.13) \\
+noon                    & donnerstag (0.12) & abstimmung (0.11) & finden (0.11) \\
+vote                    & donnerstag (0.17) & namentlich (0.16) & vertagung (0.16) \\
+be                      & klar (0.16) & anwesend (0.16) & bewusst (0.16) \\
+held                    & wichtig (0.17) & sicher (0.17) & dürfen (0.17) \\
+Wednesday               & abstimmung (0.19) & abhalten (0.17) & votum (0.17) \\
+January                 & abstimmung (0.19) & abhalten (0.17) & votum (0.17) \\
+noon                    & abstimmung (0.18) & donnerstag (0.16) & mittwoch (0.15) \\
+appointments            & ernennung (0.17) & klar (0.17) & forderung (0.17) \\ %Y
+be                      & klar (0.18) & bewusst (0.18) & derzeitig (0.18) \\
+deemed                  & wichtig (0.19) & sollen (0.19) & sicher (0.19) \\
+ratified                & mitgliedstaat (0.18) & klar (0.18) & vertrag (0.18) \\
+were                    & klar (0.18) & bewusst (0.18) & derzeitig (0.18) \\
+objections              & dankbar (0.17) & früh (0.17) & parlament (0.17) \\
+approval                & sicher (0.19) & klar (0.19) & weit (0.19) \\
+minutes                 & erheben (0.17) & minute (0.17) & bewusst (0.17) \\ %Y
+item                    & folgen (0.09) & tagesordnung (0.08) & sozialausschuss (0.05) \\ % not quite
+closed                  & aussprache (0.09) & lücke (0.07) & aktuell (0.06) \\
