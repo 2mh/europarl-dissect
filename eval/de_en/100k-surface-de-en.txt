@@ -1,75 +1,75 @@
-Sitzung                 & sitting (0.60) & p.m. (0.60) & 11.55 (0.59) \\
+Sitzung                 & sitting (0.60) & p.m. (0.60) & 11.55 (0.59) \\ %Y
 wird                    & sitting (0.65) & 11.55 (0.61) & p.m. (0.59) \\
 Uhr                     & p.m (0.56) & p.m. (0.53) & 11.55 (0.52) \\
-eröffnet               & opened (0.23) & take (0.14) & held (0.12) \\
+eröffnet               & opened (0.23) & take (0.14) & held (0.12) \\ %Y
 Protokoll               & minutes (0.47) & sitting (0.42) & distributed (0.33) \\
 vorangegangenen         & sitting (0.43) & distributed (0.30) & 11.25 (0.25) \\
-Sitzung                 & sitting (0.44) & 11.25 (0.32) & 11.45 (0.30) \\
+Sitzung                 & sitting (0.44) & 11.25 (0.32) & 11.45 (0.30) \\ %Y
 wird                    & minutes (0.51) & sitting (0.43) & protocol (0.29) \\
 genehmigt               & minutes (0.45) & protocol (0.30) & distributed (0.28) \\
 Präsident              & chirac (0.27) & ladies (0.26) & begin (0.26) \\
 begrüßt               & 's (0.21) & presented (0.20) & regarding (0.18) \\
 Einführung             & single (0.23) & central (0.20) & establishing (0.19) \\
-Euro                    & euro (0.37) & currency (0.34) & eur (0.30) \\
-Währung                & currency (0.38) & monetary (0.27) & single (0.20) \\
-Lettland                & latvia (0.27) & lithuania (0.20) & slovakia (0.19) \\
-1.                      & january (0.43) & 1 (0.23) & 2002 (0.19) \\
-Januar                  & january (0.38) & 2002 (0.18) & 2000 (0.16) \\
+Euro                    & euro (0.37) & currency (0.34) & eur (0.30) \\ %Y
+Währung                & currency (0.38) & monetary (0.27) & single (0.20) \\ %Y
+Lettland                & latvia (0.27) & lithuania (0.20) & slovakia (0.19) \\ %Y
+1.                      & january (0.43) & 1 (0.23) & 2002 (0.19) \\ %Y
+Januar                  & january (0.38) & 2002 (0.18) & 2000 (0.16) \\ %Y
 2014.                   & euro (0.39) & january (0.38) & introduction (0.37) \\
 spricht                 & within (0.26) & 's (0.25) & towards (0.25) \\
-Opfern                  & victims (0.19) & stalking (0.17) & every (0.17) \\
+Opfern                  & victims (0.19) & stalking (0.17) & every (0.17) \\ %Y
 Unwetter                & sympathy (0.16) & throughout (0.13) & homes (0.13) \\
-Solidarität            & solidarity (0.40) & within (0.21) & union (0.21) \\
+Solidarität            & solidarity (0.40) & within (0.21) & union (0.21) \\ %Y
 Europäischen           & union (0.31) & union. (0.30) & parliament (0.30) \\
-Parlaments              & parliamentary (0.29) & c5-0258/2000 (0.28) & conciliation (0.28) \\
+Parlaments              & parliamentary (0.29) & c5-0258/2000 (0.28) & conciliation (0.28) \\ %Y
 Präsident              & chirac (0.25) & ladies (0.25) & begin (0.24) \\
 erinnert                & held (0.21) & order (0.19) & become (0.19) \\
-Konferenz               & presidents (0.28) & conference (0.21) & drags (0.21) \\
+Konferenz               & presidents (0.28) & conference (0.21) & drags (0.21) \\ %Y
 Vereinten               & nations (0.40) & emasculated (0.25) & un (0.24) \\
-Nationen                & nations (0.34) & emasculated (0.23) & un (0.22) \\
-Zukunft                 & future (0.24) & generations (0.16) & shape (0.15) \\
+Nationen                & nations (0.34) & emasculated (0.23) & un (0.22) \\ %Y
+Zukunft                 & future (0.24) & generations (0.16) & shape (0.15) \\ %Y
 Syriens                 & nations (0.25) & illustrations (0.18) & un (0.16) \\
 Eröffnung              & conference (0.22) & held (0.17) & took (0.15) \\
 22.                     & january (0.25) & held (0.15) & took (0.14) \\
-Januar                  & january (0.27) & held (0.16) & took (0.15) \\
-Genf                    & un (0.22) & geneva (0.22) & held (0.16) \\
+Januar                  & january (0.27) & held (0.16) & took (0.15) \\ %Y
+Genf                    & un (0.22) & geneva (0.22) & held (0.16) \\ %Y
 anberaumt               & moi (0.20) & nairobi. (0.19) & whose (0.17) \\
 ist                     & nations (0.28) & january (0.23) & ta (0.21) \\
 Präsident              & brok (0.30) & chirac (0.27) & ladies (0.25) \\
 weist                   & order (0.17) & 's (0.16) & terms (0.16) \\
 Pressemeldungen         & dst (0.20) & pole (0.15) & melting (0.14) \\
-Vorwürfe               & accusations (0.17) & mara (0.12) & lilian (0.12) \\
+Vorwürfe               & accusations (0.17) & mara (0.12) & lilian (0.12) \\ %Y
 rumänische             & elmar (0.25) & brok (0.21) & prime (0.17) \\
-Premierminister         & guterres (0.21) & prime (0.21) & minister (0.20) \\
+Premierminister         & guterres (0.21) & prime (0.21) & minister (0.20) \\ %Y
 Victor                  & fifty-three (0.22) & uncomprehending (0.21) & emmanuel (0.20) \\
 Ponta                   & elmar (0.25) & brok (0.21) & prime (0.17) \\
-Elmar                   & elmar (0.32) & brok (0.29) & disqualification (0.22) \\
-Brok                    & brok (0.30) & tsatsos (0.19) & korea, (0.18) \\
+Elmar                   & elmar (0.32) & brok (0.29) & disqualification (0.22) \\ %Y
+Brok                    & brok (0.30) & tsatsos (0.19) & korea, (0.18) \\ %Y
 erhoben                 & order (0.14) & one (0.14) & something (0.14) \\
 hat                     & elmar (0.25) & brok (0.21) & prime (0.17) \\
-Frist                   & deadline (0.21) & limit (0.15) & take (0.15) \\
+Frist                   & deadline (0.21) & limit (0.15) & take (0.15) \\ %Y
 Einreichung             & place (0.15) & take (0.12) & long-winded (0.12) \\
 Änderungsanträgen     & nos (0.22) & 5: (0.20) & tabled (0.17) \\
-wird                    & a.m. (0.29) & tuesday (0.28) & 12.00 (0.28) \\
-Dienstag                & tuesday (0.32) & 9.12 (0.21) & wednesday (0.19) \\
+wird                    & a.m. (0.29) & tuesday (0.28) & 12.00 (0.28) \\ %Y
+Dienstag                & tuesday (0.32) & 9.12 (0.21) & wednesday (0.19) \\ %Y
 14.                     & january (0.26) & february (0.13) & collaborates (0.13) \\
-Januar                  & january (0.28) & take (0.14) & issued (0.13) \\
-Uhr                     & 12.00 (0.34) & p.m (0.33) & noon (0.32) \\
-festgesetzt             & take (0.13) & limit (0.10) & set (0.10) \\
+Januar                  & january (0.28) & take (0.14) & issued (0.13) \\ %Y
+Uhr                     & 12.00 (0.34) & p.m (0.33) & noon (0.32) \\ %Y
+festgesetzt             & take (0.13) & limit (0.10) & set (0.10) \\ %Y
 Abstimmung              & noon (0.61) & 12.00 (0.59) & at12 (0.57) \\
 findet                  & noon (0.64) & 12.00 (0.61) & at12 (0.59) \\
 Mittwoch                & noon (0.53) & 12.00 (0.52) & at12 (0.50) \\
 15.                     & take (0.24) & held (0.13) & taken (0.12) \\
-Januar                  & january (0.30) & take (0.25) & held (0.14) \\
-Uhr                     & noon (0.59) & 12.00 (0.56) & at12 (0.54) \\
+Januar                  & january (0.30) & take (0.25) & held (0.14) \\ %Y
+Uhr                     & noon (0.59) & 12.00 (0.56) & at12 (0.54) \\ %Y
 Benennungen             & contradiction (0.29) & contradiction. (0.27) & confirms (0.20) \\
-gelten                  & apply (0.21) & applied (0.15) & without (0.14) \\
+gelten                  & apply (0.21) & applied (0.15) & without (0.14) \\ %Y
 bestätigt              & present (0.15) & terms (0.14) & set (0.14) \\
-Genehmigung             & approval (0.24) & deliberated (0.21) & minutes (0.18) \\
-vorliegenden            & concerning (0.18) & present (0.17) & considered (0.17) \\
+Genehmigung             & approval (0.24) & deliberated (0.21) & minutes (0.18) \\ %Y
+vorliegenden            & concerning (0.18) & present (0.17) & considered (0.17) \\ %Y
 Protokolls              & approval (0.21) & minutes (0.18) & sitting (0.17) \\
 Widerspruch             & law (0.15) & without (0.14) & based (0.14) \\
 eingeht                 & present (0.11) & way (0.11) & involved (0.11) \\
-Punkt                   & point (0.31) & relates (0.22) & another (0.18) \\
+Punkt                   & point (0.31) & relates (0.22) & another (0.18) \\ %Y
 ist                     & leopards (0.50) & closed (0.46) & concludes (0.38) \\
-geschlossen             & closed (0.44) & 10.50 (0.33) & 11.10 (0.31) \\
+geschlossen             & closed (0.44) & 10.50 (0.33) & 11.10 (0.31) \\ %Y
