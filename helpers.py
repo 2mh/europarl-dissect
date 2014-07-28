@@ -3,7 +3,7 @@
 from os import sep
 import re
 
-from parameters import DATA_DIR_IN
+from parameters import DATA_DIR_IN, NO_POS_SYM
 
 # Conversion between names for languages 
 LONG_LANGTAG =  {"nl":"dutch",
@@ -32,7 +32,7 @@ def getTag(tag, lang):
         elif re.match(r"JJ.*", tag):
             return "A"
         else:
-            return "0"
+            return NO_POS_SYM
             
     elif lang == "de":
         if tag == "NN":
@@ -44,7 +44,7 @@ def getTag(tag, lang):
         elif re.match(r"ADJ.", tag):
             return "A"
         else:
-            return "0"
+            return NO_POS_SYM
         
     else:
         return "0"
@@ -63,6 +63,25 @@ def valid_pos(tag):
     else:
         return False
         
+class Filenames():
+    def __init__(self):
+        self.lang_1 = ""
+        self.lang_2 = "" # Might not be used in single language runs.
+        
+class InputFilenames(Filenames):
+    """Class to handle input files from europarl (currently: v7)."""
+    
+    def __init__(self):
+        pass
+
+class OutputFilenames(Filenames):
+    """Class to handle output files which are used as input material
+       for the DISSECT library."""
+    
+    def __init__(self):
+        pass
+
+# XXX: Will supposedly substituted by InputFilenames.
 class Suffixes:
     """ This class provides suffixes for being more flexible with
         language pairs supported.

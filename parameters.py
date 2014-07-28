@@ -41,7 +41,7 @@ OVERALL_SIMILARITY_WEIGHT = 1
 SENTENCE_SIMILARITY_WEIGHT = 3
 
 
-### defautl parameters used in both program parts
+### default parameters used in both program parts
 
 # Location of data (to read from, to write to)
 DATA_DIR = ''.join(['data', sep])
@@ -50,3 +50,4 @@ DATA_DIR_OUT = ''.join([DATA_DIR, 'out', sep])
 
 # Default encoding (for places where specification is necessary)
 ENC = "utf8"
+NO_POS_SYM = "0"

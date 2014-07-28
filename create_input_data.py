@@ -23,23 +23,27 @@ from lib.dissect.composes.semantic_space.space import Space
 from lib.dissect.composes.utils import io_utils
 from lib.ttpw.treetaggerwrapper import TreeTagger
 
-from helpers import LONG_LANGTAG
-from helpers import getTag
-from helpers import Suffixes
+from helpers import LONG_LANGTAG, getTag, Suffixes, InputFilenames, \
+                    OutputFilenames
 from parameters import LANG_1, LANG_2, SENTENCES_LIMIT, \
                        MAX_SENTENCE_LEN, MIN_PAIR_OCC, \
                        TREETAGGER_BASE_PATH, MAX_WORD_LEN, \
-                       DATA_DIR, DATA_DIR_IN, DATA_DIR_OUT, ENC
+                       DATA_DIR, DATA_DIR_IN, DATA_DIR_OUT, ENC, \
+                       NO_POS_SYM
 
 # Input files (col file, row files and sparse matrix files) for DISSECT
-OUTPUT_FILE_DE_DE_EN_SM = ''.join([DATA_DIR_OUT, 'de_de-en.sm'])
-OUTPUT_FILE_EN_EN_DE_SM = ''.join([DATA_DIR_OUT, 'en_en-de.sm'])
-OUTPUT_FILE_DE_EN_WORDS_COL = ''.join([DATA_DIR_OUT, 'de_en-words.col'])
-OUTPUT_FILE_DE_WORDS_ROW = ''.join([DATA_DIR_OUT, 'de-words.row'])
-OUTPUT_FILE_EN_WORDS_ROW = ''.join([DATA_DIR_OUT, 'en-words.row'])
-OUTPUT_FILE_DE_DE_EN_PKL = ''.join([DATA_DIR_OUT, 'de_de-en.pkl'])
-OUTPUT_FILE_EN_EN_DE_PKL = ''.join([DATA_DIR_OUT, 'en_en-de.pkl'])
+OUTPUT_FILE_DE_DE_EN_SM = ''.join([DATA_DIR_OUT, 'de_de-en.sm']) #
+OUTPUT_FILE_EN_EN_DE_SM = ''.join([DATA_DIR_OUT, 'en_en-de.sm']) #
+OUTPUT_FILE_DE_EN_WORDS_COL = ''.join([DATA_DIR_OUT, 'de_en-words.col']) #
+OUTPUT_FILE_DE_WORDS_ROW = ''.join([DATA_DIR_OUT, 'de-words.row']) #
+OUTPUT_FILE_EN_WORDS_ROW = ''.join([DATA_DIR_OUT, 'en-words.row']) #
+OUTPUT_FILE_DE_DE_EN_PKL = ''.join([DATA_DIR_OUT, 'de_de-en.pkl']) #
+OUTPUT_FILE_EN_EN_DE_PKL = ''.join([DATA_DIR_OUT, 'en_en-de.pkl']) #
 
+'''
+DEPRECATED: output_file_1_sm, output_file_1_col,
+            output_file_1_row (same es col), output_file_1_pkl
+            will be implemented.
 # Single language output files (despite *_ROW files)
 # (Despite that: a *_ROW file *is* a *_COL file)
 OUTPUT_FILE_DE_SM = ''.join([DATA_DIR_OUT, 'de.sm'])
@@ -48,6 +52,7 @@ OUTPUT_FILE_DE_PKL = ''.join([DATA_DIR_OUT, 'de.pkl'])
 OUTPUT_FILE_EN_PKL = ''.join([DATA_DIR_OUT, 'en.pkl'])
 OUTPUT_FILE_DE_WORDS_COL = ''.join([DATA_DIR_OUT, 'de-words.col'])
 OUTPUT_FILE_EN_WORDS_COL = ''.join([DATA_DIR_OUT, 'en-words.col'])
+'''
 
 # Symbols to ignore (besides stopwords)
 IGNORE_LIST = ['.', ',', ';', '(', ')', '-', ':', '!', '?', '\'']
@@ -57,7 +62,10 @@ suffixes = Suffixes(LANG_1, LANG_2)
 # Global variables for command-line control.
 global single_language, use_treetagger, sentences_limit, lang_1, \
        lang_2, treetagger_path, max_sentence_len, min_pair_occ, \
-       max_word_len, use_randomized_input, europarl_files
+       max_word_len, use_randomized_input, europarl_files, \
+       output_file_1_sm, output_file_2_sm, output_file_col, \
+       output_file_1_row, output_file_2_row, output_file_1_pkl, \
+       output_file_2_pkl
 language_used  = False
 use_treetagger = False
 use_randomized_input = False
@@ -321,7 +329,7 @@ class Sentences:
             token = token_pos_tagged[2].lower()
             # Those cases we don't want.
             if not token in ["<unknown>", "@ord@", "@card@"] and \
-               not pos_tag == "0" and len(token) <= max_word_len:
+               not pos_tag == NO_POS_SYM and len(token) <= max_word_len:
                 token +=  '_' + pos_tag + '_' + self.lang
                 tokens_pos_tagged.append(token)
 
