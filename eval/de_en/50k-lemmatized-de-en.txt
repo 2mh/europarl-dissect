@@ -1,20 +1,20 @@
 Sitzung                 & suspend (0.17) & become (0.12) & distribute (0.12) \\
 wird                    & distribute (0.12) & introduce (0.11) & use (0.11) \\
-Uhr                     & p.m. (0.18) & resume (0.16) & a.m. (0.14) \\
-eröffnet               & open (0.12) & distribute (0.11) & introduce (0.11) \\
+Uhr                     & p.m. (0.18) & resume (0.16) & a.m. (0.14) \\ %Y
+eröffnet               & open (0.12) & distribute (0.11) & introduce (0.11) \\ %Y
 Protokoll               & distribute (0.12) & introduce (0.11) & produce (0.11) \\
 vorangegangenen         & distribute (0.12) & produce (0.10) & introduce (0.10) \\
 Sitzung                 & suspend (0.12) & distribute (0.12) & become (0.11) \\
 wird                    & distribute (0.12) & introduce (0.11) & use (0.11) \\
 genehmigt               & distribute (0.12) & introduce (0.10) & use (0.10) \\
 Präsident              & start (0.08) & today (0.08) & debate (0.08) \\
-begrüßt               & introduce (0.07) & debate (0.07) & line (0.06) \\
-Einführung             & introduce (0.08) & allocate (0.07) & run (0.07) \\
+begrüßt               & introduce (0.07) & debate (0.07) & line (0.06) \\ %Y
+Einführung             & introduce (0.08) & allocate (0.07) & run (0.07) \\ % Wrong PoS
 Euro                    & introduce (0.08) & allocate (0.07) & spend (0.07) \\
 Währung                & introduce (0.07) & debate (0.07) & allocate (0.07) \\
 Lettland                & introduce (0.06) & spend (0.06) & run (0.06) \\
 Januar                  & introduce (0.08) & spend (0.07) & debate (0.07) \\
-spricht                 & talk (0.10) & discuss (0.09) & govern (0.09) \\
+spricht                 & talk (0.10) & discuss (0.09) & govern (0.09) \\ %Y
 Opfern                  & govern (0.09) & discuss (0.09) & interpret (0.08) \\
 Unwetter                & send (0.07) & discuss (0.07) & duty (0.07) \\
 Solidarität            & govern (0.08) & discuss (0.08) & lack (0.07) \\
@@ -45,26 +45,26 @@ Brok                    & reinstatement (0.08) & interlocutor (0.08) & hurricane
 erhoben                 & discuss (0.09) & leave (0.08) & get (0.08) \\
 hat                     & today (0.09) & nothing (0.09) & discuss (0.09) \\
 Frist                   & introduce (0.10) & incorporate (0.10) & remove (0.10) \\
-Einreichung             & date (0.08) & submit (0.07) & provision (0.07) \\
+Einreichung             & date (0.08) & submit (0.07) & provision (0.07) \\ % Wrong PoS
 Änderungsanträgen     & date (0.11) & introduce (0.11) & incorporate (0.11) \\
 wird                    & introduce (0.10) & incorporate (0.10) & place (0.10) \\
 Dienstag                & date (0.10) & place (0.09) & remove (0.09) \\
 Januar                  & introduce (0.10) & incorporate (0.10) & place (0.10) \\
-Uhr                     & p.m. (0.12) & resume (0.10) & a.m. (0.10) \\
+Uhr                     & p.m. (0.12) & resume (0.10) & a.m. (0.10) \\ %Y
 festgesetzt             & date (0.10) & introduce (0.10) & incorporate (0.10) \\
 Abstimmung              & a.m. (0.17) & tomorrow (0.14) & place (0.10) \\
-findet                  & place (0.10) & take (0.07) & hold (0.07) \\
+findet                  & place (0.10) & take (0.07) & hold (0.07) \\ %Y (take place)
 Mittwoch                & place (0.09) & schedule (0.07) & take (0.07) \\
 Januar                  & take (0.08) & hold (0.07) & delay (0.07) \\
-Uhr                     & a.m. (0.17) & noon (0.16) & p.m. (0.13) \\
+Uhr                     & a.m. (0.17) & noon (0.16) & p.m. (0.13) \\ %Y
 Benennungen             & apply (0.05) & distribute (0.04) & relate (0.04) \\
-gelten                  & apply (0.08) & distribute (0.07) & deal (0.07) \\
+gelten                  & apply (0.08) & distribute (0.07) & deal (0.07) \\ %Y
 bestätigt              & apply (0.07) & distribute (0.07) & deal (0.07) \\
-Genehmigung             & approval (0.07) & apply (0.07) & distribute (0.06) \\
+Genehmigung             & approval (0.07) & apply (0.07) & distribute (0.06) \\ %Y
 vorliegenden            & apply (0.08) & distribute (0.07) & deal (0.07) \\
 Protokolls              & apply (0.07) & distribute (0.07) & deal (0.07) \\
 Widerspruch             & apply (0.07) & distribute (0.07) & base (0.07) \\
 eingeht                 & apply (0.08) & distribute (0.07) & deal (0.07) \\
-Punkt                   & matter (0.13) & link (0.13) & bind (0.12) \\
+Punkt                   & matter (0.13) & link (0.13) & bind (0.12) \\ %Y (matter instead of point)
 ist                     & link (0.13) & bind (0.12) & affect (0.12) \\
 geschlossen             & link (0.12) & bind (0.12) & require (0.11) \\

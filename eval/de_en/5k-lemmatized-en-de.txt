@@ -4,22 +4,22 @@ minutes                 & präsident (0.10) & kollege (0.10) & herr (0.10) \\
 previous                & edinburgh (0.15) & genehmigen (0.14) & verdrängen (0.14) \\
 sitting                 & annehmen (0.13) & protokoll (0.12) & kommission (0.12) \\
 were                    & annehmen (0.16) & sollen (0.15) & europa (0.15) \\
-approved                & annehmen (0.15) & geben (0.15) & können (0.15) \\
+approved                & annehmen (0.15) & geben (0.15) & können (0.15) \\ %Y
 President               & begrüßen (0.10) & unmissverständlich (0.07) & unumwunden (0.06) \\
-welcomed                & begrüßen (0.11) & präsident (0.05) & dame (0.05) \\
+welcomed                & begrüßen (0.11) & präsident (0.05) & dame (0.05) \\ %Y
 adoption                & acht (0.07) & vervielfachung (0.07) & strafrechtsschutz (0.07) \\
 euro                    & begrüßen (0.10) & unmissverständlich (0.07) & unumwunden (0.06) \\
 Latvia                  & begrüßen (0.10) & unmissverständlich (0.07) & unumwunden (0.06) \\
 January                 & begrüßen (0.10) & unmissverständlich (0.07) & unumwunden (0.06) \\
-expressed               & ausdruck (0.09) & präsident (0.06) & dame (0.06) \\
+expressed               & ausdruck (0.09) & präsident (0.06) & dame (0.06) \\ % Wrong PoS
 Parliament              & länderübergreifend (0.15) & woge (0.14) & solidarität (0.14) \\
-solidarity              & solidarität (0.15) & wunderbar (0.13) & not (0.10) \\
+solidarity              & solidarität (0.15) & wunderbar (0.13) & not (0.10) \\ %Y
 victims                 & länderübergreifend (0.15) & woge (0.14) & solidarität (0.14) \\
 storms                  & pfennig (0.09) & schrecklich (0.07) & pauschal (0.06) \\
 President               & zukunft (0.07) & umweltkonferenz (0.07) & militärputsch (0.07) \\
-spoke                   & sprechen (0.07) & sondergipfel (0.06) & präsident (0.06) \\
+spoke                   & sprechen (0.07) & sondergipfel (0.06) & präsident (0.06) \\ %Y
 UN                      & zukunft (0.07) & umweltkonferenz (0.07) & militärputsch (0.07) \\
-conference              & konferenz (0.09) & anfang (0.06) & ereignis (0.06) \\
+conference              & konferenz (0.09) & anfang (0.06) & ereignis (0.06) \\ %Y
 future                  & thema (0.06) & derartig (0.06) & wahrscheinlich (0.06) \\
 Syria                   & zukunft (0.07) & umweltkonferenz (0.07) & militärputsch (0.07) \\
 open                    & thema (0.06) & sollen (0.06) & aspekt (0.06) \\
@@ -27,10 +27,10 @@ Geneva                  & zukunft (0.07) & umweltkonferenz (0.07) & militärputs
 January                 & zukunft (0.07) & umweltkonferenz (0.07) & militärputsch (0.07) \\
 President               & wahllos (0.12) & lob (0.11) & erzielt (0.11) \\
 commented               & pressebericht (0.08) & zweit (0.07) & eingehen (0.06) \\
-press                   & presse (0.10) & zweit (0.08) & verzichten (0.08) \\
-reports                 & van (0.12) & bericht (0.11) & periodisch (0.11) \\
+press                   & presse (0.10) & zweit (0.08) & verzichten (0.08) \\ %Y
+reports                 & van (0.12) & bericht (0.11) & periodisch (0.11) \\ %Y
 accusations             & wahllos (0.12) & lob (0.11) & erzielt (0.11) \\
-made                    & zweit (0.10) & machen (0.09) & punkt (0.09) \\
+made                    & zweit (0.10) & machen (0.09) & punkt (0.09) \\ %Y
 Romanian                & wahllos (0.12) & lob (0.11) & erzielt (0.11) \\
 Prime                   & wahllos (0.12) & lob (0.11) & erzielt (0.11) \\
 Minister                & wahllos (0.12) & lob (0.11) & erzielt (0.11) \\
@@ -38,15 +38,15 @@ Victor                  & wahllos (0.12) & lob (0.11) & erzielt (0.11) \\
 Ponta                   & wahllos (0.12) & lob (0.11) & erzielt (0.11) \\
 Elmar                   & wahllos (0.12) & lob (0.11) & erzielt (0.11) \\
 Brok                    & wahllos (0.12) & lob (0.11) & erzielt (0.11) \\
-deadline                & Änderungsantrag (0.13) & ankündigung (0.12) & frist (0.12) \\
+deadline                & Änderungsantrag (0.13) & ankündigung (0.12) & frist (0.12) \\ %Y
 tabling                 & Änderungsantrag (0.14) & können (0.13) & geben (0.13) \\
-amendments              & Änderungsantrag (0.14) & sollen (0.12) & Änderung (0.12) \\
+amendments              & Änderungsantrag (0.14) & sollen (0.12) & Änderung (0.12) \\ %Y
 was                     & sollen (0.14) & klar (0.14) & wichtig (0.14) \\
 set                     & sollen (0.14) & sein (0.14) & werden (0.14) \\
 Tuesday                 & abänderungsantrag (0.14) & ari (0.13) & edinburgh (0.12) \\
 January                 & abänderungsantrag (0.14) & ari (0.13) & edinburgh (0.12) \\
 noon                    & edinburgh (0.12) & werden (0.11) & sein (0.11) \\
-vote                    & abstimmung (0.16) & sein (0.14) & sollen (0.14) \\
+vote                    & abstimmung (0.16) & sein (0.14) & sollen (0.14) \\ %Y
 be                      & sollen (0.16) & müssen (0.15) & können (0.15) \\
 held                    & sein (0.17) & werden (0.17) & sollen (0.16) \\
 Wednesday               & abstimmung (0.16) & verschleppen (0.16) & notifizieren (0.15) \\
@@ -60,5 +60,5 @@ were                    & sollen (0.18) & wichtig (0.18) & können (0.18) \\
 objections              & klar (0.14) & abgeordnete (0.13) & bewusst (0.13) \\
 approval                & sein (0.17) & werden (0.17) & bestehen (0.17) \\
 minutes                 & kollege (0.12) & kommissar (0.12) & herr (0.12) \\
-item                    & folgen (0.10) & tagesordnung (0.07) & tagesordnungspunkt (0.06) \\
-closed                  & schließen (0.10) & lücke (0.09) & schade (0.08) \\
+item                    & folgen (0.10) & tagesordnung (0.07) & tagesordnungspunkt (0.06) \\ %Y
+closed                  & schließen (0.10) & lücke (0.09) & schade (0.08) \\ %Y
