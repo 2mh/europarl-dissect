@@ -3,7 +3,7 @@
 \documentclass[11pt,twoside,openright]{mpreport}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[french, russian, icelandic, english, ngerman]{babel}
+\usepackage[french, english, ngerman]{babel}
 \usepackage{pxfonts}
 \usepackage[numbers]{natbib}
 \usepackage{booktabs}
@@ -60,21 +60,106 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Einleitung}
 \label{cha:einleitung}
+Nach dem Gedanken der distributionellen Semantik ist jedes Wort durch sein Umfeld definiert. In diesem Fall ist der Range der Satz in beiden Sprachen. Da jeweils die Übersetzung den gleichen semantischen Inhalt hat, sollten sich die Umfeldwörter beider Sprachen einander angleichen und es ist egal in welcher Sprache das Umfeld geschrieben ist.\\
+Durch eine Trennung der Matrix nach Sprache der einzelnen Vektoren -- die Vektordimensionen sind dabei dieselben -- kann man gezielt nach den ähnlichsten Wörtern für ein Beispielwort je nach gewünschter Sprache suchen. Damit bekommt man unter den ähnlichsten Wörtern verschiedene Übersetzungen für ein Wort und mit diesen auch ihre distributionell-semantische Definition als Vektor. Mit dem Vergleichen dieser Vektoren mit dem Vektor des Eingabesatzes können dann diejenigen Übersetzungen ausgewählt werden, die im aktuellen Kontext am angemessensten sind. Damit wird die Polysemie der Eingabewörter berücksichtigt.\\
+Für die Restriktion der Dimensionen gibt es die Option der Lemmatisierung. Diese erlaubt es auch nur bestimmte Wortarten zu behandeln und das Resultat zu beeinflussen, falls die Wortarten nicht übereinstimmen. \\
+Beim einsprachingen Verwenden des Programms unterbleibt die Unterschiedung der Matrizen in Sprachen und es werden innerhalb der gleichen Matrix die ähnlichsten Wörter zum Eingabewort gesucht.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Theoretische Basis}
 \label{cha:theorie}
+Der Kern des Projektes ist die Annahme, dass ein Wort durch sein Umfeld definiert wird und dass sich in parallelen Texten die Wörter und ihre Übersetzungen einander annähern. Widdows \cite{geometry} hat dieses Verfahren verwendet um Übersetzungen zu Fachwörtern zu finden:
+\begin{quote}
+The main idea in building a bilingual WORDSPACE is to consider each document along with its translation as if they were a single 'compound' document. [...] Two words that occur in documents which are translations of one another can then be regarded as cooccurring, just as if they had occurred in the same monolingual document [...]. The corpus we used in our experiments was a collection of abstracts from German medical documents which are available with English translations.\\
+This model allows a user to enter terms in \emph{either} language and finde related words or relevant documents in \emph{both} languages.
+\end{quote}
+Die Wörter nähern sich einander an und der Kontext eines Wortes sollte in diesem Gedanken sprachunabhängig werden.
+
+
+Dinu et al. \cite{dissect} haben ein Tool entwickelt, das es einfach macht, in grossem Stil die ähnlichsten Wortvektoren zu einem bestimmten Vektor zu suchen. Durch die Möglichkeit mit grösseren Korpora zu arbeiten, können Ähnlichkeiten zwischen Wörtern berechnet werden:
+\begin{quote}
+Distributional methods for meaning similarity are based on the observation that similar words occur in similar contexts and measure similarity based on patterns of word occurrence in large corpora [...]. More precisely, they represent words, or any other target linguistic elements, as high-dimensional vectors, where the dimensions represent context features.\\
+Semantic relatedness is assessed by comparing vectors, leading, for example, to determine that \emph{car} and \emph{vehicle} are very similar in meaning, since they have similar contextual distributions. Despite the appeal of these methods, modeling words in isolation has limited applications and ideally we want to model semantics beyond word level by representing the meaning of phrases or sentences.
+\end{quote}
+
+Die Möglichkeit zu einem Wort die semantischen Nachbarn zu finden, wie es uns durch Dissect ermöglicht ist, nutzen wir für das Finden von Übersetzungskandidaten. In einem weiteren Schritt nutzen wir die Ähnlichkeitsmasse zwischen den Wörtern der einen Sprachen und denen der anderen Sprache. Dieses Mass verwenden wir in gewissem Sinn als Übersetzungsmodell.
+Ein weiteres Ähnlichkeitsmass, also jenes zwischen den gefundenen Übersetzungskandidaten und dem Eingabesatz -- der semantisch auch dem Zielsatz entsprechen sollte -- nutzen wir in einer ähnlichen Weise wie das Sprachmodell in der konventionellen statistikbasierten maschinellen Übersetzung, ausser dass bei uns nur Schlüsse zur semantischer Komponente und nicht zu derjenigen der Wohlgeformtheit gezogen werden. Diese beiden Masse werden zu einem Score verrechnet, der die Sortierung nach den besten Kandidaten ermöglicht.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Aufbau des Inputs}
+\label{cha:input}
+Das Programm \verb+create_input_data.py+ berechnet aus einem zeilenweise alignierten parallelen Text am Beispiel des Sprachpaares Deutsch--Englisch folgende Dateien:
+\begin{itemize}
+\item \verb+de-words.row+ enthält die Wörter des deutschen Textes in Kleinbuchstaben. Die Liste ist gefiltert nach Stoppwörtern:
+\begin{verbatim}
+kosovo-krieg_de
+wiederaufnahme_de
+bekannt_de
+vorbildlicher_de
+...
+\end{verbatim}
+\item \verb+en-words.row+ ist die entsprechende Liste für die englischen Wörter:
+\begin{verbatim}
+clean_en
+based_en
+possible_en
+resumption_en
+...
+\end{verbatim}
+\item \verb+de_en-words.col+ besteht aus dem Inhalt der vorherigen beiden Dateien. Diese Liste soll für alle verwendeten Matrizen eines Projektes die Vektordimensionen definieren:
+\begin{verbatim}
+kosovo-krieg_de
+wiederaufnahme_de
+bekannt_de
+vorbildlicher_de
+clean_en
+based_en
+possible_en
+resumption_en
+...
+\end{verbatim}
+\item \verb+en_en-de.sm+ ist die sparse Matrix, die die Wörter auf Englisch mit ihren Kontextwörtern in beiden Sprachen beinhält. Die dritte Stelle gibt an, wie oft sich die beiden Wörter begegnen. 
+\begin{verbatim}
+art_en war_en 4
+war_en recognised_en 4
+art_en krieg_de 4
+based_en clean_en 1
+...
+\end{verbatim}
+\item \verb+de_de-en.sm+ ist die entsprechnede Matrix für die deutschen Wörter:
+\begin{verbatim}
+bekannt_de geschieht_de 1
+krieg_de art_en 4
+geschieht_de model_en 1
+krieg_de model_en 4
+...
+\end{verbatim}
+\end{itemize}
+
+Aus diesen Dateien werden die gepickelten Dateien erstellt:
+\begin{itemize}
+\item \verb+de_de-en.pkl+ mit den Zeilen \verb+en-words.row+ und Spalten \verb+de_en-words.col+
+\item \verb+en_en-de.pkl+ mit den Zeilen \verb+de-words.row+ und Spalten \verb+de_en-words.col+
+\end{itemize}
+
+Diese gepickelten Matrixdateien werden zusammen mit der Dimensionendatei \verb+de_en-words.col+ ans Programm \verb+besttranslations.py+ weitergegeben und dort eingelesen, bzw. beim Erstellen der Satzmatrix gebraucht.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Praxis}
 \label{cha:praxis}
+Die Programme sind stark parametrisierbar und es lassen sich 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Evaluation}
 \label{cha:evaluation}
 %%%
-\section{Übersetzungskandidaten DE--EN mit 10'000 Trainingssätzen über Wortoberflächen}
+\section{Übersetzungskandidaten DE--EN mit 10\,000 Trainingssätzen über Wortoberflächen}
 \label{sec:evalDeEn10kSurf}
-\section{Übersetzungskandidaten EN--DE mit 10'000 Trainingssätzen über Wortoberflächen}
+\section{Übersetzungskandidaten EN--DE mit 10\,000 Trainingssätzen über Wortoberflächen}
 \label{sec:evalDeEn10kSurf}
-\section{Übersetzungskandidaten EN--DE mit 10'000 Trainingssätzen über Wortoberflächen}
+\section{Übersetzungskandidaten EN--DE mit 10\,000 Trainingssätzen über Wortoberflächen}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Schluss}
