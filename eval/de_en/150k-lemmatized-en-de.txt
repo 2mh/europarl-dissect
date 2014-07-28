@@ -1,0 +1,64 @@
+sitting                 & vorangegangen (0.09) & feierlich (0.09) & genehmigung (0.08) \\
+opened                  & fern (0.07) & helsinki (0.07) & kommissar (0.07) \\
+minutes                 & minute (0.15) & erheben (0.15) & parlament (0.14) \\ %Y
+previous                & genehmigen (0.18) & billigen (0.16) & hochspannen (0.15) \\
+sitting                 & vorangegangen (0.16) & protokoll (0.16) & genehmigung (0.16) \\
+were                    & klar (0.16) & bewusst (0.16) & nizza (0.16) \\
+approved                & nizza (0.16) & klar (0.16) & parlament (0.16) \\
+President               & begrüßen (0.11) & politikdebatte (0.11) & adoptiert (0.09) \\
+welcomed                & fr (0.05) & ratspräsidentin (0.05) & präsident (0.05) \\
+adoption                & annahme (0.08) & fr (0.06) & empfehlung (0.06) \\ %Y
+euro                    & begrüßen (0.11) & politikdebatte (0.11) & adoptiert (0.09) \\
+Latvia                  & begrüßen (0.11) & politikdebatte (0.11) & adoptiert (0.09) \\
+January                 & begrüßen (0.11) & politikdebatte (0.11) & adoptiert (0.09) \\
+expressed               & genugtuung (0.07) & aufrichtig (0.07) & präsident (0.07) \\
+Parliament              & woge (0.12) & solidarität (0.10) & sturm (0.09) \\
+solidarity              & befürchtung (0.06) & wunsch (0.06) & fr (0.06) \\
+victims                 & opfer (0.07) & befürchtung (0.06) & angehörige (0.06) \\ %Y
+storms                  & befürchtung (0.07) & anliegen (0.06) & persönlich (0.06) \\
+President               & hinschleppen (0.11) & parteichef (0.09) & energieausschuss (0.09) \\
+spoke                   & kommissionspräsident (0.07) & präsident (0.07) & wortmeldung (0.07) \\ % wrong PoS
+UN                      & hinschleppen (0.11) & parteichef (0.09) & energieausschuss (0.09) \\
+conference              & konferenz (0.10) & präsidium (0.07) & kommissionspräsident (0.06) \\ %Y
+future                  & nizza (0.07) & regierungskonferenz (0.07) & kommissionspräsident (0.07) \\
+Syria                   & hinschleppen (0.11) & parteichef (0.09) & energieausschuss (0.09) \\
+open                    & kommissionspräsident (0.07) & nizza (0.07) & präsident (0.07) \\
+Geneva                  & hinschleppen (0.11) & parteichef (0.09) & energieausschuss (0.09) \\
+January                 & hinschleppen (0.11) & parteichef (0.09) & energieausschuss (0.09) \\
+President               & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+commented               & bemerkung (0.10) & anmerkung (0.09) & zusammenfassend (0.09) \\ % wrong PoS
+press                   & fr (0.08) & kollege (0.08) & präsident (0.08) \\
+reports                 & bullmann (0.09) & ausgezeichnet (0.09) & maat (0.09) \\
+accusations             & bemerkung (0.09) & nl (0.08) & eingehen (0.07) \\
+made                    & fr (0.09) & kollege (0.09) & nachdrücklich (0.09) \\
+Romanian                & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Prime                   & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Minister                & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Victor                  & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Ponta                   & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Elmar                   & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+Brok                    & harris (0.13) & rapport (0.13) & hinausweisen (0.11) \\
+deadline                & termin (0.16) & Änderungsantrag (0.15) & klar (0.14) \\ %Y
+tabling                 & eingereicht (0.16) & Änderungsantrag (0.15) & einbringen (0.15) \\ %Y (Änderungsantrag can be variant)
+amendments              & eingereicht (0.16) & eingebracht (0.15) & Änderungsantrag (0.15) \\ %Y
+was                     & Änderungsantrag (0.15) & klar (0.14) & bewusst (0.14) \\
+set                     & sicher (0.15) & klar (0.15) & weit (0.15) \\
+Tuesday                 & termin (0.14) & frist (0.13) & gesetzt (0.13) \\
+January                 & termin (0.14) & frist (0.13) & gesetzt (0.13) \\
+noon                    & donnerstag (0.12) & abstimmung (0.11) & finden (0.11) \\
+vote                    & donnerstag (0.17) & namentlich (0.16) & getrennt (0.16) \\
+be                      & klar (0.16) & bewusst (0.16) & anwesend (0.16) \\
+held                    & festhalten (0.17) & wichtig (0.17) & sicher (0.17) \\ %Y
+Wednesday               & abstimmung (0.19) & votum (0.17) & donnerstag (0.17) \\
+January                 & abstimmung (0.19) & votum (0.17) & donnerstag (0.17) \\
+noon                    & abstimmung (0.19) & donnerstag (0.16) & votum (0.15) \\
+appointments            & ernennung (0.18) & klar (0.18) & nizza (0.18) \\
+be                      & klar (0.18) & bewusst (0.18) & nizza (0.18) \\
+deemed                  & sollen (0.20) & sicher (0.20) & wichtig (0.20) \\
+ratified                & mitgliedstaat (0.18) & vertrag (0.18) & nizza (0.18) \\
+were                    & klar (0.18) & bewusst (0.18) & nizza (0.18) \\
+objections              & parlament (0.17) & feststellen (0.17) & persönlich (0.17) \\
+approval                & klar (0.19) & weit (0.19) & nizza (0.18) \\
+minutes                 & erheben (0.17) & stelle (0.16) & minute (0.16) \\ %Y
+item                    & folgen (0.09) & tagesordnung (0.08) & marieke (0.05) \\ % almost
+closed                  & aussprache (0.10) & lücke (0.07) & dringlich (0.06) \\
