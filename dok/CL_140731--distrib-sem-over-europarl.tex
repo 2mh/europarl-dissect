@@ -5,6 +5,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[french, english, ngerman]{babel}
 \usepackage{pxfonts}
+\usepackage{pgfplots}
+\usepackage{tikz}
 \usepackage[numbers]{natbib}
 \usepackage{booktabs}
 \usepackage{gb4e} %\noautomath % For linguistic examples %%%einfach muell
@@ -68,7 +70,7 @@ Beim einsprachingen Verwenden des Programms unterbleibt die Unterschiedung der M
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Theoretische Basis}
 \label{cha:theorie}
-Der Kern des Projektes ist die Annahme, dass ein Wort durch sein Umfeld definiert wird und dass sich in parallelen Texten die Wörter und ihre Übersetzungen einander annähern. Widdows \cite{geometry} hat dieses Verfahren verwendet um Übersetzungen zu Fachwörtern zu finden:
+Der Kern des Projektes ist die Annahme, dass ein Wort durch sein Umfeld definiert wird und dass sich in parallelen Texten die Wörter und ihre Übersetzungen einander annähern. Widdows \citep[S. 190ff.]{geometry} hat dieses Verfahren verwendet um Übersetzungen zu Fachwörtern zu finden:
 \begin{quote}
 The main idea in building a bilingual WORDSPACE is to consider each document along with its translation as if they were a single 'compound' document. [...] Two words that occur in documents which are translations of one another can then be regarded as cooccurring, just as if they had occurred in the same monolingual document [...]. The corpus we used in our experiments was a collection of abstracts from German medical documents which are available with English translations.\\
 This model allows a user to enter terms in \emph{either} language and finde related words or relevant documents in \emph{both} languages.
@@ -139,31 +141,247 @@ krieg_de model_en 4
 
 Aus diesen Dateien werden die gepickelten Dateien erstellt:
 \begin{itemize}
-\item \verb+de_de-en.pkl+ mit den Zeilen \verb+en-words.row+ und Spalten \verb+de_en-words.col+
-\item \verb+en_en-de.pkl+ mit den Zeilen \verb+de-words.row+ und Spalten \verb+de_en-words.col+
+\item \verb+de_de-en.pkl+ mit den Zeilen \verb+en-words.row+ und \\Spalten \verb+de_en-words.col+
+\item \verb+en_en-de.pkl+ mit den Zeilen \verb+de-words.row+ und \\Spalten \verb+de_en-words.col+
 \end{itemize}
 
 Diese gepickelten Matrixdateien werden zusammen mit der Dimensionendatei \verb+de_en-words.col+ ans Programm \verb+besttranslations.py+ weitergegeben und dort eingelesen, bzw. beim Erstellen der Satzmatrix gebraucht.
+
+Die Aufteilung der Wortvektoren in eine Matrix pro Sprache ist ein entscheidender Teil der Implementierung, da dadurch auf saubere Weise verhindert werden kann, dass Kandidaten in der ungewünschten Sprache durch Dissect gefunden. In einem ersten Aufbau wurden diese ungewünschten Wörter nach Abgleich des Sprachtags bestraft, d.\,h. ihr Ähnlichkeitswert auf 0.0 gesetzt. Dabei bestand die Gefahr, dass für manche Wörter in den x ähnlichsten Wörtern nur unerwünschte Kandidaten gefunden wurden und die dann allesamt bestraft wurden, wodurch schliesslich für diese Wörter nichts Brauchbares gefunden wurde.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Praxis}
 \label{cha:praxis}
-Die Programme sind stark parametrisierbar und es lassen sich 
+Die Programme sind stark parametrisierbar und es lassen sich die Sprachwahl, die zu verwendenden Dateien und auch Parameter zur Verarbeitung und zum Output als Argumente setzen.
+
+In \verb+parameters.py+ lassen sich die Defaultwerte langfristig festlegen, wie zum Beispiel die Anzahl der Sätze, die zur Berechnung verwendet werden sollen oder die Anzahl der angezeigten Übersetzungen.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Evaluation}
 \label{cha:evaluation}
+
+\hspace{-4cm}\begin{tikzpicture}
+    \begin{axis}[
+        width  = 16cm,
+        height = 8cm,
+        major x tick style = transparent,
+        ybar=2*\pgflinewidth,
+        bar width=14pt,
+        ymajorgrids = true,
+        ylabel = {Gute Vorschläge (\%)},
+        symbolic x coords={150k,100k,50k,20k,10k,5k},
+        xtick = data,
+        scaled y ticks = false,
+        enlarge x limits=0.1,
+        ymin=0,
+        legend cell align=left,
+        legend style={
+                at={(1,1.05)},
+                anchor=south east,
+                column sep=1ex
+        }
+    ]
+        \addplot            coordinates {(150k, 1.0) (100k,13.3) (50k,1.0) (20k,1) (10k,1) (5k,1)};
+        \addplot            coordinates {(150k, 1.0) (100k,{33/75}) (50k,1.0) (20k,1) (10k,1) (5k,1)};
+        \addplot            coordinates {(150k, 1.0) (100k,12.5) (50k,1.0) (20k,1) (10k,1) (5k,1)};
+        \addplot            coordinates {(150k, 1.0) (100k,1.0) (50k,1.0) (20k,1) (10k,1) (5k,1)};
+
+        \legend{de-en Lemmata,de-en Oberfläche,en-de Lemmata,en-de Oberfläche}
+    \end{axis}
+\end{tikzpicture}
+
+
 %%%
 \section{Übersetzungskandidaten DE--EN mit 10\,000 Trainingssätzen über Wortoberflächen}
 \label{sec:evalDeEn10kSurf}
+
+
 \section{Übersetzungskandidaten EN--DE mit 10\,000 Trainingssätzen über Wortoberflächen}
 \label{sec:evalDeEn10kSurf}
 \section{Übersetzungskandidaten EN--DE mit 10\,000 Trainingssätzen über Wortoberflächen}
 
+\section{Innerhalb einer Sprache}
+Die folgenden Beispiele zeigen, was passiert, wenn man innerhalb einer Sprache probiert zu übersetzen. Für die Semantik wurden die gleiche Art von Matrizen verwendet wie bei den zweisprachigen Versuchen, jedoch wurde für die Ausgangs- und Zielsprache -- die ja gleich sind -- dieselbe Matrix verwendet. Von einer Arbeitsweise rein in einer Sprache unterscheidet sich dieses Verfahren nur darin, dass in den Vektordimensionen noch die Wörter der anderen Sprache auftauchen. Der Einfluss sollte sich gering halten und es könnte höchstens erwartet werden, dass satzabhängige ähnliche Wörter gefunden werden.
+
+\subsection{Englisch mit Oberflächenform (10\,000 Trainingssätze)}
+\hspace{-0cm}\begin{footnotesize}\begin{tabular}{|llll|}
+\hline
+The & & & \\
+sitting                 & 8.40 (0.32) & 11.15 (0.32) & 8.14 (0.32) \\
+opened                  & opened (0.25) & bosnia (0.19) & serbia (0.19) \\
+at & & & \\
+17.05 & & & \\
+. & & & \\
+The & & & \\
+minutes                 & minutes (0.27) & sitting (0.21) & distributed (0.18) \\
+of & & & \\
+the & & & \\
+previous                & previous (0.28) & speakers (0.17) & period (0.15) \\
+sitting                 & sitting (0.38) & 8.40 (0.25) & 11.15 (0.25) \\
+were                    & 8.40 (0.20) & 11.15 (0.20) & 8.14 (0.20) \\
+approved                & approved (0.28) & adopted (0.17) & commission (0.16) \\
+. & & & \\
+The & & & \\
+President               & ladies (0.28) & prodi (0.28) & reformist (0.28) \\
+welcomed                & welcomed (0.28) & cut (0.18) & anti-racist (0.18) \\
+the & & & \\
+adoption                & adoption (0.29) & featuring (0.16) & nana (0.16) \\
+of & & & \\
+the & & & \\
+euro                    & euro (0.30) & dollar (0.26) & interventionism (0.19) \\
+by & & & \\
+Latvia                  & inspiring (0.17) & surety (0.17) & re-read (0.17) \\
+on & & & \\
+1 & & & \\
+January                 & january (0.33) & standardisation (0.19) & constructed (0.18) \\
+2014. & & & \\
+\hline
+\end{tabular}\end{footnotesize}\\
+
+Mit dem Beispiel von 'President', das nicht mehr gefunden wurde, haben wir einen Fall, der an die zweisprachige Evaluation erinnert, wo dieses Wort auch Schwierigkeiten ergab und die Vorschläge ähnlich waren.
+
+Grosse Beachtung verdienen auch die verschiedenen Vorschläge für 'sitting': Einmal wurde korrekt wieder auf 'sitting' verwiesen mit Zahlausdrücken als Alternative, das andere Mal kamen nur die Zahlausdrücke.
+
+Auch wenn sie hier nicht passen sind die Vorschläge 'serbia' und 'bosnia' interessant in ihrem gemeinsamen Vorkommen. Als gewünscht kann man die Alternative 'dollar' zu 'euro' bezeichnen, wo beide klar semantisch dem gleichen Feld angehören.
+
+\subsection{Englisch mit Lemmatisierung (10\,000 Trainingssätze)}
+\hspace{-0cm}\begin{footnotesize}\begin{tabular}{|llll|}
+\hline
+The & & & \\
+sitting                 & sitting (0.08) & anniversary (0.05) & declaration (0.05) \\
+opened                  & open (0.08) & way (0.06) & go (0.06) \\
+at & & & \\
+17.05 & & & \\
+. & & & \\
+The & & & \\
+minutes                 & go (0.12) & hold (0.12) & use (0.12) \\
+of & & & \\
+the & & & \\
+previous                & pump (0.12) & squeeze (0.12) & distribute (0.12) \\
+sitting                 & distribute (0.12) & go (0.11) & use (0.11) \\
+were                    & concern (0.15) & something (0.15) & go (0.15) \\
+approved                & concern (0.15) & something (0.14) & go (0.14) \\
+. & & & \\
+The & & & \\
+President               & ending (0.07) & this (0.05) & noire (0.05) \\
+welcomed                & welcome (0.08) & fact (0.05) & s (0.05) \\
+the & & & \\
+adoption                & adoption (0.08) & fact (0.06) & adopt (0.05) \\
+of & & & \\
+the & & & \\
+euro                    & ending (0.07) & this (0.05) & noire (0.05) \\
+by & & & \\
+Latvia                  & ending (0.07) & this (0.05) & noire (0.05) \\
+on & & & \\
+1 & & & \\
+January                 & ending (0.07) & this (0.05) & noire (0.05) \\
+2014. & & & \\
+\hline
+\end{tabular}\end{footnotesize}\\
+
+In diesem Beispiel wurden beim erstens Satz gute Vorschläge gebracht, der Rest lässt jedoch zu wünschen übrig.
+
+Man kann sicherlich sagen, dass durch die Lemmatisierung die Relation von Wörtern zu ihrem Umfeld verloren gehen kann -- mehr als bei den Oberflächenformem -- und die Verarbeitung mehr einem Bag-of-words ähnelt. Dies reicht aber nicht zur Erklärung, wieso besonders der letzte Satz ein derart schlechtes Resultat brachte.
+
+\subsection{Deutsch mit Oberflächenform (10\,000 Trainingssätze)}
+\hspace{-4.5cm}\begin{footnotesize}\begin{tabular}{|llll|}
+\hline
+Die & & & \\
+Sitzung                 & sitzung (0.38) & 13.05 (0.35) & 19.50 (0.35) \\
+wird                    & 13.05 (0.31) & 19.50 (0.31) & 17.30 (0.29) \\
+um & & & \\
+17.05 & & & \\
+Uhr                     & 12.00 (0.38) & 13.05 (0.32) & 19.50 (0.32) \\
+eröffnet               & eröffnet (0.25) & billigen (0.22) & tätigkeitsfeld (0.19) \\
+. & & & \\
+Das & & & \\
+Protokoll               & protokoll (0.32) & protokolls (0.26) & montreal (0.19) \\
+der & & & \\
+vorangegangenen         & vorangegangenen (0.31) & mindestdauer (0.22) & erhoffe (0.22) \\
+Sitzung                 & sitzung (0.25) & protokolls (0.23) & genehmigung (0.17) \\
+wird                    & protokolls (0.21) & wiedergegeben (0.16) & genehmigung (0.16) \\
+genehmigt               & genehmigt (0.30) & abgefaßt (0.23) & stahlunternehmen (0.21) \\
+. & & & \\
+Der & & & \\
+Präsident              & herr (0.33) & präsident (0.26) & kollegen (0.23) \\
+begrüßt               & begrüßt (0.25) & herr (0.19) & demokraten (0.15) \\
+die & & & \\
+Einführung             & einführung (0.28) & wirtschaft (0.15) & wurde (0.15) \\
+des & & & \\
+Euro                    & euro (0.27) & milliarden (0.24) & millionen (0.24) \\
+als & & & \\
+Währung                & währung (0.27) & wirtschaft (0.21) & a5-0073/1999 (0.20) \\
+in & & & \\
+Lettland                & Übergangsbestimmungen (0.22) & entschiedenheit (0.17) & geldfälschung (0.14) \\
+am & & & \\
+1.                      & 1. (0.33) & Übergangsbestimmungen (0.28) & programmvorlage (0.19) \\
+Januar                  & januar (0.25) & Übergangsbestimmungen (0.24) & 1. (0.23) \\
+2014.                   & Übergangsbestimmungen (0.22) & entschiedenheit (0.17) & geldfälschung (0.14) \\
+\hline
+\end{tabular}\end{footnotesize}\\
+
+Hier sind im Grossen und Ganzen gute Vorschläge zu finden. Das Trippel aus 'euro', 'milliarden' und 'millionen' zeigt, dass auch semantisch ähnliche Wörter gefunden werden können. Schön ist auch dass wie mit 'protokoll' und 'protokolls' Formen des gleichen Wortes gefunden werden konnten. Das könnte bedeuten, dass sich auch die verschiedenen Formen eines Wortes annähern.
+
+\subsection{Deutsch mit Lemmatisierung (10\,000 Trainingssätze)}
+\hspace{-2.7cm}\begin{footnotesize}\begin{tabular}{|llll|}
+\hline
+Die & & & \\
+Sitzung                 & sitzung (0.13) & durchführen (0.10) & Änderungsantrag (0.10) \\
+wird                    & müssen (0.10) & schnell (0.10) & dürfen (0.10) \\
+um & & & \\
+17.05 & & & \\
+Uhr                     & sitzung (0.09) & uhr (0.09) & unterbrechen (0.08) \\
+eröffnet               & eröffnen (0.09) & aufnehmen (0.09) & einsetzen (0.09) \\
+. & & & \\
+Das & & & \\
+Protokoll               & protokoll (0.13) & aufnehmen (0.09) & Änderungsantrag (0.09) \\
+der & & & \\
+vorangegangenen         & vorangegangen (0.11) & durchführen (0.09) & Änderungsantrag (0.09) \\
+Sitzung                 & sitzung (0.11) & durchführen (0.10) & aufnehmen (0.09) \\
+wird                    & müssen (0.10) & schnell (0.10) & dürfen (0.10) \\
+genehmigt               & genehmigen (0.09) & müssen (0.08) & dürfen (0.08) \\
+. & & & \\
+Der & & & \\
+Präsident              & herr (0.10) & präsident (0.08) & kommissar (0.07) \\
+begrüßt               & herr (0.08) & begrüßen (0.08) & fraktion (0.07) \\
+die & & & \\
+Einführung             & einführung (0.08) & kommission (0.07) & weit (0.07) \\
+des & & & \\
+Euro                    & million (0.09) & euro (0.08) & gering (0.07) \\
+als & & & \\
+Währung                & währung (0.08) & wirtschaft (0.07) & einführung (0.06) \\
+in & & & \\
+Lettland                & Übergangsbestimmung (0.10) & gesamtumfang (0.06) & entschiedenheit (0.05) \\
+am & & & \\
+1.                      & 1. (0.10) & januar (0.06) & jahr (0.06) \\
+Januar                  & januar (0.08) & kommission (0.07) & erst (0.07) \\
+2014.                   & Übergangsbestimmung (0.10) & gesamtumfang (0.06) & entschiedenheit (0.05) \\
+\hline
+\end{tabular}\end{footnotesize}\\
+
+Mit deutsch als Ausgangs- und Zielsprache ist die Lemmatisierung nicht ein solches Hindernis, wie auf Englisch. Deutlich mehr Vorschläge lassen sich mit semantischen Feldern erklären und die Grundform des Wortes erscheint auch oft in den ersten beiden Vorschlägen.
+
+Interessant ist auch der Zusammenhang zwischen 'werden' und 'müssen'. Beide kommen als Hilfs- bzw. als Modalverb in einem ähnlichen Zusammenhang vor und durch die Lemmatisierung geht ihre Restriktion der untergeordneten Verbform verloren. Sie können wirklich als ähnlich bezeichnet werden.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Schluss}
 \label{cha:schluss}
+
+sehr häppy. es klappt. 
+
+speziell: lemmatisierung. für englisch offenbar nicht gut. (wortarten bleiben erhalten, was macht es also bei englisch für einen unterschied?
+
+
+
+Versuchsreihen mit ähnlicheren Sprachen?
+
+hapax legomena aus den vektordimensionen entfernen?
+
+smoothing
+
+anderes korpus? das hier ist hochgradig domänenspezifisch. opensubs?
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{plain-de}     % For German
 \bibliography{seminar}
