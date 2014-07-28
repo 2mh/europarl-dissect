@@ -66,9 +66,31 @@ def valid_pos(tag):
 class Filenames:
     """Class which provides common functionality to the handling of
        file names, used in other classes."""
-    def __init__(self):
-        self.lang_1 = ""
-        self.lang_2 = "" # Might not be used in single language runs.
+    def __init__(self, lang_1="", lang_2=""):
+        """
+        Two languages can be optionally passed.
+        @param lang_1: The user's first argument
+        @param lang_2: The users' second argument
+        """
+        # User-defined languages (arguments 1 and 2)
+        self.lang_1 = lang_1
+        self.lang_2 = lang_2 # Not used in single language runs.
+        # One of the other languages europarl pairs with
+        self.variable_lang = "" 
+        self.constant_lang = "en" # See europarl v7
+        
+        # Can only be set if there's was an initialization.
+        if len(self.lang_1) > 0:
+            self.set_variable_lang()
+            
+    def set_variable_lang(lang=""):
+        """Method usually called by initializing the class
+           automatically, but which, however, can be used to 
+           it manually.
+            
+           @param lang: Language to be set as variable lang.
+        """
+        pass
         
 class InputFilenames(Filenames):
     """Class to handle input file name from europarl 
@@ -76,6 +98,9 @@ class InputFilenames(Filenames):
     
     def __init__(self):
         pass
+        
+    def sm(self):
+        
 
 class OutputFilenames(Filenames):
     """Class to handle output files names which are used as input 

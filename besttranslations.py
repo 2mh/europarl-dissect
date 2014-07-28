@@ -20,8 +20,8 @@ import helpers
 from parameters import DIFFERENT_POS_PUNISHMENT, \
                        NUMBER_OF_NEIGHBOURS, NUMBER_OF_TRANSLATIONS, \
                        OVERALL_SIMILARITY_WEIGHT, \
-                       SENTENCE_SIMILARITY_WEIGHT, TREETAGGER_PATH, \
-                       DATA_DIR_OUT, TREETAGGER_BASE_PATH, ENC
+                       SENTENCE_SIMILARITY_WEIGHT, DATA_DIR_OUT, \
+                       TREETAGGER_BASE_PATH, ENC
 
 # For use: $ python besttranslations.py --help
 # Example (with lemmatized matrix dimensions): 
