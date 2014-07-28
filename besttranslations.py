@@ -169,18 +169,23 @@ def main():
         use_lemmatization = True
     if args.dimensions:
         space_cols_file = args.dimensions
+    elif source_lang == target_lang:
+        space_cols_file = DATA_DIR_OUT + source_lang + '-words.col'
     else:
         space_cols_file = DATA_DIR_OUT \
                         + '_'.join(sorted([source_lang,target_lang])) \
                         + '-words.col'
     if args.sourcematrix:
         loaded_space_file_s = args.sourcematrix
+    elif source_lang == target_lang:
+        loaded_space_file_s = DATA_DIR_OUT + source_lang + '.pkl'
     else:
         loaded_space_file_s = DATA_DIR_OUT + source_lang \
                             + '_' + source_lang + '-' + target_lang \
                             + '.pkl'
     if args.targetmatrix:
         loaded_space_file_t = args.targetmatrix
+    # in same language use the target language matrix will be ignored
     else:
         loaded_space_file_t = DATA_DIR_OUT + target_lang \
                             + '_' + target_lang + '-' + source_lang \
