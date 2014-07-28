@@ -1,0 +1,14 @@
+hernani@clementine:~/uzh/master/statsem/europarl-dissect$ time ./show_candidates.sh en de -nsp > eval/de_en/100k-surface-en-de.txt
+/usr/local/lib/python2.7/dist-packages/dissect-0.1.0-py2.7.egg/composes/utils/matrix_utils.py:82: UserWarning: Efficiency warning: matrices should have the same dense/sparse type!
+
+real	1m59.314s
+user	1m49.107s
+sys	0m9.869s
+
+hernani@clementine:~/uzh/master/statsem/europarl-dissect$ time ./show_candidates.sh de en -nsp > eval/de_en/100k-surface-de-en.txt
+/usr/local/lib/python2.7/dist-packages/dissect-0.1.0-py2.7.egg/composes/utils/matrix_utils.py:82: UserWarning: Efficiency warning: matrices should have the same dense/sparse type!
+
+real	1m50.639s
+user	1m40.042s
+sys	0m10.249s
+
