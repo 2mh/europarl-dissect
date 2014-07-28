@@ -11,7 +11,7 @@
 \usepackage{booktabs}
 \usepackage{gb4e} %\noautomath % For linguistic examples %%%einfach muell
 %\usepackage{listings}         % For listings %%%einfach muell
-%\usepackage{color} %%%einfach muell
+\usepackage{color} %%%einfach muell
 \usepackage{hyperref}         % Hyperref should normally be the last
                               % package
 \usepackage{qtree}
@@ -193,19 +193,19 @@ In \verb+parameters.py+ lassen sich die Defaultwerte langfristig festlegen, wie 
 \end{tikzpicture}
 
 \section{Übersetzungskandidaten EN--DE mit 30\,000 Trainingssätzen über Wortoberflächen}
-\hspace{-4cm}\begin{footnotesize}\begin{tabular}{|llll|}
+\hspace{-4cm}\begin{footnotesize}\begin{longtable}{|llll|}
 \hline
 sitting                 & sitzung (0.36) & 23.50 (0.29) & 00.05 (0.28) \\ %Y
-\emph{opened}                  & harmonisierungsamt (0.16) & beginn (0.11) & wurde (0.10) \\ % not quite
+\textcolor{red}{opened}                  & harmonisierungsamt (0.16) & beginn (0.11) & wurde (0.10) \\ % not quite
 minutes                 & protokoll (0.38) & minuten (0.35) & abstimmungsergebnis (0.25) \\ %Y
-\emph{previous}                & vorredner (0.27) & wurde (0.16) & herr (0.14) \\ % wrong PoS 
+\textcolor{red}{previous}                & vorredner (0.27) & wurde (0.16) & herr (0.14) \\ % wrong PoS 
 sitting                 & vorangegangenen (0.40) & protokoll (0.38) & sitzung (0.37) \\ %Y
-\emph{were}                    & vorangegangenen (0.44) & protokoll (0.40) & genehmigt (0.39) \\
+\textcolor{red}{were}                    & vorangegangenen (0.44) & protokoll (0.40) & genehmigt (0.39) \\
 approved                & angenommen (0.21) & angenommenen (0.18) & wurde (0.15) \\ %Y
 President               & präsident (0.31) & herr (0.30) & präsidentin (0.28) \\ %Y
-\emph{welcomed}                & präsidentin (0.26) & präsident (0.24) & kommissionspräsident (0.23) \\
+\textcolor{red}{welcomed}                & präsidentin (0.26) & präsident (0.24) & kommissionspräsident (0.23) \\
 adoption                & annahme (0.22) & hinblick (0.16) & betreffend (0.16) \\ %Y
-\emph{euro}                    & präsident (0.25) & duisenberg (0.21) & kollegen (0.21) \\
+\textcolor{red}{euro}                    & präsident (0.25) & duisenberg (0.21) & kollegen (0.21) \\
 Latvia                  & lettland (0.25) & estland (0.22) & ostsee-anrainerstaaten (0.18) \\ %Y
 January                 & 1. (0.42) & januar (0.40) & Übergangsbestimmungen (0.25) \\ %Y
 expressed               & ausdruck (0.25) & zustimmung (0.22) & wurde (0.20) \\ %Y
@@ -214,16 +214,16 @@ solidarity              & solidarität (0.38) & ausdruck (0.23) & mitgefühls (0
 victims                 & opfer (0.32) & ausdruck (0.22) & wurde (0.17) \\ %Y
 storms                  & stürme (0.28) & sturm (0.18) & abgeordnete (0.14) \\ %Y
 President               & herr (0.30) & präsident (0.30) & präsidentin (0.27) \\ %Y
-\emph{spoke}                   & präsidenten (0.32) & präsident (0.29) & präsidentin (0.27) \\
-\emph{UN}                      & abgeordnete (0.21) & darauf (0.20) & tun (0.20) \\
+\textcolor{red}{spoke}                   & präsidenten (0.32) & präsident (0.29) & präsidentin (0.27) \\
+\textcolor{red}{UN}                      & abgeordnete (0.21) & darauf (0.20) & tun (0.20) \\
 conference              & konferenz (0.31) & regierungskonferenz (0.29) & möchte (0.25) \\ %Y
-\emph{future}                  & darauf (0.23) & unsere (0.23) & ganz (0.23) \\
+\textcolor{red}{future}                  & darauf (0.23) & unsere (0.23) & ganz (0.23) \\
 Syria                   & syrien (0.30) & volksabstimmungen (0.21) & präsident (0.21) \\ %Y
-\emph{open}                    & möchte (0.27) & ganz (0.23) & darauf (0.23) \\
+\textcolor{red}{open}                    & möchte (0.27) & ganz (0.23) & darauf (0.23) \\
 Geneva                  & genfer (0.27) & genf (0.26) & jahrestag (0.24) \\ %Y
 January                 & januar (0.30) & 1. (0.24) & möchte (0.23) \\ %Y
 President               & herr (0.28) & präsident (0.27) & präsidentin (0.25) \\ %Y
-\emph{commented}               & zurückgehalten (0.32) & presseberichte (0.25) & berichte (0.22) \\ % wrong Pos
+\textcolor{red}{commented}               & zurückgehalten (0.32) & presseberichte (0.25) & berichte (0.22) \\ % wrong Pos
 press                   & presse (0.22) & gemacht (0.19) & erklärt (0.18) \\ %Y
 reports                 & berichte (0.29) & berichten (0.27) & präsidentin (0.26) \\ %Y
 accusations             & vorwürfe (0.25) & anklägerin (0.19) & gewissenhafter (0.17) \\ %Y
@@ -232,41 +232,120 @@ Romanian                & rumänischen (0.25) & vorwürfe (0.19) & liliana (0.15
 Prime                   & premierminister (0.37) & ministerpräsidenten (0.29) & präsidentin (0.25) \\ %Y
 Minister                & premierminister (0.40) & ministerpräsident (0.30) & ministerpräsidenten (0.29) \\ %Y
 Victor                  & victor (0.22) & emmanuel (0.21) & steuereintreibers (0.14) \\ %Y
-\emph{Ponta}                   & premierminister (0.37) & zurückgehalten (0.31) & ministerpräsident (0.28) \\
+\textcolor{red}{Ponta}                   & premierminister (0.37) & zurückgehalten (0.31) & ministerpräsident (0.28) \\
 Elmar                   & elmar (0.26) & präsident (0.22) & präsidentin (0.21) \\ %Y
 Brok                    & brok (0.27) & präsident (0.27) & elmar (0.25) \\ %Y
 deadline                & termin (0.19) & grundsatzabkommen (0.17) & frist (0.17) \\ %Y
 tabling                 & interpretiert. (0.14) & vorlage (0.13) & us-regierung (0.12) \\ %Y (vorlage: good!)
 amendments              & Änderungsanträge (0.31) & Änderungsanträgen (0.30) & eingebrachten (0.26) \\ %Y
-\emph{was}                     & 12 (0.30) & Änderungsanträge (0.29) & 14 (0.28) \\
-\emph{set}                     & wurden (0.21) & ansicht (0.20) & betrifft (0.19) \\
+\textcolor{red}{was}                     & 12 (0.30) & Änderungsanträge (0.29) & 14 (0.28) \\
+\textcolor{red}{set}                     & wurden (0.21) & ansicht (0.20) & betrifft (0.19) \\
 Tuesday                 & dienstag (0.27) & schlagzeile (0.16) & herald (0.16) \\ %Y
 January                 & januar (0.29) & 26. (0.21) & 1. (0.21) \\ %Y
 noon                    & 12.00 (0.32) & 12 (0.29) & findet (0.25) \\ %Y
 vote                    & abstimmung (0.36) & bitte (0.26) & findet (0.25) \\ %Y
-\emph{be}                      & 12.00 (0.34) & abstimmung (0.34) & verlegen (0.34) \\
+\textcolor{red}{be}                      & 12.00 (0.34) & abstimmung (0.34) & verlegen (0.34) \\
 held                    & möchte (0.25) & übrigen (0.21) & halten (0.20) \\ %Y
 Wednesday               & mittwoch (0.36) & abstimmung (0.33) & bitte (0.24) \\ %Y
 January                 & januar (0.33) & 1. (0.24) & 15. (0.22) \\ %Y
 noon                    & 12.00 (0.44) & abstimmung (0.43) & findet (0.37) \\ %Y
-\emph{appointments}            & wäre (0.26) & durchgefallen (0.23) & verpuffen (0.23) \\
+\textcolor{red}{appointments}            & wäre (0.26) & durchgefallen (0.23) & verpuffen (0.23) \\
 be                      & minuten (0.32) & wäre (0.30) & wären (0.26) \\ %Y
-\emph{deemed}                  & instrumentalisiert (0.17) & kriegsgerät (0.16) & kaste (0.16) \\
+\textcolor{red}{deemed}                  & instrumentalisiert (0.17) & kriegsgerät (0.16) & kaste (0.16) \\
 ratified                & ratifiziert (0.27) & ratifizierung (0.18) & symbolhafte (0.18) \\ %Y
 were                    & minuten (0.32) & wäre (0.30) & wären (0.26) \\ %Y (good!)
-\emph{objections}              & hätte (0.23) & könnte. (0.22) & wertpapierdienstleistungen (0.21) \\
+\textcolor{red}{objections}              & hätte (0.23) & könnte. (0.22) & wertpapierdienstleistungen (0.21) \\
 approval                & hätte (0.26) & möchte (0.22) & zustimmung (0.21) \\ %Y
 minutes                 & minuten (0.32) & protokoll (0.28) & hätte (0.23) \\ %Y
-\emph{item}                    & folgt (0.34) & tagesordnung (0.29) & anfragen: (0.29) \\ % not quite
+\textcolor{red}{item}                    & folgt (0.34) & tagesordnung (0.29) & anfragen: (0.29) \\ % not quite
 closed                  & geschlossen (0.47) & 1999-2000 (0.31) & 19.40 (0.31) \\ %Y
 \hline
-\end{tabular}\end{footnotesize}\\
+\end{longtable}\end{footnotesize}\\
 
+du
 
 %%%
-\section{Übersetzungskandidaten DE--EN mit 10\,000 Trainingssätzen über Wortoberflächen}
+\section{Übersetzungskandidaten DE--EN mit 20\,000 Trainingssätzen über Wortoberflächen}
 \label{sec:evalDeEn10kSurf}
-
+\hspace{-4cm}\begin{footnotesize}\begin{longtable}{|llll|}
+\hline
+Sitzung                 & sitting (0.54) & suspended (0.52) & 11.50 (0.51) \\ %Y
+\textcolor{red}{wird}                    & sitting (0.59) & 11.50 (0.54) & suspended (0.53) \\
+Uhr                     & p.m (0.52) & sitting (0.48) & p.m. (0.47) \\ %Y
+\textcolor{red}{eröffnet}               & maximised (0.14) & orwell (0.14) & depicted (0.14) \\
+\textcolor{red}{Protokoll}               & minutes (0.48) & sitting (0.40) & distributed (0.27) \\
+vorangegangenen         & sitting (0.38) & distributed (0.22) & previous (0.21) \\ %Y
+Sitzung                 & sitting (0.40) & 11.50 (0.28) & 8.25 (0.26) \\ %Y
+\textcolor{red}{wird}                    & minutes (0.53) & sitting (0.41) & 11.50 (0.23) \\
+\textcolor{red}{genehmigt}               & minutes (0.45) & sitting (0.34) & distributed (0.21) \\
+Präsident              & president (0.27) & ladies (0.26) & congratulating (0.24) \\ %Y
+begrüßt               & welcomes (0.27) & gave (0.15) & presented (0.15) \\ %Y
+Einführung             & euro (0.42) & introduction (0.33) & introducing (0.19) \\ %Y
+Euro                    & euro (0.40) & eur (0.30) & 1 (0.25) \\ %Y
+Währung                & currency (0.31) & monetary (0.25) & 2496/96/ecsc (0.19) \\ %Y
+\textcolor{red}{Lettland}                & euro (0.43) & january (0.39) & introduction (0.30) \\
+1.                      & january (0.44) & euro (0.38) & 1 (0.27) \\ %Y
+Januar                  & january (0.40) & euros (0.25) & 1 (0.24) \\ %Y
+\textcolor{red}{2014.}                   & euro (0.43) & january (0.39) & introduction (0.30) \\
+\textcolor{red}{spricht}                 & within (0.21) & union (0.20) & people (0.20) \\
+\textcolor{red}{Opfern}                  & european (0.27) & within (0.16) & union (0.16) \\
+Unwetter                & belongings (0.21) & possessions (0.18) & weather (0.17) \\ %Y
+Solidarität            & solidarity (0.38) & union (0.20) & within (0.19) \\ %Y
+Europäischen           & european (0.34) & union (0.31) & parliament (0.27) \\ %Y
+Parlaments              & parliament (0.25) & cod (0.24) & establishing (0.23) \\ %Y
+Präsident              & ladies (0.24) & president (0.24) & gentlemen (0.22) \\ %Y
+\textcolor{red}{erinnert}                & whose (0.22) & one (0.15) & order (0.15) \\
+Konferenz               & presidents (0.25) & conference (0.18) & held (0.16) \\ %Y
+Vereinten               & nations (0.39) & united (0.24) & bangkok (0.23) \\ %Y
+Nationen                & nations (0.34) & united (0.22) & bangkok (0.21) \\ %Y
+Zukunft                 & future (0.24) & present (0.14) & one (0.13) \\ %Y
+\textcolor{red}{Syriens}                 & nations (0.25) & damascus (0.20) & assad (0.19) \\
+\textcolor{red}{Eröffnung}              & conference (0.20) & intergovernmental (0.14) & present (0.13) \\
+\textcolor{red}{22.}                     & bodyguard (0.18) & vizcaya (0.18) & jorge (0.16) \\
+Januar                  & january (0.27) & scheduled (0.16) & standardisation (0.14) \\ %Y
+Genf                    & geneva (0.25) & held (0.13) & rights (0.13) \\ %Y
+\textcolor{red}{anberaumt}               & nations (0.29) & tenth (0.24) & ta (0.22) \\
+\textcolor{red}{ist}                     & nations (0.29) & tenth (0.24) & ta (0.22) \\
+Präsident              & brok (0.27) & president (0.27) & ladies (0.26) \\ %Y
+\textcolor{red}{weist}                   & upswing (0.20) & proceeded (0.20) & karl (0.17) \\
+\textcolor{red}{Pressemeldungen}         & brok (0.20) & elmar (0.19) & upswing (0.18) \\
+Vorwürfe               & accusations (0.18) & scrupulously (0.12) & question. (0.09) \\ %Y
+\textcolor{red}{rumänische}             & brok (0.20) & elmar (0.19) & upswing (0.18) \\
+Premierminister         & prime (0.20) & animosities (0.16) & hatreds (0.16) \\ %Y
+\textcolor{red}{Victor}                  & brok (0.20) & elmar (0.19) & upswing (0.18) \\
+\textcolor{red}{Ponta}                   & brok (0.20) & elmar (0.19) & upswing (0.18) \\
+Elmar                   & brok (0.29) & elmar (0.29) & tsatsos (0.29) \\ %Y
+Brok                    & brok (0.31) & tsatsos (0.25) & a5-0029/2000 (0.18) \\ %Y
+erhoben                 & one (0.11) & great (0.11) & brought (0.10) \\ %Y (brought up)
+\textcolor{red}{hat}                     & brok (0.20) & elmar (0.19) & upswing (0.18) \\
+Frist                   & deadline (0.17) & 2034 (0.17) & take (0.13) \\ %Y
+Einreichung             & backdate (0.08) & submitting (0.08) & submission (0.08) \\ %Y
+\textcolor{red}{Änderungsanträgen}     & nos (0.21) & debtor (0.20) & 14 (0.16) \\
+\textcolor{red}{wird}                    & p.m. (0.25) & noon (0.24) & p.m (0.24) \\
+Dienstag                & tuesday (0.24) & submission (0.14) & one-way (0.11) \\ %Y
+14.                     & january (0.23) & 14 (0.18) & february (0.16) \\ %Y
+Januar                  & january (0.28) & 2002 (0.12) & scheduled (0.12) \\ %Y
+Uhr                     & p.m (0.34) & noon (0.31) & p.m. (0.27) \\ %Y
+\textcolor{red}{festgesetzt}             & pinpointing (0.15) & prisoner (0.15) & legislated (0.14) \\ % not quite
+\textcolor{red}{Abstimmung}              & noon (0.66) & 12.00 (0.59) & a.m (0.53) \\
+\textcolor{red}{findet}                  & noon (0.66) & 12.00 (0.59) & a.m (0.55) \\
+Mittwoch                & wednesday (0.29) & take (0.22) & request (0.14) \\ %Y
+\textcolor{red}{15.}                     & january (0.23) & resigned (0.13) & instead (0.12) \\
+Januar                  & january (0.30) & take (0.21) & 2002 (0.12) \\ %Y
+Uhr                     & noon (0.61) & 12.00 (0.54) & p.m (0.53) \\ %Y
+\textcolor{red}{Benennungen}             & contradiction (0.24) & stark (0.16) & confirmed (0.15) \\
+gelten                  & apply (0.15) & legislation (0.11) & fundamental (0.11) \\ %Y
+bestätigt              & confirmed (0.19) & confirms (0.15) & apply (0.13) \\ %Y
+Genehmigung             & approval (0.14) & minutes (0.14) & sitting (0.13) \\ %Y
+\textcolor{red}{vorliegenden}            & draft (0.14) & one (0.13) & concerning (0.13) \\
+Protokolls              & protocol (0.16) & methodology (0.16) & ratios (0.15) \\ %Y
+Widerspruch             & contradiction (0.27) & law (0.12) & policies (0.12) \\ %Y
+\textcolor{red}{eingeht}                 & platitudes (0.22) & tired (0.22) & cement (0.20) \\
+Punkt                   & point (0.30) & matter (0.16) & order (0.16) \\ %Y
+\textcolor{red}{ist}                     & leopards (0.50) & closed (0.46) & 8.25 (0.29) \\
+geschlossen             & closed (0.43) & 8.25 (0.30) & 11.10 (0.30) \\ %Y
+\hline
+\end{longtable}\end{footnotesize}\\
 
 \section{Übersetzungskandidaten EN--DE mit 10\,000 Trainingssätzen über Wortoberflächen}
 \label{sec:evalDeEn10kSurf}
