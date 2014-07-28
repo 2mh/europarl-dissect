@@ -185,7 +185,8 @@ def main():
                             + '.pkl'
     if args.targetmatrix:
         loaded_space_file_t = args.targetmatrix
-    # in same language use the target language matrix will be ignored
+    elif source_lang == target_lang and loaded_space_file_t == "":
+        loaded_space_file_t = DATA_DIR_OUT + target_lang + '.pkl'
     else:
         loaded_space_file_t = DATA_DIR_OUT + target_lang \
                             + '_' + target_lang + '-' + source_lang \
