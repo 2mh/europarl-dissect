@@ -1,0 +1,64 @@
+sitting                 & sitzung (0.34) & 23.50 (0.28) & 00.05 (0.28) \\ %Y
+opened                  & eingeweiht (0.27) & räumlichkeiten (0.17) & harmonisierungsamt (0.17) \\ % almost
+minutes                 & protokoll (0.44) & genehmigt (0.37) & minuten (0.34) \\ %Y
+previous                & vorredner (0.23) & wurde (0.15) & daran (0.13) \\ % wrong PoS
+sitting                 & protokoll (0.45) & vorangegangenen (0.40) & sitzung (0.37) \\ %Y
+were                    & protokoll (0.47) & vorangegangenen (0.44) & genehmigt (0.42) \\
+approved                & angenommen (0.20) & beziehen (0.15) & wurde (0.15) \\ %Y
+President               & präsident (0.32) & präsidentin (0.30) & herr (0.30) \\ %Y
+welcomed                & präsidentin (0.27) & kommissionspräsident (0.24) & präsident (0.24) \\
+adoption                & annahme (0.22) & vorliegenden (0.16) & wurde (0.16) \\ %Y
+euro                    & präsident (0.26) & euro (0.22) & kollegen (0.22) \\ %Y
+Latvia                  & januar (0.45) & 1. (0.41) & leitwährungen (0.35) \\
+January                 & 1. (0.45) & januar (0.44) & Übergangsbestimmungen (0.27) \\ %Y
+expressed               & ausdruck (0.24) & abgeordneten (0.20) & wurde (0.20) \\ % wrong PoS
+Parliament              & parlament (0.35) & parlaments (0.34) & rechtzeitigen (0.26) \\ %Y
+solidarity              & solidarität (0.36) & ausdruck (0.22) & mitgefühls (0.22) \\ %Y
+victims                 & opfer (0.29) & ausdruck (0.22) & wurde (0.17) \\ %Y
+storms                  & stürme (0.28) & sturm (0.18) & unwetter (0.16) \\ %Y
+President               & präsident (0.29) & herr (0.29) & präsidentin (0.27) \\ %Y
+spoke                   & präsidenten (0.30) & präsident (0.29) & präsidentin (0.27) \\
+UN                      & möchte (0.23) & uno (0.22) & verfassungsmäßigen (0.20) \\ %Y (good!)
+conference              & konferenz (0.31) & regierungskonferenz (0.29) & möchte (0.24) \\ %Y
+future                  & möchte (0.27) & darauf (0.23) & sagen (0.23) \\ 
+Syria                   & syrien (0.30) & israel (0.22) & volksabstimmungen (0.21) \\ %Y
+open                    & möchte (0.27) & kollegen (0.25) & sagen (0.23) \\
+Geneva                  & genf (0.27) & präsident (0.24) & möchte (0.23) \\ %Y
+January                 & januar (0.29) & 1. (0.25) & gesprächsrunde (0.16) \\ %Y
+President               & präsident (0.27) & herr (0.27) & präsidentin (0.25) \\ %Y
+commented               & zurückgehalten (0.33) & presseberichte (0.26) & anschaue (0.23) \\
+press                   & presse (0.21) & kollegen (0.21) & herr (0.19) \\ %Y
+reports                 & berichte (0.27) & präsidentin (0.26) & präsident (0.25) \\ %Y
+accusations             & vorwürfe (0.23) & anklägerin (0.21) & präsidentin (0.20) \\ %Y
+made                    & frau (0.26) & kollegen (0.25) & herren (0.25) \\
+Romanian                & rumänischen (0.23) & ungarischen (0.16) & goldmine (0.12) \\ %Y
+Prime                   & premierminister (0.32) & ministerpräsidenten (0.28) & ministerpräsident (0.27) \\ %Y
+Minister                & premierminister (0.32) & minister (0.29) & ministerpräsident (0.28) \\ %Y
+Victor                  & zurückgehalten (0.32) & premierminister (0.31) & ministerpräsident (0.27) \\
+Ponta                   & zurückgehalten (0.32) & premierminister (0.31) & ministerpräsident (0.27) \\
+Elmar                   & elmar (0.26) & präsident (0.22) & einvernehmlich (0.22) \\ %Y
+Brok                    & brok (0.27) & präsident (0.27) & elmar (0.26) \\ %Y
+deadline                & termin (0.20) & frist (0.18) & grundsatzabkommen (0.18) \\ %Y
+tabling                 & bekanntesten (0.13) & demokratiebefürworter (0.12) & mancherorts (0.10) \\
+amendments              & Änderungsanträge (0.31) & Änderungsanträgen (0.28) & eingebrachten (0.24) \\ %Y
+was                     & 12 (0.29) & Änderungsanträge (0.28) & Änderungsanträgen (0.25) \\
+set                     & wurden (0.18) & ansicht (0.18) & betrifft (0.17) \\
+Tuesday                 & dienstag (0.25) & Änderungsanträge (0.25) & gedenkens (0.16) \\ %Y
+January                 & januar (0.29) & 1. (0.22) & gesprächsrunde (0.17) \\ %Y
+noon                    & 12 (0.28) & 12.00 (0.26) & findet (0.21) \\ %Y
+vote                    & abstimmung (0.33) & stimmen (0.27) & bitte (0.24) \\ %Y
+be                      & abstimmung (0.29) & 12 (0.29) & januar (0.28) \\
+held                    & möchte (0.23) & halten (0.19) & darauf (0.19) \\ %Y
+Wednesday               & mittwoch (0.32) & bitte (0.22) & tagesordnungspunkt (0.22) \\ %Y
+January                 & januar (0.32) & 1. (0.25) & folgte (0.22) \\ %Y
+noon                    & abstimmung (0.39) & 12.00 (0.37) & findet (0.31) \\ %Y
+appointments            & wäre (0.25) & durchgefallen (0.23) & verpuffen (0.23) \\
+be                      & minuten (0.30) & wäre (0.29) & protokoll (0.29) \\ %Y
+deemed                  & instrumentalisiert (0.20) & kriegsgerät (0.19) & kaste (0.19) \\
+ratified                & ratifiziert (0.25) & folgeprotokolle (0.16) & ratifizieren (0.16) \\ %Y
+were                    & minuten (0.30) & wäre (0.29) & protokoll (0.29) \\ %Y
+objections              & autorisierungen (0.23) & könnte. (0.22) & einwände (0.22) \\ %Y
+approval                & möchte (0.21) & zustimmung (0.20) & darauf (0.16) \\ %Y
+minutes                 & minuten (0.31) & protokoll (0.30) & genehmigung (0.22) \\ %Y
+item                    & folgt (0.33) & unterpunkt (0.29) & b5-0003/2000 (0.29) \\ %Y (variation: good!)
+closed                  & geschlossen (0.46) & 19.40 (0.31) & 20.40 (0.31) \\ %Y

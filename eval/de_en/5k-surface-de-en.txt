@@ -1,0 +1,75 @@
+Sitzung                 & p.m. (0.51) & 7.50 (0.50) & 1.05 (0.50) \\
+wird                    & p.m. (0.53) & 7.50 (0.52) & 1.05 (0.52) \\
+Uhr                     & p.m. (0.46) & 7.50 (0.45) & 1.05 (0.45) \\ %Y
+eröffnet               & followed (0.17) & opened (0.13) & absolute (0.10) \\ %Y
+Protokoll               & minutes (0.28) & sitting (0.26) & 11.15 (0.19) \\
+vorangegangenen         & 2.6 (0.17) & legislature. (0.17) & letting (0.16) \\
+Sitzung                 & sitting (0.26) & 11.15 (0.26) & 8.25 (0.26) \\ %Y
+wird                    & minutes (0.28) & sitting (0.25) & 11.15 (0.20) \\
+genehmigt               & categories (0.20) & authorised (0.19) & code (0.15) \\ %Y
+Präsident              & changeover (0.29) & president (0.28) & congratulate (0.25) \\ %Y
+begrüßt               & welcomes (0.16) & 88 (0.16) & disposed (0.15) \\ %Y
+Einführung             & 1999/2107 (0.17) & c5-0104/1999 (0.17) & no. (0.16) \\
+Euro                    & euro (0.27) & eur (0.23) & billion (0.23) \\ %Y
+Währung                & monetary (0.25) & cos (0.24) & 2496/96/ecsc (0.23) \\ % not quite and wrong PoS
+Lettland                & pivotal (0.32) & january (0.30) & euro (0.27) \\
+1.                      & january (0.35) & valid (0.22) & standardisation (0.21) \\
+Januar                  & january (0.36) & valid (0.20) & completion (0.19) \\ %Y
+2014.                   & pivotal (0.32) & january (0.30) & euro (0.27) \\
+spricht                 & unjustifiable (0.17) & proving (0.17) & richest (0.17) \\
+Opfern                  & european (0.28) & lending (0.24) & observe (0.20) \\
+Unwetter                & mourning (0.21) & condolences (0.20) & weather (0.18) \\ %Y
+Solidarität            & solidarity (0.36) & european (0.28) & lending (0.25) \\ %Y
+Europäischen           & european (0.34) & union (0.30) & contemplating (0.24) \\ %Y
+Parlaments              & widespread (0.28) & representativeness (0.23) & undermined (0.23) \\
+Präsident              & president (0.25) & congratulate (0.23) & commissioner (0.21) \\ %Y
+erinnert                & united (0.20) & forcefully (0.19) & cofinancing (0.17) \\
+Konferenz               & presidents (0.24) & dilemma. (0.20) & conference (0.19) \\ %Y
+Vereinten               & nations (0.37) & united (0.23) & secrets (0.23) \\
+Nationen                & nations (0.33) & secrets (0.21) & united (0.21) \\ %Y
+Zukunft                 & future (0.22) & kind (0.13) & dear (0.13) \\ %Y
+Syriens                 & damascus (0.21) & united (0.19) & assad (0.19) \\
+Eröffnung              & debate (0.10) & palacio (0.10) & cornerstone (0.09) \\
+22.                     & nations (0.28) & january (0.20) & united (0.19) \\
+Januar                  & january (0.29) & standardisation (0.18) & completion (0.17) \\ %Y
+Genf                    & geneva (0.20) & 1957 (0.19) & carriage (0.18) \\ %Y
+anberaumt               & nations (0.28) & january (0.20) & united (0.19) \\
+ist                     & nations (0.28) & january (0.20) & united (0.19) \\
+Präsident              & president (0.32) & congratulate (0.27) & compliments (0.25) \\ %Y
+weist                   & employability (0.18) & open-ended (0.16) & compile (0.16) \\
+Pressemeldungen         & reassured (0.32) & president (0.25) & clinton (0.24) \\
+Vorwürfe               & reassured (0.32) & president (0.25) & clinton (0.24) \\
+rumänische             & reassured (0.32) & president (0.25) & clinton (0.24) \\
+Premierminister         & prime (0.31) & reassured (0.27) & strip (0.21) \\ %Y
+Victor                  & reassured (0.32) & president (0.25) & clinton (0.24) \\
+Ponta                   & reassured (0.32) & president (0.25) & clinton (0.24) \\
+Elmar                   & reassured (0.32) & president (0.25) & clinton (0.24) \\
+Brok                    & reassured (0.32) & president (0.25) & clinton (0.24) \\
+erhoben                 & staked (0.14) & fontaine (0.14) & football (0.13) \\
+hat                     & reassured (0.32) & president (0.25) & clinton (0.24) \\
+Frist                   & deadline (0.14) & bit (0.13) & worded (0.13) \\ %Y
+Einreichung             & p.m (0.26) & noon (0.25) & p.m. (0.24) \\
+Änderungsanträgen     & elimination (0.16) & synergies (0.15) & watered-down (0.13) \\
+wird                    & p.m (0.26) & noon (0.25) & p.m. (0.24) \\
+Dienstag                & submission (0.25) & tuesday (0.24) & street (0.21) \\ %Y
+14.                     & 14 (0.21) & listed (0.16) & endless (0.13) \\ %Y
+Januar                  & january (0.28) & place (0.15) & fill (0.13) \\ %Y
+Uhr                     & p.m (0.35) & 12.00 (0.28) & 12 (0.28) \\ %Y
+festgesetzt             & counting (0.23) & fluctuations (0.21) & recording (0.20) \\
+Abstimmung              & noon (0.60) & p.m (0.58) & 12.00 (0.57) \\
+findet                  & p.m (0.60) & noon (0.59) & 12.00 (0.57) \\
+Mittwoch                & wednesday (0.28) & january (0.21) & liikanen (0.21) \\ %Y
+15.                     & recommended (0.17) & take (0.14) & resigned (0.14) \\
+Januar                  & january (0.28) & place (0.27) & liikanen (0.16) \\ %Y
+Uhr                     & p.m (0.57) & noon (0.54) & 12.00 (0.53) \\ %Y
+Benennungen             & contradiction (0.15) & confirmed (0.14) & diametrically (0.12) \\
+gelten                  & apply (0.18) & host (0.18) & posted (0.16) \\ %Y
+bestätigt              & confirmed (0.20) & commissioning (0.14) & siting (0.14) \\ %Y
+Genehmigung             & reasoned (0.16) & directors-general (0.15) & prohibitions (0.15) \\
+vorliegenden            & belonging (0.14) & affiliations (0.14) & hesitated (0.14) \\
+Protokolls              & 1999/0228 (0.22) & c5-0305/1999 (0.22) & 0550 (0.22) \\
+Widerspruch             & contradiction (0.19) & protects (0.16) & contrary (0.14) \\ %Y
+eingeht                 & contradiction (0.15) & confirmed (0.14) & diametrically (0.12) \\
+Punkt                   & point (0.25) & relates (0.19) & adopt (0.15) \\ %Y
+ist                     & closed (0.43) & 11.15 (0.29) & 8.25 (0.29) \\
+geschlossen             & closed (0.40) & 11.15 (0.28) & 8.25 (0.28) \\ %Y
