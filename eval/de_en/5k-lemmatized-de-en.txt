@@ -1,6 +1,6 @@
 Sitzung                 & suspend (0.14) & become (0.11) & ensure (0.11) \\
 wird                    & apply (0.11) & take (0.11) & pay (0.10) \\
-Uhr                     & p.m. (0.15) & suspend (0.11) & resume (0.11) \\
+Uhr                     & p.m. (0.15) & suspend (0.11) & resume (0.11) \\ %Y
 eröffnet               & ensure (0.09) & apply (0.08) & take (0.08) \\
 Protokoll               & apply (0.09) & take (0.09) & be (0.09) \\
 vorangegangenen         & ensure (0.09) & reply (0.09) & stock (0.09) \\
@@ -18,16 +18,16 @@ Januar                  & favour (0.07) & go (0.07) & concern (0.06) \\
 2014.                   & birth (0.09) & welcome (0.08) & changeover (0.08) \\
 spricht                 & discuss (0.09) & adopt (0.09) & s (0.09) \\
 Opfern                  & discuss (0.09) & adopt (0.08) & affect (0.08) \\
-Unwetter                & mourn (0.07) & express (0.06) & weather (0.06) \\
-Solidarität            & solidarity (0.12) & discuss (0.07) & viability (0.07) \\
+Unwetter                & mourn (0.07) & express (0.06) & weather (0.06) \\ %Y
+Solidarität            & solidarity (0.12) & discuss (0.07) & viability (0.07) \\ %Y
 Europäischen           & discuss (0.10) & adopt (0.09) & s (0.09) \\
 Parlaments              & discuss (0.10) & adopt (0.09) & s (0.09) \\
 Präsident              & be (0.10) & matter (0.10) & today (0.10) \\
 erinnert                & be (0.10) & future (0.10) & matter (0.10) \\
-Konferenz               & conference (0.11) & future (0.09) & matter (0.09) \\
+Konferenz               & conference (0.11) & future (0.09) & matter (0.09) \\ %Y
 Vereinten               & future (0.09) & link (0.09) & logic (0.09) \\
 Nationen                & future (0.09) & link (0.09) & kind (0.09) \\
-Zukunft                 & future (0.10) & be (0.09) & matter (0.09) \\
+Zukunft                 & future (0.10) & be (0.09) & matter (0.09) \\ %Y
 Syriens                 & future (0.09) & be (0.09) & matter (0.09) \\
 Eröffnung              & cornerstone (0.06) & recall (0.05) & debate (0.05) \\
 22.                     & conference (0.08) & remind (0.08) & author (0.07) \\
@@ -38,7 +38,7 @@ ist                     & future (0.10) & link (0.10) & matter (0.10) \\
 Präsident              & express (0.11) & have (0.11) & mention (0.10) \\
 weist                   & do (0.09) & go (0.08) & favour (0.08) \\
 Pressemeldungen         & reinstatement (0.08) & self-restraint (0.08) & sympathise (0.08) \\
-Vorwürfe               & nothing (0.08) & do (0.07) & accuse (0.06) \\
+Vorwürfe               & nothing (0.08) & do (0.07) & accuse (0.06) \\ % Wrong PoS
 rumänische             & reinstatement (0.08) & self-restraint (0.08) & sympathise (0.08) \\
 Premierminister         & have (0.08) & request (0.07) & mention (0.07) \\
 Victor                  & reinstatement (0.08) & self-restraint (0.08) & sympathise (0.08) \\
@@ -54,22 +54,22 @@ wird                    & take (0.10) & apply (0.09) & use (0.09) \\
 Dienstag                & submission (0.08) & see (0.07) & week (0.07) \\
 14.                     & promise (0.06) & meeting (0.05) & detail (0.05) \\
 Januar                  & ensure (0.10) & take (0.09) & apply (0.09) \\
-Uhr                     & p.m. (0.11) & tomorrow (0.08) & resume (0.07) \\
+Uhr                     & p.m. (0.11) & tomorrow (0.08) & resume (0.07) \\ %Y
 festgesetzt             & record (0.06) & take (0.06) & place (0.06) \\
 Abstimmung              & noon (0.15) & p.m. (0.15) & tomorrow (0.13) \\
-findet                  & place (0.08) & find (0.07) & take (0.07) \\
+findet                  & place (0.08) & find (0.07) & take (0.07) \\ %Y
 Mittwoch                & place (0.07) & find (0.06) & take (0.06) \\
 15.                     & find (0.05) & anyone (0.04) & resign (0.04) \\
 Januar                  & place (0.08) & find (0.07) & take (0.06) \\
-Uhr                     & p.m. (0.15) & noon (0.13) & tomorrow (0.11) \\
+Uhr                     & p.m. (0.15) & noon (0.13) & tomorrow (0.11) \\ %Y
 Benennungen             & paragraph (0.05) & confirm (0.05) & sitting (0.05) \\
 gelten                  & apply (0.07) & concern (0.06) & go (0.06) \\
-bestätigt              & confirm (0.08) & apply (0.06) & concern (0.06) \\
+bestätigt              & confirm (0.08) & apply (0.06) & concern (0.06) \\ %Y
 Genehmigung             & exemption (0.05) & publication (0.05) & apply (0.05) \\
 vorliegenden            & apply (0.07) & go (0.07) & concern (0.06) \\
 Protokolls              & apply (0.06) & go (0.06) & concern (0.06) \\
-Widerspruch             & contradiction (0.07) & concern (0.05) & something (0.05) \\
+Widerspruch             & contradiction (0.07) & concern (0.05) & something (0.05) \\ %Y
 eingeht                 & apply (0.07) & go (0.06) & mention (0.06) \\
-Punkt                   & be (0.13) & matter (0.13) & involve (0.12) \\
+Punkt                   & be (0.13) & matter (0.13) & involve (0.12) \\ %Y (matter ~ point)
 ist                     & close (0.15) & matter (0.12) & involve (0.12) \\
-geschlossen             & close (0.15) & matter (0.12) & involve (0.12) \\
+geschlossen             & close (0.15) & matter (0.12) & involve (0.12) \\ %Y
