@@ -6,7 +6,7 @@ function print_line
 	echo "--------------------------------------------------------"
 }
 
-for i in $(ls *k-* | sort -g)
+for i in $(ls *k-*-*-*.txt | sort -g)
 do 
 	print_line
 	echo "Filename:" $i
