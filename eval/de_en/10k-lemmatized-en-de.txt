@@ -1,64 +1,64 @@
-sitting                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-opened                  & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-minutes                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-previous                & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-sitting                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-were                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-approved                & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-President               & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-welcomed                & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-adoption                & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-euro                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Latvia                  & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-January                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-expressed               & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Parliament              & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-solidarity              & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-victims                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-storms                  & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-President               & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-spoke                   & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-UN                      & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-conference              & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-future                  & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Syria                   & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-open                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Geneva                  & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-January                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-President               & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-commented               & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-press                   & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-reports                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-accusations             & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-made                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Romanian                & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Prime                   & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Minister                & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Victor                  & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Ponta                   & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Elmar                   & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Brok                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-deadline                & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-tabling                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-amendments              & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-was                     & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-set                     & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Tuesday                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-January                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-noon                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-vote                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-be                      & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-held                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-Wednesday               & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-January                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-noon                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-appointments            & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-be                      & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-deemed                  & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-ratified                & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-were                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-objections              & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-approval                & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-minutes                 & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-item                    & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
-closed                  & vorschrift_N (0.00) & energieeinsparung_N (0.00) & rechtsakt_N (0.00) \\
+sitting                 & un-menschenrechtskommission (0.06) & protokoll (0.05) & genehmigung (0.05) \\
+opened                  & demokratisch (0.06) & denken (0.06) & neu (0.06) \\
+minutes                 & annehmen (0.13) & dürfen (0.13) & müssen (0.13) \\
+previous                & absegnen (0.15) & absagen (0.15) & edinburgh (0.15) \\
+sitting                 & protokoll (0.13) & annehmen (0.13) & sitzung (0.13) \\ %Y
+were                    & wichtig (0.16) & richtig (0.16) & dürfen (0.16) \\
+approved                & parlament (0.15) & gut (0.15) & kommission (0.15) \\
+President               & begrüßen (0.10) & willkommen (0.10) & umspannen (0.09) \\
+welcomed                & begrüßen (0.11) & ratspräsident (0.05) & kommissionsmitglied (0.05) \\ %Y
+adoption                & annahme (0.07) & strafrechtsschutz (0.06) & glaubwürdig (0.06) \\ %Y
+euro                    & begrüßen (0.10) & willkommen (0.10) & umspannen (0.09) \\
+Latvia                  & begrüßen (0.10) & willkommen (0.10) & umspannen (0.09) \\
+January                 & begrüßen (0.10) & willkommen (0.10) & umspannen (0.09) \\
+expressed               & ausdruck (0.08) & äußern (0.07) & vorsitzende (0.07) \\ % wrong PoS
+Parliament              & woge (0.12) & solidarität (0.11) & länderübergreifend (0.10) \\
+solidarity              & solidarität (0.13) & fraktion (0.05) & verschieden (0.05) \\ %Y
+victims                 & rationalisierung (0.06) & hitlerdiktatur (0.06) & sektiererisch (0.04) \\
+storms                  & pfennig (0.07) & pauschal (0.06) & sturm (0.06) \\ %Y
+President               & zukunft (0.07) & umweltkonferenz (0.07) & militärputsch (0.07) \\
+spoke                   & sprechen (0.07) & präsident (0.07) & wort (0.06) \\ %Y
+UN                      & zukunft (0.07) & umweltkonferenz (0.07) & militärputsch (0.07) \\
+conference              & konferenz (0.09) & sprechen (0.07) & wort (0.06) \\ %Y
+future                  & sprechen (0.08) & künftig (0.08) & nah (0.07) \\
+Syria                   & zukunft (0.07) & umweltkonferenz (0.07) & militärputsch (0.07) \\
+open                    & künftig (0.08) & nah (0.06) & thema (0.06) \\
+Geneva                  & zukunft (0.07) & umweltkonferenz (0.07) & militärputsch (0.07) \\
+January                 & zukunft (0.07) & umweltkonferenz (0.07) & militärputsch (0.07) \\
+President               & wahllos (0.12) & lob (0.11) & ursula (0.11) \\
+commented               & ausgezeichnet (0.07) & bemerkung (0.07) & ausführung (0.07) \\ % wrong PoS
+press                   & presse (0.10) & machen (0.08) & zweit (0.08) \\ %Y
+reports                 & van (0.12) & bericht (0.11) & periodisch (0.10) \\ %Y
+accusations             & wahllos (0.12) & lob (0.11) & ursula (0.11) \\
+made                    & machen (0.09) & zweit (0.09) & ausschuss (0.09) \\ %Y
+Romanian                & wahllos (0.12) & lob (0.11) & ursula (0.11) \\
+Prime                   & wahllos (0.12) & lob (0.11) & ursula (0.11) \\
+Minister                & wahllos (0.12) & lob (0.11) & ursula (0.11) \\
+Victor                  & wahllos (0.12) & lob (0.11) & ursula (0.11) \\
+Ponta                   & wahllos (0.12) & lob (0.11) & ursula (0.11) \\
+Elmar                   & wahllos (0.12) & lob (0.11) & ursula (0.11) \\
+Brok                    & wahllos (0.12) & lob (0.11) & ursula (0.11) \\
+deadline                & Änderungsantrag (0.13) & frist (0.13) & termin (0.12) \\ %Y
+tabling                 & Änderungsantrag (0.15) & einbringen (0.14) & kommission (0.13) \\ %Y (Änderungsantrag can be a variation for tabling)
+amendments              & Änderungsantrag (0.14) & Änderung (0.12) & klar (0.12) \\ %Y
+was                     & Änderungsantrag (0.15) & wichtig (0.14) & festlegen (0.14) \\
+set                     & Änderungsantrag (0.15) & sollen (0.15) & wichtig (0.15) \\
+Tuesday                 & ari (0.13) & einrichten (0.13) & edinburgh (0.12) \\
+January                 & ari (0.13) & einrichten (0.13) & edinburgh (0.12) \\
+noon                    & auszahlen (0.11) & finden (0.11) & sache (0.10) \\
+vote                    & abstimmung (0.16) & groß (0.14) & dürfen (0.14) \\ %Y
+be                      & wichtig (0.16) & dürfen (0.16) & richtig (0.16) \\
+held                    & sein (0.17) & werden (0.17) & sollen (0.17) \\
+Wednesday               & abstimmung (0.17) & notifizieren (0.15) & untragbar (0.15) \\
+January                 & abstimmung (0.17) & notifizieren (0.15) & untragbar (0.15) \\
+noon                    & abstimmung (0.18) & finden (0.14) & motto (0.13) \\
+appointments            & richtig (0.15) & notwendig (0.15) & möglich (0.15) \\
+be                      & wichtig (0.18) & dürfen (0.18) & europa (0.18) \\
+deemed                  & sollen (0.16) & wichtig (0.16) & dürfen (0.16) \\
+ratified                & wichtig (0.17) & mitgliedstaat (0.17) & dürfen (0.17) \\
+were                    & wichtig (0.18) & dürfen (0.18) & europa (0.18) \\
+objections              & bewusst (0.15) & parlament (0.15) & klar (0.15) \\
+approval                & sollen (0.18) & bestehen (0.17) & wichtig (0.17) \\
+minutes                 & dürfen (0.16) & müssen (0.16) & schnell (0.16) \\
+item                    & folgen (0.09) & beet (0.07) & betty (0.07) \\
+closed                  & schließen (0.10) & lücke (0.08) & aussprache (0.08) \\ %Y
