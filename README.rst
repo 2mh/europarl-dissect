@@ -61,6 +61,7 @@ SciPy) or from pip2.
 On a Debian operating system usually the following commands can be issued (as root) to bring these dependencies satisfied:
 
 ::
+
 	apt-get install python-scipy
 	pip2 install nltk
 	pip2 install dissect
