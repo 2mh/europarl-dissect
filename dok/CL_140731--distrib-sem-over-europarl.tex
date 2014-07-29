@@ -91,7 +91,7 @@ Ein weiteres Ähnlichkeitsmass, also jenes zwischen den gefundenen Übersetzungs
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Aufbau des Inputs}
 \label{cha:input}
-Das Programm \verb+create_input_data.py+ berechnet aus einem zeilenweise alignierten parallelen Text am Beispiel des Sprachpaares Deutsch--Englisch folgende Dateien:
+Das Programm \verb+create_input_data.py+ berechnet aus einem zeilenweise alignierten parallelen Text am Beispiel des Sprachpaares Deutsch--Englisch folgende Dateien, die Standardmässig im Ordner \verb+data/out+ erstellt werden:
 \begin{itemize}
 \item \verb+de-words.row+ enthält die Wörter des deutschen Textes in Kleinbuchstaben. Die Liste ist gefiltert nach Stoppwörtern:
 \begin{verbatim}
@@ -155,11 +155,45 @@ Die Aufteilung der Wortvektoren in eine Matrix pro Sprache ist ein entscheidende
 \label{cha:praxis}
 Die Programme sind stark parametrisierbar und es lassen sich die Sprachwahl, die zu verwendenden Dateien und auch Parameter zur Verarbeitung und zum Output als Argumente setzen.
 
-In \verb+parameters.py+ lassen sich die Defaultwerte langfristig festlegen, wie zum Beispiel die Anzahl der Sätze, die zur Berechnung verwendet werden sollen oder die Anzahl der angezeigten Übersetzungen.
+In \verb+parameters.py+ lassen sich die Defaultwerte langfristig festlegen, wie zum Beispiel die Anzahl der Sätze, die zur Berechnung verwendet werden sollen oder die Anzahl der angezeigten Übersetzungen. Als brauchbar erwiesen sich während der Entwicklung:
+\begin{itemize}
+\item Die Bestrafung ungewünschter Wortarten, indem der Score mit 0.3 multipliziert wird\\
+(\verb+DIFFERENT_POS_PUNISHMENT = 0.3+)
+\item Das Suchen von jeweils 100 Übersetzungskandidaten für die Weiterverarbeitung\\
+(\verb+NUMBER_OF_NEIGHBOURS = 100+)
+\item Die Ausgabe der drei besten Übersetzungskandidaten\\
+(\verb+NUMBER_OF_TRANSLATIONS = 3+)
+\item Und eine dreifache Gewichtung der Ähnlichkeit zum Quellsprachesatz gegenüber der allgemeinen Ähnlichkeit (in etwa des Übersetzungsmodells)\\
+(\verb+OVERALL_SIMILARITY_WEIGHT = 1+\\
+\verb+SENTENCE_SIMILARITY_WEIGHT = 3+)
+\end{itemize}
+
+Die Anzahl der Trainingssätze und ob diese Daten lemmatisiert werden sollen, lässt sich auch als Argument (\verb+-l 1000+ für 1000 Sätze und \verb+-t+ für Lemmatisierung dem Programm \verb+create_input_data.py+ mitgeben.
+
+Das Ausgabeformat von \verb+besttranslations.py+ lässt sich im Programm selbst ändern. Ein minimaler Beispielsaufruf dieses Skripts sieht wie folgend aus:
+
+\verb+python besttranslations.py -s en -t de -i <Inputdatei>+
+
+oder für die Analyse über die Lemmata:
+
+\verb+python besttranslations.py -l -s en -t de -i <Inputdatei>+
+
+Dabei steht \verb+-l+ für \emph{Lemmatisierung}, \verb+-s en+ für die Quellsprache Englisch, \verb+-t de+ für die Zielsprache Deutsch und mit \verb+-i+ kann die Eingabedatei angegeben werden. Alternativ wäre es auch möglich die Eingabedatei wegzulassen und den zu analysierenden Text über die Standardeingabe zu senden.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Evaluation}
 \label{cha:evaluation}
+
+Dass die Evaluation semantischer Anwendungen grundsätzlich eine Schwierigkeit darstellen kann, zeigte sich auch hier in dem Mass, dass die Evaluation nicht automatisiert werden konnte und auf Sprachwissen des Bewerters in beiden Sprachen beruhte. Durch diese Einschränkung ist auch das Testset relativ klein und es ist möglich, dass sich dadurch Verzerrungen ergeben.
+
+\section{Verwendung als Desambiguierungswerkzeug bei der Übersetzung}
+
+Der Anteil der Inhaltswörter -- darunter fassen wir Verben, Substantive, Namen und Adjektive -- für die unter den Übersetzungsvorschlägen eine korrekte Option dabei war, war deutlich höher bei der Berechnung der Matrizen über den Oberflächenformen der Wörter. Entgegen der Erwartungen waren die Resultate beim lemmatisierten Input deutlich schlechter.
+
+Ein weiteres Kriterium, das die Resultate beeinflusste, war die Grösse des Trainingskorpus. Bei sehr kleinen Mengen waren dabei die Werte tiefer als bei grösseren Mengen. Gerade bei der Oberflächenformbehandlung lässt sich dieses Spares-Data-Problem in der Tabelle unten erkennen.
+
+Bei der lemmatisierten Verarbeitung dagegen sank die Qualität der Vorschläge deutlich mit zunehmender Datenmenge und gute Vorschläge kamen nur noch vereinzelt vor.
 
 \hspace{-6cm}\begin{tikzpicture}
     \begin{axis}[
@@ -170,6 +204,7 @@ In \verb+parameters.py+ lassen sich die Defaultwerte langfristig festlegen, wie 
         bar width=14pt,
         ymajorgrids = true,
         ylabel = {Gute Vorschläge (\%)},
+        xlabel = {Trainingskorpus in Tausenden (k) Sätzen},
         symbolic x coords={150k,100k,50k,30k,20k,10k,5k},
         xtick = data,
         scaled y ticks = false,
@@ -192,7 +227,83 @@ In \verb+parameters.py+ lassen sich die Defaultwerte langfristig festlegen, wie 
     \end{axis}
 \end{tikzpicture}
 
-\section{Übersetzungskandidaten EN--DE mit 30\,000 Trainingssätzen über Wortoberflächen}
+Als mögliche Erklärung der Unterschiede zwischen den verschiedenen Paarungen kamen wir auf die Idee, dass die Anzahl der verschiedenen Wörter, also der Types, einen Einfluss haben könnte. Je grösser die Trainingsdaten waren, umso grösser wurde das Verhältnis zwischen der Anzahl der Types in den jeweiligen Sprachen. Dass Deutsch mehr Types hat, lässt sich mit der Morphologie und vor allem der Möglichkeit Komposita zu bilden erklären. Es ist möglich, dass dieses Verhältnis je ungleicher es ist, schlechtere Resultate verursacht. Wie man in folgender Tabelle erkennen kann, ist gerade bei lemmatisierten Trainingsdaten das Verhältnis besonders ungleich (also weit weg von 1) und die Resultate dort unbefriedigend.
+
+\hspace{-6cm}\begin{tikzpicture}
+    \begin{axis}[
+        width  = 18cm,
+        height = 8cm,
+        major x tick style = transparent,
+        ybar=2*\pgflinewidth,
+        bar width=10pt,
+        ymajorgrids = true,
+        ylabel = {Anzahl Types (in Tausenden)},
+        xlabel = {Trainingskorpus in Tausenden (k) Sätzen},
+        symbolic x coords={150k,100k,50k,30k,20k,10k,5k},
+        xtick = data,
+        scaled y ticks = false,
+        enlarge x limits=0.07, % balkenbreite
+        ymin=0,
+        legend cell align=left,
+        legend style={
+                at={(1,1.05)},
+                anchor=south east,
+                column sep=1ex
+        }
+    ]
+        \addplot coordinates {(150k, 95.715) (100k,76.128) (50k,51.347) (30k,38.694) (20k,30.492) (10k,19.675) (5k,13.042)};% de surf
+        \addplot coordinates {(150k, 41.096) (100k,33.889) (50k,24.760) (30k,19.741) (20k,16.217) (10k,11.460) (5k,8.100)};% en surf
+
+        \addplot coordinates {(150k, 0) (100k, 0) (50k, 0) (30k,0) (20k,0) (10k,0) (5k,0)};% en surf
+
+        \addplot coordinates {(150k, 38.763) (100k,32.658) (50k,23.878) (30k,19.034) (20k,15.598) (10k,10.839) (5k,7.461)};% de lemm
+        \addplot coordinates {(150k, 11.760) (100k,10.363) (50k,8.269) (30k,6.955) (20k,5.938) (10k,4.490) (5k,3.306)};% en lemm
+
+        \legend{DE-Types (Oberfläche), EN-Types (Oberfläche), ,DE-Types (Lemmata), EN-Types (Lemmata)} % Verhältnis-Zahl
+    \end{axis}
+\end{tikzpicture}
+
+Während die Anzahl der Types grundsätzlich verschieden ist zwischen den Sprachen, gibt es mit der Oberflächenform in beiden Sprachen etwa gleich viele Wortpaarungen innerhalb der Sprache. In diesen Fällen waren auch die Übersetzungskandidaten besonders gut. Die Verhältnisse lassen sich der folgenden Tabelle entnehmen:
+
+\hspace{-6cm}\begin{tikzpicture}
+    \begin{axis}[
+        width  = 18cm,
+        height = 8cm,
+        major x tick style = transparent,
+        ybar=2*\pgflinewidth,
+        bar width=10pt,
+        ymajorgrids = true,
+        ylabel = {Verhältnis},
+        xlabel = {Trainingskorpus in Tausenden (k) Sätzen},
+        symbolic x coords={150k,100k,50k,30k,20k,10k,5k},
+        xtick = data,
+        scaled y ticks = false,
+        enlarge x limits=0.07, % balkenbreite
+        ymin=0,
+        legend cell align=left,
+        legend style={
+                at={(1,1.05)},
+                anchor=south east,
+                column sep=1ex
+        }
+    ]
+        \addplot coordinates {(150k,2.32906) (100k,2.24639) (50k,2.07379) (30k,1.96008) (20k,1.88025) (10k,1.71684) (5k,1.61012)};% de-en ratio (s)
+        \addplot coordinates {(150k,1.28995) (100k,1.23778) (50k,1.16061) (30k,1.12278) (20k,1.09667) (10k,1.02789) (5k,0.990561)};% de-de--en-en-ratio (s)
+        \addplot coordinates {(150k,0) (100k,0) (50k,0) (30k,0) (20k,0) (10k,0) (5k,0)};% void
+        \addplot coordinates {(150k,3.29617) (100k,3.1514) (50k,2.88765) (30k,2.73674) (20k,2.62681) (10k,2.41403) (5k,2.25681)};% de-en ratio (t)
+        \addplot coordinates {(150k,3.16197) (100k,3.05025) (50k,2.88568) (30k,2.87985) (20k,2.8166) (10k,2.68355) (5k,2.65067)};% de-de--en-en-ratio (t)
+
+        \legend{Verhältnis DE / EN (Oberfläche), Verhältnis DE-DE / EN-EN (Oberfläche),,Verhältnis DE / EN (Lemmata), Verhältnis DE-DE / EN-EN (Lemmata) }
+    \end{axis}
+\end{tikzpicture}
+
+\subsection{Übersetzungskandidaten EN--DE mit 30\,000 Trainingssätzen über Wortoberflächen}
+In der Übersetzungsrichtung Englisch-Deutsch konnten die besten Resultate mit einem Trainingskorpus von 30\,000 Sätzen erreicht werden. Das Verhältnis zwischen Vorschlägen mit und ohne gute Kandidaten lässt sich der untenstehenden Tabelle entnehmen. Die Eingabewörter, für die keine gute Übersetzung gefunden wurde, sind dabei rot eingefärbt.
+
+Hervorheben wollen wir dabei das Beispiel 'reports', das mit 'berichte' und 'berichten' übersetzt wurde. Beide verschiedenen Formen sind dabei relativ nahe am Eingangswort. Interessant wäre natürlich noch die Ähnlichkeit zwischen den beiden Vorschlägen, doch liesse sich diese wegen dem Satzkontext nicht direkt vergleichen.
+
+Besonders ist auch das Beispiel 'welcomed', bei dem keiner der Vorschläge gut ist, jedoch die Vorschläge untereinander als hochgradig ähnlich bezeichnet werden können: 'präsidentin', 'präsident' und 'kommissionspräsident'. Man muss deshalb vermuten, dass die Semantik von 'welcomed' in diesem Beispiel verzerrt ist und das Wort im Korpus sehr oft im Zusammenhang mit Präsidenten verwendet wird.
+
 \hspace{-4cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 sitting                 & sitzung (0.36) & 23.50 (0.29) & 00.05 (0.28) \\ %Y
@@ -265,8 +376,10 @@ closed                  & geschlossen (0.47) & 1999-2000 (0.31) & 19.40 (0.31) \
 
 
 %%%
-\section{Übersetzungskandidaten DE--EN mit 20\,000 Trainingssätzen über Wortoberflächen}
+\subsection{Übersetzungskandidaten DE--EN mit 20\,000 Trainingssätzen über Wortoberflächen}
 \label{sec:evalDeEn10kSurf}
+Nicht besonders anders sehen die Resultate in die umgekehrte Übersetzungsrichtung aus. Hier war das Trainingsset mit 20\,000 die Basis für die besten Ergebnisse.
+
 \hspace{-4cm}\begin{scriptsize}\begin{tabular}{|llll|}
 \hline
 Sitzung                 & sitting (0.54) & suspended (0.52) & 11.50 (0.51) \\ %Y
@@ -347,9 +460,7 @@ geschlossen             & closed (0.43) & 8.25 (0.30) & 11.10 (0.30) \\ %Y
 \hline
 \end{tabular}\end{scriptsize}\\
 
-\section{Übersetzungskandidaten EN--DE mit 10\,000 Trainingssätzen über Wortoberflächen}
-\label{sec:evalDeEn10kSurf}
-\section{Übersetzungskandidaten EN--DE mit 10\,000 Trainingssätzen über Wortoberflächen}
+
 
 \section{Innerhalb einer Sprache}
 Die folgenden Beispiele zeigen, was passiert, wenn man innerhalb einer Sprache probiert zu übersetzen. Für die Semantik wurden die gleiche Art von Matrizen verwendet wie bei den zweisprachigen Versuchen, jedoch wurde für die Ausgangs- und Zielsprache -- die ja gleich sind -- dieselbe Matrix verwendet. Von einer Arbeitsweise rein in einer Sprache unterscheidet sich dieses Verfahren nur darin, dass in den Vektordimensionen noch die Wörter der anderen Sprache auftauchen. Der Einfluss sollte sich gering halten und es könnte höchstens erwartet werden, dass satzabhängige ähnliche Wörter gefunden werden.
@@ -388,8 +499,6 @@ January                 & january (0.33) & standardisation (0.19) & constructed 
 2014. & & & \\
 \hline
 \end{tabular}\end{footnotesize}\\
-
-Mit dem Beispiel von 'President', das nicht mehr gefunden wurde, haben wir einen Fall, der an die zweisprachige Evaluation erinnert, wo dieses Wort auch Schwierigkeiten ergab und die Vorschläge ähnlich waren.
 
 Grosse Beachtung verdienen auch die verschiedenen Vorschläge für 'sitting': Einmal wurde korrekt wieder auf 'sitting' verwiesen mit Zahlausdrücken als Alternative, das andere Mal kamen nur die Zahlausdrücke.
 
@@ -522,21 +631,25 @@ sehr häppy. es klappt.
 
 speziell: lemmatisierung. für englisch offenbar nicht gut. (wortarten bleiben erhalten, was macht es also bei englisch für einen unterschied?
 
+smoothing?
 
 
-Versuchsreihen mit ähnlicheren Sprachen?
+Als Mögliche Gebiete zur Weiterarbeit stehen sicherlich einmal die Wahl der Sprachen zur Verfügung, wobei es interessant wäre mit zwei einander sehr ähnlichen Sprachen, und die Wahl der Textdomäne.
 
-hapax legomena aus den vektordimensionen entfernen?
+Vorstellbar ist auch eine Optimierung, bei der Wörter, die nur einmal auftreten gar nicht in die Wortvektordimensionen aufgenommen werden, wodurch sich die Matrix sicherlich in eine Dimension verkleinern würde.
 
-smoothing
-
-anderes korpus? das hier ist hochgradig domänenspezifisch. opensubs?
+Aktuellere Optimierungen in der distributionellen Semantik wie die Restriktion des Umfeldes auf gewisse grammatische oder thematische Funktionen erscheinen hier deutlich komplizierter, da dies eine gute Alignierung auf der Wortebene verlangen würde und nicht ganz klar wäre, wie die Relationen sich über die Sprachgrenze verhalten müssten.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{plain-de}     % For German
 \bibliography{seminar}
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\listoffigures
-\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+%\listoffigures
+%\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 \end{document}
+
+% TODO:
+% README einbinden
+% erklaeren, wie man korpora einbindet
+% schlusswort
