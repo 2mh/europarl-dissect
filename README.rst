@@ -40,17 +40,31 @@ Dependencies
 It was tested with following additional Python libraries it externally
 relies on:
 
+- `DISSECT 0.1.0 <http://clic.cimec.unitn.it/composes/toolkit/installation.html>`__ is used for creating the semantic spaces and calculate all similarities involved.
 - `NLTK 2.0.4 <http://www.nltk.org/>`__
 - `SciPy 0.12.0 <http://sourceforge.net/projects/scipy/>`__
 
-The following two frameworks are included inside the ``lib/`` directory,
-to ensure better compatibility for the time being:
+The following program is included inside the ``lib/`` directory to ensure better compatibility for the time being (as the package
+doesn't appear packaged by operating systems or e. g. pip2):
 
-- `DISSECT 0.1.0 <http://clic.cimec.unitn.it/composes/toolkit/installation.html>`__ is used for creating the semantic spaces and calculate all similarities involved.
 - `TreeTaggerWrapper <http://perso.limsi.fr/pointal/?id=dev:treetaggerwrapper>`__  allows to efficiently access the `TreeTagger <http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/>`__  program for POS tagging and lemmatization of the input material in various languages.
 
 Installation
 ------------
+
+Resolving the dependencies
+**************************
+
+The three libraries required as stated above can either be installed from operating system package systems (as this is the case for
+SciPy) or from pip2.
+
+On a Debian operating system usually the following commands can be issued (as root) to bring these dependencies satisfied:
+
+::
+	apt-get install python-scipy
+	pip2 install nltk
+	pip2 install dissect
+
 
 TreeTagger installation
 ***********************

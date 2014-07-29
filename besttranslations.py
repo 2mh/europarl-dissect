@@ -10,10 +10,11 @@ import re, sys, subprocess, argparse
 import numpy as np
 from collections import defaultdict
 
-from lib.dissect.composes.utils import io_utils
-from lib.dissect.composes.similarity.cos import CosSimilarity
-from lib.dissect.composes.semantic_space.space import Space
-from lib.dissect.composes.matrix.dense_matrix import DenseMatrix
+from composes.utils import io_utils
+from composes.similarity.cos import CosSimilarity
+from composes.semantic_space.space import Space
+from composes.matrix.dense_matrix import DenseMatrix
+
 from lib.ttpw.treetaggerwrapper import TreeTagger
 
 import helpers

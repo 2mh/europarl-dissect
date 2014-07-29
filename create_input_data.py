@@ -18,9 +18,9 @@ from sys import exit, stderr
 
 from nltk.corpus import stopwords
 from nltk import word_tokenize
+from composes.semantic_space.space import Space
+from composes.utils import io_utils
 
-from lib.dissect.composes.semantic_space.space import Space
-from lib.dissect.composes.utils import io_utils
 from lib.ttpw.treetaggerwrapper import TreeTagger
 
 from helpers import LONG_LANGTAG, getTag, Suffixes, InputFilenames, \
