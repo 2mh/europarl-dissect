@@ -1,0 +1,75 @@
+Sitzung                 & 9.05 (0.62) & sitting (0.57) & 11.50 (0.55) \\ %Y
+wird                    & 9.05 (0.71) & sitting (0.64) & 11.50 (0.60) \\
+Uhr                     & 9.05 (0.58) & p.m (0.53) & 11.50 (0.52) \\ %Y
+eröffnet               & 9.05 (0.58) & opened (0.21) & union-ukraine (0.15) \\ %Y
+Protokoll               & sitting (0.44) & minutes (0.42) & distributed (0.25) \\
+vorangegangenen         & sitting (0.44) & minutes (0.40) & distributed (0.23) \\
+Sitzung                 & sitting (0.46) & minutes (0.42) & 12.35 (0.28) \\ %Y
+wird                    & sitting (0.49) & minutes (0.46) & distributed (0.23) \\
+genehmigt               & sitting (0.41) & minutes (0.40) & protocol (0.22) \\
+Präsident              & president (0.27) & ladies (0.25) & congratulating (0.24) \\ %Y
+begrüßt               & welcomes (0.29) & 's (0.18) & following (0.16) \\ %Y
+Einführung             & euro (0.40) & currency (0.39) & single (0.21) \\
+Euro                    & euro (0.38) & currency (0.35) & eur (0.25) \\ %Y
+Währung                & currency (0.37) & euro (0.37) & monetary (0.24) \\ %Y
+Lettland                & latvia (0.26) & lithuania (0.18) & facilitations (0.17) \\ %Y
+1.                      & january (0.41) & 1 (0.21) & onwards (0.17) \\ %Y
+Januar                  & january (0.36) & onwards (0.16) & activated (0.16) \\ %Y
+2014.                   & euro (0.38) & introduction (0.36) & january (0.36) \\
+spricht                 & 's (0.25) & within (0.20) & action (0.20) \\
+Opfern                  & solidarity (0.33) & enschede (0.22) & relatives (0.21) \\
+Unwetter                & overflights (0.12) & 180 (0.10) & 'fast (0.10) \\
+Solidarität            & solidarity (0.37) & verdicts (0.28) & 's (0.21) \\ %Y
+Europäischen           & solidarity (0.38) & parliament (0.31) & union (0.30) \\
+Parlaments              & adjourned (0.29) & parliament (0.29) & proceeded (0.28) \\ %Y
+Präsident              & president (0.24) & ladies (0.23) & congratulating (0.23) \\ %Y
+erinnert                & us (0.18) & one (0.18) & held (0.18) \\
+Konferenz               & presidents (0.26) & conference (0.24) & programmes. (0.16) \\ %Y
+Vereinten               & nations (0.40) & un (0.24) & idealistic (0.24) \\ %Y (good!)
+Nationen                & nations (0.34) & un (0.21) & ldc-iv (0.21) \\ %Y (good!)
+Zukunft                 & future (0.24) & heal (0.16) & 'close (0.14) \\ %Y
+Syriens                 & lebanon (0.10) & renounce (0.08) & syrian (0.08) \\ %Y
+Eröffnung              & opening (0.13) & developmental (0.13) & photo (0.12) \\ %Y
+22.                     & 'exercise (0.15) & place (0.12) & convention (0.12) \\
+Januar                  & january (0.26) & 1968 (0.12) & held (0.12) \\ %Y
+Genf                    & nations (0.27) & geneva (0.23) & robinson (0.20) \\ %Y
+anberaumt               & nations (0.29) & january (0.22) & future (0.20) \\
+ist                     & nations (0.29) & january (0.22) & future (0.20) \\
+Präsident              & president (0.26) & ladies (0.24) & congratulating (0.24) \\ %Y
+weist                   & one (0.13) & fact (0.13) & ranges (0.12) \\
+Pressemeldungen         & brok (0.19) & li (0.18) & es (0.18) \\
+Vorwürfe               & expounded (0.16) & grass (0.16) & grievances (0.16) \\ %Y (excellent!)
+rumänische             & canadian-romanian (0.20) & architectural (0.19) & montană (0.18) \\ %Y (with goodwill)
+Premierminister         & minister (0.24) & vanhanen (0.22) & topolánek (0.22) \\ %Y
+Victor                  & victor (0.23) & orbán (0.19) & b7-0805/2010 (0.18) \\ %Y
+Ponta                   & brok (0.19) & li (0.18) & es (0.18) \\
+Elmar                   & mr von wogau (0.26) & mr brok (0.25) & b6-0225/2006 (0.24) \\
+Brok                    & brok (0.25) & stubb (0.18) & republic (0.18) \\ %Y
+erhoben                 & held (0.12) & taking (0.12) & one (0.11) \\
+hat                     & brok (0.19) & li (0.18) & es (0.18) \\
+Frist                   & deadline (0.25) & january (0.24) & limit (0.14) \\ %Y
+Einreichung             & 12.00 (0.25) & deadline (0.21) & p.m. (0.20) \\
+Änderungsanträgen     & nos (0.16) & rallied (0.13) & tabled (0.13) \\ %Y (tabled can work)
+wird                    & 12.00 (0.29) & january (0.23) & 11.50 (0.23) \\
+Dienstag                & tuesday (0.23) & sloppiness (0.16) & unofficially (0.14) \\ %Y
+14.                     & 14. (0.15) & 14 (0.11) & 2002 (0.11) \\ %Y
+Januar                  & january (0.27) & 1968 (0.13) & yakaolang (0.11) \\ %Y
+Uhr                     & 12.00 (0.36) & p.m (0.31) & 12:00 (0.28) \\ %Y
+festgesetzt             & unregulated (0.11) & limit (0.10) & transposed (0.10) \\
+Abstimmung              & 12:00 (0.54) & noon (0.53) & a.m (0.48) \\
+findet                  & 12:00 (0.58) & noon (0.57) & a.m (0.53) \\
+Mittwoch                & a.m (0.39) & 12 noon (0.36) & wednesday (0.32) \\ %Y
+15.                     & take (0.16) & 15 (0.13) & six-digit (0.13) \\ %Y
+Januar                  & january (0.28) & place (0.22) & take (0.15) \\ %Y
+Uhr                     & 12:00 (0.52) & noon (0.51) & 12.00 (0.51) \\ %Y
+Benennungen             & four-star (0.19) & refrigerator-freezers (0.18) & coefficients (0.18) \\
+gelten                  & apply (0.19) & environmental (0.12) & applied (0.12) \\ %Y
+bestätigt              & 's (0.13) & established (0.12) & policy (0.12) \\
+Genehmigung             & approval (0.16) & protocol (0.14) & authorising (0.13) \\ %Y
+vorliegenden            & 's (0.14) & relating (0.14) & concerning (0.13) \\
+Protokolls              & protocol (0.17) & são (0.13) & tomé (0.13) \\ %Y
+Widerspruch             & counter (0.12) & calling (0.11) & 's (0.10) \\ % counter could work, but not clear
+eingeht                 & nappies (0.10) & governments. (0.09) & nepad (0.08) \\
+Punkt                   & point (0.29) & concerns (0.18) & namely (0.17) \\ %Y
+ist                     & closed (0.43) & concludes (0.40) & however. (0.32) \\
+geschlossen             & closed (0.42) & 11.46 (0.29) & 4.10 (0.29) \\ %Y
