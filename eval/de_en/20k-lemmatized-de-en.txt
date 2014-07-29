@@ -1,0 +1,75 @@
+Sitzung                 & suspend (0.16) & become (0.12) & open (0.11) \\
+wird                    & open (0.12) & distribute (0.12) & use (0.11) \\
+Uhr                     & p.m. (0.17) & resume (0.15) & suspend (0.13) \\ %Y
+eröffnet               & become (0.11) & open (0.11) & distribute (0.11) \\ %Y
+Protokoll               & distribute (0.12) & become (0.11) & introduce (0.10) \\
+vorangegangenen         & distribute (0.12) & period (0.10) & continue (0.10) \\
+Sitzung                 & distribute (0.12) & suspend (0.12) & become (0.11) \\
+wird                    & distribute (0.12) & use (0.11) & introduce (0.11) \\
+genehmigt               & distribute (0.11) & use (0.09) & introduce (0.09) \\
+Präsident              & please (0.08) & today (0.08) & debate (0.08) \\
+begrüßt               & introduce (0.07) & debate (0.07) & today (0.07) \\ % not quite
+Einführung             & introduce (0.07) & protect (0.07) & run (0.07) \\ % wrong PoS
+Euro                    & introduce (0.07) & protect (0.07) & run (0.07) \\
+Währung                & introduce (0.07) & protect (0.07) & debate (0.07) \\
+Lettland                & welcome (0.08) & introduction (0.07) & safe (0.07) \\
+1.                      & introduce (0.07) & protect (0.07) & debate (0.07) \\
+Januar                  & introduce (0.07) & protect (0.07) & debate (0.07) \\
+2014.                   & welcome (0.08) & introduction (0.07) & safe (0.07) \\
+spricht                 & talk (0.10) & discuss (0.09) & heart (0.09) \\ %Y
+Opfern                  & discuss (0.09) & establish (0.08) & give (0.08) \\
+Unwetter                & advance (0.06) & weather (0.06) & sympathy (0.06) \\ %Y
+Solidarität            & solidarity (0.12) & discuss (0.07) & heart (0.07) \\ %Y
+Europäischen           & adopt (0.10) & call (0.09) & discuss (0.09) \\
+Parlaments              & adopt (0.10) & discuss (0.09) & call (0.09) \\
+Präsident              & today (0.11) & fact (0.10) & matter (0.10) \\
+erinnert                & today (0.10) & hold (0.10) & thing (0.10) \\
+Konferenz               & hold (0.10) & today (0.10) & thing (0.09) \\
+Vereinten               & hold (0.09) & happen (0.09) & something (0.09) \\
+Nationen                & hold (0.10) & happen (0.10) & today (0.10) \\
+Zukunft                 & future (0.10) & hold (0.09) & something (0.09) \\ %Y
+Syriens                 & link (0.09) & hold (0.09) & thing (0.09) \\
+Eröffnung              & today (0.09) & hold (0.09) & thing (0.09) \\
+22.                     & today (0.07) & link (0.07) & point (0.07) \\
+Januar                  & hold (0.10) & today (0.10) & thing (0.10) \\
+Genf                    & hold (0.09) & link (0.09) & something (0.09) \\
+anberaumt               & remind (0.09) & conference (0.08) & uno (0.07) \\
+ist                     & hold (0.10) & thing (0.10) & something (0.10) \\
+Präsident              & today (0.10) & deal (0.10) & mention (0.10) \\
+weist                   & spend (0.09) & bring (0.09) & give (0.08) \\
+Pressemeldungen         & interlocutor (0.09) & upswing (0.08) & reinstatement (0.07) \\
+Vorwürfe               & spend (0.07) & bring (0.07) & nothing (0.07) \\
+rumänische             & deal (0.06) & disaster (0.05) & goldmine (0.05) \\
+Premierminister         & hear (0.09) & write (0.08) & deal (0.08) \\
+Victor                  & interlocutor (0.09) & upswing (0.08) & reinstatement (0.07) \\
+Ponta                   & interlocutor (0.09) & upswing (0.08) & reinstatement (0.07) \\
+Elmar                   & bring (0.07) & delight (0.07) & discuss (0.07) \\
+Brok                    & interlocutor (0.09) & upswing (0.08) & reinstatement (0.07) \\
+erhoben                 & bring (0.08) & spend (0.08) & give (0.08) \\
+hat                     & deal (0.09) & describe (0.09) & today (0.09) \\
+Frist                   & submit (0.10) & introduce (0.10) & grant (0.10) \\
+Einreichung             & supplement (0.07) & limit (0.06) & guidance (0.04) \\
+Änderungsanträgen     & become (0.10) & submit (0.10) & introduce (0.10) \\
+wird                    & introduce (0.10) & use (0.10) & take (0.10) \\
+Dienstag                & place (0.07) & see (0.07) & take (0.06) \\
+14.                     & approve (0.08) & submit (0.08) & grant (0.08) \\
+Januar                  & submit (0.10) & introduce (0.10) & grant (0.10) \\
+Uhr                     & p.m. (0.11) & resume (0.09) & tomorrow (0.09) \\ %Y
+festgesetzt             & introduce (0.09) & use (0.09) & take (0.09) \\
+Abstimmung              & noon (0.17) & a.m. (0.16) & p.m. (0.14) \\
+findet                  & place (0.10) & find (0.07) & take (0.07) \\ %Y
+Mittwoch                & find (0.06) & take (0.06) & request (0.06) \\
+15.                     & find (0.05) & take (0.04) & date (0.04) \\
+Januar                  & find (0.08) & take (0.07) & hold (0.07) \\
+Uhr                     & a.m. (0.15) & noon (0.15) & p.m. (0.13) \\ %Y
+Benennungen             & apply (0.04) & relate (0.04) & address (0.04) \\
+gelten                  & apply (0.07) & distribute (0.07) & go (0.07) \\ %Y
+bestätigt              & apply (0.07) & distribute (0.07) & put (0.06) \\
+Genehmigung             & apply (0.06) & distribute (0.06) & go (0.05) \\
+vorliegenden            & apply (0.07) & distribute (0.07) & concern (0.07) \\
+Protokolls              & distribute (0.07) & apply (0.07) & go (0.06) \\
+Widerspruch             & contradiction (0.09) & apply (0.07) & concern (0.06) \\ %Y
+eingeht                 & apply (0.07) & distribute (0.07) & go (0.07) \\
+Punkt                   & thing (0.13) & matter (0.13) & something (0.13) \\
+ist                     & thing (0.13) & something (0.12) & matter (0.12) \\
+geschlossen             & close (0.16) & thing (0.12) & link (0.12) \\ %Y

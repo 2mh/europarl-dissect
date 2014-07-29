@@ -1,0 +1,64 @@
+sitting                 & protokoll (0.07) & genehmigung (0.06) & vorangegangen (0.05) \\
+opened                  & klar (0.07) & neu (0.06) & kommissar (0.06) \\
+minutes                 & annehmen (0.14) & müssen (0.13) & parlament (0.13) \\
+previous                & genehmigen (0.16) & verrücken (0.15) & copyright (0.15) \\
+sitting                 & protokoll (0.14) & annehmen (0.14) & genehmigung (0.13) \\
+were                    & klar (0.16) & dürfen (0.16) & richtig (0.16) \\
+approved                & annehmen (0.16) & zustimmung (0.16) & dürfen (0.16) \\ %Y
+President               & versammelt (0.12) & fälscher (0.11) & begrüßen (0.10) \\
+welcomed                & begrüßen (0.12) & präsident (0.05) & abschließend (0.05) \\ %Y
+adoption                & annahme (0.08) & schlussfolgerung (0.05) & zweit (0.05) \\ %Y
+euro                    & versammelt (0.12) & fälscher (0.11) & begrüßen (0.10) \\
+Latvia                  & versammelt (0.12) & fälscher (0.11) & begrüßen (0.10) \\
+January                 & versammelt (0.12) & fälscher (0.11) & begrüßen (0.10) \\
+expressed               & ausdruck (0.08) & äußern (0.07) & vorsitzende (0.06) \\ % wrong PoS
+Parliament              & woge (0.12) & solidarität (0.11) & länderübergreifend (0.10) \\
+solidarity              & ausdruck (0.08) & äußern (0.07) & bringen (0.06) \\
+victims                 & bohrinsel (0.06) & opfer (0.06) & schädigung (0.05) \\ %Y
+storms                  & sturm (0.06) & pauschal (0.06) & französisch (0.05) \\ %Y
+President               & negative (0.07) & zukunft (0.07) & umweltkonferenz (0.07) \\
+spoke                   & sprechen (0.07) & präsident (0.07) & herr (0.06) \\ %Y
+UN                      & negative (0.07) & zukunft (0.07) & umweltkonferenz (0.07) \\
+conference              & konferenz (0.09) & wort (0.06) & kommissar (0.06) \\ %Y
+future                  & dankbar (0.07) & kommissar (0.07) & november (0.07) \\
+Syria                   & negative (0.07) & zukunft (0.07) & umweltkonferenz (0.07) \\
+open                    & kommissar (0.07) & nah (0.07) & derartig (0.07) \\
+Geneva                  & negative (0.07) & zukunft (0.07) & umweltkonferenz (0.07) \\
+January                 & negative (0.07) & zukunft (0.07) & umweltkonferenz (0.07) \\
+President               & wahllos (0.11) & sachverständiger (0.09) & fortschrittsbericht (0.09) \\
+commented               & bemerkung (0.08) & gestatten (0.08) & geehrt (0.07) \\ % wrong PoS
+press                   & kollege (0.07) & herr (0.07) & ausschuss (0.07) \\
+reports                 & bericht (0.10) & van (0.10) & ausgezeichnet (0.09) \\ %Y
+accusations             & beschuldigung (0.08) & justizbehörde (0.05) & strategieentwicklung (0.04) \\ %Y
+made                    & kollege (0.09) & schlussfolgerung (0.09) & deutlich (0.08) \\
+Romanian                & wahllos (0.11) & sachverständiger (0.09) & fortschrittsbericht (0.09) \\
+Prime                   & wahllos (0.11) & sachverständiger (0.09) & fortschrittsbericht (0.09) \\
+Minister                & wahllos (0.11) & sachverständiger (0.09) & fortschrittsbericht (0.09) \\
+Victor                  & wahllos (0.11) & sachverständiger (0.09) & fortschrittsbericht (0.09) \\
+Ponta                   & wahllos (0.11) & sachverständiger (0.09) & fortschrittsbericht (0.09) \\
+Elmar                   & wahllos (0.11) & sachverständiger (0.09) & fortschrittsbericht (0.09) \\
+Brok                    & wahllos (0.11) & sachverständiger (0.09) & fortschrittsbericht (0.09) \\
+deadline                & Änderungsantrag (0.14) & frist (0.14) & termin (0.13) \\ %Y
+tabling                 & Änderungsantrag (0.15) & einbringen (0.14) & eingebracht (0.13) \\ %Y (Änderungsantrag can be a variation of tabling)
+amendments              & Änderungsantrag (0.14) & eingebracht (0.13) & Änderung (0.13) \\ %Y
+was                     & Änderungsantrag (0.15) & klar (0.14) & dürfen (0.14) \\
+set                     & Änderungsantrag (0.16) & wichtig (0.15) & klar (0.15) \\
+Tuesday                 & ari (0.13) & ferne (0.13) & Änderungsantrag (0.13) \\
+January                 & ari (0.13) & ferne (0.13) & Änderungsantrag (0.13) \\
+noon                    & finden (0.10) & berücksichtigung (0.10) & abstimmung (0.10) \\
+vote                    & grund (0.14) & grund|gründen (0.14) & dürfen (0.14) \\
+be                      & dürfen (0.16) & klar (0.16) & richtig (0.16) \\
+held                    & wichtig (0.17) & sollen (0.17) & gehen (0.17) \\
+Wednesday               & abstimmung (0.16) & zirkel (0.16) & votum (0.16) \\
+January                 & abstimmung (0.16) & zirkel (0.16) & votum (0.16) \\
+noon                    & abstimmung (0.18) & votum (0.14) & finden (0.13) \\
+appointments            & wichtig (0.17) & dürfen (0.17) & sicher (0.17) \\
+be                      & dürfen (0.18) & klar (0.18) & richtig (0.18) \\
+deemed                  & bestehen (0.18) & sollen (0.18) & gehen (0.18) \\
+ratified                & dürfen (0.18) & mitgliedstaat (0.18) & sicher (0.18) \\
+were                    & dürfen (0.18) & klar (0.18) & richtig (0.18) \\
+objections              & klar (0.16) & bewusst (0.16) & erst (0.16) \\
+approval                & sicher (0.18) & klar (0.18) & groß (0.18) \\
+minutes                 & müssen (0.16) & treffen|triefen (0.16) & behandeln (0.15) \\
+item                    & folgen (0.09) & tagesordnung (0.07) & varela (0.05) \\ % not quite
+closed                  & schließen (0.11) & aussprache (0.09) & sitzung (0.07) \\ %Y

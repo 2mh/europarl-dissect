@@ -1,0 +1,64 @@
+sitting                 & protokoll (0.06) & vorangegangen (0.06) & genehmigung (0.06) \\
+opened                  & einleiten (0.06) & denken (0.06) & kommissar (0.06) \\
+minutes                 & annehmen (0.15) & dürfen (0.14) & sicher (0.14) \\
+previous                & genehmigen (0.17) & verrücken (0.15) & copyright (0.15) \\
+sitting                 & protokoll (0.15) & annehmen (0.14) & genehmigung (0.14) \\
+were                    & klar (0.16) & dürfen (0.16) & sicher (0.16) \\
+approved                & annehmen (0.16) & grund (0.16) & dürfen (0.16) \\ %Y
+President               & begrüßen (0.11) & politikdebatte (0.11) & fälscher (0.11) \\
+welcomed                & begrüßen (0.12) & präsident (0.05) & abschließend (0.05) \\ %Y
+adoption                & annahme (0.08) & kommissionsmitglied (0.05) & empfehlung (0.05) \\ %Y
+euro                    & begrüßen (0.11) & politikdebatte (0.11) & fälscher (0.11) \\
+Latvia                  & begrüßen (0.11) & politikdebatte (0.11) & fälscher (0.11) \\
+January                 & begrüßen (0.11) & politikdebatte (0.11) & fälscher (0.11) \\
+expressed               & ausdruck (0.08) & aussprechen (0.07) & präsident (0.07) \\ % wrong PoS
+Parliament              & woge (0.12) & solidarität (0.10) & holzexport (0.07) \\
+solidarity              & bringen (0.06) & volk (0.06) & anliegen (0.06) \\
+victims                 & opfer (0.06) & anmerken (0.05) & anliegen (0.05) \\ %Y
+storms                  & sturm (0.07) & unmittelbar (0.05) & umstand (0.05) \\ %Y
+President               & parteichef (0.09) & enkelkind (0.07) & negative (0.07) \\
+spoke                   & sprechen (0.07) & präsident (0.07) & ratspräsident (0.07) \\ %Y
+UN                      & parteichef (0.09) & enkelkind (0.07) & negative (0.07) \\
+conference              & konferenz (0.09) & mai (0.06) & november (0.06) \\ %Y
+future                  & nah (0.07) & kommissar (0.07) & verhandlung (0.07) \\
+Syria                   & parteichef (0.09) & enkelkind (0.07) & negative (0.07) \\
+open                    & nah (0.07) & kommissar (0.07) & verhandlung (0.07) \\
+Geneva                  & parteichef (0.09) & enkelkind (0.07) & negative (0.07) \\
+January                 & parteichef (0.09) & enkelkind (0.07) & negative (0.07) \\
+President               & rapport (0.13) & wahllos (0.11) & sachverständiger (0.09) \\
+commented               & bemerkung (0.09) & anmerkung (0.08) & gestatten (0.07) \\ % wrong PoS
+press                   & eingehen (0.07) & kollege (0.07) & schlussfolgerung (0.07) \\
+reports                 & bericht (0.10) & van (0.09) & ausgezeichnet (0.09) \\ %Y
+accusations             & beschuldigung (0.06) & fraktionssprecher (0.06) & überproportional (0.05) \\ %Y
+made                    & eingehen (0.09) & kollege (0.09) & schlussfolgerung (0.09) \\
+Romanian                & rapport (0.13) & wahllos (0.11) & sachverständiger (0.09) \\
+Prime                   & rapport (0.13) & wahllos (0.11) & sachverständiger (0.09) \\
+Minister                & rapport (0.13) & wahllos (0.11) & sachverständiger (0.09) \\
+Victor                  & rapport (0.13) & wahllos (0.11) & sachverständiger (0.09) \\
+Ponta                   & rapport (0.13) & wahllos (0.11) & sachverständiger (0.09) \\
+Elmar                   & rapport (0.13) & wahllos (0.11) & sachverständiger (0.09) \\
+Brok                    & rapport (0.13) & wahllos (0.11) & sachverständiger (0.09) \\
+deadline                & Änderungsantrag (0.14) & frist (0.14) & termin (0.14) \\ %Y
+tabling                 & Änderungsantrag (0.15) & einbringen (0.14) & einreichen (0.14) \\ %Y (Änderungsantrag can be variant of tabling)
+amendments              & Änderungsantrag (0.14) & einreichen (0.13) & einbringen (0.13) \\ %Y
+was                     & Änderungsantrag (0.15) & festlegen (0.14) & klar (0.14) \\
+set                     & Änderungsantrag (0.16) & festlegen (0.15) & klar (0.15) \\ %Y
+Tuesday                 & nachprüfbar (0.13) & ari (0.13) & festsetzen (0.13) \\
+January                 & nachprüfbar (0.13) & ari (0.13) & festsetzen (0.13) \\
+noon                    & finden (0.11) & abstimmung (0.10) & donnerstag (0.10) \\
+vote                    & grund|gründen (0.14) & klar (0.14) & übrig (0.14) \\
+be                      & dürfen (0.16) & klar (0.16) & sicher (0.16) \\
+held                    & wichtig (0.17) & sollen (0.17) & dürfen (0.17) \\
+Wednesday               & abstimmung (0.18) & zustoßen (0.17) & zirkel (0.16) \\
+January                 & abstimmung (0.18) & zustoßen (0.17) & zirkel (0.16) \\
+noon                    & abstimmung (0.18) & donnerstag (0.14) & finden (0.14) \\
+appointments            & dürfen (0.18) & sicher (0.18) & klar (0.18) \\
+be                      & klar (0.18) & dürfen (0.18) & sicher (0.18) \\
+deemed                  & sollen (0.18) & dürfen (0.18) & eu (0.18) \\
+ratified                & mitgliedstaat (0.18) & vertrag (0.17) & union (0.17) \\
+were                    & klar (0.18) & dürfen (0.18) & sicher (0.18) \\
+objections              & bewusst (0.16) & parlament (0.16) & anwesend (0.15) \\
+approval                & dürfen (0.18) & mitgliedstaat (0.18) & sicher (0.18) \\
+minutes                 & dürfen (0.17) & sicher (0.17) & klar (0.16) \\
+item                    & folgen (0.09) & tagesordnung (0.07) & varela (0.05) \\
+closed                  & schließen (0.11) & aussprache (0.09) & lücke (0.08) \\
