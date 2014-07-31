@@ -150,12 +150,19 @@ Aus diesen Dateien werden die gepickelten\footnote{Die Daten werden für eine ef
 
 Diese gepickelten Matrixdateien werden zusammen mit der Dimensionendatei \verb+de_en-words.col+ ans Programm \verb+besttranslations.py+ weitergegeben und dort eingelesen, bzw. beim Erstellen der Satzmatrix gebraucht.
 
-Die Aufteilung der Wortvektoren in eine Matrix pro Sprache ist ein entscheidender Teil der Implementierung, da dadurch auf saubere Weise verhindert werden kann, dass Kandidaten in der ungewünschten Sprache durch Dissect gefunden. In einem ersten Aufbau wurden diese ungewünschten Wörter nach Abgleich des Sprachtags bestraft, d.\,h. ihr Ähnlichkeitswert auf 0.0 gesetzt. Dabei bestand die Gefahr, dass für manche Wörter in den x ähnlichsten Wörtern nur unerwünschte Kandidaten gefunden wurden und die dann allesamt bestraft wurden, wodurch schliesslich für diese Wörter nichts Brauchbares gefunden wurde.
-
-
+Die Aufteilung der Wortvektoren in eine Matrix pro Sprache ist ein entscheidender Teil der Implementierung, da dadurch auf saubere Weise verhindert werden kann, dass Kandidaten in der ungewünschten Sprache durch DISSECT gefunden werden. In einem ersten Aufbau wurden ungewünschte Wörter nach Abgleich des Sprachtags bestraft, d.\,h. ihr Ähnlichkeitswert auf 0.0 gesetzt. Dabei bestand die Gefahr, dass für manche Wörter nur ungewünchte Wörter als die ähnlichsten
+erschienen, die allesamt bestraft wurden. Dies hat darin resultiert, dass
+keine Kandidaten vorgeschlagen werden konnten.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Praxis}
 \label{cha:praxis}
+Unser Softwaresystem, das sich der DISSECT-Bibliothek bedient, ist
+auf github öffentlich verfügbar: \url{https://github.com/2mh/europarl-dissect}.
+Es besteht ein \verb+README+-File, welches über die konkreten 
+Softwareanforderungen informiert, sowie (weitergehende) 
+Verwendungsmöglichkeiten aufzeigt.
+\\
+\\
 Die Programme sind stark parametrisierbar und es lassen sich die Sprachwahl, die zu verwendenden Dateien und auch Parameter zur Verarbeitung und zum Output als Argumente setzen.
 
 In \verb+parameters.py+ lassen sich die Defaultwerte langfristig festlegen, wie zum Beispiel die Anzahl der Sätze, die zur Berechnung verwendet werden sollen oder die Anzahl der angezeigten Übersetzungen. Als brauchbar erwiesen sich während der Entwicklung:
@@ -171,9 +178,9 @@ In \verb+parameters.py+ lassen sich die Defaultwerte langfristig festlegen, wie 
 \verb+SENTENCE_SIMILARITY_WEIGHT = 3+)
 \end{itemize}
 
-Die Anzahl der Trainingssätze und ob diese Daten lemmatisiert werden sollen, lässt sich auch als Argument (\verb+-l 1000+ für 1000 Sätze und \verb+-t+ für Lemmatisierung dem Programm \verb+create_input_data.py+ mitgeben.
+Die Anzahl der Trainingssätze und ob diese Daten lemmatisiert werden sollen, lässt sich auch als Argument (\verb+-l 1000+ für 1000 Sätze und \verb+-t+ für Lemmatisierung) dem Programm \verb+create_input_data.py+ mitgeben.
 
-Das Ausgabeformat von \verb+besttranslations.py+ lässt sich im Programm selbst ändern. Ein minimaler Beispielsaufruf dieses Skripts sieht wie folgend aus:
+Das Ausgabeformat von \verb+besttranslations.py+ lässt sich im Programm selbst ändern. Ein minimaler Beispielsaufruf dieses Skripts sieht wie folgt aus:
 
 \verb+python besttranslations.py -s en -t de -i <Inputdatei>+
 
@@ -182,8 +189,6 @@ oder für die Analyse über die Lemmata:
 \verb+python besttranslations.py -l -s en -t de -i <Inputdatei>+
 
 Dabei steht \verb+-l+ für \emph{Lemmatisierung}, \verb+-s en+ für die Quellsprache Englisch, \verb+-t de+ für die Zielsprache Deutsch und mit \verb+-i+ kann die Eingabedatei angegeben werden. Alternativ wäre es auch möglich die Eingabedatei wegzulassen und den zu analysierenden Text über die Standardeingabe zu senden.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Evaluation}
 \label{cha:evaluation}
