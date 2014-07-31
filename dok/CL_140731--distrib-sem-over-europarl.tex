@@ -78,20 +78,20 @@ This model allows a user to enter terms in \emph{either} language and finde rela
 Die Wörter nähern sich einander an und der Kontext eines Wortes sollte in diesem Gedanken sprachunabhängig werden.
 
 
-Dinu et al. \cite{dissect} haben ein Tool entwickelt, das es einfach macht, in grossem Stil die ähnlichsten Wortvektoren zu einem bestimmten Vektor zu suchen. Durch die Möglichkeit mit grösseren Korpora zu arbeiten, können Ähnlichkeiten zwischen Wörtern berechnet werden:
+Dinu et al. \cite{dissect} haben die Python-Bibliothek \textbf{DISSECT} entwickelt, die es einfach macht, in grossem Stil die ähnlichsten Wortvektoren zu einem bestimmten Vektor zu suchen. Durch die Möglichkeit mit grösseren Korpora zu arbeiten, können Ähnlichkeiten zwischen Wörtern berechnet werden:
 \begin{quote}
 Distributional methods for meaning similarity are based on the observation that similar words occur in similar contexts and measure similarity based on patterns of word occurrence in large corpora [...]. More precisely, they represent words, or any other target linguistic elements, as high-dimensional vectors, where the dimensions represent context features.\\
 Semantic relatedness is assessed by comparing vectors, leading, for example, to determine that \emph{car} and \emph{vehicle} are very similar in meaning, since they have similar contextual distributions. Despite the appeal of these methods, modeling words in isolation has limited applications and ideally we want to model semantics beyond word level by representing the meaning of phrases or sentences.
 \end{quote}
 
-Die Möglichkeit zu einem Wort die semantischen Nachbarn zu finden, wie es uns durch Dissect ermöglicht ist, nutzen wir für das Finden von Übersetzungskandidaten. In einem weiteren Schritt nutzen wir die Ähnlichkeitsmasse zwischen den Wörtern der einen Sprachen und denen der anderen Sprache. Dieses Mass verwenden wir in gewissem Sinn als Übersetzungsmodell.
-Ein weiteres Ähnlichkeitsmass, also jenes zwischen den gefundenen Übersetzungskandidaten und dem Eingabesatz -- der semantisch auch dem Zielsatz entsprechen sollte -- nutzen wir in einer ähnlichen Weise wie das Sprachmodell in der konventionellen statistikbasierten maschinellen Übersetzung, ausser dass bei uns nur Schlüsse zur semantischer Komponente und nicht zu derjenigen der Wohlgeformtheit gezogen werden. Diese beiden Masse werden zu einem Score verrechnet, der die Sortierung nach den besten Kandidaten ermöglicht.
+Die Möglichkeit zu einem Wort die semantischen Nachbarn zu finden, wie es uns durch DISSECT ermöglicht ist, nutzen wir für das Finden von Übersetzungskandidaten. In einem weiteren Schritt nutzen wir die Ähnlichkeitsmasse zwischen den Wörtern der einen Sprachen und denen der anderen Sprache. Dieses Mass verwenden wir in gewissem Sinn als Übersetzungsmodell.
+Ein weiteres Ähnlichkeitsmass, also jenes zwischen den gefundenen Übersetzungskandidaten und dem Eingabesatz -- der semantisch auch dem Zielsatz entsprechen sollte -- nutzen wir in einer ähnlichen Weise wie das Sprachmodell in der konventionellen Statistikbasierten Maschinellen Übersetzung, ausser dass bei uns nur Schlüsse zur semantischer Komponente und nicht zu derjenigen der Wohlgeformtheit gezogen werden. Diese beiden Masse werden zu einem Score verrechnet, der die Sortierung nach den besten Kandidaten ermöglicht.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Aufbau des Inputs}
 \label{cha:input}
-Das Programm \verb+create_input_data.py+ berechnet aus einem zeilenweise alignierten parallelen Text am Beispiel des Sprachpaares Deutsch--Englisch folgende Dateien, die Standardmässig im Ordner \verb+data/out+ erstellt werden:
+Das Programm \verb+create_input_data.py+ berechnet aus einem zeilenweise alignierten parallelen Text am Beispiel des Sprachpaares Deutsch--Englisch folgende Dateien, die standardmässig im Ordner \verb+data/out+ erstellt werden:
 \begin{itemize}
 \item \verb+de-words.row+ enthält die Wörter des deutschen Textes in Kleinbuchstaben. Die Liste ist gefiltert nach Stoppwörtern:
 \begin{verbatim}
@@ -138,8 +138,11 @@ krieg_de model_en 4
 ...
 \end{verbatim}
 \end{itemize}
+Die in den Dateien enthaltenen Terme sind jeweils mit einem Suffix \verb+_en+ oder \verb+_de+ versehen, der ihre Sprachzugehörigkeit markiert. Wenn mit
+Lemmatisierung gearbeitet wird, besteht zusätzlich ein Infix mit den Zeichen \verb+_A+, \verb+_N+, \verb+_P+ oder \verb+_V+, welche Adjektive, Substantive,
+Eigennamen oder Verben markieren.
 
-Aus diesen Dateien werden die gepickelten Dateien erstellt:
+Aus diesen Dateien werden die gepickelten\footnote{Die Daten werden für eine effizientere Verarbeitung mittels der Python-Bibliothek \textbf{pickle} als Python-Objekte gespeichert.} Dateien erstellt:
 \begin{itemize}
 \item \verb+de_de-en.pkl+ mit den Zeilen \verb+en-words.row+ und \\Spalten \verb+de_en-words.col+
 \item \verb+en_en-de.pkl+ mit den Zeilen \verb+de-words.row+ und \\Spalten \verb+de_en-words.col+
