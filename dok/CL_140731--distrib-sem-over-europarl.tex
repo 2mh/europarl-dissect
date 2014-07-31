@@ -323,6 +323,7 @@ Hervorheben wollen wir dabei das Beispiel 'reports', das mit 'berichte' und 'ber
 
 Besonders ist auch das Beispiel 'welcomed', bei dem keiner der Vorschläge gut ist, jedoch die Vorschläge untereinander als hochgradig ähnlich bezeichnet werden können: 'präsidentin', 'präsident' und 'kommissionspräsident'. Man muss deshalb vermuten, dass die Semantik von 'welcomed' in diesem Beispiel verzerrt ist und das Wort im Korpus sehr oft im Zusammenhang mit Präsidenten verwendet wird.
 
+\begin{table}[H]
 \hspace{-4cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 sitting                 & sitzung (0.36) & 23.50 (0.29) & 00.05 (0.28) \\ %Y
@@ -391,15 +392,20 @@ minutes                 & minuten (0.32) & protokoll (0.28) & hätte (0.23) \\ %
 closed                  & geschlossen (0.47) & 1999-2000 (0.31) & 19.40 (0.31) \\ %Y
 \hline
 \end{tabular}\end{footnotesize}\\
+\caption{Beste Übersetzungskandidaten EN--DE (30k, Wortoberflächen)}
+\end{table}
 
 
 
 %%%
 \paragraph{Übersetzungskandidaten DE--EN mit 20\,000 Trainingssätzen über Wortoberflächen\\\\}
+Nicht besonders anders sehen die Resultate in die umgekehrte Übersetzungsrichtung aus. Hier war das Trainingsset mit 20\,000 die Basis für die besten Ergebnisse (vgl. nachfolgende Tabelle).
 \label{sec:evalDeEn10kSurf}
-Nicht besonders anders sehen die Resultate in die umgekehrte Übersetzungsrichtung aus. Hier war das Trainingsset mit 20\,000 die Basis für die besten Ergebnisse.
-
-\hspace{-4cm}\begin{scriptsize}\begin{tabular}{|llll|}
+\hspace{-4cm}
+\begin{table}[H]
+\caption{Beste Übersetzungskandidaten DE--EN (20k, Wortoberflächen)}
+\begin{scriptsize}
+\begin{tabular}{|llll|}
 \hline
 Sitzung                 & sitting (0.54) & suspended (0.52) & 11.50 (0.51) \\ %Y
 \textcolor{red}{wird}                    & sitting (0.59) & 11.50 (0.54) & suspended (0.53) \\
@@ -477,13 +483,15 @@ Punkt                   & point (0.30) & matter (0.16) & order (0.16) \\ %Y
 \textcolor{red}{ist}                     & leopards (0.50) & closed (0.46) & 8.25 (0.29) \\
 geschlossen             & closed (0.43) & 8.25 (0.30) & 11.10 (0.30) \\ %Y
 \hline
-\end{tabular}\end{scriptsize}\\
-
+\end{tabular}
+\end{scriptsize}
+\end{table}
 
 
 \section{Innerhalb einer Sprache}
-Die folgenden Beispiele zeigen, was passiert, wenn man innerhalb einer Sprache probiert zu übersetzen. Für die Semantik wurden die gleiche Art von Matrizen verwendet wie bei den zweisprachigen Versuchen, jedoch wurde für die Ausgangs- und Zielsprache -- die ja gleich sind -- dieselbe Matrix verwendet. Von einer Arbeitsweise rein in einer Sprache unterscheidet sich dieses Verfahren nur darin, dass in den Vektordimensionen noch die Wörter der anderen Sprache auftauchen. Der Einfluss sollte sich gering halten und es könnte höchstens erwartet werden, dass satzabhängige ähnliche Wörter gefunden werden.
+Die folgenden Beispiele zeigen, was passiert, wenn man innerhalb einer Sprache probiert zu ``übersetzen''. Für die Semantik wurden die gleiche Art von Matrizen verwendet wie bei den zweisprachigen Versuchen, jedoch wurde für die Ausgangs- und Zielsprache -- die ja gleich sind -- dieselbe Matrix verwendet. Von einer Arbeitsweise rein in einer Sprache unterscheidet sich dieses Verfahren nur darin, dass in den Vektordimensionen noch die Wörter der anderen Sprache auftauchen. Der Einfluss sollte sich gering halten und es könnte höchstens erwartet werden, dass satzabhängige ähnliche Wörter gefunden werden.
 \paragraph{Englisch mit Oberflächenform (10\,000 Trainingssätze)\\\\}
+\begin{table}[H]
 \hspace{-0cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 The & & & \\
@@ -516,13 +524,17 @@ on & & & \\
 January                 & january (0.33) & standardisation (0.19) & constructed (0.18) \\
 2014. & & & \\
 \hline
-\end{tabular}\end{footnotesize}\\
+\end{tabular}\end{footnotesize}
+\caption{Kandidaten EN (10k, Worteroberflächen)}
+\end{table}
 
 Grosse Beachtung verdienen auch die verschiedenen Vorschläge für 'sitting': Einmal wurde korrekt wieder auf 'sitting' verwiesen mit Zahlausdrücken als Alternative, das andere Mal kamen nur die Zahlausdrücke.
 
 Auch wenn sie hier nicht passen sind die Vorschläge 'serbia' und 'bosnia' interessant in ihrem gemeinsamen Vorkommen. Als gewünscht kann man die Alternative 'dollar' zu 'euro' bezeichnen, wo beide klar semantisch dem gleichen Feld angehören.
 
 \paragraph{Englisch mit Lemmatisierung (10\,000 Trainingssätze)\\\\}
+Wird mit Lemmatisierung gearbeitet, so resultieren beim ersten  Satz gute Vorschläge, der Rest jedoch enttäuscht, wie die Tabelle zeigt:
+\begin{table}[H]
 \hspace{-0cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 The & & & \\
@@ -555,13 +567,13 @@ on & & & \\
 January                 & ending (0.07) & this (0.05) & noire (0.05) \\
 2014. & & & \\
 \hline
-\end{tabular}\end{footnotesize}\\
-
-In diesem Beispiel wurden beim erstens Satz gute Vorschläge gebracht, der Rest lässt jedoch zu wünschen übrig.
-
+\end{tabular}\end{footnotesize}
+\caption{Kandidaten EN (10k, Lemmata)}
+\end{table}
 Man kann sicherlich sagen, dass durch die Lemmatisierung die Relation von Wörtern zu ihrem Umfeld verloren gehen kann -- mehr als bei den Oberflächenformen -- und die Verarbeitung mehr einem Bag-of-words ähnelt. Dies reicht aber nicht zur Erklärung, wieso besonders der letzte Satz ein derart schlechtes Resultat brachte.
 
 \paragraph{Deutsch mit Oberflächenform (10\,000 Trainingssätze)\\\\}
+\begin{table}[H]
 \hspace{-4.5cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 Die & & & \\
@@ -596,11 +608,14 @@ am & & & \\
 Januar                  & januar (0.25) & Übergangsbestimmungen (0.24) & 1. (0.23) \\
 2014.                   & Übergangsbestimmungen (0.22) & entschiedenheit (0.17) & geldfälschung (0.14) \\
 \hline
-\end{tabular}\end{footnotesize}\\
+\end{tabular}\end{footnotesize}
+\caption{Kandidaten DE (10k, Wortoberflächen)}
+\end{table}
 
 Hier sind im Grossen und Ganzen gute Vorschläge zu finden. Das Trippel aus 'euro', 'milliarden' und 'millionen' zeigt, dass auch semantisch ähnliche Wörter gefunden werden können. Schön ist auch dass wie mit 'protokoll' und 'protokolls' Formen des gleichen Wortes gefunden werden konnten. Das könnte bedeuten, dass sich auch die verschiedenen Formen eines Wortes annähern.
 
 \paragraph{Deutsch mit Lemmatisierung (10\,000 Trainingssätze)\\\\}
+\begin{table}[H]
 \hspace{-2.7cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 Die & & & \\
@@ -635,7 +650,9 @@ am & & & \\
 Januar                  & januar (0.08) & kommission (0.07) & erst (0.07) \\
 2014.                   & Übergangsbestimmung (0.10) & gesamtumfang (0.06) & entschiedenheit (0.05) \\
 \hline
-\end{tabular}\end{footnotesize}\\
+\end{tabular}\end{footnotesize}
+\label{Kandidaten DE (10k, Lemmata)}
+\end{table}
 
 Mit Deutsch als Ausgangs- und Zielsprache ist die Lemmatisierung nicht ein solches Hindernis, wie auf Englisch. Deutlich mehr Vorschläge lassen sich mit semantischen Feldern erklären und die Grundform des Wortes erscheint auch oft in den ersten beiden Vorschlägen.
 
