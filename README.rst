@@ -108,8 +108,45 @@ biased results.
 Clone the source code
 *********************
 
-To download and test our code, simly issue the following command:
+To download and test our code, simply issue the following command:
+
+::
+	
+	git clone https://github.com/2mh/europarl-dissect.git
+
+This will create the folder ``europarl-dissect`` from which on you can
+work.
 
 Usage
 -----
-TBD
+
+Basic usage
+***********
+
+If you download the code and put in place some training data (assuming
+the files ``data/in/europarl-v7.de-en.de`` and
+``data/in/europarl-v7.de-en.de`` exist), you can immediately test the system, 
+by the following commands:
+
+::
+
+	# Create training material with 1,000 sentences.
+	./create_input_data.py -l 1000
+	# Test with test input material provided.
+	./show_candidates.sh de en # From DE to EN
+	./show_candidates.sh en de # From EN to DE
+
+To test the system with lemmatized training and input material, do the
+following:
+
+::
+	
+	# As above, but with lemmatization; -t meaning to use TreeTagger.
+	./create_input_data.py -l 1000 -t
+	# The -l option makes sure the system knows it deals with lemmatization.
+	./show_candidates.sh de en -l # From DE to EN, lemmatized
+	./show_candidates.sh de en -l # From DE to EN, lemmatized
+
+Advances usage
+**************
+To follow.
