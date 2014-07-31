@@ -89,8 +89,10 @@ Ein weiteres Ähnlichkeitsmass, also jenes zwischen den gefundenen Übersetzungs
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Aufbau des Inputs}
-\label{cha:input}
+\chapter{Praxis}
+\label{cha:praxis}
+\section{Aufbau des Inputs}
+\label{sec:input}
 Das Programm \verb+create_input_data.py+ berechnet aus einem zeilenweise alignierten parallelen Text am Beispiel des Sprachpaares Deutsch--Englisch folgende Dateien, die standardmässig im Ordner \verb+data/out+ erstellt werden:
 \begin{itemize}
 \item \verb+de-words.row+ enthält die Wörter des deutschen Textes in Kleinbuchstaben. Die Liste ist gefiltert nach Stoppwörtern:
@@ -153,11 +155,14 @@ Diese gepickelten Matrixdateien werden zusammen mit der Dimensionendatei \verb+d
 Die Aufteilung der Wortvektoren in eine Matrix pro Sprache ist ein entscheidender Teil der Implementierung, da dadurch auf saubere Weise verhindert werden kann, dass Kandidaten in der ungewünschten Sprache durch DISSECT gefunden werden. In einem ersten Aufbau wurden ungewünschte Wörter nach Abgleich des Sprachtags bestraft, d.\,h. ihr Ähnlichkeitswert auf 0.0 gesetzt. Dabei bestand die Gefahr, dass für manche Wörter nur ungewünchte Wörter als die ähnlichsten
 erschienen, die allesamt bestraft wurden. Dies hat darin resultiert, dass
 keine Kandidaten vorgeschlagen werden konnten.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Praxis}
-\label{cha:praxis}
+
+\section{Verwendung des Systems}
+\label{sec:verwendung}
 Unser Softwaresystem, das sich der DISSECT-Bibliothek bedient, ist
-auf github öffentlich verfügbar: \url{https://github.com/2mh/europarl-dissect}.
+auf github öffentlich verfügbar:\\
+\url{https://github.com/2mh/europarl-dissect}
+\\
+\\
 Es besteht ein \verb+README+-File, welches über die konkreten 
 Softwareanforderungen informiert, sowie (weitergehende) 
 Verwendungsmöglichkeiten aufzeigt.
@@ -193,7 +198,7 @@ Dabei steht \verb+-l+ für \emph{Lemmatisierung}, \verb+-s en+ für die Quellspr
 \chapter{Evaluation}
 \label{cha:evaluation}
 
-Dass die Evaluation semantischer Anwendungen grundsätzlich eine Schwierigkeit darstellen kann, zeigte sich auch hier in dem Mass, dass die Evaluation nicht automatisiert werden konnte und auf Sprachwissen des Bewerters in beiden Sprachen beruhte. Durch diese Einschränkung ist auch das Testset relativ klein und es ist möglich, dass sich dadurch Verzerrungen ergeben.
+Dass die Evaluation semantischer Anwendungen grundsätzlich eine Schwierigkeit darstellen kann, zeigte sich auch hier in dem Mass, dass die Evaluation nicht automatisiert werden konnte und auf unser Sprachwissen als Bewerter in beiden Sprachen beruhte. Durch diese Einschränkung ist auch das Testset relativ klein und es ist möglich, dass sich dadurch Verzerrungen ergeben.
 
 \section{Verwendung als Desambiguierungswerkzeug bei der Übersetzung}
 
@@ -203,6 +208,7 @@ Ein weiteres Kriterium, das die Resultate beeinflusste, war die Grösse des Trai
 
 Bei der lemmatisierten Verarbeitung dagegen sank die Qualität der Vorschläge deutlich mit zunehmender Datenmenge und gute Vorschläge kamen nur noch vereinzelt vor.
 
+\begin{figure}[H]
 \hspace{-6cm}\begin{tikzpicture}
     \begin{axis}[
         width  = 18cm,
@@ -234,8 +240,13 @@ Bei der lemmatisierten Verarbeitung dagegen sank die Qualität der Vorschläge d
         \legend{de$\rightarrow$en Oberflächenformen,de$\rightarrow$en Lemmatisierung,en$\rightarrow$de Oberflächenformen,en$\rightarrow$de Lemmatisierung}
     \end{axis}
 \end{tikzpicture}
+\caption{test}
+\end{figure}
 
-Als mögliche Erklärung der Unterschiede zwischen den verschiedenen Paarungen kamen wir auf die Idee, dass die Anzahl der verschiedenen Wörter, also der Types, einen Einfluss haben könnte. Je grösser die Trainingsdaten waren, umso grösser wurde das Verhältnis zwischen der Anzahl der Types in den jeweiligen Sprachen. Dass Deutsch mehr Types hat, lässt sich mit der Morphologie und vor allem der Möglichkeit Komposita zu bilden erklären. Es ist möglich, dass dieses Verhältnis je ungleicher es ist, schlechtere Resultate verursacht. Wie man in folgender Tabelle erkennen kann, ist gerade bei lemmatisierten Trainingsdaten das Verhältnis besonders ungleich (also weit weg von 1) und die Resultate dort unbefriedigend.
+Als mögliche Erklärung der Unterschiede zwischen den verschiedenen Paarungen kamen wir auf die Idee, dass die Anzahl der verschiedenen Wörter, also der Types, einen Einfluss haben könnte. Je grösser die Trainingsdaten waren, umso grösser wurde das Verhältnis zwischen der Anzahl der Types in den jeweiligen Sprachen. Dass Deutsch mehr Types hat, lässt sich mit der Morphologie und vor allem der Möglichkeit Komposita zu bilden erklären. Es ist möglich, dass dieses Verhältnis je ungleicher es ist, schlechtere Resultate verursacht. Wie man in folgender
+ Abbildung  erkennen kann, ist gerade bei lemmatisierten Trainingsdaten das 
+Verhältnis besonders ungleich (also weit weg von 1) und die Resultate dort 
+unbefriedigend.
 
 \hspace{-6cm}\begin{tikzpicture}
     \begin{axis}[
@@ -305,7 +316,7 @@ Während die Anzahl der Types grundsätzlich verschieden ist zwischen den Sprach
     \end{axis}
 \end{tikzpicture}
 
-\subsection{Übersetzungskandidaten EN--DE mit 30\,000 Trainingssätzen über Wortoberflächen}
+\paragraph{Übersetzungskandidaten EN--DE mit 30\,000 Trainingssätzen über Wortoberflächen\\\\}
 In der Übersetzungsrichtung Englisch-Deutsch konnten die besten Resultate mit einem Trainingskorpus von 30\,000 Sätzen erreicht werden. Das Verhältnis zwischen Vorschlägen mit und ohne gute Kandidaten lässt sich der untenstehenden Tabelle entnehmen. Die Eingabewörter, für die keine gute Übersetzung gefunden wurde, sind dabei rot eingefärbt.
 
 Hervorheben wollen wir dabei das Beispiel 'reports', das mit 'berichte' und 'berichten' übersetzt wurde. Beide verschiedenen Formen sind dabei relativ nahe am Eingangswort. Interessant wäre natürlich noch die Ähnlichkeit zwischen den beiden Vorschlägen, doch liesse sich diese wegen dem Satzkontext nicht direkt vergleichen.
@@ -384,7 +395,7 @@ closed                  & geschlossen (0.47) & 1999-2000 (0.31) & 19.40 (0.31) \
 
 
 %%%
-\subsection{Übersetzungskandidaten DE--EN mit 20\,000 Trainingssätzen über Wortoberflächen}
+\paragraph{Übersetzungskandidaten DE--EN mit 20\,000 Trainingssätzen über Wortoberflächen\\\\}
 \label{sec:evalDeEn10kSurf}
 Nicht besonders anders sehen die Resultate in die umgekehrte Übersetzungsrichtung aus. Hier war das Trainingsset mit 20\,000 die Basis für die besten Ergebnisse.
 
@@ -472,8 +483,7 @@ geschlossen             & closed (0.43) & 8.25 (0.30) & 11.10 (0.30) \\ %Y
 
 \section{Innerhalb einer Sprache}
 Die folgenden Beispiele zeigen, was passiert, wenn man innerhalb einer Sprache probiert zu übersetzen. Für die Semantik wurden die gleiche Art von Matrizen verwendet wie bei den zweisprachigen Versuchen, jedoch wurde für die Ausgangs- und Zielsprache -- die ja gleich sind -- dieselbe Matrix verwendet. Von einer Arbeitsweise rein in einer Sprache unterscheidet sich dieses Verfahren nur darin, dass in den Vektordimensionen noch die Wörter der anderen Sprache auftauchen. Der Einfluss sollte sich gering halten und es könnte höchstens erwartet werden, dass satzabhängige ähnliche Wörter gefunden werden.
-
-\subsection{Englisch mit Oberflächenform (10\,000 Trainingssätze)}
+\paragraph{Englisch mit Oberflächenform (10\,000 Trainingssätze)\\\\}
 \hspace{-0cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 The & & & \\
@@ -512,7 +522,7 @@ Grosse Beachtung verdienen auch die verschiedenen Vorschläge für 'sitting': Ei
 
 Auch wenn sie hier nicht passen sind die Vorschläge 'serbia' und 'bosnia' interessant in ihrem gemeinsamen Vorkommen. Als gewünscht kann man die Alternative 'dollar' zu 'euro' bezeichnen, wo beide klar semantisch dem gleichen Feld angehören.
 
-\subsection{Englisch mit Lemmatisierung (10\,000 Trainingssätze)}
+\paragraph{Englisch mit Lemmatisierung (10\,000 Trainingssätze)\\\\}
 \hspace{-0cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 The & & & \\
@@ -551,7 +561,7 @@ In diesem Beispiel wurden beim erstens Satz gute Vorschläge gebracht, der Rest 
 
 Man kann sicherlich sagen, dass durch die Lemmatisierung die Relation von Wörtern zu ihrem Umfeld verloren gehen kann -- mehr als bei den Oberflächenformen -- und die Verarbeitung mehr einem Bag-of-words ähnelt. Dies reicht aber nicht zur Erklärung, wieso besonders der letzte Satz ein derart schlechtes Resultat brachte.
 
-\subsection{Deutsch mit Oberflächenform (10\,000 Trainingssätze)}
+\paragraph{Deutsch mit Oberflächenform (10\,000 Trainingssätze)\\\\}
 \hspace{-4.5cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 Die & & & \\
@@ -590,7 +600,7 @@ Januar                  & januar (0.25) & Übergangsbestimmungen (0.24) & 1. (0.
 
 Hier sind im Grossen und Ganzen gute Vorschläge zu finden. Das Trippel aus 'euro', 'milliarden' und 'millionen' zeigt, dass auch semantisch ähnliche Wörter gefunden werden können. Schön ist auch dass wie mit 'protokoll' und 'protokolls' Formen des gleichen Wortes gefunden werden konnten. Das könnte bedeuten, dass sich auch die verschiedenen Formen eines Wortes annähern.
 
-\subsection{Deutsch mit Lemmatisierung (10\,000 Trainingssätze)}
+\paragraph{Deutsch mit Lemmatisierung (10\,000 Trainingssätze)\\\\}
 \hspace{-2.7cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
 Die & & & \\
@@ -627,7 +637,7 @@ Januar                  & januar (0.08) & kommission (0.07) & erst (0.07) \\
 \hline
 \end{tabular}\end{footnotesize}\\
 
-Mit deutsch als Ausgangs- und Zielsprache ist die Lemmatisierung nicht ein solches Hindernis, wie auf Englisch. Deutlich mehr Vorschläge lassen sich mit semantischen Feldern erklären und die Grundform des Wortes erscheint auch oft in den ersten beiden Vorschlägen.
+Mit Deutsch als Ausgangs- und Zielsprache ist die Lemmatisierung nicht ein solches Hindernis, wie auf Englisch. Deutlich mehr Vorschläge lassen sich mit semantischen Feldern erklären und die Grundform des Wortes erscheint auch oft in den ersten beiden Vorschlägen.
 
 Interessant ist auch der Zusammenhang zwischen 'werden' und 'müssen'. Beide kommen als Hilfs- bzw. als Modalverb in einem ähnlichen Zusammenhang vor und durch die Lemmatisierung geht ihre Restriktion der untergeordneten Verbform verloren. Sie können wirklich als ähnlich bezeichnet werden.
 
