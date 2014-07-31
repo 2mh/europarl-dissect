@@ -491,6 +491,7 @@ geschlossen             & closed (0.43) & 8.25 (0.30) & 11.10 (0.30) \\ %Y
 \section{Innerhalb einer Sprache}
 Die folgenden Beispiele zeigen, was passiert, wenn man innerhalb einer Sprache probiert zu ``übersetzen''. Für die Semantik wurden die gleiche Art von Matrizen verwendet wie bei den zweisprachigen Versuchen, jedoch wurde für die Ausgangs- und Zielsprache -- die ja gleich sind -- dieselbe Matrix verwendet. Von einer Arbeitsweise rein in einer Sprache unterscheidet sich dieses Verfahren nur darin, dass in den Vektordimensionen noch die Wörter der anderen Sprache auftauchen. Der Einfluss sollte sich gering halten und es könnte höchstens erwartet werden, dass satzabhängige ähnliche Wörter gefunden werden.
 \paragraph{Englisch mit Oberflächenform (10\,000 Trainingssätze)\\\\}
+Grosse Beachtung verdienen die verschiedenen Vorschläge für 'sitting': Einmal wurde korrekt wieder auf 'sitting' verwiesen mit Zahlausdrücken als Alternative, das andere Mal kamen nur die Zahlausdrücke:
 \begin{table}[H]
 \hspace{-0cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
@@ -527,10 +528,8 @@ January                 & january (0.33) & standardisation (0.19) & constructed 
 \end{tabular}\end{footnotesize}
 \caption{Kandidaten EN (10k, Worteroberflächen)}
 \end{table}
-
-Grosse Beachtung verdienen auch die verschiedenen Vorschläge für 'sitting': Einmal wurde korrekt wieder auf 'sitting' verwiesen mit Zahlausdrücken als Alternative, das andere Mal kamen nur die Zahlausdrücke.
-
-Auch wenn sie hier nicht passen sind die Vorschläge 'serbia' und 'bosnia' interessant in ihrem gemeinsamen Vorkommen. Als gewünscht kann man die Alternative 'dollar' zu 'euro' bezeichnen, wo beide klar semantisch dem gleichen Feld angehören.
+Auch wenn sie für das Wort 'opened' nicht zu passen scheinen, sind die Vorschläge 'serbia' und 'bosnia' interessant in ihrem gemeinsamen Vorkommen. Als gewünscht kann man die Alternative 'dollar' zu 'euro' bezeichnen (bei 'euro'), wo beide klar semantisch dem gleichen Feld angehören. Das Wort
+'interventionism' scheint zudem auf politische Vorgänge in Sachen Geldmengenregulation hinzudeuten, was zur europarl-Domäne passt.
 
 \paragraph{Englisch mit Lemmatisierung (10\,000 Trainingssätze)\\\\}
 Wird mit Lemmatisierung gearbeitet, so resultieren beim ersten  Satz gute Vorschläge, der Rest jedoch enttäuscht, wie die Tabelle zeigt:
