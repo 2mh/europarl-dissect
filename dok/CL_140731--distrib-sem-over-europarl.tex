@@ -93,7 +93,7 @@ Ein weiteres Ähnlichkeitsmass, also jenes zwischen den gefundenen Übersetzungs
 \label{cha:praxis}
 \section{Aufbau des Inputs}
 \label{sec:input}
-Das Programm \verb+create_input_data.py+ berechnet aus einem zeilenweise alignierten parallelen Text am Beispiel des Sprachpaares Deutsch--Englisch folgende Dateien, die standardmässig im Ordner \verb+data/out+ erstellt werden:
+Das Programm \verb+create_input_data.py+ berechnet aus einem zeilenweise alignierten parallelen Text am Beispiel des Sprachpaares Deutsch--Englisch folgende Dateien, die standardmässig im Ordner \verb+data/out+ (relativ zum Inhalt unserer Software) erstellt werden:
 \begin{itemize}
 \item \verb+de-words.row+ enthält die Wörter des deutschen Textes in Kleinbuchstaben. Die Liste ist gefiltert nach Stoppwörtern:
 \begin{verbatim}
@@ -201,13 +201,18 @@ Dabei steht \verb+-l+ für \emph{Lemmatisierung}, \verb+-s en+ für die Quellspr
 Dass die Evaluation semantischer Anwendungen grundsätzlich eine Schwierigkeit darstellen kann, zeigte sich auch hier in dem Mass, dass die Evaluation nicht automatisiert werden konnte und auf unser Sprachwissen als Bewerter in beiden Sprachen beruhte. Durch diese Einschränkung ist auch das Testset relativ klein und es ist möglich, dass sich dadurch Verzerrungen ergeben.
 
 \section{Verwendung als Desambiguierungswerkzeug bei der Übersetzung}
-
 Der Anteil der Inhaltswörter -- darunter fassen wir Verben, Substantive, Namen und Adjektive -- für die unter den Übersetzungsvorschlägen eine korrekte Option dabei war, war deutlich höher bei der Berechnung der Matrizen über den Oberflächenformen der Wörter. Entgegen der Erwartungen waren die Resultate beim lemmatisierten Input deutlich schlechter.
 
 Ein weiteres Kriterium, das die Resultate beeinflusste, war die Grösse des Trainingskorpus. Bei sehr kleinen Mengen waren dabei die Werte tiefer als bei grösseren Mengen. Gerade bei der Oberflächenformbehandlung lässt sich dieses Spares-Data-Problem in der Tabelle unten erkennen.
-
+\\
+\\
 Bei der lemmatisierten Verarbeitung dagegen sank die Qualität der Vorschläge deutlich mit zunehmender Datenmenge und gute Vorschläge kamen nur noch vereinzelt vor.
-
+\\
+\\
+Als mögliche Erklärung der Unterschiede zwischen den verschiedenen Paarungen kamen wir auf die Idee, dass die Anzahl der verschiedenen Wörter, also der Types, einen Einfluss haben könnte. Je grösser die Trainingsdaten waren, umso grösser wurde das Verhältnis zwischen der Anzahl der Types in den jeweiligen Sprachen. Dass Deutsch mehr Types hat, lässt sich mit der Morphologie und vor allem der Möglichkeit Komposita zu bilden erklären. Es ist möglich, dass dieses Verhältnis je ungleicher es ist, schlechtere Resultate verursacht. Wie man in folgender
+ Abbildung  erkennen kann, ist gerade bei lemmatisierten Trainingsdaten das 
+Verhältnis besonders ungleich (also weit weg von 1) und die Resultate dort 
+unbefriedigend.
 \begin{figure}[H]
 \hspace{-6cm}\begin{tikzpicture}
     \begin{axis}[
@@ -240,14 +245,10 @@ Bei der lemmatisierten Verarbeitung dagegen sank die Qualität der Vorschläge d
         \legend{de$\rightarrow$en Oberflächenformen,de$\rightarrow$en Lemmatisierung,en$\rightarrow$de Oberflächenformen,en$\rightarrow$de Lemmatisierung}
     \end{axis}
 \end{tikzpicture}
-\caption{test}
+\caption{Anteil guter Vorschläge}
 \end{figure}
 
-Als mögliche Erklärung der Unterschiede zwischen den verschiedenen Paarungen kamen wir auf die Idee, dass die Anzahl der verschiedenen Wörter, also der Types, einen Einfluss haben könnte. Je grösser die Trainingsdaten waren, umso grösser wurde das Verhältnis zwischen der Anzahl der Types in den jeweiligen Sprachen. Dass Deutsch mehr Types hat, lässt sich mit der Morphologie und vor allem der Möglichkeit Komposita zu bilden erklären. Es ist möglich, dass dieses Verhältnis je ungleicher es ist, schlechtere Resultate verursacht. Wie man in folgender
- Abbildung  erkennen kann, ist gerade bei lemmatisierten Trainingsdaten das 
-Verhältnis besonders ungleich (also weit weg von 1) und die Resultate dort 
-unbefriedigend.
-
+\begin{figure}[H]
 \hspace{-6cm}\begin{tikzpicture}
     \begin{axis}[
         width  = 18cm,
@@ -281,9 +282,12 @@ unbefriedigend.
         \legend{DE-Types (Oberfläche), EN-Types (Oberfläche), ,DE-Types (Lemmata), EN-Types (Lemmata)} % Verhältnis-Zahl
     \end{axis}
 \end{tikzpicture}
+\caption{Anzahl Types}
+\end{figure}
 
 Während die Anzahl der Types grundsätzlich verschieden ist zwischen den Sprachen, gibt es mit der Oberflächenform in beiden Sprachen etwa gleich viele Wortpaarungen innerhalb der Sprache. In diesen Fällen waren auch die Übersetzungskandidaten besonders gut. Die Verhältnisse lassen sich der folgenden Tabelle entnehmen:
 
+\begin{figure}[H]
 \hspace{-6cm}\begin{tikzpicture}
     \begin{axis}[
         width  = 18cm,
@@ -315,9 +319,11 @@ Während die Anzahl der Types grundsätzlich verschieden ist zwischen den Sprach
         \legend{Verhältnis DE / EN (Oberfläche), Verhältnis DE-DE / EN-EN (Oberfläche),,Verhältnis DE / EN (Lemmata), Verhältnis DE-DE / EN-EN (Lemmata) }
     \end{axis}
 \end{tikzpicture}
+\caption{Verhältnisse verschiedener Paarungen}
+\end{figure}
 
 \paragraph{Übersetzungskandidaten EN--DE mit 30\,000 Trainingssätzen über Wortoberflächen\\\\}
-In der Übersetzungsrichtung Englisch-Deutsch konnten die besten Resultate mit einem Trainingskorpus von 30\,000 Sätzen erreicht werden. Das Verhältnis zwischen Vorschlägen mit und ohne gute Kandidaten lässt sich der untenstehenden Tabelle entnehmen. Die Eingabewörter, für die keine gute Übersetzung gefunden wurde, sind dabei rot eingefärbt.
+In der Übersetzungsrichtung Englisch-Deutsch konnten die besten Resultate mit einem Trainingskorpus von 30\,000 Sätzen erreicht werden. Die konkreten Vorschläge mit und ohne gute Kandidaten lässt sich der untenstehenden Tabelle entnehmen. Die Eingabewörter, für die keine gute Übersetzung gefunden wurde, sind dabei rot eingefärbt.
 
 Hervorheben wollen wir dabei das Beispiel 'reports', das mit 'berichte' und 'berichten' übersetzt wurde. Beide verschiedenen Formen sind dabei relativ nahe am Eingangswort. Interessant wäre natürlich noch die Ähnlichkeit zwischen den beiden Vorschlägen, doch liesse sich diese wegen dem Satzkontext nicht direkt vergleichen.
 
@@ -399,7 +405,7 @@ closed                  & geschlossen (0.47) & 1999-2000 (0.31) & 19.40 (0.31) \
 
 %%%
 \paragraph{Übersetzungskandidaten DE--EN mit 20\,000 Trainingssätzen über Wortoberflächen\\\\}
-Nicht besonders anders sehen die Resultate in die umgekehrte Übersetzungsrichtung aus. Hier war das Trainingsset mit 20\,000 die Basis für die besten Ergebnisse (vgl. nachfolgende Tabelle).
+Nicht besonders anders sehen die Resultate in die umgekehrte Übersetzungsrichtung aus. Hier war das Trainingsset mit 20\,000 die Basis für die besten Ergebnisse, wie die nachfolgende Tabelle zeigt:
 \label{sec:evalDeEn10kSurf}
 \hspace{-4cm}
 \begin{table}[H]
@@ -572,6 +578,9 @@ January                 & ending (0.07) & this (0.05) & noire (0.05) \\
 Man kann sicherlich sagen, dass durch die Lemmatisierung die Relation von Wörtern zu ihrem Umfeld verloren gehen kann -- mehr als bei den Oberflächenformen -- und die Verarbeitung mehr einem Bag-of-words ähnelt. Dies reicht aber nicht zur Erklärung, wieso besonders der letzte Satz ein derart schlechtes Resultat brachte.
 
 \paragraph{Deutsch mit Oberflächenform (10\,000 Trainingssätze)\\\\}
+
+Hier sind im Grossen und Ganzen gute Vorschläge zu finden. Das Trippel aus 'euro', 'milliarden' und 'millionen' zeigt, dass auch semantisch ähnliche Wörter gefunden werden können. Schön ist auch dass wie mit 'protokoll' und 'protokolls' Formen des gleichen Wortes gefunden werden konnten. Das könnte bedeuten, dass sich auch die verschiedenen Formen eines Wortes annähern.
+
 \begin{table}[H]
 \hspace{-4.5cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
@@ -611,9 +620,12 @@ Januar                  & januar (0.25) & Übergangsbestimmungen (0.24) & 1. (0.
 \caption{Kandidaten DE (10k, Wortoberflächen)}
 \end{table}
 
-Hier sind im Grossen und Ganzen gute Vorschläge zu finden. Das Trippel aus 'euro', 'milliarden' und 'millionen' zeigt, dass auch semantisch ähnliche Wörter gefunden werden können. Schön ist auch dass wie mit 'protokoll' und 'protokolls' Formen des gleichen Wortes gefunden werden konnten. Das könnte bedeuten, dass sich auch die verschiedenen Formen eines Wortes annähern.
-
 \paragraph{Deutsch mit Lemmatisierung (10\,000 Trainingssätze)\\\\}
+
+Mit Deutsch als Ausgangs- und Zielsprache ist die Lemmatisierung nicht ein solches Hindernis, wie auf Englisch. Deutlich mehr Vorschläge lassen sich mit semantischen Feldern erklären und die Grundform des Wortes erscheint auch oft in den ersten beiden Vorschlägen.
+
+Interessant ist auch der Zusammenhang zwischen 'werden' und 'müssen'. Beide kommen als Hilfs- bzw. als Modalverb in einem ähnlichen Zusammenhang vor und durch die Lemmatisierung geht ihre Restriktion der untergeordneten Verbform verloren. Sie können wirklich als ähnlich bezeichnet werden.
+
 \begin{table}[H]
 \hspace{-2.7cm}\begin{footnotesize}\begin{tabular}{|llll|}
 \hline
@@ -650,30 +662,36 @@ Januar                  & januar (0.08) & kommission (0.07) & erst (0.07) \\
 2014.                   & Übergangsbestimmung (0.10) & gesamtumfang (0.06) & entschiedenheit (0.05) \\
 \hline
 \end{tabular}\end{footnotesize}
-\label{Kandidaten DE (10k, Lemmata)}
+\caption{Kandidaten DE (10k, Lemmata)}
 \end{table}
-
-Mit Deutsch als Ausgangs- und Zielsprache ist die Lemmatisierung nicht ein solches Hindernis, wie auf Englisch. Deutlich mehr Vorschläge lassen sich mit semantischen Feldern erklären und die Grundform des Wortes erscheint auch oft in den ersten beiden Vorschlägen.
-
-Interessant ist auch der Zusammenhang zwischen 'werden' und 'müssen'. Beide kommen als Hilfs- bzw. als Modalverb in einem ähnlichen Zusammenhang vor und durch die Lemmatisierung geht ihre Restriktion der untergeordneten Verbform verloren. Sie können wirklich als ähnlich bezeichnet werden.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Schluss}
 \label{cha:schluss}
+Trotz anfänglicher Schwierigkeiten, das Inputmaterial für DISSECT korrekt aufzubereiten, sind wir zuletzt froh, dass die Ergebnisse
+gut ausfallen können: wird auf Wortoberflächen gesetzt und Trainingsmaterial im Umfang von 20--30\,000 Wörtern verwendet, sind bei
+Deutsch--Englisch (in beide Übersetzungsrichtungen) gute Vorschläge in über 60\% der betrachteten Fälle zu finden, die sich dadurch eignen,
+das System als Desambiguierungswerkzeug -- z. B. für Maschinelle Übersetzung -- zu verwenden.
 
-sehr häppy. es klappt. 
+Auf der Ebene der Wortoberflächen entstehen ebenfalls als sinnvoll betrachbare semantische Netze, wenn nur nur deutsche oder englische
+Wörter miteinander verglichen werden.
 
-speziell: lemmatisierung. für englisch offenbar nicht gut. (wortarten bleiben erhalten, was macht es also bei englisch für einen unterschied?
+Schlecht fallen die Ergebnisse in jedem Fall aus, wenn mittels TreeTagger Lemmatisierung betrieben wird: wir können nur Vermutungen darüber
+anstellen, dass dies mit der höheren morphologichen Variabilität zu tun haben könnte, welche das Deutsche aufweist. 
 
-smoothing?
+Hinsichtlich der Evaluation bleibt allerdings Verbesserungspotenzial darin, dass die verschiedenen Traininskorpora ebenfalls mit anderen
+Testsätzen zu überprüfen wären, um die Ergebnisse schliesslich zu mitteln. Dies lag allerdings auf Grund des grossen Arbeitsaufwands dies nur schon für
+ wenige Sätze zu tun im Rahmen dieser Ausarbeitung nicht drin.
 
-
-Als Mögliche Gebiete zur Weiterarbeit stehen sicherlich einmal die Wahl der Sprachen zur Verfügung, wobei es interessant wäre mit zwei einander sehr ähnlichen Sprachen, und die Wahl der Textdomäne.
+Als mögliches Gebiet zur Weiterarbeit steht sicherlich, einerseits die Wahl der Sprachen zur Verfügung, wobei es interessant wäre mit zwei in morphologischer
+Hinsicht ähnlicher aufgebauten Sprachen zu arbeiten; andererseits könnte mit anderen Textdomänen gearbeitet werden: es könnten sich beispielsweise
+Filmuntertitel anbieten, welche ebenfalls in alignierter Form vorliegen. Der Vorteil bei Filmuntertiteln ist zudem, dass die alignierten Textbereiche
+kleiner sind, da es sich dabei nicht zwingend um ganze Sätze handelt. Ein Nachteil hingegen ist, dass keine klare Textdomäne erwartet werden kann:
+mit zunehmendem Trainingsmaterial besteht also die Gefahr, dass weniger gute Vorschläge erfolgen.
 
 Vorstellbar ist auch eine Optimierung, bei der Wörter, die nur einmal auftreten gar nicht in die Wortvektordimensionen aufgenommen werden, wodurch sich die Matrix sicherlich in eine Dimension verkleinern würde.
 
 Aktuellere Optimierungen in der distributionellen Semantik wie die Restriktion des Umfeldes auf gewisse grammatische oder thematische Funktionen erscheinen hier deutlich komplizierter, da dies eine gute Alignierung auf der Wortebene verlangen würde und nicht ganz klar wäre, wie die Relationen sich über die Sprachgrenze verhalten müssten.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{plain-de}     % For German
 \bibliography{seminar}
