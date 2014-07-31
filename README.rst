@@ -67,30 +67,48 @@ On a Debian operating system usually the following commands can be issued (as ro
 	pip2 install dissect
 
 
-TreeTagger installation
-***********************
-
-TBD
-
 TreeTagger configuration
 ************************
 
-TBD
+After installing the TreeTagger package (cf. information on the project's home
+given above) it is necessary to specify where its base directory can be found.
+
+In fixed form this can be specified in the ``parameters.py`` file by setting
+the ``TREETAGGER_BASE_PATH`` variable accordingly. The path can be
+specified either relatively to the project's directory or in absolute
+terms.
 
 Installation of europarl training data
 **************************************
 
-TBD
+There is a ``README.rst`` file in ``data/in/`` giving more information
+on where to find the europarl files we used to test the system.
+
+Please note that by principle also other data material can be used
+as long as long as it simple adheres to the format provided by the
+europarl corpus (each language in plain text (UTF-8) with one sentence 
+per line). 
 
 Preparing a (small) set of testing data 
 ***************************************
 
-TBD
+Example input material to test ``europarl-dissect`` for its disambiguation 
+capabilities and example usage can be found in the files ``data/eval-de.txt``
+and ``data/eval-en.txt`` for some German and English sentences, respectively.
+
+More sentences in the same text domain can be found in ``data/europarl_2014_de.txt``
+and ``data/europarl_2014_en.txt``. It is also possible to use input material in
+the TreeTagger outpout format -- this is exemplified by ``europarl/europarl_2014_de_tagged.txt``
+and ``europarl_2014_en_tagged.txt``.
+
+Most important thing to note is of course to not use sentences which are
+already part of the training material, as this would result in (clearly)
+biased results.
 
 Clone the source code
 *********************
 
-TBD
+To download and test our code, simly issue the following command:
 
 Usage
 -----
