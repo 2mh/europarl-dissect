@@ -147,6 +147,6 @@ following:
 	./show_candidates.sh de en -l # From DE to EN, lemmatized
 	./show_candidates.sh de en -l # From DE to EN, lemmatized
 
-Advances usage
+Advanced usage
 **************
 To follow.
