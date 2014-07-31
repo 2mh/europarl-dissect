@@ -203,14 +203,13 @@ Dass die Evaluation semantischer Anwendungen grundsätzlich eine Schwierigkeit d
 \section{Verwendung als Desambiguierungswerkzeug bei der Übersetzung}
 Der Anteil der Inhaltswörter -- darunter fassen wir Verben, Substantive, Namen und Adjektive -- für die unter den Übersetzungsvorschlägen eine korrekte Option dabei war, war deutlich höher bei der Berechnung der Matrizen über den Oberflächenformen der Wörter. Entgegen der Erwartungen waren die Resultate beim lemmatisierten Input deutlich schlechter.
 
-Ein weiteres Kriterium, das die Resultate beeinflusste, war die Grösse des Trainingskorpus. Bei sehr kleinen Mengen waren dabei die Werte tiefer als bei grösseren Mengen. Gerade bei der Oberflächenformbehandlung lässt sich dieses Spares-Data-Problem in der Tabelle unten erkennen.
+Ein weiteres Kriterium, das die Resultate beeinflusste, war die Grösse des Trainingskorpus. Bei sehr kleinen Mengen waren dabei die Werte tiefer als bei grösseren Mengen. Gerade bei der Oberflächenformbehandlung lässt sich dieses Spares-Data-Problem in der Abbildung \ref{fig:accuracy} erkennen.
 \\
 \\
 Bei der lemmatisierten Verarbeitung dagegen sank die Qualität der Vorschläge deutlich mit zunehmender Datenmenge und gute Vorschläge kamen nur noch vereinzelt vor.
 \\
 \\
-Als mögliche Erklärung der Unterschiede zwischen den verschiedenen Paarungen kamen wir auf die Idee, dass die Anzahl der verschiedenen Wörter, also der Types, einen Einfluss haben könnte. Je grösser die Trainingsdaten waren, umso grösser wurde das Verhältnis zwischen der Anzahl der Types in den jeweiligen Sprachen. Dass Deutsch mehr Types hat, lässt sich mit der Morphologie und vor allem der Möglichkeit Komposita zu bilden erklären. Es ist möglich, dass dieses Verhältnis je ungleicher es ist, schlechtere Resultate verursacht. Wie man in folgender
- Abbildung  erkennen kann, ist gerade bei lemmatisierten Trainingsdaten das 
+Als mögliche Erklärung der Unterschiede zwischen den verschiedenen Paarungen kamen wir auf die Idee, dass die Anzahl der verschiedenen Wörter, also der Types, einen Einfluss haben könnte. Je grösser die Trainingsdaten waren, umso grösser wurde das Verhältnis zwischen der Anzahl der Types in den jeweiligen Sprachen. Dass Deutsch mehr Types hat, lässt sich mit der Morphologie und vor allem der Möglichkeit Komposita zu bilden erklären. Es ist möglich, dass dieses Verhältnis je ungleicher es ist, schlechtere Resultate verursacht. Wie man in Abbildung \ref{fig:numOfWords} erkennen kann, ist gerade bei lemmatisierten Trainingsdaten das 
 Verhältnis besonders ungleich (also weit weg von 1) und die Resultate dort 
 unbefriedigend.
 \begin{figure}[H]
@@ -246,6 +245,7 @@ unbefriedigend.
     \end{axis}
 \end{tikzpicture}
 \caption{Anteil guter Vorschläge}
+\label{fig:accuracy}
 \end{figure}
 
 \begin{figure}[H]
@@ -283,9 +283,10 @@ unbefriedigend.
     \end{axis}
 \end{tikzpicture}
 \caption{Anzahl Types}
+\label{fig:numOfWords}
 \end{figure}
 
-Während die Anzahl der Types grundsätzlich verschieden ist zwischen den Sprachen, gibt es mit der Oberflächenform in beiden Sprachen etwa gleich viele Wortpaarungen innerhalb der Sprache. In diesen Fällen waren auch die Übersetzungskandidaten besonders gut. Die Verhältnisse lassen sich der folgenden Tabelle entnehmen:
+Während die Anzahl der Types grundsätzlich verschieden ist zwischen den Sprachen, gibt es mit der Oberflächenform in beiden Sprachen etwa gleich viele Wortpaarungen (siehe Abbildung \ref{fig:numOfWords}) innerhalb der Sprache. In diesen Fällen waren auch die Übersetzungskandidaten besonders gut. Die Verhältnisse lassen sich der Abbildung \ref{fig:ratio} entnehmen:
 
 \begin{figure}[H]
 \hspace{-6cm}\begin{tikzpicture}
@@ -320,6 +321,7 @@ Während die Anzahl der Types grundsätzlich verschieden ist zwischen den Sprach
     \end{axis}
 \end{tikzpicture}
 \caption{Verhältnisse verschiedener Paarungen}
+\label{fig:ratio}
 \end{figure}
 
 \paragraph{Übersetzungskandidaten EN--DE mit 30\,000 Trainingssätzen über Wortoberflächen\\\\}
@@ -532,7 +534,7 @@ January                 & january (0.33) & standardisation (0.19) & constructed 
 2014. & & & \\
 \hline
 \end{tabular}\end{footnotesize}
-\caption{Kandidaten EN (10k, Worteroberflächen)}
+\caption{Kandidaten EN (10k, Wortoberflächen)}
 \end{table}
 Auch wenn sie für das Wort 'opened' nicht zu passen scheinen, sind die Vorschläge 'serbia' und 'bosnia' interessant in ihrem gemeinsamen Vorkommen. Als gewünscht kann man die Alternative 'dollar' zu 'euro' bezeichnen (bei 'euro'), wo beide klar semantisch dem gleichen Feld angehören. Das Wort
 'interventionism' scheint zudem auf politische Vorgänge in Sachen Geldmengenregulation hinzudeuten, was zur europarl-Domäne passt.
@@ -669,7 +671,7 @@ Januar                  & januar (0.08) & kommission (0.07) & erst (0.07) \\
 \chapter{Schluss}
 \label{cha:schluss}
 Trotz anfänglicher Schwierigkeiten, das Inputmaterial für DISSECT korrekt aufzubereiten, sind wir zuletzt froh, dass die Ergebnisse
-gut ausfallen können: wird auf Wortoberflächen gesetzt und Trainingsmaterial im Umfang von 20--30\,000 Wörtern verwendet, sind bei
+gut ausfallen können: wird auf Wortoberflächen gesetzt und Trainingsmaterial im Umfang von 20\,000--30\,000 Wörtern verwendet, sind bei
 Deutsch--Englisch (in beide Übersetzungsrichtungen) gute Vorschläge in über 60\% der betrachteten Fälle zu finden, die sich dadurch eignen,
 das System als Desambiguierungswerkzeug -- z. B. für Maschinelle Übersetzung -- zu verwenden.
 
